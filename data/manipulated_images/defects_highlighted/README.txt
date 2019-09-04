@@ -1,0 +1,1 @@
+In this folder there should be the images with highlighted defects and theirs image_id as filename.

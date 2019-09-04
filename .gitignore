@@ -1,0 +1,8 @@
+*.ipynb_checkpoints
+*.jpg
+/data/images/*.jpg
+/data/manipulated_images/defects_highlighted/*.jpg
+/data/manipulated_images/preprocessed_images/*.jpg
+*.csv
+/references/Kovesi - phasecorners.pdf
+/references/MorroneBurrPhaseModel - Phase Congruency.pdf

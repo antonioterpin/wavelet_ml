@@ -1,0 +1,1 @@
+In this folder there should be the original images with theirs image_id as filename.
