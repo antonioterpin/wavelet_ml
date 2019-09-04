@@ -1,0 +1,1 @@
+All the code in this directory assumes that pwd is here.
