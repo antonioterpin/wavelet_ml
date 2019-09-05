@@ -5,7 +5,7 @@ function [pixels, pixels_binary] = rle_decoding(rle_encoded_pixels, im_width, im
     % conversion from string to array of int
     rle_encoded_pixels_array = str2num(rle_encoded_pixels);
     [X, Y] = meshgrid(1:im_width, 1:im_height);
-    rle_encoded_pixels_resolution_matrix = [Y(:) X(:)];
+    rle_encoded_pixels_resolution_matrix = [X(:) Y(:)];
     
     pixels = zeros(sum(rle_encoded_pixels_array(2:2:end)), 2);
     last = 1;

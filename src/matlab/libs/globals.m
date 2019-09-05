@@ -64,6 +64,6 @@ column_image_id = 'ImageId';
 % COLORS
 global defects_colors;
 
-defects_colors = ['red' 'green' 'blue' 'yellow'];
+defects_colors = ["red" "green" "blue" "yellow"];
 
 end

@@ -11,8 +11,6 @@ function dataset_division(train_set_perc, test_set_perc, type)
 %   * type: 'Randomly': random division
 %   * type: 'Anomaly': in the training set there are only flawless
 %   surfaces, in the cv and test sets there are both.
-%
-% WARNING: it assumes to be called from the project root directory.
     
     random_type = 'Randomly';
     if nargin < 3
