@@ -41,13 +41,15 @@ defects_highlighted = '../../data/manipulated_images/defects_highlighted/';
 preprocessed_images = '../../data/manipulated_images/preprocessed_images/';
 
 % CSV
-global dataset_path formatted_dataset_path training_set_path cv_set_path test_set_path;
+global dataset_path formatted_dataset_path augmented_dataset_path... 
+    training_set_path cv_set_path test_set_path;
 
 dataset_path = '../../data/dataset.csv';
 formatted_dataset_path = '../../data/manipulated_data/data_set.csv';
 training_set_path = '../../data/manipulated_data/train_set.csv';
 cv_set_path = '../../data/manipulated_data/cv_set.csv';
 test_set_path = '../../data/manipulated_data/test_set.csv';
+augmented_dataset_path = '../../data/manipulated_data/augmented_dataset.csv';
 
 % NUMERIC
 global number_defect_classes;

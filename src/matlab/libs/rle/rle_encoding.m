@@ -1,6 +1,9 @@
-function [rle_encoded_pixels, rle_encoded_pixels_string] = rle_encoding(pixels, im_width, im_height)
+function [rle_encoded_pixels_string, rle_encoded_pixels] = rle_encoding(pixels, im_width, im_height)
 % RLE_ENCODING takes pixels, im_width (image width) and im_height (image
 %   height) and calculates the rle encoding.
+
+    % for easy of use
+    pixels = flip(pixels,2);
 
     % take pixels and encode in a binary matrix
     A = zeros(im_height, im_width);

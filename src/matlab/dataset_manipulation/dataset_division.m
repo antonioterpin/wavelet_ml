@@ -1,4 +1,4 @@
-function dataset_division(train_set_perc, test_set_perc, type)
+function dataset_division(train_set_perc, test_set_perc, type, use_augmented_dataset)
 % DATASET_DIVISION Dataset division in training set, cross validation set
 % and test set.
 %
@@ -11,10 +11,15 @@ function dataset_division(train_set_perc, test_set_perc, type)
 %   * type: 'Randomly': random division
 %   * type: 'Anomaly': in the training set there are only flawless
 %   surfaces, in the cv and test sets there are both.
+%
+% DATASET_DIVISION(_, use_augmented_dataset) Use the unskew dataset.
     
     random_type = 'Randomly';
     if nargin < 3
         type = random_type;
+    end
+    if nargin < 4
+       use_augmented_dataset = false;
     end
     
     assert(strcmp(type, random_type), 'At the moment only random division is supported');
@@ -22,12 +27,15 @@ function dataset_division(train_set_perc, test_set_perc, type)
     
     % Load global variables
     globals();
-    global formatted_dataset_path training_set_path cv_set_path test_set_path; % datasets
-    global number_defect_classes column_encoded_pixels column_image_id; % dataset details
+    global formatted_dataset_path augmented_dataset_path training_set_path cv_set_path test_set_path; % datasets
     
+    dataset_path = formatted_dataset_path;
+    if use_augmented_dataset
+        dataset_path = augmented_dataset_path;
+    end
     % import dataset
-    opts = detectImportOptions(formatted_dataset_path);
-    dataset = readtable(formatted_dataset_path, opts);
+    opts = detectImportOptions(dataset_path);
+    dataset = readtable(dataset_path, opts);
     
     number_of_images = size(dataset, 1);
     train_set_size = floor(train_set_perc * number_of_images);
