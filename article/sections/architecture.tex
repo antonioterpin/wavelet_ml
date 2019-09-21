@@ -1,0 +1,68 @@
+\section{Architecture overview}
+
+\par{
+    The defect detection system architecture proposed in this paper is shown in figure \ref{fig:architecture}.
+}
+
+    \begin{figure}
+        \centering
+        \begin{tikzpicture}
+
+            % \draw[help lines] (0,0) grid (8.5,16);
+
+            % Output
+            \node[architecture_node_fullwidth,fill=waterblue,architecture_no_fill] (output) at (1,16) {Output};
+
+            % Classificator
+            % \node[architecture_box,minimum width=7.2cm,minimum height=4.7cm] (classification_architecture) at (.9,14.6) {};
+            \node[architecture_node_fullwidth,fill=purple,architecture_no_fill] (classification) at (1,14.5) {Classification};
+                    % CNN
+                \matrix[architecture_node_nofill,minimum width=\onethird,minimum height=2cm,inner sep=0mm,fill=blue,architecture_no_fill] (cnn) at (1,13.5) {
+                    \node {CNN}; & \node (cnn_local) {CNN}; & \node {CNN}; \\
+                };
+                \draw[black] (cnn_local.north east)--(cnn_local.south east);
+                \draw[black] (cnn_local.north west)--(cnn_local.south west);
+
+                    % INPUT
+                \matrix[architecture_node_nofill,minimum width=\onethird,minimum height=1cm,inner sep=0mm,row sep=-0.51cm,fill=lightblue,architecture_no_fill] (cnn_features) at (1,11.5) {
+                    \node (cnn_shape_feature) {Shape Feature}; & \node (cnn_local_feature) {Local Feature}; & \node (cnn_global_feature) {Global Feature}; \\
+                    \node (cnn_shape_feature_color) {b/w}; & \node (cnn_local_feature_color) {Gray scale}; & \node (cnn_global_feature_color) {Gray scale}; \\
+                };
+                \draw[black] (cnn_local_feature.north east)--(cnn_local_feature_color.south east);
+                \draw[black] (cnn_local_feature.north west)--(cnn_local_feature_color.south west);
+            
+            \draw[->] ($(classification.north) + (0,.05)$) -- ($(output.south) + (0,-0.05)$);
+
+            % INPUT PREPROCESSING
+                % Enhanced image
+                \node[architecture_node_fullwidth,minimum height=4.7cm,fill=lightyellow,architecture_no_fill] (enhanced_image_box) at (1,9.5) {};
+                \node[architecture_node_fullwidth,minimum height=1cm,anchor=south west,draw=none] (enhanced_image_label) at (1,4.8) {Enhanced Image};
+                % \node[architecture_box,minimum width=7.2cm,minimum height=4.9cm] (preprocessing_architecture) at (.9,9.6) {};
+
+                % Padding
+                \matrix[architecture_node_nofill,minimum width=\onethird,minimum height=1cm,inner sep=0mm,row sep=-0.51cm,fill=lightred,architecture_no_fill] (cnn) at (1,9.5) {
+                    \node (padding1) {Padding \&}; & \node (padding2) {Padding \&};\\
+                    \node {Centering}; & \node (centering2) {Centering};\\
+                };
+                \draw[black] (padding2.north west)--(centering2.south west);
+
+                % Segmentation & Bounding box
+                \matrix[architecture_node_nofill,minimum width=\onethird - .6mm,minimum height=1cm,inner sep=.5mm,nodes={draw=black},fill=lightorange,architecture_no_fill,nodes={fill=orange,architecture_no_fill}] (segmentation_bounding_box) at (1,8) {
+                    \node {Segmentation}; & \node {Bounding Box};\\
+                };
+
+                % Border detection & Region proposals
+                \node[architecture_node_nofill,minimum width=2*\onethird,minimum height=1cm,fill=yellow,architecture_no_fill] (border) at (1,6.88) {Border detection};
+            
+            \draw[->] ($(segmentation_bounding_box.west) + (0.03,0)$) -- ($(segmentation_bounding_box.west) + (-0.5,0)$) -- ($(output.west) + (-0.5,0)$) -- ($(output.west) + (-0.05,0)$);
+            \draw[->] ($(padding1.north) + (0,.05)$) -- ($(cnn_shape_feature_color.south) + (0,-0.05)$);
+            \draw[->] ($(padding2.north) + (0,.05)$) -- ($(cnn_local_feature_color.south) + (0,-0.05)$);
+            \draw[->] ($(enhanced_image_box.north) + (2.33cm,.05)$) -- ($(cnn_global_feature_color.south) + (0,-0.05)$);
+
+            % Raw image
+            \node[architecture_node_fullwidth,fill=green,architecture_no_fill] (rawim) at (1,4.3) {Raw Image};
+            \draw[->] ($(rawim.north) + (0,.05)$) -- ($(enhanced_image_box.south) + (0,-0.05)$);
+
+        \end{tikzpicture}
+        \caption{Proposed defect detection system architecture}\label{fig:architecture}
+    \end{figure}

@@ -1,0 +1,430 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.8.12)  21 SEP 2019 17:21
+entering extended mode
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
+**/Users/antonioterpin/Progetti/Wavelet-ML/article/defect_detection.tex
+(/Users/antonioterpin/Progetti/Wavelet-ML/article/defect_detection.tex
+LaTeX2e <2018-12-01>
+(/Users/antonioterpin/Progetti/Wavelet-ML/article/IEEEtran.cls
+Document Class: IEEEtran 2015/08/26 V1.8b by Michael Shell
+-- See the "IEEEtran_HOWTO" manual for usage information.
+-- http://www.michaelshell.org/tex/ieeetran/
+\@IEEEtrantmpdimenA=\dimen102
+\@IEEEtrantmpdimenB=\dimen103
+\@IEEEtrantmpdimenC=\dimen104
+\@IEEEtrantmpcountA=\count80
+\@IEEEtrantmpcountB=\count81
+\@IEEEtrantmpcountC=\count82
+\@IEEEtrantmptoksA=\toks14
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 503.
+(/usr/local/texlive/2019/texmf-dist/tex/latex/psnfss/ot1ptm.fd
+File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
+)
+-- Using 8.5in x 11in (letter) paper.
+-- Using PDF output.
+\@IEEEnormalsizeunitybaselineskip=\dimen105
+-- This is a 10 point document.
+\CLASSINFOnormalsizebaselineskip=\dimen106
+\CLASSINFOnormalsizeunitybaselineskip=\dimen107
+\IEEEnormaljot=\dimen108
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <5> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <5> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <7> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <8> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <9> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <10> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <11> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <11> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <12> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <17> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <17> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <20> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <20> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <24> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <24> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1090.
+\IEEEquantizedlength=\dimen109
+\IEEEquantizedlengthdiff=\dimen110
+\IEEEquantizedtextheightdiff=\dimen111
+\IEEEilabelindentA=\dimen112
+\IEEEilabelindentB=\dimen113
+\IEEEilabelindent=\dimen114
+\IEEEelabelindent=\dimen115
+\IEEEdlabelindent=\dimen116
+\IEEElabelindent=\dimen117
+\IEEEiednormlabelsep=\dimen118
+\IEEEiedmathlabelsep=\dimen119
+\IEEEiedtopsep=\skip41
+\c@section=\count83
+\c@subsection=\count84
+\c@subsubsection=\count85
+\c@paragraph=\count86
+\c@IEEEsubequation=\count87
+\abovecaptionskip=\skip42
+\belowcaptionskip=\skip43
+\c@figure=\count88
+\c@table=\count89
+\@IEEEeqnnumcols=\count90
+\@IEEEeqncolcnt=\count91
+\@IEEEsubeqnnumrollback=\count92
+\@IEEEquantizeheightA=\dimen120
+\@IEEEquantizeheightB=\dimen121
+\@IEEEquantizeheightC=\dimen122
+\@IEEEquantizeprevdepth=\dimen123
+\@IEEEquantizemultiple=\count93
+\@IEEEquantizeboxA=\box27
+\@IEEEtmpitemindent=\dimen124
+\IEEEPARstartletwidth=\dimen125
+\c@IEEEbiography=\count94
+\@IEEEtranrubishbin=\box28
+) (/usr/local/texlive/2019/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty (/usr/local/texlive/2019/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty (/usr/local/texlive/2019/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.tex
+\pgfutil@everybye=\toks15
+\pgfutil@tempdima=\dimen126
+\pgfutil@tempdimb=\dimen127
+ (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/utilities/pgfutil-common-lists.tex)) (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/utilities/pgfutil-latex.def
+\pgfutil@abb=\box29
+ (/usr/local/texlive/2019/texmf-dist/tex/latex/ms/everyshi.sty
+Package: everyshi 2001/05/15 v3.00 EveryShipout Package (MS)
+)) (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/utilities/pgfrcs.code.tex (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/pgf.revision.tex)
+Package: pgfrcs 2019/08/03 v3.1.4b (3.1.4b)
+))
+Package: pgf 2019/08/03 v3.1.4b (3.1.4b)
+ (/usr/local/texlive/2019/texmf-dist/tex/latex/pgf/basiclayer/pgfcore.sty (/usr/local/texlive/2019/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2017/06/01 v1.1a Enhanced LaTeX Graphics (DPC,SPQR)
+ (/usr/local/texlive/2019/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks16
+) (/usr/local/texlive/2019/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2017/06/25 v1.2c Standard LaTeX Graphics (DPC,SPQR)
+ (/usr/local/texlive/2019/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+) (/usr/local/texlive/2019/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 99.
+ (/usr/local/texlive/2019/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen128
+\Gin@req@width=\dimen129
+) (/usr/local/texlive/2019/texmf-dist/tex/latex/pgf/systemlayer/pgfsys.sty (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/systemlayer/pgfsys.code.tex
+Package: pgfsys 2019/08/03 v3.1.4b (3.1.4b)
+ (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex
+\pgfkeys@pathtoks=\toks17
+\pgfkeys@temptoks=\toks18
+ (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/utilities/pgfkeysfiltered.code.tex
+\pgfkeys@tmptoks=\toks19
+))
+\pgf@x=\dimen130
+\pgf@y=\dimen131
+\pgf@xa=\dimen132
+\pgf@ya=\dimen133
+\pgf@xb=\dimen134
+\pgf@yb=\dimen135
+\pgf@xc=\dimen136
+\pgf@yc=\dimen137
+\pgf@xd=\dimen138
+\pgf@yd=\dimen139
+\w@pgf@writea=\write3
+\r@pgf@reada=\read1
+\c@pgf@counta=\count95
+\c@pgf@countb=\count96
+\c@pgf@countc=\count97
+\c@pgf@countd=\count98
+\t@pgf@toka=\toks20
+\t@pgf@tokb=\toks21
+\t@pgf@tokc=\toks22
+\pgf@sys@id@count=\count99
+ (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/systemlayer/pgf.cfg
+File: pgf.cfg 2019/08/03 v3.1.4b (3.1.4b)
+)
+Driver file for pgf: pgfsys-pdftex.def
+ (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-pdftex.def
+File: pgfsys-pdftex.def 2019/08/03 v3.1.4b (3.1.4b)
+ (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-common-pdf.def
+File: pgfsys-common-pdf.def 2019/08/03 v3.1.4b (3.1.4b)
+))) (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/systemlayer/pgfsyssoftpath.code.tex
+File: pgfsyssoftpath.code.tex 2019/08/03 v3.1.4b (3.1.4b)
+\pgfsyssoftpath@smallbuffer@items=\count100
+\pgfsyssoftpath@bigbuffer@items=\count101
+) (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/systemlayer/pgfsysprotocol.code.tex
+File: pgfsysprotocol.code.tex 2019/08/03 v3.1.4b (3.1.4b)
+)) (/usr/local/texlive/2019/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
+ (/usr/local/texlive/2019/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1348.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1352.
+Package xcolor Info: Model `RGB' extended on input line 1364.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1366.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1367.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
+) (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/basiclayer/pgfcore.code.tex
+Package: pgfcore 2019/08/03 v3.1.4b (3.1.4b)
+ (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/math/pgfmathcalc.code.tex (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/math/pgfmathutil.code.tex) (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/math/pgfmathparser.code.tex
+\pgfmath@dimen=\dimen140
+\pgfmath@count=\count102
+\pgfmath@box=\box30
+\pgfmath@toks=\toks23
+\pgfmath@stack@operand=\toks24
+\pgfmath@stack@operation=\toks25
+) (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.code.tex (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.basic.code.tex) (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.trigonometric.code.tex) (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.random.code.tex) (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.comparison.code.tex) (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.base.code.tex) (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.round.code.tex) (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.misc.code.tex) (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.integerarithmetics.code.tex))) (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/math/pgfmathfloat.code.tex
+\c@pgfmathroundto@lastzeros=\count103
+)) (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/math/pgfint.code.tex) (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepoints.code.tex
+File: pgfcorepoints.code.tex 2019/08/03 v3.1.4b (3.1.4b)
+\pgf@picminx=\dimen141
+\pgf@picmaxx=\dimen142
+\pgf@picminy=\dimen143
+\pgf@picmaxy=\dimen144
+\pgf@pathminx=\dimen145
+\pgf@pathmaxx=\dimen146
+\pgf@pathminy=\dimen147
+\pgf@pathmaxy=\dimen148
+\pgf@xx=\dimen149
+\pgf@xy=\dimen150
+\pgf@yx=\dimen151
+\pgf@yy=\dimen152
+\pgf@zx=\dimen153
+\pgf@zy=\dimen154
+) (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathconstruct.code.tex
+File: pgfcorepathconstruct.code.tex 2019/08/03 v3.1.4b (3.1.4b)
+\pgf@path@lastx=\dimen155
+\pgf@path@lasty=\dimen156
+) (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathusage.code.tex
+File: pgfcorepathusage.code.tex 2019/08/03 v3.1.4b (3.1.4b)
+\pgf@shorten@end@additional=\dimen157
+\pgf@shorten@start@additional=\dimen158
+) (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/basiclayer/pgfcorescopes.code.tex
+File: pgfcorescopes.code.tex 2019/08/03 v3.1.4b (3.1.4b)
+\pgfpic=\box31
+\pgf@hbox=\box32
+\pgf@layerbox@main=\box33
+\pgf@picture@serial@count=\count104
+) (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/basiclayer/pgfcoregraphicstate.code.tex
+File: pgfcoregraphicstate.code.tex 2019/08/03 v3.1.4b (3.1.4b)
+\pgflinewidth=\dimen159
+) (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransformations.code.tex
+File: pgfcoretransformations.code.tex 2019/08/03 v3.1.4b (3.1.4b)
+\pgf@pt@x=\dimen160
+\pgf@pt@y=\dimen161
+\pgf@pt@temp=\dimen162
+) (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/basiclayer/pgfcorequick.code.tex
+File: pgfcorequick.code.tex 2019/08/03 v3.1.4b (3.1.4b)
+) (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreobjects.code.tex
+File: pgfcoreobjects.code.tex 2019/08/03 v3.1.4b (3.1.4b)
+) (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathprocessing.code.tex
+File: pgfcorepathprocessing.code.tex 2019/08/03 v3.1.4b (3.1.4b)
+) (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/basiclayer/pgfcorearrows.code.tex
+File: pgfcorearrows.code.tex 2019/08/03 v3.1.4b (3.1.4b)
+\pgfarrowsep=\dimen163
+) (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreshade.code.tex
+File: pgfcoreshade.code.tex 2019/08/03 v3.1.4b (3.1.4b)
+\pgf@max=\dimen164
+\pgf@sys@shading@range@num=\count105
+\pgf@shadingcount=\count106
+) (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreimage.code.tex
+File: pgfcoreimage.code.tex 2019/08/03 v3.1.4b (3.1.4b)
+ (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreexternal.code.tex
+File: pgfcoreexternal.code.tex 2019/08/03 v3.1.4b (3.1.4b)
+\pgfexternal@startupbox=\box34
+)) (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/basiclayer/pgfcorelayers.code.tex
+File: pgfcorelayers.code.tex 2019/08/03 v3.1.4b (3.1.4b)
+) (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransparency.code.tex
+File: pgfcoretransparency.code.tex 2019/08/03 v3.1.4b (3.1.4b)
+) (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepatterns.code.tex
+File: pgfcorepatterns.code.tex 2019/08/03 v3.1.4b (3.1.4b)
+) (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/basiclayer/pgfcorerdf.code.tex
+File: pgfcorerdf.code.tex 2019/08/03 v3.1.4b (3.1.4b)
+))) (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/modules/pgfmoduleshapes.code.tex
+File: pgfmoduleshapes.code.tex 2019/08/03 v3.1.4b (3.1.4b)
+\pgfnodeparttextbox=\box35
+) (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/modules/pgfmoduleplot.code.tex
+File: pgfmoduleplot.code.tex 2019/08/03 v3.1.4b (3.1.4b)
+) (/usr/local/texlive/2019/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-0-65.sty
+Package: pgfcomp-version-0-65 2019/08/03 v3.1.4b (3.1.4b)
+\pgf@nodesepstart=\dimen165
+\pgf@nodesepend=\dimen166
+) (/usr/local/texlive/2019/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-1-18.sty
+Package: pgfcomp-version-1-18 2019/08/03 v3.1.4b (3.1.4b)
+)) (/usr/local/texlive/2019/texmf-dist/tex/latex/pgf/utilities/pgffor.sty (/usr/local/texlive/2019/texmf-dist/tex/latex/pgf/utilities/pgfkeys.sty (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex)) (/usr/local/texlive/2019/texmf-dist/tex/latex/pgf/math/pgfmath.sty (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex)) (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/utilities/pgffor.code.tex
+Package: pgffor 2019/08/03 v3.1.4b (3.1.4b)
+ (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex)
+\pgffor@iter=\dimen167
+\pgffor@skip=\dimen168
+\pgffor@stack=\toks26
+\pgffor@toks=\toks27
+)) (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex
+Package: tikz 2019/08/03 v3.1.4b (3.1.4b)
+ (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothandlers.code.tex
+File: pgflibraryplothandlers.code.tex 2019/08/03 v3.1.4b (3.1.4b)
+\pgf@plot@mark@count=\count107
+\pgfplotmarksize=\dimen169
+)
+\tikz@lastx=\dimen170
+\tikz@lasty=\dimen171
+\tikz@lastxsaved=\dimen172
+\tikz@lastysaved=\dimen173
+\tikz@lastmovetox=\dimen174
+\tikz@lastmovetoy=\dimen175
+\tikzleveldistance=\dimen176
+\tikzsiblingdistance=\dimen177
+\tikz@figbox=\box36
+\tikz@figbox@bg=\box37
+\tikz@tempbox=\box38
+\tikz@tempbox@bg=\box39
+\tikztreelevel=\count108
+\tikznumberofchildren=\count109
+\tikznumberofcurrentchild=\count110
+\tikz@fig@count=\count111
+ (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix.code.tex
+File: pgfmodulematrix.code.tex 2019/08/03 v3.1.4b (3.1.4b)
+\pgfmatrixcurrentrow=\count112
+\pgfmatrixcurrentcolumn=\count113
+\pgf@matrix@numberofcolumns=\count114
+)
+\tikz@expandcount=\count115
+ (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarytopaths.code.tex
+File: tikzlibrarytopaths.code.tex 2019/08/03 v3.1.4b (3.1.4b)
+))) (/Users/antonioterpin/Progetti/Wavelet-ML/article/style/architecture_style.tex (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarypositioning.code.tex
+File: tikzlibrarypositioning.code.tex 2019/08/03 v3.1.4b (3.1.4b)
+) (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryfit.code.tex
+File: tikzlibraryfit.code.tex 2019/08/03 v3.1.4b (3.1.4b)
+) (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarymatrix.code.tex
+File: tikzlibrarymatrix.code.tex 2019/08/03 v3.1.4b (3.1.4b)
+)) (/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarycalc.code.tex
+File: tikzlibrarycalc.code.tex 2019/08/03 v3.1.4b (3.1.4b)
+) (/Users/antonioterpin/Progetti/Wavelet-ML/article/style/colors.tex) (/usr/local/texlive/2019/texmf-dist/tex/latex/cite/cite.sty
+LaTeX Info: Redefining \cite on input line 302.
+LaTeX Info: Redefining \nocite on input line 332.
+Package: cite 2015/02/27  v 5.5
+) (/Users/antonioterpin/Progetti/Wavelet-ML/article/defect_detection.aux)
+\openout1 = `defect_detection.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+
+-- Lines per column: 56 (exact).
+ABD: EveryShipout initializing macros (/usr/local/texlive/2019/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count116
+\scratchdimen=\dimen178
+\scratchbox=\box40
+\nofMPsegments=\count117
+\nofMParguments=\count118
+\everyMPshowfont=\toks28
+\MPscratchCnt=\count119
+\MPscratchDim=\dimen179
+\MPnumerator=\count120
+\makeMPintoPDFobject=\count121
+\everyMPtoPDFconversion=\toks29
+) (/usr/local/texlive/2019/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
+ (/usr/local/texlive/2019/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2016/05/16 v1.4 Providing info/warning/error messages (HO)
+) (/usr/local/texlive/2019/texmf-dist/tex/latex/oberdiek/grfext.sty
+Package: grfext 2016/05/16 v1.2 Manage graphics extensions (HO)
+ (/usr/local/texlive/2019/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
+Package: kvdefinekeys 2016/05/16 v1.4 Define keys (HO)
+ (/usr/local/texlive/2019/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
+))) (/usr/local/texlive/2019/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
+ (/usr/local/texlive/2019/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+Package: kvsetkeys 2016/05/16 v1.17 Key value parser (HO)
+ (/usr/local/texlive/2019/texmf-dist/tex/generic/oberdiek/etexcmds.sty
+Package: etexcmds 2016/05/16 v1.6 Avoid name clashes with e-TeX commands (HO)
+ (/usr/local/texlive/2019/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+Package: ifluatex 2016/05/16 v1.4 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)))) (/usr/local/texlive/2019/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2018/09/10 v0.29 Utility functions of pdfTeX for LuaTeX (HO)
+ (/usr/local/texlive/2019/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2018/09/07 v3.3 Provides the ifpdf switch
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 438.
+Package grfext Info: Graphics extension search list:
+(grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPEG,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 456.
+ (/usr/local/texlive/2019/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
+))
+** WARNING: \IEEEpubid is locked out when in conference mode (line 23).
+(/Users/antonioterpin/Progetti/Wavelet-ML/article/sections/abstract&keywords.tex) (/Users/antonioterpin/Progetti/Wavelet-ML/article/sections/introduction.tex [1{/usr/local/texlive/2019/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+
+
+]) (/Users/antonioterpin/Progetti/Wavelet-ML/article/sections/architecture.tex) (/Users/antonioterpin/Progetti/Wavelet-ML/article/sections/image_preprocessing.tex) (/Users/antonioterpin/Progetti/Wavelet-ML/article/sections/localization&classification.tex [2]) (/Users/antonioterpin/Progetti/Wavelet-ML/article/sections/defect_segmentation.tex) (/Users/antonioterpin/Progetti/Wavelet-ML/article/sections/conclusion.tex) (/Users/antonioterpin/Progetti/Wavelet-ML/article/defect_detection.bbl [3])
+
+** Conference Paper **
+Before submitting the final camera ready copy, remember to:
+
+ 1. Manually equalize the lengths of two columns on the last page
+ of your paper;
+
+ 2. Ensure that any PostScript and/or PDF output post-processing
+ uses only Type 1 fonts and that every step in the generation
+ process uses the appropriate paper size.
+
+[4
+
+] (/Users/antonioterpin/Progetti/Wavelet-ML/article/defect_detection.aux) ) 
+Here is how much of TeX's memory you used:
+ 13080 strings out of 492616
+ 272278 string characters out of 6129481
+ 317673 words of memory out of 5000000
+ 16740 multiletter control sequences out of 15000+600000
+ 34143 words of font info for 63 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 55i,16n,61p,1467b,1047s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texlive/2019/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on /Users/antonioterpin/Progetti/Wavelet-ML/article/defect_detection.pdf (4 pages, 75964 bytes).
+PDF statistics:
+ 37 PDF objects out of 1000 (max. 8388607)
+ 26 compressed objects within 1 object stream
+ 0 named destinations out of 1000 (max. 500000)
+ 13 words of extra memory for PDF output out of 10000 (max. 10000000)
+

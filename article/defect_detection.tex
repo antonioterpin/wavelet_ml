@@ -1,0 +1,56 @@
+\documentclass[conference, twoside]{IEEEtran}
+
+\usepackage{tikz}
+\input{style/architecture_style.tex}
+\usetikzlibrary{calc}
+
+\input{style/colors.tex}
+
+
+\usepackage{cite}
+
+% format citations
+\renewcommand\citepunct{, }
+\renewcommand\citeleft{[}
+\renewcommand\citeright{]}
+\renewcommand\citedash{--}
+
+
+\begin{document}
+    % TITLE & PUBLICATION ID
+
+    \title{An effective approach to defect detection} %  on steel surfaces
+    \IEEEpubid{0000--0000/00\$00.00 ̃\copyright ̃2019 IEEE }
+
+    % AUTHORS
+
+    \author{
+        \IEEEauthorblockN{Antonio Terpin}
+        \IEEEauthorblockA{Electronic Engineering, Scuola Superiore\\
+        Università degli Studi di Udine\\
+        Udine, Italia \\
+        Email: terpin.antonio@spes.uniud.it}
+        \and
+        \IEEEauthorblockN{Claudio Verardo}
+        \IEEEauthorblockA{Electronic Engineering, Scuola Superiore\\
+        Università degli Studi di Udine\\
+        Udine, Italia \\
+        Email: verardo.claudio@spes.uniud.it}
+    }
+
+    \maketitle
+
+    \input{sections/abstract&keywords.tex}
+    \input{sections/introduction.tex}
+    \input{sections/architecture.tex}
+    \input{sections/image_preprocessing.tex}
+    \input{sections/localization&classification.tex}
+    \input{sections/defect_segmentation.tex}
+    \input{sections/conclusion.tex}
+    % \input{sections/acknowledgment.tex}
+    
+    \bibliographystyle{IEEEtran}
+    \bibliography{references}
+
+\end{document}
+

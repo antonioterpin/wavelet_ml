@@ -1,0 +1,61 @@
+This is BibTeX, Version 0.99d (TeX Live 2019)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: defect_detection.aux
+The style file: IEEEtran.bst
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Database file #1: references.bib
+-- IEEEtran.bst version 1.12 (2007/01/11) by Michael Shell.
+-- http://www.michaelshell.org/tex/ieeetran/bibtex/
+-- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
+Warning--empty journal in intechopen:bernardini
+Warning--empty author in ieee:4310039
+Warning--empty journal in googlescholar:kovesiphase
+Warning--empty year in googlescholar:kovesiphase
+
+Done.
+You've used 35 entries,
+            4024 wiz_defined-function locations,
+            1037 strings with 14055 characters,
+and the built_in function-call counts, 28606 in all, are:
+= -- 2284
+> -- 643
+< -- 250
++ -- 369
+- -- 103
+* -- 1361
+:= -- 4066
+add.period$ -- 73
+call.type$ -- 35
+change.case$ -- 35
+chr.to.int$ -- 603
+cite$ -- 39
+duplicate$ -- 2060
+empty$ -- 2390
+format.name$ -- 132
+if$ -- 6737
+int.to.chr$ -- 0
+int.to.str$ -- 35
+missing$ -- 335
+newline$ -- 138
+num.names$ -- 38
+pop$ -- 800
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 2
+skip$ -- 2236
+stack$ -- 0
+substring$ -- 1499
+swap$ -- 1732
+text.length$ -- 49
+text.prefix$ -- 0
+top$ -- 5
+type$ -- 35
+warning$ -- 4
+while$ -- 120
+width$ -- 37
+write$ -- 360
+(There were 4 warnings)
