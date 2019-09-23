@@ -25,21 +25,32 @@
 \citation{springer:10.1007/11907350_46}
 \citation{arXiv:2018arXiv180702811F,arXiv:2012arXiv1206.2944S,rasmussen:williams:2006}
 \citation{ieee:6248110}
-\citation{Klette:2014:CCV:2584519}
-\citation{rasmussen:williams:2006,arXiv:2018arXiv180702811F,arXiv:2012arXiv1206.2944S}
 \@writefile{toc}{\contentsline {section}{\numberline {II}Architecture overview}{2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {III}Image preprocessing}{2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {III-A}}Compression, equalization and noise reduction}{2}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Proposed defect detection system architecture}}{2}\protected@file@percent }
 \newlabel{fig:architecture}{{1}{2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {III-B}}Edge detection filter}{2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {III-B}1}Phase congruency edge detection}{2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {III-B}2}...}{2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {III-B}3}Maxima suppression}{2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {III-B}4}Thresholding}{2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {III-B}5}Wavelet family}{2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {III-B}6}Evaluation schema}{2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {IV}Defects area localization and classification}{2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces TODO RESULTS WITH SOME METRICS}}{3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {III}Image preprocessing}{3}\protected@file@percent }
+\newlabel{section:image_preprocessing}{{III}{3}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Hystogram of luminance distribution on sample image before linear scaling.}}{3}\protected@file@percent }
+\newlabel{fig:luminance_before}{{2}{3}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Hystogram of luminance distribution on sample image after linear scaling.}}{3}\protected@file@percent }
+\newlabel{fig:luminance_after}{{3}{3}}
+\@writefile{toc}{\contentsline {section}{\numberline {IV}Region proposals}{3}\protected@file@percent }
+\newlabel{section:region_proposals}{{IV}{3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {IV-A}}Contour detection}{3}\protected@file@percent }
+\newlabel{subsection:contour_detection}{{\unhbox \voidb@x \hbox {IV-A}}{3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {IV-B}}Image Segmentation}{3}\protected@file@percent }
+\newlabel{subsection:segmentation}{{\unhbox \voidb@x \hbox {IV-B}}{3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {IV-C}}Bounding box}{3}\protected@file@percent }
+\newlabel{subsection:bounding_box}{{\unhbox \voidb@x \hbox {IV-C}}{3}}
+\@writefile{toc}{\contentsline {section}{\numberline {V}Defects area localization and classification}{3}\protected@file@percent }
+\newlabel{section:mc-cnn}{{V}{3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {V-A}}Proper data augmentation}{3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {V-B}}Region of interests and proposals}{3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Hystogram of luminance distribution on sample image before equalization.}}{3}\protected@file@percent }
+\newlabel{fig:equalization_before}{{4}{3}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Hystogram of luminance distribution on sample image after equalization.}}{3}\protected@file@percent }
+\newlabel{fig:equalization_after}{{5}{3}}
 \bibstyle{IEEEtran}
 \bibdata{references}
 \bibcite{ieee:4777721}{1}
@@ -72,21 +83,20 @@
 \bibcite{googlescholar:kovesiphase}{28}
 \bibcite{researchgate:phase}{29}
 \bibcite{springer:Kass1988}{30}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {IV-A}}Proper data augmentation}{3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {IV-B}}Region of interests and proposals}{3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {IV-C}}Region based Convolutional Neural Network (R-CNN)}{3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {IV-C}1}Convolutional filters dimensioning}{3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {IV-C}2}Pooling layers}{3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {IV-C}3}...}{3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {IV-D}}Thresholding and location aggregation}{3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {IV-E}}Multi-task loss}{3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {V}Defects area segmentation}{3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {V-A}}Alpha shape}{3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {V-B}}Evaluation scheme}{3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {VI}Conclusion}{3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{References}{3}\protected@file@percent }
 \bibcite{ieee:1273918}{31}
 \bibcite{springer:10.1007/11907350_46}{32}
 \bibcite{arXiv:2018arXiv180702811F}{33}
 \bibcite{arXiv:2012arXiv1206.2944S}{34}
 \bibcite{rasmussen:williams:2006}{35}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Sample image before preprocessing.}}{4}\protected@file@percent }
+\newlabel{fig:preprocessing_before}{{6}{4}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Sample image after preprocessing.}}{4}\protected@file@percent }
+\newlabel{fig:preprocessing_after}{{7}{4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {V-C}}Region based Convolutional Neural Network (R-CNN)}{4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {V-C}1}Convolutional filters dimensioning}{4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {V-C}2}Pooling layers}{4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {V-C}3}...}{4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {V-D}}Thresholding and location aggregation}{4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {V-E}}Multi-task loss}{4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {VI}Conclusion}{4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{References}{4}\protected@file@percent }

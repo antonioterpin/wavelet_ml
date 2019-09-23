@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.8.12)  21 SEP 2019 17:21
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.8.12)  22 SEP 2019 21:47
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -397,7 +397,12 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 (/Users/antonioterpin/Progetti/Wavelet-ML/article/sections/abstract&keywords.tex) (/Users/antonioterpin/Progetti/Wavelet-ML/article/sections/introduction.tex [1{/usr/local/texlive/2019/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
 
-]) (/Users/antonioterpin/Progetti/Wavelet-ML/article/sections/architecture.tex) (/Users/antonioterpin/Progetti/Wavelet-ML/article/sections/image_preprocessing.tex) (/Users/antonioterpin/Progetti/Wavelet-ML/article/sections/localization&classification.tex [2]) (/Users/antonioterpin/Progetti/Wavelet-ML/article/sections/defect_segmentation.tex) (/Users/antonioterpin/Progetti/Wavelet-ML/article/sections/conclusion.tex) (/Users/antonioterpin/Progetti/Wavelet-ML/article/defect_detection.bbl [3])
+]) (/Users/antonioterpin/Progetti/Wavelet-ML/article/sections/architecture.tex
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 71.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 71.
+ [2]) (/Users/antonioterpin/Progetti/Wavelet-ML/article/sections/image_preprocessing.tex) (/Users/antonioterpin/Progetti/Wavelet-ML/article/sections/region_proposals.tex) (/Users/antonioterpin/Progetti/Wavelet-ML/article/sections/localization&classification.tex [3]) (/Users/antonioterpin/Progetti/Wavelet-ML/article/sections/conclusion.tex) (/Users/antonioterpin/Progetti/Wavelet-ML/article/defect_detection.bbl)
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -409,22 +414,20 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[4
-
-] (/Users/antonioterpin/Progetti/Wavelet-ML/article/defect_detection.aux) ) 
+[4] (/Users/antonioterpin/Progetti/Wavelet-ML/article/defect_detection.aux) ) 
 Here is how much of TeX's memory you used:
- 13080 strings out of 492616
- 272278 string characters out of 6129481
- 317673 words of memory out of 5000000
- 16740 multiletter control sequences out of 15000+600000
- 34143 words of font info for 63 fonts, out of 8000000 for 9000
+ 13096 strings out of 492616
+ 272611 string characters out of 6129481
+ 320656 words of memory out of 5000000
+ 16755 multiletter control sequences out of 15000+600000
+ 35867 words of font info for 65 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 55i,16n,61p,1467b,1047s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texlive/2019/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on /Users/antonioterpin/Progetti/Wavelet-ML/article/defect_detection.pdf (4 pages, 75964 bytes).
+ 55i,16n,61p,1467b,1049s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on /Users/antonioterpin/Progetti/Wavelet-ML/article/defect_detection.pdf (4 pages, 119221 bytes).
 PDF statistics:
- 37 PDF objects out of 1000 (max. 8388607)
- 26 compressed objects within 1 object stream
+ 53 PDF objects out of 1000 (max. 8388607)
+ 38 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

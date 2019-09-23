@@ -1,9 +1,5 @@
 \section{Architecture overview}
 
-\par{
-    The defect detection system architecture proposed in this paper is shown in figure \ref{fig:architecture}.
-}
-
     \begin{figure}
         \centering
         \begin{tikzpicture}
@@ -26,7 +22,7 @@
                     % INPUT
                 \matrix[architecture_node_nofill,minimum width=\onethird,minimum height=1cm,inner sep=0mm,row sep=-0.51cm,fill=lightblue,architecture_no_fill] (cnn_features) at (1,11.5) {
                     \node (cnn_shape_feature) {Shape Feature}; & \node (cnn_local_feature) {Local Feature}; & \node (cnn_global_feature) {Global Feature}; \\
-                    \node (cnn_shape_feature_color) {b/w}; & \node (cnn_local_feature_color) {Gray scale}; & \node (cnn_global_feature_color) {Gray scale}; \\
+                    \node (cnn_shape_feature_color) {b/w}; & \node (cnn_local_feature_color) {Gray levels}; & \node (cnn_global_feature_color) {Gray levels}; \\
                 };
                 \draw[black] (cnn_local_feature.north east)--(cnn_local_feature_color.south east);
                 \draw[black] (cnn_local_feature.north west)--(cnn_local_feature_color.south west);
@@ -57,7 +53,7 @@
             \draw[->] ($(segmentation_bounding_box.west) + (0.03,0)$) -- ($(segmentation_bounding_box.west) + (-0.5,0)$) -- ($(output.west) + (-0.5,0)$) -- ($(output.west) + (-0.05,0)$);
             \draw[->] ($(padding1.north) + (0,.05)$) -- ($(cnn_shape_feature_color.south) + (0,-0.05)$);
             \draw[->] ($(padding2.north) + (0,.05)$) -- ($(cnn_local_feature_color.south) + (0,-0.05)$);
-            \draw[->] ($(enhanced_image_box.north) + (2.33cm,.05)$) -- ($(cnn_global_feature_color.south) + (0,-0.05)$);
+            \draw[->] ($(enhanced_image_box.north) + (2.3cm,.05)$) -- ($(cnn_global_feature_color.south) + (0,-0.05)$);
 
             % Raw image
             \node[architecture_node_fullwidth,fill=green,architecture_no_fill] (rawim) at (1,4.3) {Raw Image};
@@ -66,3 +62,26 @@
         \end{tikzpicture}
         \caption{Proposed defect detection system architecture}\label{fig:architecture}
     \end{figure}
+
+    \par{
+        The defect detection system architecture proposed in this paper is shown in figure \ref{fig:architecture}.
+    }
+
+    \par{
+        Steel surfaces pictures of $1600\times 256$ pixels are taken at the input of the process. Since they may be taken one with a different light exposure condition then the others, some preprocessing is made to enhance the quality of the image, e.g. hystogram equalization or linear scaling. Moreover, the images considered have three equal colors levels, therefore they are converted into gray levels, to save space. This first step is further described in \ref{section:image_preprocessing}.
+    }
+    \par{
+        The aim of this paper is both detecting pixels representing steel imperfections and classify those regions. Therefore, image segmentation is either obtained as an output of the system or it is needed in some step during the process. To achieve this, a brute-force multi-scale sliding window on the picture could be used, but to improve performances without reducing accuracy a MC-CNN is proposed in \ref{section:mc-cnn}. This MC-CNN allows to combine and consider separately interesting regions, which are called proposals and described in \ref{section:region_proposals}, to reduce the number of evaluations. Moreover, both local and global information, are combined to improve classification accuracy. *** IN REALTAá SAREBBE DA VERIFICARE SE SI AVESSE TEMPO, INOLTRE AGGIUNGERE TABELLA DELLE VALUTAZIONI DI DIVERSI SISTEMI, COMPRENSIVA DI TEMPO, ACCURATEZZA, F-MEASURE, .... *** This approach avoid the complexity of combining different scale information and handling windows with different class of defects.
+    }
+    \par{
+        The column of the MC-CNN concerned with global information is fed with the full enchanced image. Conceptually, this CNN learns to evaluate the probability of presence of some kind of defects in the whole surface picture. The other two column consider local information instead. This local information is obtained from a further processing step, described in \ref{section:region_proposals}. Firstly, a contour detection algorithm (\ref{subsection:contour_detection}) is used to spot proposals. Secondly, image segmentation (\ref{subsection:segmentation}) is done, to feed the MC-CNN only with some interesting regions. This segmentation results in a black and white (b/w) map describing plausibles defects. One column of the MC-CNN is fed with this map, therefore it learns to classify regions only observing their shapes. The other column is fed with the portion of original image enveloped in the bounding box (\ref{subsection:bounding_box}) of the map, therefore it is trained to consider local features inside, outside and on the border of the considered proposal.
+    }
+    \par{
+        Since defects may have different dimensions, the local information are centered in a $1600\times 256$ pixels black image.
+    }
+    \par{
+        The two MC-CNN columns concerning local information ends with a soft-max layer, because they focus on a small enough region. Instead, the one dealing with global information has a different output layer. Their results are combined in order to properly classify the local regions, and the approach is described in \ref{section:mc-cnn}.
+    }
+    \par{
+        Finally, if the classification outcome labels the region as defective, segmentation coordinates are kept. When all the proposals of the considered image have been processed, defective pixels are encoded with Run-Length-Encoding (RLE) algorithm. The output given is the RLE-encoding of all defective pixels grouped by class. If the surface is flawless, all this encodings are empty.
+    }

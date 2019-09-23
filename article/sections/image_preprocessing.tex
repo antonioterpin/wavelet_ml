@@ -1,25 +1,62 @@
-\section{Image preprocessing}
-    Motivation and approach pith.
-    
-    \subsection{Compression, equalization and noise reduction}
-        Explain need and method... cite articles that do the same, cite articles that introduce the methods \cite{Klette:2014:CCV:2584519}.
-
-    \subsection{Edge detection filter}
-        Cite main edge detection filters, explain approach (phase congruency) and previous use of wavelet in this field.. our approach and our evaluation of different wavelet families.
-        \subsubsection{Phase congruency edge detection}
-            Phase congruency.....  through wavelet .....
-        \subsubsection{...}
-            ..... Other steps .....
-        \subsubsection{Maxima suppression}
-            Describe maxima suppression....
-        \subsubsection{Thresholding}
-            Describe hysteresys thresholding....
-            Table comparing different thresholding values....
-        \subsubsection{Wavelet family}
-            Present different wavelet families, euristic considerations, ....
-            Table comparing different wavelet families....
-        \subsubsection{Evaluation schema}
-            Describe how we evaluated any choice.. optimization for example on confronting how much the defects area are highlighted.
-            An effective approach to this black-box derivative-free global-optimization method is Bayesian Optimization \cite{rasmussen:williams:2006, arXiv:2018arXiv180702811F, arXiv:2012arXiv1206.2944S}
-            Loss when we loose defects...
-            Loss when we keep too much non defects area...
+\section{Image preprocessing}\label{section:image_preprocessing}
+    \par{
+        In this section image preprocessing is introduced, and the raw image is enhanced to improve learning quality. *** TODO POTREBBE ESSERE INTERESSANTE CONFRONTARE RISULTATI CON E SENZA ***
+    }
+    \begin{table}
+        \caption{TODO RESULTS WITH SOME METRICS}
+    \end{table}
+    \par{
+        Firstly, since given images have three equal levels of colours, they are in gray levels. Therefore it is possible to shrink the space occupied on disk by discarding hue and saturation information and using only luminance.
+    }
+    \par{
+        Rec.ITU-R BT.601-7 calculates luminance $\left(E\left[y\right]\right)$ as:
+        $$ E\left[y\right] = 0.299 * R + 0.587 * G + 0.114 * B $$
+        where $R,G,B$ are the three image channels. Observe that since $R = G = B$, also $E\left[y\right] = R = G = B$, which justifies the assumption that discarding hue and saturation does not affect effectiveness of the system, whereas improving space and computational efficiency. Luminance is denoted by $E\left[y\right]$ since brightness is named $y$ in literature, therefore the luminance, or the physical intensity expected is labeled this way.
+    }
+    \par{
+        Secondly, since pictures may be taken under different light exposure conditions, and since learning has heuristically be proven to be more efficient and effective if input assumptions are always the same, linear scaling and hystogram equalization are done.
+    }
+    \par{
+        Linear scaling ensure that all images gray levels spread over all the range of possible values. $\mathcal{I}\left(x,y\right)$ refers to the luminance level of pixel $\left(x,y\right)$ of image $\mathcal{I}$. Therefore, denoting with $G_{max}$ the greater luminance level (tipically $2^k - 1$ for some $k$), the luminance scaled image is obtained as:
+        $$\mathcal{I}_{new}\left(x,y\right) = G_{max} \frac{\mathcal{I}\left(x,y\right) - \mathcal{I}_{min}}{\mathcal{I}_{max} - \mathcal{I}_{min}}$$
+        $$\mathcal{I}_{max} = \max_{x,y} \mathcal{I}\left(x,y\right)\;;\quad\mathcal{I}_{min} = \min_{x,y} \mathcal{I}\left(x,y\right)$$
+    }
+    \begin{figure}
+        % \includegraphics[]{}
+        \caption{Hystogram of luminance distribution on sample image before linear scaling.}\label{fig:luminance_before}
+    \end{figure}
+    \begin{figure}
+        % \includegraphics[]{}
+        \caption{Hystogram of luminance distribution on sample image after linear scaling.}\label{fig:luminance_after}
+    \end{figure}
+    \par{
+        Histogram equalization is a technique for adjusting image intensities to enhance contrast.
+    }
+    \par{
+        TODO MATH ....
+    }
+    \begin{figure}
+        % \includegraphics[]{}
+        \caption{Hystogram of luminance distribution on sample image before equalization.}\label{fig:equalization_before}
+    \end{figure}
+    \begin{figure}
+        % \includegraphics[]{}
+        \caption{Hystogram of luminance distribution on sample image after equalization.}\label{fig:equalization_after}
+    \end{figure}
+    \par{
+        In figures \ref{fig:equalization_before} and \ref{fig:equalization_after} the effects of equalization on a sample image hystogram of luminance distribution are visible.
+    }
+    \par{
+        The difference between hystogram equalization and linear scaling (or stretching) is that .......
+    }
+    \begin{figure}
+        % \includegraphics[]{}
+        \caption{Sample image before preprocessing.}\label{fig:preprocessing_before}
+    \end{figure}
+    \begin{figure}
+        % \includegraphics[]{}
+        \caption{Sample image after preprocessing.}\label{fig:preprocessing_after}
+    \end{figure}
+    \par{
+        Pictures \ref{fig:preprocessing_before} and \ref{fig:preprocessing_after} show preprocessing output on a sample image.
+    }
