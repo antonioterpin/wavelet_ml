@@ -1,6 +1,10 @@
-function [pixels, pixels_binary] = rle_decoding(rle_encoded_pixels, im_width, im_height)
-% RLE_DECODING Given rle_encoded_pixels string, im_height (image height) 
-%   and im_width (image width) returns the pixels decoded as [X Y] coordinates
+function [pixels, map] = rle_decoding(rle_encoded_pixels, dim)
+% RLE_DECODING Decode rle_encoded_pixels and returns list of encoded pixels and a binary map.
+%   [pixels, map] = RLE_DECODING(rle_encoded_pixels, dim)
+%
+%   See also RLE_ENCODING.
+
+    im_width = dim(2); im_height = dim(1);
 
     % conversion from string to array of int
     rle_encoded_pixels_array = str2num(rle_encoded_pixels);
@@ -15,6 +19,6 @@ function [pixels, pixels_binary] = rle_decoding(rle_encoded_pixels, im_width, im
         last = last + length + 1;
     end
     
-    pixels_binary = zeros(im_height, im_width);
-    pixels_binary((pixels(:,2) - 1) * im_height + pixels(:,1)) = 1;
+    map = zeros(im_height, im_width);
+    map((pixels(:,1) - 1) * im_height + pixels(:,2)) = 1;
 end

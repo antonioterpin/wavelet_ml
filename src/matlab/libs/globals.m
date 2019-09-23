@@ -20,7 +20,7 @@ function globals
 %
 % DATASET COLUMNS NAME
 %   * column_encoded_pixels: Name of encoded pixels column. Concat
-%   '#class_id' to get the name of encoded pixels of that
+%   "#class_id" to get the name of encoded pixels of that
 %   class.
 %   * column_image_id_class_id: Name of the column containing
 %   image_id_class_id string. Image id is the name of the image while class
@@ -35,21 +35,21 @@ function globals
 % IMAGES
 global images_path compressed_images defects_highlighted preprocessed_images;
 
-images_path = '../../data/images/';
-compressed_images = '../../data/manipulated_images/compressed_images/';
-defects_highlighted = '../../data/manipulated_images/defects_highlighted/';
-preprocessed_images = '../../data/manipulated_images/preprocessed_images/';
+images_path = "../../data/images/";
+compressed_images = "../../data/manipulated-images/compressed_images/";
+defects_highlighted = "../../data/manipulated-images/defects_highlighted/";
+preprocessed_images = "../../data/manipulated-images/preprocessed_images/";
 
 % CSV
 global dataset_path formatted_dataset_path augmented_dataset_path... 
     training_set_path cv_set_path test_set_path;
 
-dataset_path = '../../data/dataset.csv';
-formatted_dataset_path = '../../data/manipulated_data/data_set.csv';
-training_set_path = '../../data/manipulated_data/train_set.csv';
-cv_set_path = '../../data/manipulated_data/cv_set.csv';
-test_set_path = '../../data/manipulated_data/test_set.csv';
-augmented_dataset_path = '../../data/manipulated_data/augmented_dataset.csv';
+dataset_path = "../../data/dataset.csv";
+formatted_dataset_path = "../../data/manipulated-data/dataset.csv";
+training_set_path = "../../data/manipulated-data/train-set.csv";
+cv_set_path = "../../data/manipulated-data/cv-set.csv";
+test_set_path = "../../data/manipulated-data/test-set.csv";
+augmented_dataset_path = "../../data/manipulated-data/augmented-dataset.csv";
 
 % NUMERIC
 global number_defect_classes;
@@ -59,9 +59,9 @@ number_defect_classes = 4;
 % DATASET COLUMNS NAME
 global column_encoded_pixels column_image_id_class_id column_image_id;
 
-column_encoded_pixels = 'EncodedPixels';
-column_image_id_class_id = 'ImageId_ClassId';
-column_image_id = 'ImageId';
+column_encoded_pixels = "EncodedPixels";
+column_image_id_class_id = "ImageId_ClassId";
+column_image_id = "ImageId";
 
 % COLORS
 global defects_colors;

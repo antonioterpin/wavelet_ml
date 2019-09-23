@@ -14,7 +14,7 @@ function dataset_division(train_set_perc, test_set_perc, type, use_augmented_dat
 %
 % DATASET_DIVISION(_, use_augmented_dataset) Use the unskew dataset.
     
-    random_type = 'Randomly';
+    random_type = "Randomly";
     if nargin < 3
         type = random_type;
     end
@@ -22,8 +22,8 @@ function dataset_division(train_set_perc, test_set_perc, type, use_augmented_dat
        use_augmented_dataset = false;
     end
     
-    assert(strcmp(type, random_type), 'At the moment only random division is supported');
-    assert(train_set_perc + test_set_perc <= 1, 'Percentages must sum up to something less or equal to 1');
+    assert(strcmp(type, random_type), "At the moment only random division is supported");
+    assert(train_set_perc + test_set_perc <= 1, "Percentages must sum up to something less or equal to 1");
     
     % Load global variables
     globals();
@@ -43,7 +43,7 @@ function dataset_division(train_set_perc, test_set_perc, type, use_augmented_dat
     cv_set_size = number_of_images - (train_set_size + test_set_size);
 
     
-    if strcmp(type, 'Randomly')
+    if strcmp(type, "Randomly")
         % divide dataset randomly
         random_dataset = dataset(randperm(number_of_images),:); % random shuffle
         train_set = random_dataset(1:train_set_size,:);
