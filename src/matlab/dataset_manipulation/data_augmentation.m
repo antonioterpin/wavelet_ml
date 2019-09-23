@@ -12,18 +12,18 @@ number_of_original_images = size(dataset,1);
 
 % do not increase the number of surfaces with only class_id 3 or flawless.
 dataset = dataset(...
-    find(strcmp(dataset.EncodedPixels1, '') == 0 ... 
-    | strcmp(dataset.EncodedPixels2, '') == 0 ...
-    | strcmp(dataset.EncodedPixels4, '') == 0), :);
+    find(strcmp(dataset.EncodedPixels1, "") == 0 ... 
+    | strcmp(dataset.EncodedPixels2, "") == 0 ...
+    | strcmp(dataset.EncodedPixels4, "") == 0), :);
 
 
 number_of_images = size(dataset,1);
-data_augmentation_waitbar = waitbar(0, 'Augmenting less frequent defects...');
+data_augmentation_waitbar = waitbar(0, "Augmenting less frequent defects...");
 for i = 1 : number_of_images
     image_row = dataset(i,:);
-    new_rows = flip_image(image_row, 'jpg');
+    new_rows = flip_image(image_row, "jpg");
     augmented_dataset = [augmented_dataset; new_rows];
-    waitbar(i / number_of_images, data_augmentation_waitbar, 'Augmenting less frequent defects...');
+    waitbar(i / number_of_images, data_augmentation_waitbar, "Augmenting less frequent defects...");
 end
 close(data_augmentation_waitbar);
 

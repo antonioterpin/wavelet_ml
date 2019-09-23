@@ -12,18 +12,18 @@ dataset = readtable(dataset_path, opts);
 % format dataset
 number_of_images = size(dataset,1) / number_defect_classes;
 dataset_formatted = cell2table(cell(number_of_images,1 + number_defect_classes)); % create empty table
-formatting_dataset_waitbar = waitbar(0, 'Formatting dataset...'); % initialize waitbar
+formatting_dataset_waitbar = waitbar(0, "Formatting dataset..."); % initialize waitbar
 
 for i = 1 : number_of_images
     dataset_formatted{i,:} = format_image_row(dataset((i - 1) * number_defect_classes + 1 : i * number_defect_classes, :), 'jpg');
-    waitbar(i / number_of_images, formatting_dataset_waitbar, 'Formatting dataset...'); % update waitbar
+    waitbar(i / number_of_images, formatting_dataset_waitbar, "Formatting dataset..."); % update waitbar
 end
 close(formatting_dataset_waitbar); % close waitbar
 
 % rename columns
-dataset_formatted.Properties.VariableNames{'Var1'} = column_image_id;
+dataset_formatted.Properties.VariableNames{"Var1"} = column_image_id;
 for i = 1 : number_defect_classes
-    dataset_formatted.Properties.VariableNames{strcat('Var', num2str(i + 1))} = strcat(column_encoded_pixels, num2str(i));
+    dataset_formatted.Properties.VariableNames{strcat("Var", num2str(i + 1))} = strcat(column_encoded_pixels, num2str(i));
 end
 
 % save formatted dataset to csv
@@ -40,7 +40,7 @@ function formatted_row = format_image_row(image_rows, image_type)
     global column_encoded_pixels column_image_id_class_id;
     
     if nargin < 2
-        image_type = 'jpg';
+        image_type = "jpg";
     end
     
     formatted_row = erase(image_rows{1, column_image_id_class_id}, extractAfter(image_rows{1, column_image_id_class_id}, image_type));

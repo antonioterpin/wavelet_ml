@@ -27,13 +27,13 @@ function highlighted_image = highlight_defects(image_row, use_buffered_image)
          
          % highlight defects
          for i = 1 : number_defect_classes
-             rle_encoded_pixels = image_row{1, sprintf('%s%d', column_encoded_pixels, i)}{1};
-             if strcmp(rle_encoded_pixels, '') == 0
+             rle_encoded_pixels = image_row{1, sprintf("%s%d", column_encoded_pixels, i)}{1};
+             if strcmp(rle_encoded_pixels, "") == 0
                  % image has this kind of defect
-                 pixels = rle_decoding(rle_encoded_pixels, size(highlighted_image, 2), size(highlighted_image, 1));
+                 pixels = rle_decoding(rle_encoded_pixels, size(highlighted_image));
                  shp = alphaShape(pixels(:,1),pixels(:,2));
                  [~, bounds] = boundaryFacets(shp);
-                 highlighted_image = insertMarker(highlighted_image, bounds, 'color', {defects_colors(i)});
+                 highlighted_image = insertMarker(highlighted_image, bounds, "color", {defects_colors(i)});
              end
          end
          

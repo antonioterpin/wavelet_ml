@@ -4,7 +4,7 @@ function image_rows = flip_image(image_row, type)
 % See also FLIP
 
     if nargin < 2
-        type = 'jpg';
+        type = "jpg";
     end
 
     globals();
@@ -21,9 +21,9 @@ function image_rows = flip_image(image_row, type)
     im_width = size(image, 2);
     
     % output filenames
-    h_image_filename = insertBefore(image_id, sprintf('%s%s', '.', type), '_h');
-    v_image_filename = insertBefore(image_id, sprintf('%s%s', '.', type), '_v');
-    hv_image_filename = insertBefore(image_id, sprintf('%s%s', '.', type), '_hv');
+    h_image_filename = insertBefore(image_id, sprintf("%s%s", ".", type), "_h");
+    v_image_filename = insertBefore(image_id, sprintf("%s%s", ".", type), "_v");
+    hv_image_filename = insertBefore(image_id, sprintf("%s%s", ".", type), "_hv");
     
     % save images
     imwrite(flip(image), strcat(compressed_images, h_image_filename));

@@ -1,13 +1,25 @@
-function [rle_encoded_pixels_string, rle_encoded_pixels] = rle_encoding(pixels, im_width, im_height)
-% RLE_ENCODING takes pixels, im_width (image width) and im_height (image
-%   height) and calculates the rle encoding.
+function [rle_encoded_pixels_string, rle_encoded_pixels] = rle_encoding(pixels, dim)
+% RLE_ENCODING Run RLE encoding algorithm on vectorized pixels map.
+%   [rle_encoded_pixels_string, rle_encoded_pixels] = RLE_ENCODING(map) Run
+%   RLE encoding algorithm on vectorized pixels map.
+%
+%   _ = RLE_ENCODING(pixels,dim) Build pixels map from pixels list and run
+%   RLE encoding algorithm on vectorized map.
+%
+%   See also RLE_DECODING.
 
-    % for easy of use
-    pixels = flip(pixels,2);
+    assert(nargin <= 2, "Wrong number of arguments, check help.");
 
-    % take pixels and encode in a binary matrix
-    A = zeros(im_height, im_width);
-    A((pixels(:,2) - 1) * im_height + pixels(:,1)) = 1;
+    A = [];
+    if nargin == 2
+        % for easy of use
+        pixels = flip(pixels,2);
+        % take pixels and encode in a binary matrix
+        A = zeros(dim(1), dim(2));
+        A((pixels(:,2) - 1) * dim(1) + pixels(:,1)) = 1;
+    else
+        A = pixels; % consider pixels as binary map
+    end
     
     % diff finds the transition 0->1 (1) and 1->0 (-1)
     % == 1 finds only the beginning of a sequence of ones
@@ -25,6 +37,6 @@ function [rle_encoded_pixels_string, rle_encoded_pixels] = rle_encoding(pixels, 
     v = accumarray(cumsum(sequences_beginning).*A(:)+1,A(:));
     rle_encoded_pixels = [find(sequences_beginning == 1)'; v(2:end)']; % [beginning; length]
     rle_encoded_pixels = rle_encoded_pixels(:); % vectorization
-    rle_encoded_pixels_string = sprintf('%s%d',sprintf('%d ',rle_encoded_pixels(1:end-1)),rle_encoded_pixels(end));
+    rle_encoded_pixels_string = sprintf("%s%d",sprintf("%d ",rle_encoded_pixels(1:end-1)),rle_encoded_pixels(end));
 
 end
