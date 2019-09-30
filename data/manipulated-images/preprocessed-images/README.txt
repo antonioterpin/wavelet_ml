@@ -1,1 +1,1 @@
-In this folder there should be the preprocessed images with theirs image_id as filename.
+This is a placeholder for preprocessed images, since they are not tracked for security reasons :)
