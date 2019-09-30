@@ -61,7 +61,7 @@ help rle_decoding;
 ```
 #### Examples
 ###### Example 1
-'''
+```
 rle_encoded_pixels = "5 2 10 6 17 1"; 
 dim = [4 5];
 ```
