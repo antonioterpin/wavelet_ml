@@ -1,8 +1,11 @@
 function ds2segmented_class_folders(dataset)
-%DS2SEGMENTED_CLASS_FOLDERS Given a dataset segment images and save shape
-%and local features to proper folders divided by classes.
-%   Detailed explanation goes here
-%   ds2segmented_class_folders(dataset)
+%DS2SEGMENTED_CLASS_FOLDERS Prepare segmentation images.
+%   
+%   ds2segmented_class_folders(dataset) Given a dataset segment images and 
+%   save shape features and local features to proper folders,
+%   differentiated by defect classes.
+%
+%   See also BOUNDS2LOCALFEATURE, SEGMENTATE_IMAGE, RLE_ENCODING, RLE_DECODING
 
     type = "jpg";
     global number_defect_classes; % data

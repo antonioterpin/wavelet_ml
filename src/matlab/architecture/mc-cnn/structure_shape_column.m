@@ -1,7 +1,7 @@
-function [layers] = structure_shape_column()
-%STRUCTURE_SHAPE_COLUMN Returns the structure of the shape column
-%   [layers] = structure_shape_column() Returns the layers of the shape
-%   column of the mc-cnn
+function layers = structure_shape_column()
+%STRUCTURE_SHAPE_COLUMN Shape column layers
+%
+%   layers = structure_shape_column()
 %
 %   See also STRUCTURE_LOCAL_COLUMN, STRUCTURE_GLOBAL_COLUMN
 
