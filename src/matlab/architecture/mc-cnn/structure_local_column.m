@@ -1,7 +1,7 @@
-function [layers] = structure_local_column()
-%STRUCTURE_LOCAL_COLUMN Returns the structure of the shape column
-%   [layers] = structure_local_column() Returns the layers of the local
-%   column of the mc-cnn
+function layers = structure_local_column()
+%STRUCTURE_LOCAL_COLUMN Local column layers
+%
+%   layers = structure_local_column()
 %
 %   See also STRUCTURE_SHAPE_COLUMN, STRUCTURE_GLOBAL_COLUMN
     
