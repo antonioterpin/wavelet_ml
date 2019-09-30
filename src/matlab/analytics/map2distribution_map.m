@@ -1,5 +1,5 @@
 function [distribution_map,mu,covmat] = map2distribution_map(rle_encoded_defects, image_size)
-%MAP2PROBABILISTIC_MAP Returns the relative frequencies distribution for
+%MAP2DISTRIBUTION_MAP Returns the relative frequencies distribution for
 % the given defective pixels and their bivariate gaussian distribution parameters.
 %   
 %   [distribution_map,mu,sigma] = map2distribution_map(rle_encoded_defects, image_size)
