@@ -40,3 +40,12 @@
 /references/Read/MorroneBurrPhaseModel - Phase Congruency.pdf
 /references/Read/Object recognition with gradient-based learning.pdf
 /references/Read/Snakes - Active contour models.pdf
+/data/exports/defect-analysis/defects-statistics.mat
+/data/exports/mc-cnn/data/local-imds.mat
+/data/exports/mc-cnn/data/local-sbs-imds.mat
+/data/exports/mc-cnn/data/shape-imds.mat
+/data/exports/mc-cnn/data/shape-sbs-imds.mat
+/data/exports/mc-cnn/net/local-7|8-5|16-3|32--4.mat
+/data/exports/mc-cnn/net/local-no3-7|8-5|16-3|32--4.mat
+/data/exports/mc-cnn/net/shape-7|8-5|16-3|32--4.mat
+/data/exports/mc-cnn/net/shape-no3-7|8-5|16-3|32--4.mat
