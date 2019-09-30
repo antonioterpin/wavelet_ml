@@ -1,12 +1,43 @@
 function [rle_encoded_pixels_string, rle_encoded_pixels] = rle_encoding(pixels, dim)
-% RLE_ENCODING Run RLE encoding algorithm on vectorized pixels map.
-%   [rle_encoded_pixels_string, rle_encoded_pixels] = RLE_ENCODING(map) Run
-%   RLE encoding algorithm on vectorized pixels map.
+% RLE_ENCODING RLE encoding.
 %
-%   _ = RLE_ENCODING(pixels,dim) Build pixels map from pixels list and run
-%   RLE encoding algorithm on vectorized map.
+%   [rle_encoded_pixels_string, rle_encoded_pixels] = RLE_ENCODING(map)
+%   RLE encode the binary 2D matrix map.
 %
-%   See also RLE_DECODING.
+%   [rle_encoded_pixels_string, rle_encoded_pixels] = RLE_ENCODING(pixels, dim)
+%   Build the binary 2D matrix map from the array of pixels [(x,y)] and
+%   then run RLE encoding algorithm on the 2D matrix map.
+%   rle_encoded_pixels is a string representing an array of an even
+%   number of integers. dim contains the size of the 2D matrix. Pixels
+%   enumeration consider the vectorization (on columns) of the matrix.
+%   Sequences of adjacents pixels are encoded by starting position (odd
+%   position integer) and sequence length (even position integer).
+%
+%   Example 1:
+%   The following given map:
+%           _         _
+%          | 0 1 0 1 1 |
+%    map = | 0 1 1 1 0 |  which contains the pixels ([x,y]):
+%          | 0 0 1 1 0 |  pixels = [2 1; 2 2; 3 2; 3 3; 3 4; 4 1; 4 2; 4 3; 5 1]
+%          | 0 0 1 0 0 |
+%           -         -
+%   
+%   Is vectorized as [0 0 0 0 1 1 0 0 0 1 1 1 1 1 1 0 1 0 0 0] which is
+%   encoded as rle_encoded_pixels_string = "5 2 10 6 17 1",
+%   rle_encoded_pixels = [5 2 10 6 17 1].
+%
+%   Example 2:
+%   The list of pixels = [2 1; 2 2; 3 2; 3 3; 3 4; 4 1; 4 2; 4 3; 5 1] with
+%   2D matrix dimensions dim = [4 5] represents the map:
+%           _         _
+%          | 0 1 0 1 1 |
+%    map = | 0 1 1 1 0 |
+%          | 0 0 1 1 0 |
+%          | 0 0 1 0 0 |
+%           -         -
+%   which is then encoded as the previous example.
+%
+%   See also RLE, RLE_DECODING.
 
     assert(nargin <= 2, "Wrong number of arguments, check help.");
 
