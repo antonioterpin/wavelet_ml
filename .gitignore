@@ -49,3 +49,17 @@
 /data/exports/mc-cnn/net/local-no3-7|8-5|16-3|32--4.mat
 /data/exports/mc-cnn/net/shape-7|8-5|16-3|32--4.mat
 /data/exports/mc-cnn/net/shape-no3-7|8-5|16-3|32--4.mat
+/references
+/test
+/output/mc-cnn/shape-net-7|8-5|16-3|32--4-plot-confusion.fig
+/output/mc-cnn/shape-net-7|8-5|16-3|32--4-training.png
+/output/mc-cnn/shape-no3-net-7|8-5|16-3|32--4-training.fig
+/output/mc-cnn/shape-no3-net-7|8-5|16-3|32--4-training.png
+/output/mc-cnn/local-net-7|8-5|16-3|32--4-plot-confusion.fig
+/output/mc-cnn/local-net-7|8-5|16-3|32--4-training.png
+/output/mc-cnn/local-no3-net-7|8-5|16-3|32--4-plot-confusion.fig
+/output/mc-cnn/local-no3-net-7|8-5|16-3|32--4-training.png
+/output/defects/class1shape.fig
+/output/defects/class2shape.fig
+/output/defects/class3shape.fig
+/output/defects/class4shape.fig
