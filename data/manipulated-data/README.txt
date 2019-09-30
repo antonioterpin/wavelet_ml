@@ -1,6 +1,7 @@
-In this folder there should be the formatted dataset, and its division in train, cross validation and test sets:
+This is a placeholder for:
 
-* data_set.csv
-* train_set.csv
-* cv_set.csv
-* test_set.csv
+* dataset.csv
+* train-set.csv
+* cv-set.csv
+* test-set.csv
+* augmented-dataset.csv
