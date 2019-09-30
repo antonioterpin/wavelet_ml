@@ -33,9 +33,12 @@ writetable(dataset_formatted, formatted_dataset_path);
 % Script functions
 
 function formatted_row = format_image_row(image_rows, image_type)
-    % FORMAT_IMAGE_ROW Take the #number_defect_classes image rows: ['image_id_#defect_class'
-    % 'EncodedPixels'] and returns ['image_id',
-    % 'EncodedPixels_#defect_class']
+    % FORMAT_IMAGE_ROW Format the given image_rows into a single image_row
+    %
+    %   formatted_row = format_image_row(image_rows, image_type) This 
+    %   routine returns, given the image_rows referring to the same image 
+    %   but describing different defect classes, a single image_row
+    %   containing all information.
     
     global column_encoded_pixels column_image_id_class_id;
     

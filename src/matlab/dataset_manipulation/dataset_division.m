@@ -2,17 +2,19 @@ function dataset_division(train_set_perc, test_set_perc, type, use_augmented_dat
 % DATASET_DIVISION Dataset division in training set, cross validation set
 % and test set.
 %
-% DATASET_DIVISION(train_set_perc, test_set_perc) Divides the dataset 
+%   DATASET_DIVISION(train_set_perc, test_set_perc) Divides the dataset 
 %   randomly, #train_set_perc% of the rows in the training set, 
 %   #test_set_perc% of the rows in the test set, and the remaining ones in
 %   the cross validation set.
 %
-% DATASET_DIVISION(_, type) Divides the dataset in different ways:
-%   * type: 'Randomly': random division
-%   * type: 'Anomaly': in the training set there are only flawless
-%   surfaces, in the cv and test sets there are both.
+%   DATASET_DIVISION(_, type) Divides the dataset in different ways:
+%       * type = "Randomly": random division
+%       * type = "Anomaly": in the training set there are only flawless
+%                   surfaces, in the cv and test sets there are both.
 %
-% DATASET_DIVISION(_, use_augmented_dataset) Use the unskew dataset.
+%   DATASET_DIVISION(_, use_augmented_dataset) Use the unskew dataset.
+%
+%   Further developments: implement type = "Anomaly".
     
     random_type = "Randomly";
     if nargin < 3
