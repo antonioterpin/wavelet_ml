@@ -1,10 +1,14 @@
 function [distribution_map,mu,covmat] = map2distribution_map(rle_encoded_defects, image_size)
-%MAP2DISTRIBUTION_MAP Returns the relative frequencies distribution for
-% the given defective pixels and their bivariate gaussian distribution parameters.
+%MAP2DISTRIBUTION_MAP Compute statistics on the shape of the given rle 
+%   encoded shapes.
 %   
-%   [distribution_map,mu,sigma] = map2distribution_map(rle_encoded_defects, image_size)
-%   mu is the vector of mean length and height of defects regions
-%   cov is the covariance matrix of length and height of defects regions
+%   [distribution_map,mu,covmat] = map2distribution_map(rle_encoded_defects, image_size)
+%   Returns the relative frequencies distribution_map for the given defective 
+%   pixels and their bivariate gaussian distribution parameters.
+%   * mu is the vector of mean length and height of defects regions
+%   * covmat is the covariance matrix of length and height of defects regions
+%
+%   See also MEAN, COV
     
     distribution_map = zeros(image_size); % initialize to zero all frequencies
     total_number_of_defects = 0;
