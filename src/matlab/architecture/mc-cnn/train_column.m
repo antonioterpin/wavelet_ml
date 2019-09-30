@@ -1,7 +1,14 @@
 function net = train_column(train_imds,test_imds,layers)
-%TRAIN_SHAPE_COLUMN Train a column of the mc-cnn
-%   Detailed explanation goes here
-%   net = train_column(imds,layers)
+%TRAIN_COLUMN Train a column of the mc-cnn.
+%   
+%   net = TRAIN_COLUMN(train_imds,test_imds,layers) Train a column,
+%   described by layers, of the mc-cnn. This routine centralizes the
+%   trainingOptions. train_imds is the imds used for training, test_imds is
+%   the imds used for validation/testing. No cross validation is intrinsically 
+%   provided here.
+%
+%   See also trainNetwork, trainingOptions
+
     options = trainingOptions('sgdm', ...
     'InitialLearnRate',0.01, ...
     'MaxEpochs',10, ...
