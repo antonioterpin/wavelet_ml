@@ -1,6 +1,16 @@
 function highlighted_image = highlight_defects(image_row, use_buffered_image)
-% HIGHLIGHT_DEFECTS highlights the area in the image given in image_row
-%   with the colors specified in the globals file.
+% HIGHLIGHT_DEFECTS Highlight defective region borders in image.
+%
+%   highlighted_image = highlight_defects(image_row) Paints over the image
+%   specified in the column_image_id column of image_row the borders of the
+%   areas described in column_encoded_pixels columns.
+%   
+%   highlighted_image = highlight_defects(_, use_buffered_image)
+%   use_buffered_image determines whether the routine should look for
+%   previously saved image (default option, use_buffered_image = true) or
+%   it should produce a brand new output image unconditionally.
+%
+% See also ALPHA_SHAPE, INSERTMARKER
 
     if nargin < 2
         use_buffered_image = true;

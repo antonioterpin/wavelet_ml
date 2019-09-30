@@ -1,7 +1,29 @@
 function image_rows = flip_image(image_row, type)
-% FLIP_IMAGE Flips image I horizontally, vertically and both.
+% FLIP_IMAGE Flips image horizontally, vertically and both.
 %
-% See also FLIP
+%   image_rows = flip_image(image_row) Given the image_row returns an array
+%   of three image rows (image_rows) containing the transformed images
+%   filenames and their relative encoded pixels, which are linearly
+%   transformed.
+%   image_row is composed by column_image_id with the image filename, and
+%   #number_defect_classes columns of column_encoded_pixels.
+%
+%   image_rows = flip_image(_, type) To specify image type. Default
+%   is "jpg".
+%
+%   Example:
+%
+%       Original               Flipped         Flipped        Flipped
+%                             Vertical       Horizontally       Both
+%     _         _            _         _     _         _     _         _
+%    | 0 1 0 1 1 |          | 1 1 0 1 0 |   | 0 0 1 0 0 |   | 0 0 1 0 0 |   
+%    | 0 1 1 1 0 |  ===>    | 0 1 1 1 0 |   | 0 0 1 1 0 |   | 0 1 1 0 0 |
+%    | 0 0 1 1 0 |          | 0 1 1 0 0 |   | 0 1 1 1 0 |   | 0 1 1 1 0 |
+%    | 0 0 1 0 0 |          | 0 0 1 0 0 |   | 0 1 1 1 1 |   | 1 1 1 1 0 |
+%     -         -            -         -     -         -     -         -
+%   Relative encoded pixels are encoded properly.   
+%
+% See also FLIP, RLE_DECODING, RLE_ENCODING
 
     if nargin < 2
         type = "jpg";
