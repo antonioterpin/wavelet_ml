@@ -29,7 +29,7 @@ xticklabels(["Flawless Surfaces","Class 1","Class 2","Class 3","Class 4"])
 
 subplot(2,2,2);
 title("Original dataset");
-pie_stats = exclusive_stats(dataset);
+pie_stats = exclusive_stats_categories(dataset);
 pie(pie_stats, ones(size(categories(pie_stats)))); % TODO fix
 
 subplot(2,2,3:4);
@@ -53,7 +53,7 @@ function counts = not_exclusive_stats(dataset)
     counts = [n_flawless; vals];
 end
 
-function categories = exclusive_stats(dataset)
+function categories = exclusive_stats_categories(dataset)
     % EXCLUSIVE_STATS calculate the categorical vector for the
     % surfaces in the given dataset.
     
