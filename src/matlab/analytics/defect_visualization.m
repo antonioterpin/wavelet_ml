@@ -2,9 +2,9 @@
 
 % import dataset
 globals();
-global formatted_dataset_path column_image_id;
-opts = detectImportOptions(formatted_dataset_path);
-dataset = readtable(formatted_dataset_path, opts);
+global augmented_dataset_path column_image_id;
+opts = detectImportOptions(augmented_dataset_path);
+dataset = readtable(augmented_dataset_path, opts);
 
 number_of_images = size(dataset,1);
 defects_drawing_waitbar = waitbar(0, "Drawing defects on images");
