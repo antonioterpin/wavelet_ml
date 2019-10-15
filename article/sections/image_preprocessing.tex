@@ -1,17 +1,14 @@
 \section{Image preprocessing}\label{section:image_preprocessing}
     \par{
-        In this section image preprocessing is introduced, and the raw image is enhanced to improve learning quality. *** TODO POTREBBE ESSERE INTERESSANTE CONFRONTARE RISULTATI CON E SENZA ***
+        In this section image preprocessing is introduced, and the raw image is enhanced to improve learning quality. In \ref{section:results} the contribution of preprocessing is evaluated.
     }
-    \begin{table}
-        \caption{TODO RESULTS WITH SOME METRICS}
-    \end{table}
     \par{
-        Firstly, since given images have three equal levels of colours, they are in gray levels. Therefore it is possible to shrink the space occupied on disk by discarding hue and saturation information and using only luminance.
+        Firstly, since given images have three equal colours levels, they can be considered gray-levels. Therefore it is possible to shrink the space occupied on disk by discarding hue and saturation information and using only luminance.
     }
     \par{
         Rec.ITU-R BT.601-7 calculates luminance $\left(E\left[y\right]\right)$ as:
         $$ E\left[y\right] = 0.299 * R + 0.587 * G + 0.114 * B $$
-        where $R,G,B$ are the three image channels. Observe that since $R = G = B$, also $E\left[y\right] = R = G = B$, which justifies the assumption that discarding hue and saturation does not affect effectiveness of the system, whereas improving space and computational efficiency. Luminance is denoted by $E\left[y\right]$ since brightness is named $y$ in literature, therefore the luminance, or the physical intensity expected is labeled this way.
+        where $R,G,B$ are the three image channels. Observe that since $R = G = B$, also $E\left[y\right] = R = G = B$, which justifies the assumption that discarding hue and saturation does not affect effectiveness of the system, whereas improving space and computational efficiency. Luminance is denoted by $E\left[y\right]$ since brightness is named $y$ in literature, therefore the luminance, i.e. the physical intensity expected, is labeled in this way.
     }
     \par{
         Secondly, since pictures may be taken under different light exposure conditions, and since learning has heuristically be proven to be more efficient and effective if input assumptions are always the same, linear scaling and hystogram equalization are done.
@@ -30,7 +27,7 @@
         \caption{Hystogram of luminance distribution on sample image after linear scaling.}\label{fig:luminance_after}
     \end{figure}
     \par{
-        Histogram equalization is a technique for adjusting image intensities to enhance contrast.
+        Also histogram equalization is a technique for adjusting image intensities to enhance contrast.
     }
     \par{
         TODO MATH ....

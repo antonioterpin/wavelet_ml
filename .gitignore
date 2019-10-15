@@ -63,3 +63,11 @@
 /output/defects/class2shape.fig
 /output/defects/class3shape.fig
 /output/defects/class4shape.fig
+/article/graphics
+/article/defect_detection.out
+/article/defect_detection.log
+/article/defect_detection.fls
+/article/defect_detection.fdb_latexmk
+/article/defect_detection.blg
+/article/defect_detection.bbl
+/article/defect_detection.aux

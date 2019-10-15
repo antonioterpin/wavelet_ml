@@ -9,6 +9,14 @@
 
 \usepackage{cite}
 
+\usepackage{amsmath}
+\usepackage[colorlinks]{hyperref}
+\hypersetup{citecolor=black}
+\hypersetup{linkcolor=black}
+\hypersetup{urlcolor=black}
+\usepackage{cleveref}
+\usepackage{fancyvrb}
+
 % format citations
 \renewcommand\citepunct{, }
 \renewcommand\citeleft{[}
@@ -42,10 +50,11 @@
 
     \input{sections/abstract&keywords.tex}
     \input{sections/introduction.tex}
+    \input{sections/problem_introduction.tex}
     \input{sections/architecture.tex}
     \input{sections/image_preprocessing.tex}
     \input{sections/region_proposals}
-    \input{sections/localization&classification.tex}
+    \input{sections/mc_cnn.tex}
     \input{sections/conclusion.tex}
     % \input{sections/acknowledgment.tex}
     
