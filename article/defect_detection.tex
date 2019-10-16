@@ -2,7 +2,7 @@
 
 \usepackage{tikz}
 \input{style/architecture_style.tex}
-\usetikzlibrary{calc}
+\usetikzlibrary{calc, shapes.misc}
 
 \input{style/colors.tex}
 
@@ -49,12 +49,17 @@
     \maketitle
 
     \input{sections/abstract&keywords.tex}
+    % Introduction
     \input{sections/introduction.tex}
     \input{sections/problem_introduction.tex}
+    % Architecture
     \input{sections/architecture.tex}
     \input{sections/image_preprocessing.tex}
     \input{sections/region_proposals}
     \input{sections/mc_cnn.tex}
+    % Challengers
+    \input{sections/challengers.tex}
+    % Results
     \input{sections/conclusion.tex}
     % \input{sections/acknowledgment.tex}
     
