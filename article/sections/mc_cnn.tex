@@ -93,7 +93,7 @@
         Firstly, this approach highlight the upper bound reachable with the whole architecture.
     }
     \par{
-        Secondly, dividing the \emph{detector} outcome from the \emph{classificator} input during the training allows to export the trained MC-CNN and to use it within the challengers architectures, explained in \ref{section:challengers}. This specifies the effectiveness of the \emph{detector} proposed.
+        Secondly, dividing the \emph{detector} outcome from the \emph{classificator} input during the training allows to export the trained MC-CNN and to use it within the challenger architecture, explained in \ref{section:challenger}. This specifies the effectiveness of the \emph{detector} proposed.
     }
     \subsection{Shape column}\label{section:shape-column}
         \par{
@@ -174,11 +174,65 @@
         }
     \subsection{Final classifier}
         \par{
-            ... the three columns are then combined....
+            The outcomes of the different columns of a MC-CNN are then combined to obtain the final output. In the proposed architecture, this combination is done through a neural network, since a manual tuning of such combination would be ineffective.
+        }
+        \begin{figure}
+            \centering
+            \begin{tikzpicture}
+                % input layer
+                \foreach \i in {0,...,11} % TODO fix
+                    \node[circle, draw, minimum height=1, minimum width=1,fill=blue] (input \i) at (0,-\i*0.5) {};
+
+                % hidden layer
+                \foreach \i in {0,...,7} % TODO fix
+                    \node[circle, draw, minimum height=1, minimum width=1,fill=orange] (hidden \i) at ($(input 2) + (2,-\i*0.5)$) {};
+
+                % from input to hidden layer
+                \foreach \i in {0,...,11}
+                    \foreach \j in {0,...,7}
+                        \draw[->] ($(input \i) + (.2,0)$) -- ($(hidden \j) + (-.2,0)$);
+
+                % output layer
+                \foreach \i in {0,...,4} % TODO fix
+                    \node[circle, draw, minimum height=1, minimum width=1,fill=yellow] (output \i) at ($(hidden 1) + (2,-\i*0.5)$) {};
+
+                % from hidden to output layer
+                \foreach \i in {0,...,7}
+                    \foreach \j in {0,...,4}
+                        \draw[->] ($(hidden \i) + (.2,0)$) -- ($(output \j) + (-.2,0)$);
+
+                % from output to softmax layer
+                \foreach \i in {0,...,4}
+                    \draw[->] ($(output \i) + (.2,0)$) -- ($(output \i) + (2,0)$);
+
+                % softmax layer
+                \node[rounded rectangle, fill=white, minimum width=3cm,draw,rotate=-90] (softmax) at ($(output 2) + (1,0)$) {Softmax};
+
+                % legend
+                \node[rectangle, draw, fill=yellow, minimum width=1, minimum height=1] (output label color) at ($(output 0) + (0,1)$) {};
+                \node[anchor=west] (output label) at ($(output label color) + (.2,0)$) {Output layer};
+
+                \node[rectangle, draw, fill=orange, minimum width=1, minimum height=1] (hidden label color) at ($(output label color) + (0,.5)$) {};
+                \node[anchor=west] (hidden label) at ($(hidden label color) + (.2,0)$) {Hidden layer};
+
+                \node[rectangle, draw, fill=blue, minimum width=1, minimum height=1] (input label color) at ($(hidden label color) + (0,.5)$) {};
+                \node[anchor=west] (input label) at ($(input label color) + (.2,0)$) {Input layer};
+
+                \node[anchor=west] (legend label) at ($(input label color) + (-.25,.5)$) {\underline{Legend}};
+            \end{tikzpicture}
+            \caption{Final classifier structure.}\label{fig:mc-cnn:final-classifier-structure}
+        \end{figure}
+        \par{
+            In figure \ref{fig:mc-cnn:final-classifier-structure} the structure of the last layer of the architecture is shown.
         }
         \par{
-            ... nn used to combine
-            ... because manually tuning would be ineffective
+            The first layer is constrained to the output size of the three columns, i.e. *** TODO COMPLETARE... *** Then there is an hidden layers with $7$ activation units, and finally the output layer with $5$ neurons. The output is passed through a softmax layer, hence the final output describe the confidence per each class.
+        }
+        \par{
+            Observe that bias units have not been included in any layer.
+        }
+        \par{
+            ** DISPLAY WEIGHTS, INFER WHAT MATTERS MOST TO DETERMINE THE OUTPUT **
         }
         \par{
             The results of this architecture are shown in \ref{section:results}.
