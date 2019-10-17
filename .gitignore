@@ -72,3 +72,12 @@ data/manipulated-images/preprocessed-images/._README.txt
 data/manipulated-data/._README.txt
 data/images/._README.txt
 data/manipulated-images/defects-highlighted/._README.txt
+/article/graphics
+/article/defect_detection.out
+/article/defect_detection.log
+/article/defect_detection.fls
+/article/defect_detection.fdb_latexmk
+/article/defect_detection.blg
+/article/defect_detection.bbl
+/article/defect_detection.aux
+/article/defect_detection.synctex.gz

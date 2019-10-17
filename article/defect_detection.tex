@@ -2,12 +2,20 @@
 
 \usepackage{tikz}
 \input{style/architecture_style.tex}
-\usetikzlibrary{calc}
+\usetikzlibrary{calc, shapes.misc}
 
 \input{style/colors.tex}
 
 
 \usepackage{cite}
+
+\usepackage{amsmath}
+\usepackage[colorlinks]{hyperref}
+\hypersetup{citecolor=black}
+\hypersetup{linkcolor=black}
+\hypersetup{urlcolor=black}
+\usepackage{cleveref}
+\usepackage{fancyvrb}
 
 % format citations
 \renewcommand\citepunct{, }
@@ -41,11 +49,17 @@
     \maketitle
 
     \input{sections/abstract&keywords.tex}
+    % Introduction
     \input{sections/introduction.tex}
+    \input{sections/problem_introduction.tex}
+    % Architecture
     \input{sections/architecture.tex}
     \input{sections/image_preprocessing.tex}
     \input{sections/region_proposals}
-    \input{sections/localization&classification.tex}
+    \input{sections/mc_cnn.tex}
+    % Challenger
+    \input{sections/challengers.tex}
+    % Results
     \input{sections/conclusion.tex}
     % \input{sections/acknowledgment.tex}
     

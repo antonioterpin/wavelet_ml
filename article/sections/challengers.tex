@@ -1,0 +1,31 @@
+\section{Challenger}\label{section:challenger}
+    \par{
+        To measure the effectiveness of the R-CNN approach relying on the edge-based image segmentation involving wavelet analysis, the results are compared with another well-known architecture, i.e. a \emph{sliding window} classificator. Results are reported in \ref{section:results}.
+    }
+    \subsection{Sliding window architecture}
+        \par{
+            The idea behind this architecture is to crop the input image at different locations (eventually all the ones possible, as in this paper) and use a classifier to assign to the pixels of the considered region an array of confidences.
+        }
+        \begin{figure}
+            \centering
+            \caption{Sliding window architecture}\label{fig:sliding-window}
+        \end{figure}
+        \par{
+            This cropped regions may overlap. In those circumstances, an euristic to combine different values of confidences is needed. In this article ** TODO completare... **.
+        }
+        \par{
+            In figure \ref{fig:sliding-window} the sketch of this architecture is shown. In the illustration the resulting map, called \emph{confidence map}, has each pixel divided in five regions. Each region has a different color with different intensity. They refer to the possible labels and the relative confidences. 
+        }
+        \par{
+            The \emph{confidence map} is then used along with some image segmentation tecnique to spot defective regions. In particular, a $n+1$ levels whatershed algorithm is proposed in \ref{section:challenger:image-segmentation}.
+        }
+        \par{
+            Since defects may have different dimensions, more refined tecniques could be used to improve the accuracy of the challenger. However, these are outside the scope of this work, and they are proposed in \ref{section:further-work}. Moreover, the segmentation tecnique proposed in \ref{section:challenger:image-segmentation} soothes this problem, since it combines local information from different areas to build the defective regions.
+        }
+    \subsection{Image segmentation}\label{section:challenger:image-segmentation}
+        \par{
+            The \emph{confidence map} is used to segmentate the image through a $n+1$ levels whatershed algorithm. However, since the defective regions are always disjunct, the problem can be reduced to a binary whatershed algorithm \cite{ieee:87344} considering all the defective classes as one, and distinguishing them only later. The $n+1$ levels whatershed algorithm is left as a further development in \ref{section:further-work}.
+        }
+        \par{
+            As a final remark about the challenger, it is patent that even this naive implementation is far more involved then the proposed architecture, and the reason lies on the image segmentation approach.
+        }

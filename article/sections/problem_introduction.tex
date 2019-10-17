@@ -1,0 +1,147 @@
+\section{Steel surfaces defect detection}
+    \subsection{Problem statement}
+        \par{
+            \emph{Given a set of steel surfaces images with the description of their defective areas, learn to detect defective pixels in new pictures.}
+        }
+        \par{
+            The surfaces may have more disjunct defective areas, and there are four defective classes, described in \ref{subsection:defects}.
+        }
+        \par{
+            For each of this classes, a thorough characterization of the pixels in the defective areas is given.
+        }
+        \par{
+            Defective pixels are described using a Run Length Encoding (RLE) approach. The rationale is that an efficient way to store pixel-wide information is needed, and it is reasonable to believe that many defective pixels will be adjacent.
+        }
+        \par{
+            To do so, the binary matrix describing interesting pixels is firstly vectorized column-wide, i.e. each column vector is appended to the previous.
+        }
+        \par{
+            Secondly, pixels are enumerated in this vectorized map.
+        }
+        \par{
+            Finally, the rle algorithm is used on the indices of the cosidered pixels.
+        }
+        \par{
+            \begin{BVerbatim}
+
+Example:
+
+    Suppose the ones in the below 
+    matrix need to be encoded:
+     _       _
+    | 1 0 1 1 |
+    | 1 1 1 0 |
+    | 0 1 1 0 |
+     -       -
+
+    The interested cells, expressed 
+    as (x, y) coordinates, are:
+
+    [(1, 1) (1, 2) (2, 2) (2, 3)
+        (3, 1) (3, 2) (3, 3) (4, 1)]
+    
+    The vectorized matrix is:
+
+    [1 1 0 0 1 1 1 1 1 1 0 0]
+
+    Which can be encoded as:
+
+    "1 2 4 6"
+           
+            \end{BVerbatim}
+        }
+        \par{
+            An optimized implementation in \texttt{MATLAB} of both the rle encoding and decoding scheme described is proposed in \cite{antonioterpin:github}.
+        }
+        \begin{figure}
+            \includegraphics[width=\linewidth]{graphics/architecture/architecture-input}
+            \includegraphics[width=\linewidth]{graphics/architecture/architecture-output}
+            \caption{Detection process input and output.}\label{fig:exampledetection}
+        \end{figure}
+        \par{
+            A visual description of the end to end process is given in figure \ref{fig:exampledetection}, where defective areas have been highlighted with different colors, depending on the defect class.
+        }
+        \par{
+            A mathematical description of the task is:
+        }
+        \par{
+            Given a \emph{training set} $\left(\underline{\underline{\mathbf{X}}}_{train}, \underline{\mathbf{y}}_{train}\right)$ and a \emph{test set} $\left(\underline{\underline{\mathbf{X}}}_{test}, \underline{\mathbf{y}}_{test}\right)$, the goal is to build a \emph{trainer} system $\mathcal{T}$ and a \emph{predictor} function $\mathcal{P}$ such that:
+            \begin{equation*}
+                \underline{\underline{\mathbf{\Theta}}} = \mathcal{T}\left(\underline{\underline{\mathbf{X}}}_{train}, \underline{\mathbf{y}}_{train}\right);\quad \lvert \mathcal{P}\left(\underline{\underline{\mathbf{X}}}_{test}; \underline{\underline{\mathbf{\Theta}}}\right) - \underline{\mathbf{y}}_{test} \rvert \rightarrow 0
+            \end{equation*}
+        }
+        \par{
+            Both the trainer and the predictor are implemented through deep learning tecniques and they are described in \ref{section:architecture}.
+        }
+
+    \subsection{Defect analysis}\label{subsection:defects}
+        \subsubsection{Defect class \#1}
+            \begin{figure}
+                \includegraphics[width=\linewidth]{graphics/defects/class1surface}
+                \includegraphics[width=\linewidth]{graphics/defects/class1surface-highlighted}
+                \caption{Steel surface with defect class \#1.}\label{fig:defects:surface-1}
+            \end{figure}
+            \begin{figure}
+                \includegraphics[width=\linewidth]{graphics/defects/class1shape}
+                \caption{Shape distribution for defect class \#1.}\label{fig:defects:shape-1}
+            \end{figure}
+            \par{
+                ***** TODO: propose explanation ******\\
+                ****** TODO: gaussian bivariate statistics *****\\
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean fermentum congue magna nec facilisis. Etiam rutrum viverra nisl in accumsan. Maecenas vel mauris eget lectus auctor facilisis. Sed accumsan efficitur faucibus. Phasellus dolor est, consequat non nisi non, eleifend laoreet tellus. Mauris in est blandit, convallis massa eleifend, malesuada tellus. Vivamus laoreet diam facilisis enim tincidunt vehicula.
+            }
+
+        \subsubsection{Defect class \#2}
+            \begin{figure}
+                \includegraphics[width=\linewidth]{graphics/defects/class2surface}
+                \includegraphics[width=\linewidth]{graphics/defects/class2surface-highlighted}
+                \caption{Steel surface with defect class \#2.}\label{fig:defects:surface-2}
+            \end{figure}
+            \begin{figure}
+                \includegraphics[width=\linewidth]{graphics/defects/class2shape}
+                \caption{Shape distribution for defect class \#2.}\label{fig:defects:shape-2}
+            \end{figure}
+            \par{
+                ***** TODO: propose explanation ******\\
+                ****** TODO: gaussian bivariate statistics *****\\
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean fermentum congue magna nec facilisis. Etiam rutrum viverra nisl in accumsan. Maecenas vel mauris eget lectus auctor facilisis. Sed accumsan efficitur faucibus. Phasellus dolor est, consequat non nisi non, eleifend laoreet tellus.
+            }
+        \subsubsection{Defect class \#3}
+            \begin{figure}
+                \includegraphics[width=\linewidth]{graphics/defects/class3surface}
+                \includegraphics[width=\linewidth]{graphics/defects/class3surface-highlighted}
+                \caption{Steel surface with defect class \#3.}\label{fig:defects:surface-3}
+            \end{figure}
+            \begin{figure}
+                \includegraphics[width=\linewidth]{graphics/defects/class3shape}
+                \caption{Shape distribution for defect class \#3.}\label{fig:defects:shape-3}
+            \end{figure}
+            \par{
+                ***** TODO: propose explanation ******\\
+                ****** TODO: gaussian bivariate statistics *****\\
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean fermentum congue magna nec facilisis. Etiam rutrum viverra nisl in accumsan. Maecenas vel mauris eget lectus auctor facilisis. Sed accumsan efficitur faucibus. Phasellus dolor est, consequat non nisi non, eleifend laoreet tellus.
+            }
+
+        \subsubsection{Defect class \#4}
+            \begin{figure}
+                \includegraphics[width=\linewidth]{graphics/defects/class4surface}
+                \includegraphics[width=\linewidth]{graphics/defects/class4surface-highlighted}
+                \caption{Steel surface with defect class \#4.}\label{fig:defects:surface-4}
+            \end{figure}
+            \begin{figure}
+                \includegraphics[width=\linewidth]{graphics/defects/class4shape}
+                \caption{Shape distribution for defect class \#4.}\label{fig:defects:shape-4}
+            \end{figure}
+            \par{
+                ***** TODO: propose explanation ******\\
+                ****** TODO: gaussian bivariate statistics *****\\
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean fermentum congue magna nec facilisis. Etiam rutrum viverra nisl in accumsan. Maecenas vel mauris eget lectus auctor facilisis. Sed accumsan efficitur faucibus. Phasellus dolor est, consequat non nisi non, eleifend laoreet tellus.
+            }
+    \subsection{Dataset considerations}
+        \par{
+            *** TODO: include dataset statistics, data augmentation, ... ***\\
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean fermentum congue magna nec facilisis. Etiam rutrum viverra nisl in accumsan. Maecenas vel mauris eget lectus auctor facilisis. Sed accumsan efficitur faucibus. Phasellus dolor est, consequat non nisi non, eleifend laoreet tellus.
+        }
+        \par{
+            To keep proper spatial information ....(data augmentation)
+        }

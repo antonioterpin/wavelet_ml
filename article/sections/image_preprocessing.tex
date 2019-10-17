@@ -1,62 +1,66 @@
 \section{Image preprocessing}\label{section:image_preprocessing}
     \par{
-        In this section image preprocessing is introduced, and the raw image is enhanced to improve learning quality. *** TODO POTREBBE ESSERE INTERESSANTE CONFRONTARE RISULTATI CON E SENZA ***
+        In this section image preprocessing is introduced, and the raw image is enhanced to improve learning quality. In \ref{section:results} the contribution of preprocessing is evaluated.
     }
-    \begin{table}
-        \caption{TODO RESULTS WITH SOME METRICS}
-    \end{table}
     \par{
-        Firstly, since given images have three equal levels of colours, they are in gray levels. Therefore it is possible to shrink the space occupied on disk by discarding hue and saturation information and using only luminance.
+        Firstly, since given images have three equal colours levels, they can be considered gray-levels. Therefore it is possible to shrink the space occupied on disk by discarding hue and saturation information and using only luminance.
     }
     \par{
         Rec.ITU-R BT.601-7 calculates luminance $\left(E\left[y\right]\right)$ as:
         $$ E\left[y\right] = 0.299 * R + 0.587 * G + 0.114 * B $$
-        where $R,G,B$ are the three image channels. Observe that since $R = G = B$, also $E\left[y\right] = R = G = B$, which justifies the assumption that discarding hue and saturation does not affect effectiveness of the system, whereas improving space and computational efficiency. Luminance is denoted by $E\left[y\right]$ since brightness is named $y$ in literature, therefore the luminance, or the physical intensity expected is labeled this way.
+        where $R,G,B$ are the three image channels. Observe that since $R = G = B$, also $E\left[y\right] = R = G = B$, which justifies the assumption that discarding hue and saturation does not affect effectiveness of the system, whereas improving space and computational efficiency. Luminance is denoted by $E\left[y\right]$ since brightness is named $y$ in literature, therefore the luminance, i.e. the physical intensity expected, is labeled in this way.
     }
     \par{
-        Secondly, since pictures may be taken under different light exposure conditions, and since learning has heuristically be proven to be more efficient and effective if input assumptions are always the same, linear scaling and hystogram equalization are done.
+        Secondly, since pictures may be taken under different light exposure conditions, and since learning has heuristically be proven to be more effective if input assumptions are always the same, the luminance histogram of the image is normalized.
     }
     \par{
         Linear scaling ensure that all images gray levels spread over all the range of possible values. $\mathcal{I}\left(x,y\right)$ refers to the luminance level of pixel $\left(x,y\right)$ of image $\mathcal{I}$. Therefore, denoting with $G_{max}$ the greater luminance level (tipically $2^k - 1$ for some $k$), the luminance scaled image is obtained as:
         $$\mathcal{I}_{new}\left(x,y\right) = G_{max} \frac{\mathcal{I}\left(x,y\right) - \mathcal{I}_{min}}{\mathcal{I}_{max} - \mathcal{I}_{min}}$$
         $$\mathcal{I}_{max} = \max_{x,y} \mathcal{I}\left(x,y\right)\;;\quad\mathcal{I}_{min} = \min_{x,y} \mathcal{I}\left(x,y\right)$$
     }
-    \begin{figure}
-        % \includegraphics[]{}
-        \caption{Hystogram of luminance distribution on sample image before linear scaling.}\label{fig:luminance_before}
-    \end{figure}
-    \begin{figure}
-        % \includegraphics[]{}
-        \caption{Hystogram of luminance distribution on sample image after linear scaling.}\label{fig:luminance_after}
-    \end{figure}
     \par{
-        Histogram equalization is a technique for adjusting image intensities to enhance contrast.
+        However, histogram equalization is preferred over linear scaling.
     }
     \par{
-        TODO MATH ....
-    }
-    \begin{figure}
-        % \includegraphics[]{}
-        \caption{Hystogram of luminance distribution on sample image before equalization.}\label{fig:equalization_before}
-    \end{figure}
-    \begin{figure}
-        % \includegraphics[]{}
-        \caption{Hystogram of luminance distribution on sample image after equalization.}\label{fig:equalization_after}
-    \end{figure}
-    \par{
-        In figures \ref{fig:equalization_before} and \ref{fig:equalization_after} the effects of equalization on a sample image hystogram of luminance distribution are visible.
+        Indeed, although both linear scaling and histogram equalization are effective in spreading over all the spectrum the luminance levels of an image, the former only ensure that all the intensities are used whereas the latter is also concerned about the shape of the resulting histogram, which ideally should be flat.
     }
     \par{
-        The difference between hystogram equalization and linear scaling (or stretching) is that .......
+        In fact, histogram equalization aims to transform a scalar image $\mathcal{I}$ such that all grey levels appear equally often in the transformed image $\mathcal{I}_{new}$, i.e.:
+        \begin{equation*}
+            H_{\mathcal{I}_{new}}(u) = \text{const} = \frac{N_{cols}N_{rows}}{G_{max} + 1} \quad 0 \leq u \leq G_{max}
+        \end{equation*}
+        Where $N_{cols}$ and $N_{rows}$ are, respectively, the number of columns and rows of the image. $H_{\mathcal{I}}(u)$ is the absolute frequency of luminance level $u$.
+    }
+    \par{
+        However, this is not practically feasible, since identical value in $\mathcal{I}$ must be mapped on the same value of $\mathcal{I}_{new}$. Therefore, the transform is just an approximate solution.
+    }
+    \par{
+        Intensities $u$ in $\mathcal{I}$ are mapped onto new intensities $v = g(u)$ by the gradation function $g$: 
+        \begin{equation*}
+            g(u) = c_{\mathcal{I}}(u) \cdot G_{max}
+        \end{equation*}
+        Where $c_{\mathcal{I}}$ is the relative cumulative frequency function.
     }
     \begin{figure}
-        % \includegraphics[]{}
-        \caption{Sample image before preprocessing.}\label{fig:preprocessing_before}
-    \end{figure}
-    \begin{figure}
-        % \includegraphics[]{}
-        \caption{Sample image after preprocessing.}\label{fig:preprocessing_after}
+        \includegraphics[width=\linewidth]{graphics/preprocessing/histeq-before}
+        \includegraphics[width=\linewidth]{graphics/preprocessing/histeq-after}
+        \caption{Hystogram of luminance distribution on sample image before and after equalization.}\label{fig:equalization}
     \end{figure}
     \par{
-        Pictures \ref{fig:preprocessing_before} and \ref{fig:preprocessing_after} show preprocessing output on a sample image.
+        In figure \ref{fig:equalization} the effects of equalization a sample image hystogram of luminance distribution are shown.
+    }
+    \begin{figure}
+        \includegraphics[width=\linewidth]{graphics/preprocessing/histeq-before-image}
+        \includegraphics[width=\linewidth]{graphics/preprocessing/histeq-before-image-2}
+        \includegraphics[width=\linewidth]{graphics/preprocessing/histeq-before-image-3}
+        \caption{Sample images before preprocessing.}\label{fig:preprocessing_image_before}
+    \end{figure}
+    \begin{figure}
+        \includegraphics[width=\linewidth]{graphics/preprocessing/histeq-after-image}
+        \includegraphics[width=\linewidth]{graphics/preprocessing/histeq-after-image-2}
+        \includegraphics[width=\linewidth]{graphics/preprocessing/histeq-after-image-3}
+        \caption{Sample images after preprocessing.}\label{fig:preprocessing_image_after}
+    \end{figure}
+    \par{
+        Pictures \ref{fig:preprocessing_image_before} and \ref{fig:preprocessing_image_after} show the preprocessing output on some samples images. It is patently visible that the different light exposures of the three images are compensated through the histogram equalization.
     }
