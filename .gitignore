@@ -63,3 +63,12 @@
 /output/defects/class2shape.fig
 /output/defects/class3shape.fig
 /output/defects/class4shape.fig
+*.DS_Store
+data/._README.md
+*.mat
+*.fig
+*.png
+data/manipulated-images/preprocessed-images/._README.txt
+data/manipulated-data/._README.txt
+data/images/._README.txt
+data/manipulated-images/defects-highlighted/._README.txt
