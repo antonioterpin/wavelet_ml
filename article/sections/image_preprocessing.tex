@@ -13,6 +13,22 @@
     \par{
         Secondly, since pictures may be taken under different light exposure conditions, and since learning has heuristically be proven to be more effective if input assumptions are always the same, the luminance histogram of the image is normalized.
     }
+    \begin{figure}
+        \includegraphics[width=\linewidth]{graphics/preprocessing/histeq-before-image}
+        \vskip .05cm
+        \includegraphics[width=\linewidth]{graphics/preprocessing/histeq-before-image-2}
+        \vskip .05cm
+        \includegraphics[width=\linewidth]{graphics/preprocessing/histeq-before-image-3}
+        \caption{Sample images before preprocessing.}\label{fig:preprocessing_image_before}
+    \end{figure}
+    \begin{figure}
+        \includegraphics[width=\linewidth]{graphics/preprocessing/histeq-after-image}
+        \vskip .05cm
+        \includegraphics[width=\linewidth]{graphics/preprocessing/histeq-after-image-2}
+        \vskip .05cm
+        \includegraphics[width=\linewidth]{graphics/preprocessing/histeq-after-image-3}
+        \caption{Sample images after preprocessing.}\label{fig:preprocessing_image_after}
+    \end{figure}
     \par{
         Linear scaling ensure that all images gray levels spread over all the range of possible values. $\mathcal{I}\left(x,y\right)$ refers to the luminance level of pixel $\left(x,y\right)$ of image $\mathcal{I}$. Therefore, denoting with $G_{max}$ the greater luminance level (tipically $2^k - 1$ for some $k$), the luminance scaled image is obtained as:
         $$\mathcal{I}_{new}\left(x,y\right) = G_{max} \frac{\mathcal{I}\left(x,y\right) - \mathcal{I}_{min}}{\mathcal{I}_{max} - \mathcal{I}_{min}}$$
@@ -24,6 +40,12 @@
     \par{
         Indeed, although both linear scaling and histogram equalization are effective in spreading over all the spectrum the luminance levels of an image, the former only ensure that all the intensities are used whereas the latter is also concerned about the shape of the resulting histogram, which ideally should be flat.
     }
+    \begin{figure}
+        \includegraphics[width=\linewidth]{graphics/preprocessing/histeq-before}
+        \vskip .5cm
+        \includegraphics[width=\linewidth]{graphics/preprocessing/histeq-after}
+        \caption{Hystogram of luminance distribution on sample image before and after equalization.}\label{fig:equalization}
+    \end{figure}
     \par{
         In fact, histogram equalization aims to transform a scalar image $\mathcal{I}$ such that all grey levels appear equally often in the transformed image $\mathcal{I}_{new}$, i.e.:
         \begin{equation*}
@@ -41,26 +63,9 @@
         \end{equation*}
         Where $c_{\mathcal{I}}$ is the relative cumulative frequency function.
     }
-    \begin{figure}
-        \includegraphics[width=\linewidth]{graphics/preprocessing/histeq-before}
-        \includegraphics[width=\linewidth]{graphics/preprocessing/histeq-after}
-        \caption{Hystogram of luminance distribution on sample image before and after equalization.}\label{fig:equalization}
-    \end{figure}
     \par{
         In figure \ref{fig:equalization} the effects of equalization a sample image hystogram of luminance distribution are shown.
     }
-    \begin{figure}
-        \includegraphics[width=\linewidth]{graphics/preprocessing/histeq-before-image}
-        \includegraphics[width=\linewidth]{graphics/preprocessing/histeq-before-image-2}
-        \includegraphics[width=\linewidth]{graphics/preprocessing/histeq-before-image-3}
-        \caption{Sample images before preprocessing.}\label{fig:preprocessing_image_before}
-    \end{figure}
-    \begin{figure}
-        \includegraphics[width=\linewidth]{graphics/preprocessing/histeq-after-image}
-        \includegraphics[width=\linewidth]{graphics/preprocessing/histeq-after-image-2}
-        \includegraphics[width=\linewidth]{graphics/preprocessing/histeq-after-image-3}
-        \caption{Sample images after preprocessing.}\label{fig:preprocessing_image_after}
-    \end{figure}
     \par{
         Pictures \ref{fig:preprocessing_image_before} and \ref{fig:preprocessing_image_after} show the preprocessing output on some samples images. It is patently visible that the different light exposures of the three images are compensated through the histogram equalization.
     }

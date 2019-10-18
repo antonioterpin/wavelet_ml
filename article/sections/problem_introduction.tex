@@ -3,6 +3,12 @@
         \par{
             \emph{Given a set of steel surfaces images with the description of their defective areas, learn to detect defective pixels in new pictures.}
         }
+        \begin{figure}
+            \includegraphics[width=\linewidth]{graphics/architecture/architecture-input}
+            \vskip .05cm
+            \includegraphics[width=\linewidth]{graphics/architecture/architecture-output}
+            \caption{Detection process input and output.}\label{fig:exampledetection}
+        \end{figure}
         \par{
             The surfaces may have more disjunct defective areas, and there are four defective classes, described in \ref{subsection:defects}.
         }
@@ -53,11 +59,6 @@ Example:
         \par{
             An optimized implementation in \texttt{MATLAB} of both the rle encoding and decoding scheme described is proposed in \cite{antonioterpin:github}.
         }
-        \begin{figure}
-            \includegraphics[width=\linewidth]{graphics/architecture/architecture-input}
-            \includegraphics[width=\linewidth]{graphics/architecture/architecture-output}
-            \caption{Detection process input and output.}\label{fig:exampledetection}
-        \end{figure}
         \par{
             A visual description of the end to end process is given in figure \ref{fig:exampledetection}, where defective areas have been highlighted with different colors, depending on the defect class.
         }
@@ -75,73 +76,177 @@ Example:
         }
 
     \subsection{Defect analysis}\label{subsection:defects}
-        \subsubsection{Defect class \#1}
+        \par{
+            The dataset is concerned with flat steel sheet, which production process is especially delicate and structured in many phases.
+        }
+        \par{
+            Therefore, there are numerous defects classified in literature \cite{defects:64common,defects:mainlinemetals}. Hence, many of the traditional types may have been grouped together in the four class given. However, in this section a plausible explanation of each defect class is provided.
+        }
+        \par{
+            The fundamental observation, however, is that some defects have a global origin, i.e. they are due to a flawed machinery, therefore is reasonable that a local classifier would miss important details.
+        }
+        \par{
+            One of the main stage of the production process is rolling \cite{wiki:rolling, defects:rolling}, which is the procedure of plastically deforming steel by passing it between rolls. Therefore, the stell is subjected to high compressive stresses as a result of the friction between the rolls and the metal surface.
+        }
+        \par{
+            The semi-finished products of rolling are named \emph{boom}, \emph{billet} and \emph{slab}. The former is the product of the first breakdown of the ingot, the second is obtained from a further reduction by hot rolling, and the latter is the hot rolled ingot.
+        }
+        \par{
+            The billet is characterized by a cross sectional area larger then $\SI[product-units=power]{40 x 40 }{\mm}$, whereas the slab has one larger then $\SI{100}{\mm\squared}$ and a width two times greater then its thickness.
+        }
+        \par{
+            Rolling mill products are called \emph{plate}, \emph{sheet}, \emph{strip} based on their size.
+        }
+        \par{
+            The plate has a thickness greater then $\SI{6}{\mm}$, whereas both sheet and strip are smaller. However, the latters are distinguished by their width. Sheets width is larger then $\SI{600}{\mm}$, whereas strips width is not.
+        }
+        \subsubsection{Defect class \#1}\label{section:defect-class-3}
+            \par{
+                The first type of defect has not been classified yet into one of the classes found in literature.
+            }
             \begin{figure}
                 \includegraphics[width=\linewidth]{graphics/defects/class1surface}
+                \vskip .05cm
                 \includegraphics[width=\linewidth]{graphics/defects/class1surface-highlighted}
                 \caption{Steel surface with defect class \#1.}\label{fig:defects:surface-1}
             \end{figure}
+            \par{
+                However, it is a glaring example of burst defects, indeed it is reasonable to expect such defects to repeat multiple times on the same surface.
+            }
             \begin{figure}
                 \includegraphics[width=\linewidth]{graphics/defects/class1shape}
                 \caption{Shape distribution for defect class \#1.}\label{fig:defects:shape-1}
             \end{figure}
+            \begin{figure}
+                % \includegraphics[width=\linewidth]{graphics/defects/class1gaussian}
+                \caption{Shape size bivariate lognormal distribution for defect class \#1}\label{fig:defects:gaussian-1}
+            \end{figure}
             \par{
-                ***** TODO: propose explanation ******\\
-                ****** TODO: gaussian bivariate statistics *****\\
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean fermentum congue magna nec facilisis. Etiam rutrum viverra nisl in accumsan. Maecenas vel mauris eget lectus auctor facilisis. Sed accumsan efficitur faucibus. Phasellus dolor est, consequat non nisi non, eleifend laoreet tellus. Mauris in est blandit, convallis massa eleifend, malesuada tellus. Vivamus laoreet diam facilisis enim tincidunt vehicula.
+                An example of surface with a burst of class \#1 defects is visible in illustration \ref{fig:defects:surface-1}. The shape distribution of the defect is illustrated in picture \ref{fig:defects:shape-1}.
             }
-
+            \par{
+                This is drawn by super-position of all the defects of the same type, centered in the middle of the figure, and counting the relative frequencies of each pixel.
+            }
+            \par{
+                The bivariate lognormal distribution of the shape size is shown in \ref{fig:defects:gaussian-1}.
+            }
         \subsubsection{Defect class \#2}
+            \par{
+                Defects of class \#2 usually appears near the transversal edge, hence, they are probably edge laminations, since they are also visually similar.
+            }
             \begin{figure}
                 \includegraphics[width=\linewidth]{graphics/defects/class2surface}
+                \vskip .05cm
                 \includegraphics[width=\linewidth]{graphics/defects/class2surface-highlighted}
                 \caption{Steel surface with defect class \#2.}\label{fig:defects:surface-2}
             \end{figure}
+            \par{
+                This defects are due to the overcooling of the slab off of the caster. The coil mill edges looks like a continuous or semi-continuous line of slivers.
+            }
             \begin{figure}
                 \includegraphics[width=\linewidth]{graphics/defects/class2shape}
                 \caption{Shape distribution for defect class \#2.}\label{fig:defects:shape-2}
             \end{figure}
+            \begin{figure}
+                % \includegraphics[width=\linewidth]{graphics/defects/class2gaussian}
+                \caption{Shape size bivariate lognormal distribution for defect class \#2}\label{fig:defects:gaussian-2}
+            \end{figure}
             \par{
-                ***** TODO: propose explanation ******\\
-                ****** TODO: gaussian bivariate statistics *****\\
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean fermentum congue magna nec facilisis. Etiam rutrum viverra nisl in accumsan. Maecenas vel mauris eget lectus auctor facilisis. Sed accumsan efficitur faucibus. Phasellus dolor est, consequat non nisi non, eleifend laoreet tellus.
+                In figure \ref{fig:defects:surface-2} an example of surface with a defect of this type is shown. The shape distribution of the defect is illustrated in picture \ref{fig:defects:shape-2}. The bivariate lognormal distribution of the shape size is shown in \ref{fig:defects:gaussian-2}.
             }
         \subsubsection{Defect class \#3}
+            \par{
+                The mill rolls should be perfectly parallel to correctly flatten the steel. When this is not the case, a stress pattern arises, with tension along the centreline.
+            }
             \begin{figure}
                 \includegraphics[width=\linewidth]{graphics/defects/class3surface}
+                \vskip .05cm
                 \includegraphics[width=\linewidth]{graphics/defects/class3surface-highlighted}
                 \caption{Steel surface with defect class \#3.}\label{fig:defects:surface-3}
             \end{figure}
+            \par{
+                Defects of class \#3 are probably rolling defects, in particular their repetitive pattern along the centreline is a symptom of \emph{zipper cracks}, i.e. centre line cracking. This is another patent example of burst defect, indeed it is reasonable to expect such defects to repeat multiple times on the same surface.
+            }
             \begin{figure}
                 \includegraphics[width=\linewidth]{graphics/defects/class3shape}
                 \caption{Shape distribution for defect class \#3.}\label{fig:defects:shape-3}
             \end{figure}
+            \begin{figure}
+                % \includegraphics[width=\linewidth]{graphics/defects/class3gaussian}
+                \caption{Shape size bivariate lognormal distribution for defect class \#3}\label{fig:defects:gaussian-3}
+            \end{figure}
             \par{
-                ***** TODO: propose explanation ******\\
-                ****** TODO: gaussian bivariate statistics *****\\
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean fermentum congue magna nec facilisis. Etiam rutrum viverra nisl in accumsan. Maecenas vel mauris eget lectus auctor facilisis. Sed accumsan efficitur faucibus. Phasellus dolor est, consequat non nisi non, eleifend laoreet tellus.
+                An example of surface affected by defects of class \#3 is shown in figure \ref{fig:defects:surface-3}. A single defect of class \#3 (i.e. a single crack) has usually a shape as the one shown in picture \ref{fig:defects:shape-3}. The bivariate lognormal distribution of the shape size is shown in \ref{fig:defects:gaussian-3}.
             }
 
         \subsubsection{Defect class \#4}
+            \par{
+                This defect class seems to be concerned with protrusions on the steel surface. The main typologies of protuberances in the dataset are \emph{scabs} and \emph{blisters}.
+            }
             \begin{figure}
                 \includegraphics[width=\linewidth]{graphics/defects/class4surface}
+                \vskip .05cm
                 \includegraphics[width=\linewidth]{graphics/defects/class4surface-highlighted}
                 \caption{Steel surface with defect class \#4.}\label{fig:defects:surface-4}
             \end{figure}
+            \par{
+                Scabs are flattened protrusions, and they tend to be round or oval shaped and concentrated to only certain blooms or billets.
+            }
+            \par{
+                Blisters, or gas porosities, are small bulges on the surface of the components and their dimension can vary. Some gasses may remain constrained inside the steel sheet. The high pressure due to the rolling process produces then protrusions on the surface.
+            }
             \begin{figure}
                 \includegraphics[width=\linewidth]{graphics/defects/class4shape}
                 \caption{Shape distribution for defect class \#4.}\label{fig:defects:shape-4}
             \end{figure}
+            \begin{figure}
+                % \includegraphics[width=\linewidth]{graphics/defects/class4gaussian}
+                \caption{Shape size bivariate lognormal distribution for defect class \#4}\label{fig:defects:gaussian-4}
+            \end{figure}
             \par{
-                ***** TODO: propose explanation ******\\
-                ****** TODO: gaussian bivariate statistics *****\\
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean fermentum congue magna nec facilisis. Etiam rutrum viverra nisl in accumsan. Maecenas vel mauris eget lectus auctor facilisis. Sed accumsan efficitur faucibus. Phasellus dolor est, consequat non nisi non, eleifend laoreet tellus.
+                An example of surface affected by defects of class \#4 is shown in figure \ref{fig:defects:surface-4}. A single defect of class \#4 (i.e. a single crack) has usually a shape as the one shown in picture \ref{fig:defects:shape-4}. The bivariate lognormal distribution of the shape size is shown in \ref{fig:defects:gaussian-4}. These statistics have been used, along with the visual inspection, to infer the origin of this defect class.
+            }
+            \par{
+                Differently from the defects of class \#3, these flaws are local, i.e. it is not unusual to find only a single region with this issues in the whole picture.
             }
     \subsection{Dataset considerations}
+        \begin{figure}
+            \includegraphics[width=\linewidth]{graphics/defects/representation}
+            \caption{Class representation in the original dataset.}\label{fig:defects:representation-original}
+        \end{figure}
         \par{
-            *** TODO: include dataset statistics, data augmentation, ... ***\\
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean fermentum congue magna nec facilisis. Etiam rutrum viverra nisl in accumsan. Maecenas vel mauris eget lectus auctor facilisis. Sed accumsan efficitur faucibus. Phasellus dolor est, consequat non nisi non, eleifend laoreet tellus.
+            In illustration \ref{fig:defects:representation-original} the relative representation of the classes in the original dataset is shown. It is patent that class 3 is far more represented then the other defect classes, and the number of surfaces with at least a defect of this class is nearly tantamount the number of flawless surfaces.
+        }
+        \begin{figure}
+            \includegraphics[width=\linewidth]{graphics/defects/combinations}
+            \caption{Frequencies of defects combinations.}\label{fig:defects:combinations}
+        \end{figure}
+        \par{
+            In figure \ref{fig:defects:combinations} images have been grouped in mutually exclusive subsets, based on the combination of defects in the pictured surface.
         }
         \par{
-            To keep proper spatial information ....(data augmentation)
+            Since skewed dataset lessen the effectiveness of machine learning algorithms, especially in predicting minority class examples, data augmentation is done only on those classes with fewer elements.
+        }
+        \begin{figure}
+            \includegraphics[width=\linewidth]{graphics/defects/data-augmentation}
+            \vskip .05cm
+            \includegraphics[width=\linewidth]{graphics/defects/data-augmentation-h}
+            \vskip .05cm
+            \includegraphics[width=\linewidth]{graphics/defects/data-augmentation-v}
+            \vskip .05cm
+            \includegraphics[width=\linewidth]{graphics/defects/data-augmentation-hv}
+            \caption{Data augmentation. The image is flipped horizontally, vertically and both. The defective area is moved coherently.}\label{fig:data-augmentation}
+        \end{figure}
+        \par{
+            In order to keep proper proportions and spatial information, replicas of surfaces are built only using simmetries. Therefore, from a single image other three are created. An example of such operation is shown in \ref{fig:data-augmentation}.
+        }
+        \par{
+            The encoded pixels must of course be mapped onto the new image. This is done considering the binary matrix corresponding to the encoded pixels, flipping it and re-encoding the resulting map.
+        }
+        \begin{figure}
+            \includegraphics[width=\linewidth]{graphics/defects/representation-augmented}
+            \caption{Class representation in the augmented dataset.}\label{fig:defects:representation-augmented}
+        \end{figure}
+        \par{
+            The resulting dataset is slightly more balanced. The bar chart in figure \ref{fig:defects:representation-augmented} shows the new representation of the different classes after data augmentation.
         }
