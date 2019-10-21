@@ -21,11 +21,11 @@ function globals
 %   * cv_set_path: contains the relative path to the cross validation set.
 %   * test_set_path: contains the relative path to the test set.
 %   * classification_training_set_path: contains relative path to
-%   classification training set
+%   classification training set.
 %   * classification_test_set_path: contains relative path to
-%   classification test set
+%   classification test set.
 %   * classification_cv_set_path: contains relative path to
-%   classification cross validation set
+%   classification cross validation set.
 %
 % NUMERIC
 %   * number_defect_classes: contains the number of defect classes.
@@ -66,7 +66,7 @@ local_feature_images = "../../data/ideal-mc-cnn/local-features/";
 
 % CSV
 global dataset_path formatted_dataset_path augmented_dataset_path... 
-    training_set_path cv_set_path test_set_path...
+    training_set_path cv_set_path test_set_path... 
     classification_training_set_path classification_test_set_path classification_cv_set_path;
 
 dataset_path = "../../data/dataset.csv";
