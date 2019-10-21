@@ -1,0 +1,269 @@
+\subsection{Proposed architecture}
+\begin{frame}[fragile]{Proposed architecture}
+    \vskip -0.5cm
+    \begin{block}{Region-based CNN (R-CNN)}
+        \begin{itemize}
+            \item Region proposals
+            \item Classification
+        \end{itemize}
+    \end{block}
+    \vskip 0.25cm
+    \centering
+    \begin{tikzpicture}
+        % Input
+        \node[rectangle, draw, minimum width=2cm, minimum height=2cm, anchor=west] at (-2,0) {Image};
+
+        \draw[->] (0.5,0) -- (1.5,0);
+
+        % Region proposals
+        \node at (2.5,1.5) {Region proposals};
+        \foreach \i in {0,...,7}
+            \node[rectangle, draw, minimum width=1cm, minimum height=1cm, anchor=north west, fill=white] at (2 +\i*0.2,1-\i*0.2) {};
+
+        \draw[->] (4.5,0) -- (5.5,0);
+
+        % Classification
+        \node at (5.5,1.5) {Class};
+        \draw[->, color=UniBlue] (6.2, .8) -- (5.7, 1.25);
+        \draw[color=UniBlue] (6.35,-.25) ellipse (0.25cm and 1.1cm);
+
+        \node at (8.2,2) {Encoded};
+        \node at (8.3,1.5) {Pixels};
+        \draw[->, color=UniOrange] (7, .95) -- (7.5, 1.55);
+        \draw[color=UniOrange] (7.6,.6) ellipse (1.1cm and 0.35cm);
+
+        \node [matrix, anchor=north west, draw] at (6,1)
+        {
+            % \node {Class}; & \node {EncodedPixels};\\
+            \node {$1$}; & \node {``12 13 \ldots''};\\
+            \node {$2$}; & \node {``6 35 \ldots''};\\
+            \node {$3$}; & \node {``''};\\
+            \node {$4$}; & \node {``192 78 \ldots''};\\
+        };
+    \end{tikzpicture}
+\end{frame}
+
+\subsubsection{Region proposals}
+\begin{frame}{Region proposals}
+    TODO include original image
+    TODO include edged image
+    TODO include alpha-shape
+    TODO include bounding boxes
+\end{frame}
+
+\begin{frame}
+    \frametitle{Region proposals}
+    \framesubtitle{Optimization}
+    \begin{description}
+        \item<1-> 
+        \begin{alertblock}{Alpha shape tuning}
+            Manually tuning the parameters to satisfy the validity of the topologically correct image segmentation using alpha-shapes requires a full knowledge of the object considered.
+        \end{alertblock}
+        \item<2->
+        \begin{exampleblock}{Alpha shape tuning - solution}
+            An empirical approach is proposed instead. To tune the hyper parameters of the algorithm, bayesian optimization is used.
+        \end{exampleblock}
+    \end{description}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Region proposals}
+    \framesubtitle{Optimization}
+    \begin{description}
+        \item<1->
+        \begin{block}{Bayesian optimization}
+            Bayesian optimization aims to solve an optimization problem $\max\limits_{x\in A}f\left(x\right)$ when:
+            \begin{itemize}
+                \item $A \subset \mathbb{R}^d$ with $d$ not too large.
+                \item Easy to asses $A$ membership.
+                \item $f$ can be modeled using \emph{Gaussian process regression}.
+                \item $f$ is a \emph{black box}.
+            \end{itemize}
+        \end{block}
+        \item<2->
+        \begin{exampleblock}{Loss function}
+            \begin{equation}
+                J\left(\alpha\right) = \frac{2\lvert X \cap Y \rvert}{\lvert X \rvert + \lvert Y \rvert} = -f(x)
+            \end{equation}
+        \end{exampleblock}
+    \end{description}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Region proposals}
+    \framesubtitle{Optimization}
+    \vskip -0.5cm
+    \begin{block}{Bayesian optimization}
+        Firstly a collection of points $x_1, \ldots, x_k \in \mathbb{R}^d$ is considered. Suppose $f$ can be modeled as:
+        \begin{equation*}
+            f\left(x_{1:n}\right) \sim \mathcal{N}\left(\mu\left(x_{1:n}\right), \Sigma\left(x_{1:n}, x_{1:n}\right)\right)
+        \end{equation*}
+        Then we can infere the probability distribution of $f\left(x_{n+1}\right)$:
+        \begin{equation}
+            f\left(x_{n+1}\right) \mid f\left(x_{1:n}\right) \sim \mathcal{N}\left(\mu_{n+1}, \Sigma_{n+1}\right)
+        \end{equation}
+        \begin{equation*}
+            \mu_{n+1} = \Sigma\left(x_{n+1}, x_{1:n}\right)\Sigma\left(x_{1:n}, x_{1:n}\right)^{-1}\left(f\left(x_{1:n}\right) - \mu\left(x_{1:n}\right)\right) + \mu\left(x_{n}\right)
+        \end{equation*}
+        \begin{equation*}
+            \Sigma_n = \Sigma\left(x_{n+1}, x_{n+1}\right) - \Sigma\left(x_{n+1}, x_{1:n}\right)\Sigma\left(x_{1:n}, x_{1:n}\right)^{-1}\Sigma\left(x_{1:n}, x_{n+1}\right)
+        \end{equation*}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Region proposals}
+    \framesubtitle{Optimization}
+    \begin{exampleblock}{Acquisition function}
+        Therefore, it is possible to consider an \emph{acquisition function}, i.e. a function that given the previous $x_1, \ldots, x_n$ values determines the best choice of $x_{n+1}$:
+        \begin{equation}
+            a \colon \left[x_1 \ldots x_n\right] \rightarrow x_{n+1} \colon \mathcal{P}\left[f(x_{n+1}) = \max\limits_{x \in A} f\left(x\right)\right] \text{is max}
+        \end{equation}
+    \end{exampleblock}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Region proposals}
+    \framesubtitle{Optimization}
+    TABLE with results\\
+    plot bayesian \\
+    example results
+\end{frame}
+
+\subsubsection{MC-CNN}
+\begin{frame}{Multi Column CNN (MC-CNN)}
+    \centering
+    \begin{tikzpicture}
+        % image
+        \node[circle, draw] (input) at (0,0) {I};
+
+        % preprocessed image
+        \node[rectangle, draw] (p1) at ($(input) + (2,2)$) {P};
+        \node[rectangle, draw] (p2) at ($(input) + (2,.5)$) {P};
+        \node (p3) at ($(input) + (2,-.5)$) {\vdots};
+        \node[rectangle, draw] (p4) at ($(input) + (2,-2)$) {P};
+
+        % image to preprocessed image
+        \draw[->] ($(input) + (0.5, 0)$) -- ($(p1) + (-0.3, 0)$);
+        \draw[->] ($(input) + (0.5, 0)$) -- ($(p2) + (-0.3, 0)$);
+        \draw[->] ($(input) + (0.5, 0)$) -- ($(p4) + (-0.3, 0)$);
+
+        % cnn
+        \node[rounded rectangle, draw, minimum width=2.5cm, minimum height=1cm] (cnn1) at ($(p1) + (2.5,0)$) {CNN};
+        \node[rounded rectangle, draw, minimum width=2.5cm, minimum height=1cm] (cnn2) at ($(p2) + (2.5,0)$) {CNN};
+        \node[minimum width=2.5cm, minimum height=1cm] (cnn3) at ($(p3) + (2.5,0)$) {\vdots};
+        \node[rounded rectangle, draw, minimum width=2.5cm, minimum height=1cm] (cnn4) at ($(p4) + (2.5,0)$) {CNN};
+
+        % preprocessed to cnn
+        \draw[->] ($(p1) + (0.5, 0)$) -- ($(cnn1) + (-1.2, 0)$);
+        \draw[->] ($(p2) + (0.5, 0)$) -- ($(cnn2) + (-1.2, 0)$);
+        \draw[->] ($(p4) + (0.5, 0)$) -- ($(cnn4) + (-1.2, 0)$);
+
+        % classifier
+        \node[rectangle, draw, minimum width=2cm, minimum height=1cm] (classifier) at ($(cnn3) + (3.5,0.5)$) {NN};
+
+        % cnn to classifier
+        \draw[->] ($(cnn1) + (1.3, 0)$) -- ($(classifier) + (-1.2, .2)$);
+        \draw[->] ($(cnn2) + (1.3, 0)$) -- ($(classifier) + (-1.2, 0)$);
+        \draw[->] ($(cnn4) + (1.3, 0)$) -- ($(classifier) + (-1.2, -.2)$);
+
+        % output
+        \node[circle, draw] (output) at ($(classifier) + (2,0)$) {O};
+
+        % classifier to output
+        \draw[->] ($(classifier) + (1.1, 0)$) -- ($(output) + (-.45, 0)$);
+
+    \end{tikzpicture}
+\end{frame}
+
+\begin{frame}{Multi Column CNN (MC-CNN)}
+    \includegraphics[width=\textwidth]{graphics/architecture/mc-cnn-input}
+    $$\Downarrow$$
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        Flawless area & Defect \#1 & Defect \#2 & Defect \#3 & Defect \#4\\\hline
+        $1\%$ & $4\%$ & $6\%$ & \cellcolor{UniBlue}\textcolor{white}{$87\%$} & $2\%$ \\
+        \hline
+    \end{tabular}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Multi Column CNN (MC-CNN)}
+    \framesubtitle{Shape column}
+    \includegraphics[width=\textwidth]{graphics/architecture/mc-cnn-shape}
+    % \includegraphics[width=\textwidth]{graphics/architecture/mc-cnn-shape-architecture}
+    TODO confusion matrix + learning curve
+\end{frame}
+
+\begin{frame}
+    \frametitle{Multi Column CNN (MC-CNN)}
+    \framesubtitle{Local column}
+    \includegraphics[width=\textwidth]{graphics/architecture/mc-cnn-local}
+    % \includegraphics[width=\textwidth]{graphics/architecture/mc-cnn-shape-architecture}
+    TODO confusion matrix + learning curve
+\end{frame}
+
+\begin{frame}
+    \frametitle{Multi Column CNN (MC-CNN)}
+    \framesubtitle{Global column}
+    \includegraphics[width=\textwidth]{graphics/architecture/mc-cnn-global}
+    % \includegraphics[width=\textwidth]{graphics/architecture/mc-cnn-shape-architecture}
+    TODO confusion matrix + learning curve
+\end{frame}
+
+\subsubsection{Output layer}
+\begin{frame}{Output layer}
+    \begin{tikzpicture}
+
+        % columns
+        \node[rounded rectangle, draw, minimum width = 2cm, minimum height=1cm] (cnn1) at (0,2) {Shape};
+        \node[rounded rectangle, draw, minimum width = 2cm, minimum height=1cm] (cnn2) at (0,0) {Local};
+        \node[rounded rectangle, draw, minimum width = 2cm, minimum height=1cm] (cnn3) at (0,-2) {Global};
+
+        % columns output
+        \foreach \i in {0,...,4}
+            \node[rectangle, draw, minimum width=1cm, minimum height=1cm, anchor=north west, fill=white] (output1 \i) at ($(cnn1) + (2+\i*0.15, 1-\i*.15) $) {$87\%$};
+
+        \foreach \i in {0,...,4}
+            \node[rectangle, draw, minimum width=1cm, minimum height=1cm, anchor=north west, fill=white] (output2 \i) at ($(cnn2) + (2+\i*0.15, 1-\i*.15) $) {$92\%$};
+
+        \foreach \i in {0,...,4}
+            \node[rectangle, draw, minimum width=1cm, minimum height=1cm, anchor=north west, fill=white] (output3 \i) at ($(cnn3) + (2+\i*0.15, 1-\i*.15) $) {$42\%$};
+
+        % columns to output
+        \draw[->] ($(cnn1) + (1, 0)$) -- ($(cnn1) + (1.7, 0)$);
+        \draw[->] ($(cnn2) + (1, 0)$) -- ($(cnn2) + (1.7, 0)$);
+        \draw[->] ($(cnn3) + (1, 0)$) -- ($(cnn3) + (1.7, 0)$);
+
+        % fuse output
+        \node [matrix, anchor=west, draw] (finalinput) at ($(cnn2) + (4.5,0)$)
+        {
+            \node {$13\%$};\\
+            \node {$25\%$};\\
+            \node {\vdots};\\
+            \node {$42\%$};\\
+        };
+
+        % cnn output to flatten
+        \draw[->] ($(output1 4) + (.6, 0)$) -- ($(finalinput) + (-.7,.2)$);
+        \draw[->] ($(output2 4) + (.6, 0)$) -- ($(finalinput) + (-.7,0)$);
+        \draw[->] ($(output3 4) + (.6, 0)$) -- ($(finalinput) + (-.7,-.2)$);
+
+        % hidden layer
+        \foreach \i in {0,...,7}
+            \node[circle, draw, minimum width=.75cm, minimum height=.75cm, anchor=west] (h \i) at ($(finalinput) + (2, 3-\i*.8) $) {};
+        \foreach \i in {0,...,7}
+            \draw[->] ($(finalinput) + (.75,0)$) -- ($(h \i) + (-.5,0)$);
+
+        % output layer
+        \foreach \i in {0,...,4}
+            \node[circle, draw, minimum width=.75cm, minimum height=.75cm, anchor=west] (o \i) at ($(finalinput) + (4, 1.75-\i*.8) $) {};
+        \foreach \i in {0,...,4}
+            \foreach \j in {0,...,7}
+                \draw[->] ($(h \j) + (.5,0)$) -- ($(o \i) + (-.5,0)$);
+        
+        
+    \end{tikzpicture}
+    % FC NN + bayesopt params....
+\end{frame}
