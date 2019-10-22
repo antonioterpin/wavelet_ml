@@ -5,11 +5,19 @@ function globals
 %   * images_path: contains the relative path to the original images.
 %   * compressed_images: contains the relative path to the compressed images.
 %   * defects_highlighted: contains the relative path to the images with highlighted defects.
+%   * augmentated_images: contains the relative path to the compressed and augmentated images.
+%   * augmentated_preprocessed_images: contains the relative path to the compressed, preprocessed and augmentated images.
 %   * preprocessed_images: contains the relative path to the preprocessed images.
 %   * shape_feature_images: contains the relative path to the shape feature
 %   images
 %   * local_feature_images: contains the relative path to the local feature
 %   images
+%   * global_feature_images: contains the relative path to the local feature
+%   images
+%   * local_feature_preprocessed_images: contains the relative path to the local feature
+%   images (preprocessed)
+%   * global_feature_preprocessed_images: contains the relative path to the local feature
+%   images (preprocessed)
 % 
 % CSV
 %   * dataset_path: contains the relative path to the original csv.
@@ -55,14 +63,20 @@ function globals
 
 
 % IMAGES
-global images_path compressed_images defects_highlighted preprocessed_images shape_feature_images local_feature_images;
+global images_path compressed_images defects_highlighted preprocessed_images augmentated_images augmentated_preprocessed_images;
+global shape_feature_images local_feature_images global_feature_images local_feature_preprocessed_images global_feature_preprocessed_images;
 
 images_path = "../../data/images/";
 compressed_images = "../../data/manipulated-images/compressed-images/";
 defects_highlighted = "../../data/manipulated-images/defects-highlighted/";
-preprocessed_images = "../../data/manipulated-images/preprocessed-images/";
+augmentated_preprocessed_images = "../../data/manipulated-images/compressed-preprocessed-augmentated-images/";
+augmentated_images = "../../data/manipulated-images/compressed-augmentated-images/";
+preprocessed_images = "../../data/manipulated-images/compressed-preprocessed-images/";
 shape_feature_images = "../../data/ideal-mc-cnn/shape-features/";
 local_feature_images = "../../data/ideal-mc-cnn/local-features/";
+global_feature_images = "../../data/ideal-mc-cnn/global-features/";
+local_feature_preprocessed_images = "../../data/ideal-mc-cnn/local-features-preprocessed/";
+global_feature_preprocessed_images = "../../data/ideal-mc-cnn/global-features-preprocessed/";
 
 % CSV
 global dataset_path formatted_dataset_path augmented_dataset_path... 

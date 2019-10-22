@@ -1,1 +1,0 @@
-This is a placeholder for preprocessed images, since they are not tracked for security reasons :)
