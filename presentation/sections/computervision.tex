@@ -1,0 +1,218 @@
+\subsection{Computer Vision}
+    \framepic{graphics/computervision/computer-vision}{
+        \framefill
+        \textcolor{white}{Computer Vision}
+        \vskip 0.5cm
+    }
+    \begin{frame}{Computer Vision}
+        \begin{block}{Classification Task}
+            To determine to which of a set of \textbf{categories} a given object belongs to.
+        \end{block}
+        \begin{columns}[onlytextwidth]
+            \column{0.3\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{graphics/computervision/classification-image.jpeg}
+            \column{0.4\textwidth}
+                \begin{tikzpicture}
+                    \node at (0,0) {Classification};
+                    \node at (0.05,-0.5) {System};
+                    \node[rectangle, draw, minimum width=2.6cm, minimum height=1.1cm, anchor=north west] at (-1.3,0.3) {};
+                    \draw[->] (1.5,0) -- (2.5,0.3);
+                    \draw[->] (1.5,-0.5) -- (2.5,-1.2);
+                    \draw[->] (-2,1) -- (-1.5,0);
+                    \draw[->] (-2,-1.5) -- (-1.5,-0.5);
+                \end{tikzpicture}
+            \column{0.2\textwidth}
+                \vskip -0.5cm Output \vskip 0.5cm
+                \begin{columns}[onlytextwidth]
+                    \column{0.5\textwidth}
+                        \begin{tabular}{|c|}
+                            \hline
+                            $0.03$\\\hline
+                            \cellcolor{UniBlue}\textcolor{white}{$0.77$}\\\hline
+                            $\vdots$\\\hline
+                            $0.12$\\\hline
+                        \end{tabular}
+                    \column{0.5\textwidth}
+                        \vskip -0.2cm
+                        \begin{tabular}{c}
+                            \\
+                            \textcolor{UniBlue}{Child}\\
+                            \\
+                            \\
+                        \end{tabular}
+                \end{columns}
+        \end{columns}
+    \end{frame}
+
+    \begin{frame}{Computer Vision}
+        \begin{block}{Object Localization Task}
+            To find a given number (usually one) of items in a given context, predicting both their position and their class. \\
+            \textbf{Remark.} Position is usually given as a bounding box.
+        \end{block}
+        \begin{columns}[onlytextwidth]
+            \column{0.45\textwidth}
+            \includegraphics[width=\textwidth]{graphics/computervision/localization-input}
+            \column{0.45\textwidth}
+            \includegraphics[width=\textwidth]{graphics/computervision/localization-output}
+        \end{columns}
+    \end{frame}
+
+    \begin{frame}{Computer Vision}
+        \begin{description}
+            \item<1->
+                \begin{block}{Object Detection Task}
+                    To \textbf{localize} any number of items in a given context, allowing either zero or any finite number of objects.
+                \end{block}
+            \item<2->
+                \begin{alertblock}{Remark.}
+                    The constraint on the number of object is \emph{a priori}. Indeed, a localization system will always look for a fixed number of objects, whereas a detection system is trained to be able to spot a variable number of objects in each input.
+                \end{alertblock}
+        \end{description}
+    \end{frame}
+
+    \begin{frame}{Computer Vision}
+        \begin{description}
+            \item<1->   \begin{block}{Image Segmentation}
+                            Pixel-wide classification of the image. \textbf{Remark.} Image segmentation can be consider either the preemptive step to classification or the output of a classification system.
+                        \end{block}
+            \item<2->   \vskip -0.5cm 
+                        \begin{exampleblock}{Example: Pixel-based image segmentation.}
+                            This family considers some distance defined over the image domain to segmentate it.
+                        \end{exampleblock}
+            \item<3->   \vskip -0.5cm 
+                        \begin{exampleblock}{Example: Edge-based image segmentation.}
+                            This family uses an edge-detector algorithm, along with denoising and thresholding considerations, to solve the boundary detection problem.
+                        \end{exampleblock}
+        \end{description}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Pixel-based image segmentation}
+        \framesubtitle{Whatershed}
+        \begin{columns}[onlytextwidth]
+            \column{0.5\textwidth}
+            \includegraphics[width=\textwidth]{graphics/computervision/whatershed-plane}
+            \column{0.5\textwidth}
+            \includegraphics[width=\textwidth]{graphics/computervision/whatershed-surf}
+        \end{columns}
+        \begin{block}{Whatershed and immersion}
+            The above pictures both show the same function defined over a 2D domain. Suppose to immerse the above right surface in some liquid, which gradually fill the two holes.
+        \end{block}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Pixel-based image segmentation}
+        \framesubtitle{Whatershed}
+        \begin{columns}[onlytextwidth]
+            \column{0.5\textwidth}
+            \includegraphics[width=\textwidth]{graphics/computervision/whatershed-plane}
+            \column{0.5\textwidth}
+            \includegraphics[width=\textwidth]{graphics/computervision/whatershed-surf}
+        \end{columns}
+        \begin{block}{Whatershed and immersion}
+            At some point the two volumes of liquid will meet, in particular they will flood at the same time over the green colored surface region.
+        \end{block}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Pixel-based image segmentation}
+        \framesubtitle{Whatershed}
+        \begin{columns}[onlytextwidth]
+            \column{0.5\textwidth}
+            \includegraphics[width=\textwidth]{graphics/computervision/whatershed-plane}
+            \column{0.5\textwidth}
+            \includegraphics[width=\textwidth]{graphics/computervision/whatershed-surf}
+        \end{columns}
+        \begin{block}{Whatershed and immersion}
+            This region is called whatershed and differentiates two areas of the image. Hence, an image can be segmentated considering its whatersheds.
+        \end{block}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Pixel-based image segmentation}
+        \framesubtitle{Whatershed}
+        % \includegraphics[width=\textwidth]{graphics/whatershed-plane}
+        TODO insert example image\\
+        % \includegraphics[width=\textwidth]{graphics/whatershed-surf}
+        TODO insert example image
+    \end{frame}
+
+    % \begin{frame}
+    %     \frametitle{Pixel-based image segmentation}
+    %     \framesubtitle{Whatershed}
+    %     Let $\mathcal{D} \subset \mathbb{R}_+^2$ be a $2D$ domain, and $\mathcal{I} \colon \mathcal{D} \rightarrow \mathbb{R}_+$. Denote $\displaystyle h_m \triangleq \min_{\underline{x} \in \mathcal{D}}\mathcal{I}(\underline{x})$, $\displaystyle h_M \triangleq \max_{\underline{x} \in \mathcal{D}}\mathcal{I}(\underline{x})$, $T_h\left(\mathcal{I}\right) \triangleq \left\{\underline{p} \in \mathcal{D}, \mathcal{I}(\underline{p}) \leq h\right\}$.
+    % \end{frame}
+
+    % \begin{frame}
+    %     \frametitle{Pixel-based image segmentation}
+    %     \framesubtitle{Whatershed}
+    %         \begin{itemize}
+    %             \item Def, th, alg
+    %             \item Example results
+    %         \end{itemize}
+    % \end{frame}
+
+    \begin{frame}
+        \frametitle{Edge-based image segmentation}
+        \framesubtitle{Wavelet \& Phase Congruency \& Alpha-Shape}
+        \includegraphics[width=\textwidth]{graphics/computervision/edge-odd}
+        \includegraphics[width=\textwidth]{graphics/computervision/edge-odd-plot}
+        \begin{exampleblock}{Odd transition}
+            Given a function defined on a $2D$ domain, a local odd transition is likely to describe border edge.
+        \end{exampleblock}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Edge-based image segmentation}
+        \framesubtitle{Wavelet \& Phase Congruency \& Alpha-Shape}
+        \includegraphics[width=\textwidth]{graphics/computervision/edge-even}
+        \includegraphics[width=\textwidth]{graphics/computervision/edge-even-plot}
+        \begin{exampleblock}{Even transition}
+            Given a function defined on a $2D$ domain, a local even transition is likely to describe a line.
+        \end{exampleblock}
+    \end{frame}
+    
+    \begin{frame}
+        \frametitle{Edge-based image segmentation}
+        \framesubtitle{Wavelet \& Phase Congruency \& Alpha-Shape}
+            \begin{block}{Phase-congruency model}
+                Given $v_1, v_2, \ldots, v_n \in \mathcal{V}$, their phase congruency is defined as:
+                \begin{equation}
+                    \mathcal{P} = \frac{\lvert \sum_{i} v_i \rvert}{\sum_{i} \lvert v_i \rvert}
+                \end{equation}
+            \end{block}
+            \centering
+            \includegraphics[width=0.6\textwidth]{graphics/computervision/phasecongruency}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Edge-based image segmentation}
+        \framesubtitle{Wavelet \& Phase Congruency \& Alpha-Shape}
+            Algorithm
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Edge-based image segmentation}
+        \framesubtitle{Wavelet \& Phase Congruency \& Alpha-Shape}
+        \begin{columns}[onlytextwidth]
+            \column{0.5\textwidth}
+                \includegraphics[width=\textwidth]{graphics/computervision/alpha-shape-points}
+            \column{0.5\textwidth}
+                \includegraphics[width=\textwidth]{graphics/computervision/alpha-shapes}
+        \end{columns}
+        \begin{description}
+            \item<2-> \begin{theorem}[Topologically correct image segmentation]
+                            Under certain conditions on the parameters of the alpha-shape, the boundary reconstruction is topologically equivalent to the boundary of the original region.
+                        \end{theorem}
+        \end{description}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Edge-based image segmentation}
+        \framesubtitle{Wavelet \& Phase Congruency \& Alpha-Shape}
+        % \includegraphics[width=\textwidth]{graphics/whatershed-plane}
+        TODO insert example image\\
+        % \includegraphics[width=\textwidth]{graphics/whatershed-surf}
+        TODO insert example image
+    \end{frame}

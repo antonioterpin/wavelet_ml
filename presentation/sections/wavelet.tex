@@ -1,0 +1,175 @@
+\subsection{Wavelet Analysis}
+    \framepic{graphics/wavelets/wavelet}{
+        \framefill
+        \textcolor{black}{Wavelet}
+        \vskip 0.5cm
+    }
+
+    \begin{frame}{Multi Resolution Analysis}
+        \begin{description}
+            \item<1->\begin{block}{Goal}
+                Approximate vectors of $L^2\left(\mathbb{R}\right)$ with variable degrees of resolution.
+            \end{block}
+            \item<2->\includegraphics[width=.6\textwidth]{graphics/wavelets/mra}
+        \end{description}
+    \end{frame}
+
+    \begin{frame}{Multi Resolution Analysis}
+        \begin{description}
+            \item<1->\begin{block}{Goal}
+                Approximate vectors of $L^2\left(\mathbb{R}\right)$ with variable degrees of resolution.
+            \end{block}
+            \item<1->\includegraphics[width=.6\textwidth]{graphics/wavelets/mra-1}
+        \end{description}
+    \end{frame}
+
+    \begin{frame}{Multi Resolution Analysis}
+        \begin{description}
+            \item<1->\begin{block}{Goal}
+                Approximate vectors of $L^2\left(\mathbb{R}\right)$ with variable degrees of resolution.
+            \end{block}
+            \item<1->\includegraphics[width=.6\textwidth]{graphics/wavelets/mra-2}
+        \end{description}
+    \end{frame}
+
+    \begin{frame}{Multi Resolution Analysis}
+        \begin{description}
+            \item<1->\begin{block}{Goal}
+                Approximate vectors of $L^2\left(\mathbb{R}\right)$ with variable degrees of resolution.
+            \end{block}
+            \item<1->\includegraphics[width=.6\textwidth]{graphics/wavelets/mra-3}
+        \end{description}
+    \end{frame}
+
+    \begin{frame}{Multi Resolution Analysis}
+        \begin{block}{Axioms}
+            \begin{equation}
+                \cdots \subset V_{-2} \subset V_{-1} \subset V_0 \subset V_1 \subset V_2 \subset \cdots
+            \end{equation}
+            \begin{equation}
+                \overline{\bigcup\limits_{n \in \mathbb{Z}} V_n} = L^2\left(\mathbb{R}\right)
+            \end{equation}
+            \begin{equation}
+                \bigcap\limits_{n \in \mathbb{Z}} V_n = \left\{0\right\}
+            \end{equation}
+            \begin{equation}
+                V_{n+1} = \mathcal{S}V_n
+            \end{equation}
+            \begin{equation}
+                V_0 = \langle \left\{\tau^i\phi, i \in \mathbb{Z}\right\} \rangle \quad \exists \phi \in L^2\left(\mathbb{R}\right)\rangle
+            \end{equation}
+        \end{block}
+    \end{frame}
+
+    \begin{frame}{Multi Resolution Analysis}
+        \begin{block}{Scaling function}
+            \begin{equation}
+                V_1 \supset V_0, \phi \in V_1
+            \end{equation}
+            \begin{equation}
+                \left\{\mathcal{S}\tau^i\phi = \tau^{i/2}\mathcal{S}\phi, i \in \mathbb{Z}\right\} \; \text{orthonormal basis of } V_1
+            \end{equation}
+            \begin{equation}
+                    \phi = \sum_{i \in \mathbb{Z}} g_i \tau^{i/2} \mathcal{S} \phi
+            \end{equation}
+        \end{block}
+    \end{frame}
+
+    \begin{frame}{Multi Resolution Analysis}
+        \begin{block}{Wavelet}
+            \begin{equation}
+                V_{n+1} \supset V_n \Rightarrow \exists W_n \colon V_{n+1} = V_n \oplus W_n
+            \end{equation}
+            \begin{equation}
+                \left\{\tau^i\psi\right\}_{i \in \mathbb{Z}} = W_0
+            \end{equation}
+            \begin{equation}
+                \psi = \sum_{i \in \mathbb{Z}} h_i \tau^{i/2}\mathcal{S}\phi\quad\psi \in V_1
+            \end{equation}
+            \begin{equation}
+                \langle \psi, \tau^i \psi \rangle = \delta_i
+            \end{equation}
+            \begin{equation}
+                \langle \tau^j\psi, \tau^i \phi \rangle = 0
+            \end{equation}
+        \end{block}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Multi Resolution Analysis}
+        \framesubtitle{Filter banks}
+        \centering 
+        \begin{tikzpicture}
+            % High res
+            \node[anchor= west] (highres) at (0,0) {$V_{n+1}$};
+            % Low res
+            \node[rectangle, draw, anchor= west, minimum height=0.75cm, minimum width=1.5cm] (g) at (3,2) {g};
+            \node[circle, draw, anchor= west] (downsampleg) at (6,2) {$\downarrow 2$};
+            \node[anchor= west] (lowres) at (8,2) {$V_n$};
+            % Details
+            \node[rectangle, draw, anchor= west, minimum height=0.75cm, minimum width=1.5cm] (h) at (3,-2) {h};
+            \node[circle, draw, anchor= west] (downsampleh) at (6,-2) {$\downarrow 2$};
+            \node[anchor= west] (details) at (8,-2) {$W_n$};
+
+            \draw[->] (1,0) -- (2,0) -- (2,2) -- (3,2);
+            \draw[->] (1,0) -- (2,0) -- (2,-2) -- (3,-2);
+
+            \draw[->] (4.5,2) -- (6,2);
+            \draw[->] (4.5,-2) -- (6,-2);
+
+            \draw[->] (7,2) -- (8,2);
+            \draw[->] (7,-2) -- (8,-2);
+
+        \end{tikzpicture}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Wavelet: Example application}
+        \framesubtitle{Detect abrupt changes}
+
+        \centering
+        \vskip -1cm
+        $$s_1(t) = 2\sin\left(2\pi 10f_0 t\right) + \sin\left(2\pi 50f_0 t\right) + 10\delta\left(t - \frac{1}{2f_0}\right)$$
+        \includegraphics[height=0.6\textheight]{graphics/wavelets/signal1}
+
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Wavelet: Example application}
+        \framesubtitle{Detect abrupt changes}
+        $$s_1(t) = 2\sin\left(2\pi 10f_0 t\right) + \sin\left(2\pi 50f_0 t\right) + 10\delta\left(t - \frac{1}{2f_0}\right)$$
+        \begin{columns}[onlytextwidth]
+            \column{0.5\textwidth}
+            \includegraphics[width=\textwidth]{graphics/wavelets/detect-abrupt-changes-fft}
+            \column{0.5\textwidth}
+            \includegraphics[width=\textwidth]{graphics/wavelets/detect-abrupt-changes-cwt}
+        \end{columns}
+        
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Wavelet: Example application}
+        \framesubtitle{Detect temporal trends}
+
+        \begin{columns}[onlytextwidth]
+            \column{0.5\textwidth}
+            \includegraphics[width=\textwidth]{graphics/wavelets/frequency-signal-2}
+            \column{0.5\textwidth}
+            \includegraphics[width=\textwidth]{graphics/wavelets/signal2}
+        \end{columns}
+        
+    \end{frame}
+    
+    \begin{frame}
+        \frametitle{Wavelet: Example application}
+        \framesubtitle{Detect temporal trends}
+
+        \begin{columns}[onlytextwidth]
+            \column{0.5\textwidth}
+            \includegraphics[width=\textwidth]{graphics/wavelets/detect-pattern-fft}
+            \column{0.5\textwidth}
+            \includegraphics[width=\textwidth]{graphics/wavelets/detect-pattern-cwt}
+        \end{columns}
+        
+    \end{frame}
+
