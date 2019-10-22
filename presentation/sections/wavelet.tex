@@ -6,39 +6,24 @@
     }
 
     \begin{frame}{Multi Resolution Analysis}
-        \begin{description}
-            \item<1->\begin{block}{Goal}
+        \centering
+        \onslide <1-> {
+            \begin{block}{Goal}
                 Approximate vectors of $L^2\left(\mathbb{R}\right)$ with variable degrees of resolution.
             \end{block}
-            \item<2->\includegraphics[width=.6\textwidth]{graphics/wavelets/mra}
-        \end{description}
-    \end{frame}
-
-    \begin{frame}{Multi Resolution Analysis}
-        \begin{description}
-            \item<1->\begin{block}{Goal}
-                Approximate vectors of $L^2\left(\mathbb{R}\right)$ with variable degrees of resolution.
-            \end{block}
-            \item<1->\includegraphics[width=.6\textwidth]{graphics/wavelets/mra-1}
-        \end{description}
-    \end{frame}
-
-    \begin{frame}{Multi Resolution Analysis}
-        \begin{description}
-            \item<1->\begin{block}{Goal}
-                Approximate vectors of $L^2\left(\mathbb{R}\right)$ with variable degrees of resolution.
-            \end{block}
-            \item<1->\includegraphics[width=.6\textwidth]{graphics/wavelets/mra-2}
-        \end{description}
-    \end{frame}
-
-    \begin{frame}{Multi Resolution Analysis}
-        \begin{description}
-            \item<1->\begin{block}{Goal}
-                Approximate vectors of $L^2\left(\mathbb{R}\right)$ with variable degrees of resolution.
-            \end{block}
-            \item<1->\includegraphics[width=.6\textwidth]{graphics/wavelets/mra-3}
-        \end{description}
+        }
+        \only <2> {
+            \includegraphics[width=.6\textwidth]{graphics/wavelets/mra}
+        }
+        \only <3> {
+            \includegraphics[width=.6\textwidth]{graphics/wavelets/mra-1}
+        }
+        \only <4> {
+            \includegraphics[width=.6\textwidth]{graphics/wavelets/mra-2}
+        }
+        \only <5> {
+            \includegraphics[width=.6\textwidth]{graphics/wavelets/mra-3}
+        }
     \end{frame}
 
     \begin{frame}{Multi Resolution Analysis}
@@ -130,21 +115,18 @@
         \centering
         \vskip -1cm
         $$s_1(t) = 2\sin\left(2\pi 10f_0 t\right) + \sin\left(2\pi 50f_0 t\right) + 10\delta\left(t - \frac{1}{2f_0}\right)$$
-        \includegraphics[height=0.6\textheight]{graphics/wavelets/signal1}
+        \only<1> {
+            \includegraphics[height=0.6\textheight]{graphics/wavelets/signal1}
+        }
+        \only<2> {
+            \begin{columns}[onlytextwidth]
+                \column{0.5\textwidth}
+                \includegraphics[width=\textwidth]{graphics/wavelets/detect-abrupt-changes-fft}
+                \column{0.5\textwidth}
+                \includegraphics[width=\textwidth]{graphics/wavelets/detect-abrupt-changes-cwt}
+            \end{columns}
+        }
 
-    \end{frame}
-
-    \begin{frame}
-        \frametitle{Wavelet: Example application}
-        \framesubtitle{Detect abrupt changes}
-        $$s_1(t) = 2\sin\left(2\pi 10f_0 t\right) + \sin\left(2\pi 50f_0 t\right) + 10\delta\left(t - \frac{1}{2f_0}\right)$$
-        \begin{columns}[onlytextwidth]
-            \column{0.5\textwidth}
-            \includegraphics[width=\textwidth]{graphics/wavelets/detect-abrupt-changes-fft}
-            \column{0.5\textwidth}
-            \includegraphics[width=\textwidth]{graphics/wavelets/detect-abrupt-changes-cwt}
-        \end{columns}
-        
     \end{frame}
 
     \begin{frame}
