@@ -190,7 +190,7 @@
                 % from input to hidden layer
                 \foreach \i in {0,...,11}
                     \foreach \j in {0,...,7}
-                        \draw[->] ($(input \i) + (.2,0)$) -- ($(hidden \j) + (-.2,0)$);
+                        \draw ($(input \i) + (.2,0)$) -- ($(hidden \j) + (-.2,0)$);
 
                 % output layer
                 \foreach \i in {0,...,4} % TODO fix
@@ -199,11 +199,11 @@
                 % from hidden to output layer
                 \foreach \i in {0,...,7}
                     \foreach \j in {0,...,4}
-                        \draw[->] ($(hidden \i) + (.2,0)$) -- ($(output \j) + (-.2,0)$);
+                        \draw ($(hidden \i) + (.2,0)$) -- ($(output \j) + (-.2,0)$);
 
                 % from output to softmax layer
                 \foreach \i in {0,...,4}
-                    \draw[->] ($(output \i) + (.2,0)$) -- ($(output \i) + (2,0)$);
+                    \draw ($(output \i) + (.2,0)$) -- ($(output \i) + (2,0)$);
 
                 % softmax layer
                 \node[rounded rectangle, fill=white, minimum width=3cm,draw,rotate=-90] (softmax) at ($(output 2) + (1,0)$) {Softmax};
@@ -229,7 +229,7 @@
             The first layer is constrained to the output size of the three columns, i.e. *** TODO COMPLETARE... *** Then there is an hidden layers with $7$ activation units, and finally the output layer with $5$ neurons. The output is passed through a softmax layer, hence the final output describe the confidence per each class.
         }
         \par{
-            Observe that bias units have not been included in any layer.
+            Observe that bias units have not been included.
         }
         \par{
             ** DISPLAY WEIGHTS, infer what matters most to determine output **

@@ -1,14 +1,37 @@
 \section{Detector}\label{section:region_proposals}
     \par{
-        ** .... The first part of the architecture is a \emph{detector} for region proposals.... Explain how to pick region of interests (ROI).... **
+        The proposed architecture is divided in two main stages. The first part is a \emph{detector} for region proposals, which are then fed into the \emph{classificator} described in \ref{section:mc-cnn} for classification.
+    }
+    \par{
+        Indeed, the whole system relies on this stage to spot one or more region of interest (ROI), which are the plausible candidates to be defective regions.
+    }
+    \par{
+        ...
     }
     \subsection{Contour detection}\label{subsection:contour_detection}
+        \par{
+            ** Explain kovesi ecc.. **
+        }
     \subsection{Image Segmentation}\label{subsection:segmentation}
-        Introduction to alpha shapes and cite article describing proper segmentation usign alpha shapes.... describe parameteres and present limitations of such an approach in this practical application....
-        Therefore, bayesian optimization is proposed for alpha value....
-        Present table comparing different alpha values....
-        Explain evaluation scheme for alpha value optimization....
+        \par{
+            Introduction to alpha shapes and cite article describing proper segmentation usign alpha shapes.... describe parameteres and present limitations of such an approach in this practical application....
+        }
+        \par{
+            Therefore, the discussed parameters are optimized through Bayesian optimization \cite{arXiv:2012arXiv1206.2944S,arXiv:2018arXiv180702811F}.
+        }
+        \par{
+            Explain evaluation scheme for alpha value optimization....
+        }
+        \begin{figure}
+            \caption{Bayesian optimization on alpha shaping.}\label{fig:alpha-shape-optimization}
+        \end{figure}
+        \par{
+            Present table comparing different alpha values....
+        }
     \subsection{Bounding box}\label{subsection:bounding_box}
+        \par{
+
+        }
 
 
 % \subsection{Edge detection filter}

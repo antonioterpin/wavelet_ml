@@ -1,8 +1,6 @@
 \section{Results}\label{section:results}
     Review the article, make some considerations on results
 
-    *** Confronto con esplicitamente indicati il contributo di ogni step al miglioramento del risultato ***
-
     \begin{figure}
         \centering
         % \includegraphics[width=.8\linewidth]{graphics/results/mc-cnn-shape-confusion}
@@ -27,14 +25,28 @@
         \caption{Final classifier confusion matrix on ideal input.}\label{fig:final-classifier-confusion}
     \end{figure}
 
-    The whole system implementation can be found in the \href{https://github.com/antonioterpin/wavelet_ml}{\texttt{GitHub}} repository \cite{antonioterpin:github}.
+    \begin{table}
+        \caption{Results}\label{table:results}
+    \end{table}
 
-    % \begin{table}
-    %     \caption{TODO RESULTS WITH SOME METRICS}
-    % \end{table}
+    \par{
+        *** Confronto con esplicitamente indicati il contributo di ogni step al miglioramento del risultato *** Results are shown in table \ref{table:results}.
+    }
+
+    \par{
+        The whole system implementation can be found in the \href{https://github.com/antonioterpin/wavelet_ml}{\texttt{GitHub}} repository \cite{antonioterpin:github}.
+    }
 
 \section{Further work}\label{section:further-work}
-    ...  provide suggestions to further work...
-    * use image pyramids in challenger
-    * Eventually, it is possible to consider a multi-scale approach ...
-    * Remove the assumption of non-overlapping regions for the $n+1$ levels whatershed algorithm
+    \par{
+        This work can be further developed in many ways.
+    }
+    \par{
+        Firstly, the challenger could be refined in order to evaluate better the effectiveness of the proposed architecture. As an example, a multi-scale approach could be considered, since the challenger does not take into account the variability of defects dimensions. To solve this flaw, \emph{image pyramids} could be used.
+    }
+    \par{
+        Secondly, other refined architectures could be compared to the proposed one.
+    }
+    \par{
+        Finally, an interesting development would be to investigate further a segmentation with overlapping (adjacent) regions, when there are more classes then foreground/background only. Towards this multi-level segmentation, it would be interesting to consider a non-binary whatershed-based algorithm.
+    }

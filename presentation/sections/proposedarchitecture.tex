@@ -1,4 +1,11 @@
 \subsection{Proposed architecture}
+
+\framepic{graphics/architecture/architecture}{
+    \framefill
+    \textcolor{white}{Proposed architecture}
+    \vskip 0.5cm
+}
+
 \begin{frame}[fragile]{Proposed architecture}
     \vskip -0.5cm
     \begin{block}{Region-based CNN (R-CNN)}
@@ -13,33 +20,37 @@
         % Input
         \node[rectangle, draw, minimum width=2cm, minimum height=2cm, anchor=west] at (-2,0) {Image};
 
-        \draw[->] (0.5,0) -- (1.5,0);
+        % \onslide <2-> {
+            \draw[->] (0.5,0) -- (1.5,0);
 
-        % Region proposals
-        \node at (2.5,1.5) {Region proposals};
-        \foreach \i in {0,...,7}
-            \node[rectangle, draw, minimum width=1cm, minimum height=1cm, anchor=north west, fill=white] at (2 +\i*0.2,1-\i*0.2) {};
+            % Region proposals
+            \node at (2.5,1.5) {Region proposals};
+            \foreach \i in {0,...,7}
+                \node[rectangle, draw, minimum width=1cm, minimum height=1cm, anchor=north west, fill=white] at (2 +\i*0.2,1-\i*0.2) {};
+        % }
 
-        \draw[->] (4.5,0) -- (5.5,0);
+        % \onslide <3-> {
+            \draw[->] (4.5,0) -- (5.5,0);
 
-        % Classification
-        \node at (5.5,1.5) {Class};
-        \draw[->, color=UniBlue] (6.2, .8) -- (5.7, 1.25);
-        \draw[color=UniBlue] (6.35,-.25) ellipse (0.25cm and 1.1cm);
+            % Classification
+            \node at (5.5,1.5) {Class};
+            \draw[->, color=UniBlue] (6.2, .8) -- (5.7, 1.25);
+            \draw[color=UniBlue] (6.35,-.25) ellipse (0.25cm and 1.1cm);
 
-        \node at (8.2,2) {Encoded};
-        \node at (8.3,1.5) {Pixels};
-        \draw[->, color=UniOrange] (7, .95) -- (7.5, 1.55);
-        \draw[color=UniOrange] (7.6,.6) ellipse (1.1cm and 0.35cm);
+            \node at (8.2,2) {Encoded};
+            \node at (8.3,1.5) {Pixels};
+            \draw[->, color=UniOrange] (7, .95) -- (7.5, 1.55);
+            \draw[color=UniOrange] (7.6,.6) ellipse (1.1cm and 0.35cm);
 
-        \node [matrix, anchor=north west, draw] at (6,1)
-        {
-            % \node {Class}; & \node {EncodedPixels};\\
-            \node {$1$}; & \node {``12 13 \ldots''};\\
-            \node {$2$}; & \node {``6 35 \ldots''};\\
-            \node {$3$}; & \node {``''};\\
-            \node {$4$}; & \node {``192 78 \ldots''};\\
-        };
+            \node [matrix, anchor=north west, draw] at (6,1)
+            {
+                % \node {Class}; & \node {EncodedPixels};\\
+                \node {$1$}; & \node {``12 13 \ldots''};\\
+                \node {$2$}; & \node {``6 35 \ldots''};\\
+                \node {$3$}; & \node {``''};\\
+                \node {$4$}; & \node {``192 78 \ldots''};\\
+            };
+        % }
     \end{tikzpicture}
 \end{frame}
 
@@ -54,23 +65,22 @@
 \begin{frame}
     \frametitle{Region proposals}
     \framesubtitle{Optimization}
-    \begin{description}
-        \item<1-> 
+    \onslide <1-> {
         \begin{alertblock}{Alpha shape tuning}
             Manually tuning the parameters to satisfy the validity of the topologically correct image segmentation using alpha-shapes requires a full knowledge of the object considered.
         \end{alertblock}
-        \item<2->
+    }
+    \onslide <2-> {
         \begin{exampleblock}{Alpha shape tuning - solution}
             An empirical approach is proposed instead. To tune the hyper parameters of the algorithm, bayesian optimization is used.
         \end{exampleblock}
-    \end{description}
+    }
 \end{frame}
 
 \begin{frame}
     \frametitle{Region proposals}
     \framesubtitle{Optimization}
-    \begin{description}
-        \item<1->
+    \onslide <1-> {
         \begin{block}{Bayesian optimization}
             Bayesian optimization aims to solve an optimization problem $\max\limits_{x\in A}f\left(x\right)$ when:
             \begin{itemize}
@@ -80,13 +90,14 @@
                 \item $f$ is a \emph{black box}.
             \end{itemize}
         \end{block}
-        \item<2->
+    }
+    \onslide <2-> {
         \begin{exampleblock}{Loss function}
             \begin{equation}
                 J\left(\alpha\right) = \frac{2\lvert X \cap Y \rvert}{\lvert X \rvert + \lvert Y \rvert} = -f(x)
             \end{equation}
         \end{exampleblock}
-    \end{description}
+    }
 \end{frame}
 
 \begin{frame}
@@ -254,14 +265,14 @@
         \foreach \i in {0,...,7}
             \node[circle, draw, minimum width=.75cm, minimum height=.75cm, anchor=west] (h \i) at ($(finalinput) + (2, 3-\i*.8) $) {};
         \foreach \i in {0,...,7}
-            \draw[->] ($(finalinput) + (.75,0)$) -- ($(h \i) + (-.5,0)$);
+            \draw ($(finalinput) + (.75,0)$) -- ($(h \i) + (-.5,0)$);
 
         % output layer
         \foreach \i in {0,...,4}
             \node[circle, draw, minimum width=.75cm, minimum height=.75cm, anchor=west] (o \i) at ($(finalinput) + (4, 1.75-\i*.8) $) {};
         \foreach \i in {0,...,4}
             \foreach \j in {0,...,7}
-                \draw[->] ($(h \j) + (.5,0)$) -- ($(o \i) + (-.5,0)$);
+                \draw ($(h \j) + (.5,0)$) -- ($(o \i) + (-.5,0)$);
         
         
     \end{tikzpicture}
