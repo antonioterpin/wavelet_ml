@@ -5,41 +5,72 @@ global formatted_dataset_path training_set_path cv_set_path test_set_path; % ori
 global augmented_dataset_path;
 
 % load datasets
-opts = detectImportOptions(training_set_path);
-train_set = readtable(training_set_path, opts);
-opts = detectImportOptions(cv_set_path);
-cv_set = readtable(cv_set_path, opts);
-opts = detectImportOptions(test_set_path);
-test_set = readtable(test_set_path, opts);
-opts = detectImportOptions(formatted_dataset_path);
-dataset = readtable(formatted_dataset_path, opts);
-opts = detectImportOptions(augmented_dataset_path);
-balanced_dataset = readtable(augmented_dataset_path, opts);
+% opts = detectImportOptions(formatted_dataset_path);
+dataset = readtable(formatted_dataset_path, 'Delimiter', ',');
+% opts = detectImportOptions(training_set_path, 'FileType','text');
+train_set = readtable(training_set_path, 'Delimiter', ',');
+% opts = detectImportOptions(cv_set_path);
+cv_set = readtable(cv_set_path, 'Delimiter', ',');
+% opts = detectImportOptions(test_set_path);
+test_set = readtable(test_set_path, 'Delimiter', ',');
+% opts = detectImportOptions(augmented_dataset_path);
+balanced_dataset = readtable(augmented_dataset_path, 'Delimiter', ',');
 
-figure;
-
+%%
 % original dataset
-subplot(2,2,1);
-title("Original dataset");
-bar_stats = [not_exclusive_stats(train_set) not_exclusive_stats(cv_set) not_exclusive_stats(test_set)];
+fig1 = figure('Position',[0 50 900 300]);
+% bar_stats = [not_exclusive_stats(train_set) not_exclusive_stats(cv_set) not_exclusive_stats(test_set)];
+bar_stats = [not_exclusive_stats(dataset)];
 perc_stats = bar_stats / size(dataset,1);
-bar(perc_stats, "stacked");
+bar(perc_stats);
+title("Class representation in the original dataset");
 ylabel("%");
-xticklabels(["Flawless Surfaces","Class 1","Class 2","Class 3","Class 4"])
+xticklabels(["Flawless","Class 1","Class 2","Class 3","Class 4"])
 
-subplot(2,2,2);
-title("Original dataset");
+%%
+fig2 = figure('Position',[0 50 900 300]);
 pie_stats = exclusive_stats_categories(dataset);
-pie(pie_stats, ones(size(categories(pie_stats)))); % TODO fix
+% pie(pie_stats, ones(size(categories(pie_stats)))); % TODO fix
 
-subplot(2,2,3:4);
-title("Balanced dataset");
+cat_names = str2num(cell2mat(categories(pie_stats)));
+cat_names_str = strings(length(cat_names),1);
+
+for i=1:length(cat_names)
+    
+    if isequal(cat_names(i,:),[0 0 0 0])
+        cat_names_str(i) = "0";
+    else
+        n_defect = 0;
+        for j=1:4
+            if cat_names(i,j)
+                n_defect = n_defect+1;
+                if n_defect > 1
+                    cat_names_str(i) = cat_names_str(i) + ',' + num2str(j);
+                else
+                    cat_names_str(i) = cat_names_str(i) + num2str(j);
+                end
+            end
+        end
+    end
+
+end
+cat_names_str = cellstr(cat_names_str);
+
+pie_stats=renamecats(pie_stats,categories(pie_stats),cat_names_str);
+histogram(pie_stats,'Normalization','probability');
+ylabel('%');
+title("Frequencies of defect combinations");
+
+%%
+fig3 = figure('Position',[0 50 900 300]);
 bar_stats = not_exclusive_stats(balanced_dataset);
 perc_stats = bar_stats / size(balanced_dataset,1);
 bar(perc_stats, "stacked");
+title("Augmented dataset");
 ylabel("%");
-xticklabels({"Flawless Surfaces","Class 1","Class 2","Class 3","Class 4"})
+xticklabels({"Flawless","Class 1","Class 2","Class 3","Class 4"})
 
+%%
 
 % Script functions
 
