@@ -54,9 +54,8 @@ function [number_of_regions, encoded_shape_maps, bounding_boxes, shp] = segmenta
     % number_of_regions = sum(area(shp, 1:number_of_all_regions ) > minimum_defective_area); % use this when introducing a minimum defective area
     number_of_regions = numRegions(shp);
     % encoded_shape_maps = []; % use this when introducing a minimum defective area
-    encoded_shape_maps = zeros(1,number_of_regions);
+    encoded_shape_maps = string(zeros(1,number_of_regions));
     bounding_boxes = zeros(2,2,number_of_regions);
-    
     
     % For each region
     for region_id = 1 : number_of_regions % number_of_all_regions
