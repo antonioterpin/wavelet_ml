@@ -1,1 +1,0 @@
-This is a placeholder for compressed images, since they are not tracked for security reasons :)
