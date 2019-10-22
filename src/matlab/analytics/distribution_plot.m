@@ -19,10 +19,8 @@ function distribution_plot(lh,title_suffix)
     xlim([0 8]);
     title(strcat('Length distribution',title_suffix));
     xlabel('Length (log)');
-    ylabel('Number of regions');
     
     % Height
-    figure('Position',[0 50 900 300]);
     histogram(log_lh(:,2),0:0.1:max_height);
     % histfit(log_lh(:,2));
     xlim([0 6]);
@@ -37,6 +35,7 @@ function distribution_plot(lh,title_suffix)
     
     x1 = 0:0.01:max_length;
     x2 = 0:0.01:max_height;
+    
     [X1,X2] = meshgrid(x1,x2);
     X = [X1(:) X2(:)];
 
@@ -51,6 +50,6 @@ function distribution_plot(lh,title_suffix)
     xlabel('Length (log)')
     ylabel('Height (log)')
     title(strcat('Probability density',title_suffix))
-    
+
 end
 
