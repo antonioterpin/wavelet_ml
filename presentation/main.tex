@@ -1,0 +1,78 @@
+% Welcome! This is the unofficial University of Udine beamer template.
+
+% See README.md for more informations about this template.
+
+% This style has been developed following the "Manuale di Stile"
+% (Style Manual) of the University of Udine. You can find the
+% manual here: https://www.uniud.it/it/ateneo-uniud/ateneo-uniud/identita-visiva/manuali-immagine-stile/manuale-stile
+
+% Note: for some reason, the RGB values specified in the manual
+% do NOT render correctly in Beamer, so they have been redefined
+% for this document using the high level chromo-optic deep neural 
+% quantistic technology offered by Microsoft Paint's color picker.
+
+% We defined four theme colors: UniBrown, UniBlue, UniGold
+% and UniOrange. For example, to write some uniud-brownish
+% text, just use: \textcolor{UniBrown}{Hello!}
+
+% Note that [usenames,dvipsnames] is MANDATORY due to compatibility
+% issues between tikz and xcolor packages.
+
+\documentclass[usenames,dvipsnames,xcolor=table]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\usetikzlibrary{calc, shapes.misc}
+\usepackage{verbatim}
+\usetheme{uniud}
+
+%%% Bibliography
+\usepackage[style=authoryear,backend=biber]{biblatex}
+\addbibresource{bibliography.bib}
+
+% Author names in publication list are consistent 
+% i.e. name1 surname1, name2 surname2
+% See https://tex.stackexchange.com/questions/106914/biblatex-does-not-reverse-the-first-and-last-names-of-the-second-author
+\DeclareNameAlias{author}{given-family}
+
+%%% Suppress biblatex annoying warning
+\usepackage{silence}
+\WarningFilter{biblatex}{Patching footnotes failed}
+
+%%% Some useful commands
+% pdf-friendly newline in links
+\newcommand{\pdfnewline}{\texorpdfstring{\newline}{ }} 
+% Fill the vertical space in a slide (to put text at the bottom)
+\newcommand{\framefill}{\vskip0pt plus 1filll}
+
+
+\title[Steel defect detection]{An effective approach to steel defect detection}
+\date[\today]{\today}
+\author[Antonio Terpin e Claudio Verardo]{
+  Antonio Terpin e Claudio Verardo
+}
+\institute{Scuola Superiore, University of Udine}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}{Outline}
+\tableofcontents
+\end{frame}
+
+\input{sections/introduction.tex}
+\input{sections/defectdetection.tex}
+\input{sections/results.tex}
+
+% \begin{frame}[t,allowframebreaks]
+% \frametitle{Bibliography}
+
+% \nocite{*} % will display the non-cited publications as well. Useful for a publication list.
+
+% \printbibliography
+
+% \end{frame}
+
+\end{document}
