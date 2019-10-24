@@ -26,7 +26,7 @@ function layers = structure_global_column()
     
     maxPooling2dLayer(2,'Stride',2)
     
-    fullyConnectedLayer(4)
+    fullyConnectedLayer(11)
     softmaxLayer
     classificationLayer];
 end
