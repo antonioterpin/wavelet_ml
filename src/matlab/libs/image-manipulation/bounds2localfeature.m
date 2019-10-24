@@ -1,4 +1,4 @@
-function [shape_feature,local_feature] = bounds2localfeature(encoded_shape_feature,bounding_box,image)
+function [shape_feature,local_feature,displacement_vector] = bounds2localfeature(encoded_shape_feature,bounding_box,image)
 %BOUNDS2LOCALFEATURE Calculates shape_feature and local_feature.
 %   
 %   [shape_feature,local_feature] = bounds2localfeature(encoded_shape_feature,bounding_box,image)
