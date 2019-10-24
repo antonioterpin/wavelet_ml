@@ -58,8 +58,10 @@ function globals
 %   statistics saved variables.
 %   * variables_shape_imds_path: Path to shape imds variables for mc-cnn training.
 %   * variables_local_imds_path: Path to local imds variables for mc-cnn training.
+%   * variables_global_imds_path: Path to global imds variables for mc-cnn training.
 %   * variables_shape_sbs_imds_path: Path to shape subsets imds variables for mc-cnn training.
 %   * variables_local_sbs_imds_path: Path to local subsets imds variables for mc-cnn training.
+%   * variables_global_sbs_imds_path: Path to global subsets imds variables for mc-cnn training.
 
 
 % IMAGES
@@ -115,12 +117,15 @@ defects_colors = ["red" "green" "blue" "yellow"];
 
 % EXPORTS
 global variables_analytics_defects_statistics_path;
-global variables_shape_imds_path variables_local_imds_path variables_shape_sbs_imds_path variables_local_sbs_imds_path;
+global variables_shape_imds_path variables_local_imds_path variables_global_imds_path;
+global variables_shape_sbs_imds_path variables_local_sbs_imds_path variables_global_sbs_imds_path;
 
 variables_analytics_defects_statistics_path = "../../data/exports/defect-analysis/defects-statistics.mat";
 variables_shape_imds_path = "../../data/exports/mc-cnn/data/shape-imds.mat";
 variables_local_imds_path = "../../data/exports/mc-cnn/data/local-imds.mat";
+variables_global_imds_path = "../../data/exports/mc-cnn/data/global-sbs-imds.mat";
 variables_shape_sbs_imds_path = "../../data/exports/mc-cnn/data/shape-sbs-imds.mat";
 variables_local_sbs_imds_path = "../../data/exports/mc-cnn/data/local-sbs-imds.mat";
+variables_global_sbs_imds_path = "../../data/exports/mc-cnn/data/global-sbs-imds.mat";
 
 end
