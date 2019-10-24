@@ -1,4 +1,4 @@
-function [number_of_regions, encoded_shape_maps, bounding_boxes, shp] = segmentate_image(map)
+function [number_of_regions, encoded_shape_maps, bounding_boxes, shp] = segmentate_image(map, alpha, hole_th, region_th)
 % SEGMENTATE_IMAGE segment binary matrix into regions of interest.
 %       
 %   [number_of_regions, encoded_shape_maps, bounding_boxes, shp] = segmentate_image(map)
@@ -10,6 +10,8 @@ function [number_of_regions, encoded_shape_maps, bounding_boxes, shp] = segmenta
 %   top-left and bottom-right coordinates, is given in
 %   bounding_boxes(:,:,region_id). region_id is a number between 1 and
 %   number_of_regions, inclusive.
+%
+%   [_] = segmentate_image(_, alpha, hole_th, region_th) Parametric alpha shaping.
 %
 %   Example:
 %
@@ -44,31 +46,34 @@ function [number_of_regions, encoded_shape_maps, bounding_boxes, shp] = segmenta
 %
 %   See also ALPHA_SHAPE, RLE_ENCODING, RLE_DECODING
 
-    % global minimum_defective_area; % lower bound to defective areas... outliers
+    if nargin < 4
+        region_th = 0;
+    end
+    if nargin < 3
+        hole_th = 0;
+    end
+    if nargin < 2
+        alpha = 0.7;
+    end
     
     % Alpha shaping
     pixels = rle_decoding(rle_encoding(map),size(map)); % just to re-use code.. can be improved
-    shp = alphaShape(pixels(:,1),pixels(:,2));
-    
-    % number_of_all_regions = numRegions(shp); % use this when introducing a minimum defective area
-    % number_of_regions = sum(area(shp, 1:number_of_all_regions ) > minimum_defective_area); % use this when introducing a minimum defective area
+    shp = alphaShape(pixels(:,1),pixels(:,2), ...
+        alpha, "HoleThreshold", hole_th, "RegionThreshold", region_th);
+
     number_of_regions = numRegions(shp);
-    % encoded_shape_maps = []; % use this when introducing a minimum defective area
     encoded_shape_maps = string(zeros(1,number_of_regions));
     bounding_boxes = zeros(2,2,number_of_regions);
     
     % For each region
     for region_id = 1 : number_of_regions % number_of_all_regions
-        % if area(shp, region_id) > minimum_defective_area % use this when introducing a minimum defective area
-            % calculate region bounds
-            [~, b] = boundaryFacets(shp, region_id);
-            encoded_shape_maps(region_id) = rle_encoding(b,size(map));
-            % encoded_shape_maps = [encoded_shape_maps; rle_encoding(b,size(map))]; % use this when introducing a minimum defective area
-            % calculate bounding boxes
-            minX = min(b(:,1)); minY = min(b(:,2));
-            maxX = max(b(:,1)); maxY = max(b(:,2));
-            bounding_boxes(:,:,region_id) = [minX minY; maxX maxY];
-        % end
+        % calculate region bounds
+        [~, b] = boundaryFacets(shp, region_id);
+        encoded_shape_maps(region_id) = rle_encoding(b,size(map));
+        % calculate bounding boxes
+        minX = min(b(:,1)); minY = min(b(:,2));
+        maxX = max(b(:,1)); maxY = max(b(:,2));
+        bounding_boxes(:,:,region_id) = [minX minY; maxX maxY];
     end
     
 end
