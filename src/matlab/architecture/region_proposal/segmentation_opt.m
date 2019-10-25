@@ -1,7 +1,7 @@
 
 % parameters
 class = 3;
-batch_size = 10;
+batch_size = 40;
 
 % hyperparameters to optimize
 hyst_tl = optimizableVariable('hyst_tl',[0 60],'Type','integer');
