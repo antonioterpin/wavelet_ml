@@ -1,0 +1,29 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%          CLASSE 3           %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%% RISULTATI 24/10 notte - classe 3 con batch da 5
+    hyst_tl    hyst_th    alpha    hole_th    region_th
+     _______    _______    _____    _______    _________
+ 
+     44         99         7        577        2099     
+
+%%%%% BATCH 100 - LOSS FUNCTION SENZA BOUNDING BOX
+
+(best observed)
+     hyst_tl    hyst_th    alpha    hole_th    region_th
+     _______    _______    _____    _______    _________
+ 
+     50         99         5        1639       512    
+Estimated objective function value = 0.71009
+Function evaluation time = 466.4164
+
+(best estimated)
+     hyst_tl    hyst_th    alpha    hole_th    region_th
+     _______    _______    _____    _______    _________
+ 
+     48         100        5        670        510  
+Estimated objective function value = 0.71009
+Estimated function evaluation time = 481.5575
+
+%%%%%

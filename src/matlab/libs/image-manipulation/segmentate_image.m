@@ -45,21 +45,21 @@ function [number_of_regions, encoded_shape_maps, bounding_boxes, shp] = segmenta
 %   introduced
 %
 %   See also ALPHA_SHAPE, RLE_ENCODING, RLE_DECODING
-
-    if nargin < 4
-        region_th = 0;
-    end
-    if nargin < 3
-        hole_th = 0;
-    end
-    if nargin < 2
-        alpha = 0.7;
-    end
     
     % Alpha shaping
     pixels = rle_decoding(rle_encoding(map),size(map)); % just to re-use code.. can be improved
-    shp = alphaShape(pixels(:,1),pixels(:,2), ...
+    
+    switch nargin
+        case 1
+            shp = alphaShape(pixels(:,1),pixels(:,2));
+        case 2
+            shp = alphaShape(pixels(:,1),pixels(:,2),alpha);
+        case 3
+            shp = alphaShape(pixels(:,1),pixels(:,2), alpha, "HoleThreshold", hole_th);
+        case 4
+            shp = alphaShape(pixels(:,1),pixels(:,2), ...
         alpha, "HoleThreshold", hole_th, "RegionThreshold", region_th);
+    end
 
     number_of_regions = numRegions(shp);
     encoded_shape_maps = string(zeros(1,number_of_regions));
