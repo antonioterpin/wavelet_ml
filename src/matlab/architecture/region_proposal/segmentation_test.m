@@ -1,26 +1,5 @@
 
-% RISULTATI 24/10 classe 3 con batch da 5
-%     hyst_tl    hyst_th    alpha    hole_th    region_th
-%     _______    _______    _____    _______    _________
-% 
-%     44         99         7        577        2099     
-
-% classe 3 con batch da 100 (best observed)
-%     hyst_tl    hyst_th    alpha    hole_th    region_th
-%     _______    _______    _____    _______    _________
-% 
-%     50         99         5        1639       512    
-% Estimated objective function value = 0.71009
-% Function evaluation time = 466.4164
-
-% classe 3 con batch da 100 (best estimated)
-%     hyst_tl    hyst_th    alpha    hole_th    region_th
-%     _______    _______    _____    _______    _________
-% 
-%     48         100        5        670        510  
-% Estimated objective function value = 0.71009
-% Estimated function evaluation time = 481.5575
-
+% test images
 % im_name = '0adc17f1d.jpg'; %4
 % im_name = '0b7a4c9b9.jpg'; %3
 % im_name = '0be9bad7b.jpg'; %3-4
