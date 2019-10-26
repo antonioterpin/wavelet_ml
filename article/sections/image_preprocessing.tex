@@ -1,9 +1,12 @@
 \section{Image preprocessing}\label{section:image_preprocessing}
     \par{
+        The first stage of the architecture is concerned with the enhancement of the raw image, in order to improve the learning effectiveness.
+    }
+    \par{
         In this section image preprocessing is introduced, and the raw image is enhanced to improve learning quality. In \ref{section:results} the contribution of preprocessing is evaluated.
     }
     \par{
-        Firstly, since given images have three equal colours levels, they can be considered gray-levels. Therefore it is possible to shrink the space occupied on disk by discarding hue and saturation information and using only luminance.
+        Firstly, since given images have three equal colours levels, they can be considered gray-levels. Therefore, it is possible to shrink the space occupied on disk by discarding hue and saturation information and using only luminance.
     }
     \par{
         Rec.ITU-R BT.601-7 calculates luminance $\left(E\left[y\right]\right)$ as:
@@ -11,7 +14,7 @@
         where $R,G,B$ are the three image channels. Observe that since $R = G = B$, also $E\left[y\right] = R = G = B$, which justifies the assumption that discarding hue and saturation does not affect effectiveness of the system, whereas improving space and computational efficiency. Luminance is denoted by $E\left[y\right]$ since brightness is named $y$ in literature, therefore the luminance, i.e. the physical intensity expected, is labeled in this way.
     }
     \par{
-        Secondly, since pictures may be taken under different light exposure conditions, and since learning has heuristically be proven to be more effective if input assumptions are always the same, the luminance histogram of the image is normalized.
+        Secondly, since pictures may have been taken under different light exposure conditions, and since learning has heuristically be proven to be more effective if input assumptions are constant, the luminance histogram of the image is normalized.
     }
     \begin{figure}
         \includegraphics[width=\linewidth]{graphics/preprocessing/histeq-before-image}
@@ -30,7 +33,7 @@
         \caption{Sample images after preprocessing.}\label{fig:preprocessing_image_after}
     \end{figure}
     \par{
-        Linear scaling ensure that all images gray levels spread over all the range of possible values. $\mathcal{I}\left(x,y\right)$ refers to the luminance level of pixel $\left(x,y\right)$ of image $\mathcal{I}$. Therefore, denoting with $G_{max}$ the greater luminance level (tipically $2^k - 1$ for some $k$), the luminance scaled image is obtained as:
+        Linear scaling ensures that all pixels luminances spread over all the range of possible values. $\mathcal{I}\left(x,y\right)$ refers to the luminance level of pixel $\left(x,y\right)$ of image $\mathcal{I}$. Therefore, denoting with $G_{max}$ the greater luminance level (tipically $2^k - 1$ for some $k$, e.g. $k = 8,\;G_{max} = 255$), the luminance scaled image is obtained as:
         $$\mathcal{I}_{new}\left(x,y\right) = G_{max} \frac{\mathcal{I}\left(x,y\right) - \mathcal{I}_{min}}{\mathcal{I}_{max} - \mathcal{I}_{min}}$$
         $$\mathcal{I}_{max} = \max_{x,y} \mathcal{I}\left(x,y\right)\;;\quad\mathcal{I}_{min} = \min_{x,y} \mathcal{I}\left(x,y\right)$$
     }
@@ -44,7 +47,7 @@
         \includegraphics[width=\linewidth]{graphics/preprocessing/histeq-before}
         \vskip .5cm
         \includegraphics[width=\linewidth]{graphics/preprocessing/histeq-after}
-        \caption{Hystogram of luminance distribution on sample image before and after equalization.}\label{fig:equalization}
+        \caption{Histogram of luminance distribution on sample image before and after equalization.}\label{fig:equalization}
     \end{figure}
     \par{
         In fact, histogram equalization aims to transform a scalar image $\mathcal{I}$ such that all grey levels appear equally often in the transformed image $\mathcal{I}_{new}$, i.e.:
@@ -64,8 +67,8 @@
         Where $c_{\mathcal{I}}$ is the relative cumulative frequency function.
     }
     \par{
-        In figure \ref{fig:equalization} the effects of equalization a sample image hystogram of luminance distribution are shown.
+        In figure \ref{fig:equalization} the effects of equalization on the histogram of luminance of a sample image are shown.
     }
     \par{
-        Pictures \ref{fig:preprocessing_image_before} and \ref{fig:preprocessing_image_after} show the preprocessing output on some samples images. It is patently visible that the different light exposures of the three images are compensated through the histogram equalization.
+        Pictures \ref{fig:preprocessing_image_before} and \ref{fig:preprocessing_image_after} show the preprocessing output on some samples images. It is clear that the different light exposures of the three images are compensated through the histogram equalization.
     }
