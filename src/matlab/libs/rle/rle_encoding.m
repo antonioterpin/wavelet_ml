@@ -68,5 +68,11 @@ function [rle_encoded_pixels_string, rle_encoded_pixels] = rle_encoding(pixels, 
     v = accumarray(cumsum(sequences_beginning).*A(:)+1,A(:));
     rle_encoded_pixels = [find(sequences_beginning == 1)'; v(2:end)']; % [beginning; length]
     rle_encoded_pixels = rle_encoded_pixels(:); % vectorization
-    rle_encoded_pixels_string = sprintf("%s%d",sprintf("%d ",rle_encoded_pixels(1:end-1)),rle_encoded_pixels(end));
+    
+    if size(rle_encoded_pixels,1) > 0
+        rle_encoded_pixels_string = sprintf('%s%d',sprintf('%d ',rle_encoded_pixels(1:end-1)),rle_encoded_pixels(end));
+    else
+        rle_encoded_pixels_string = '';
+    end
+    
 end
