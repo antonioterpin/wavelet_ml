@@ -108,7 +108,13 @@
             An example of this binary images is given in figure \ref{fig:mc-cnn:shape-input}. The shape is centered in a $1600\times 256$ black image. Indeed, the size of the input is set to the largest area that could be found, i.e. a defect spanning over the entire surface. The shape is centered to ensure that the classificator is translation independent. 
         }
         \par{
-            ** EXPLAIN WHY NO FAKE REGIONS **
+            The \emph{detector}, since will not be ideal, will provide to the \emph{classificator} also false positive ROIs, i.e. regions that are not defective. Therefore, this stage of the architecture need to be able to discard flawless proposed regions.
+        }
+        \par{
+            However, training the shape column to classify some shapes as not defective is not feasible. Indeed, there is not a flawless surface shape, and manually generating it would not be safe.
+        }
+        \par{
+            Hence, the shape column is only trained to classify a region into one of the four defect classes, and to mark flawless proposals will be duty of the final classifier (\ref{section:final-classifier}).
         }
         \begin{figure}
             \centering
@@ -116,14 +122,14 @@
             \caption{Shape column CNN layers}\label{fig:mc-cnn:shape-structure}
         \end{figure}
         \par{
-            The layers of this CNN are shown in \ref{fig:mc-cnn:shape-structure}. *** ... explanation, dimensioning, type of layers .... Stats on defects shapes.... ***
+            The layers of this CNN are shown in \ref{fig:mc-cnn:shape-structure}. *** ... explanation, dimensioning, type of layers .... Stats on defects shapes.... CITE GOOGLE papers... inception for structure rationale ***
         }
         \par{
             The output layer is a $n$-dimensional vector, where $n$ is the number of defect classes. Each entry of this vector describe the confidence of the network in considering the input shape as related to one of the $n$ defect classes.
         }
     \subsection{Local column}\label{section:local-column}
         \par{
-            The \emph{local column} is thought to consider luminance levels around the border of the defect, to learn from the local context ** NO FAKE; ONLY CLASS **.
+            The \emph{local column} is thought to consider luminance levels around the border of the defect, to learn from the local context. Similarly to the shape column (\ref{section:shape-column}), this column is concerned only in classifying proposals into one of the four defective classes.
         }
         \begin{figure}
             \centering
@@ -162,14 +168,15 @@
         \begin{figure}
             \centering
             % \includegraphics[]{}
-            \caption{Global column CNN layers}\label{fig:mc-cnn:global-structure}
+            \caption{Global column CNN layers.}\label{fig:mc-cnn:global-structure}
         \end{figure}
         \par{
-            *** structure, explanation, output ***\\
-            *** MAYBE OUTPUT AS MULTIPLE COMBINATIONS CLASSES? *** \\
-            *** DESCRIBE STRUCTURE, RATIONALE BEHIND DIMENSIONING, USE DEFECT STATS ***
+            The structure of the global column is shown in \ref{fig:mc-cnn:global-structure} ** explain structure **
         }
-    \subsection{Final classifier}
+        \par{
+            ** OUTPUT: MULTIPLE COMBINATIONS CLASSES **
+        }
+    \subsection{Final classifier}\label{section:final-classifier}
         \par{
             The outcomes of the different columns of a MC-CNN are then combined to obtain the final output. In the proposed architecture, this combination is done through a neural network, since a manual tuning of such combination would be ineffective. Moreover, this is used to establish thresholding.
         }
