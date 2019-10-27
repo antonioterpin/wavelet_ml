@@ -100,3 +100,4 @@ presentation/graphics/*.*
 presentation/graphics/*
 src/matlab/architecture/region_proposal/segmentation_results_3.asv
 src/matlab/architecture/region_proposal/segmentation_opt.asv
+/article/defect_detection.pdf
