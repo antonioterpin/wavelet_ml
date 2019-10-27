@@ -1,5 +1,14 @@
-
 function segmentation_opt_results = segmentation_opt(class, batch_size)
+% SEGMENTATION_OPT Optimization of the region proposal architecture
+%
+%   segmentation_opt_results = segmentation_opt(class, batch_size) launch
+%   the bayesian optimization routine over kovesi edge detection, hysteretic
+%   edge follower and alpha shape.
+%
+%   Example:
+%
+%   segmentation_opt_results = segmentation_opt(3, 40)
+%   segmentation_opt_results = segmentation_opt(4, 128)
 
     % hyperparameters to optimize
     kov_nscale = optimizableVariable('kov_nscale',[3 6],'Type','integer');
@@ -124,8 +133,8 @@ function err = err_segmentation(params, images, dataset, class, batch_size)
     
 end
 
-function tf = hyst_constraint(X)
-
-    tf = X.hyst_tl < X.hyst_th;
-
-end
+% function tf = hyst_constraint(X)
+% 
+%     tf = X.hyst_tl < X.hyst_th;
+% 
+% end
