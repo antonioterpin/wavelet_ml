@@ -1,4 +1,4 @@
-function segmentation_opt_results = segmentation_opt(class, batch_size)
+function [results, params] = segmentation_optimization(images, dataset, class, batch_size, n_iter)
 % SEGMENTATION_OPT Optimization of the region proposal architecture
 %
 %   segmentation_opt_results = segmentation_opt(class, batch_size) launch
@@ -9,6 +9,13 @@ function segmentation_opt_results = segmentation_opt(class, batch_size)
 %
 %   segmentation_opt_results = segmentation_opt(3, 40)
 %   segmentation_opt_results = segmentation_opt(4, 128)
+
+    global results_segmentation_optimization_dir
+    
+    file_log = convertStringsToChars(strcat(results_segmentation_optimization_dir,"log_class",num2str(class),"_batch",num2str(batch_size),"_niter",num2str(n_iter),sprintf("_%f",now),".out"));
+    file_data = convertStringsToChars(strcat(results_segmentation_optimization_dir,"data_class",num2str(class),"_batch",num2str(batch_size),"_niter",num2str(n_iter),sprintf("_%f",now),".mat"));
+    file_params = convertStringsToChars(strcat(results_segmentation_optimization_dir,"params_class",num2str(class),"_batch",num2str(batch_size),"_niter",num2str(n_iter),sprintf("%f",now),".mat"));
+    file_plot = convertStringsToChars(strcat(results_segmentation_optimization_dir,"plot_class",num2str(class),"_batch",num2str(batch_size),"_niter",num2str(n_iter),sprintf("%f",now),".png"));
 
     % hyperparameters to optimize
     kov_nscale = optimizableVariable('kov_nscale',[3 6],'Type','integer');
@@ -25,27 +32,27 @@ function segmentation_opt_results = segmentation_opt(class, batch_size)
 
     hyp_segmentation = [kov_nscale, kov_norient, kov_min_wl, kov_mult, hyst_tl, hyst_th, alpha, hole_th, region_th];
 
-    % dataset images
-    global global_feature_images
-    images = imageDatastore(convertStringsToChars(global_feature_images),...
-              'IncludeSubfolders', true, 'LabelSource', 'foldernames'); % use foldernames as labels
-
-    % dataset csv
-    global augmented_dataset_path
-    dataset = readtable(augmented_dataset_path, 'Delimiter', ',');
-
+    diary(file_log);
+    
     % bayesian optimization
-    segmentation_opt_results = bayesopt(@(params)err_segmentation(params, images, dataset, class, batch_size),...
-                                        hyp_segmentation,...
-                                        'AcquisitionFunctionName','expected-improvement-plus',...
-                                        'MaxObjectiveEvaluations',50,...
-                                        'UseParallel',true,...
-                                        'Verbose',1);
+    results = bayesopt(@(params)err_segmentation(params, images, dataset, class, batch_size),...
+                       hyp_segmentation,...
+                       'AcquisitionFunctionName','expected-improvement-plus',...
+                       'MaxObjectiveEvaluations',n_iter,...
+                       'UseParallel',true,...
+                       'Verbose',1,...
+                       'OutputFcn',@saveToFile,...
+                       'SaveFileName',file_data);
                                     
-%                                         'XConstraintFcn',@hyst_constraint,...
-
-    % hyp_segmentation_opt = segmentation_opt_results.XAtMinObjective;     
-    % loss_segmentation_opt = segmentation_opt_results.MinObjective;
+                       % 'XConstraintFcn',@hyst_constraint,...
+    
+    diary off;
+  
+    % loss = segmentation_opt_results.MinObjective;
+    params = table2struct(results.XAtMinObjective);
+    save(file_params,'params');
+    
+    saveas(gcf,file_plot)
 
 end
 
@@ -75,11 +82,11 @@ function err = err_segmentation(params, images, dataset, class, batch_size)
         im = readimage(images,i);
         im_size = size(im);
         
-        [filepath,name,ext] = fileparts(cell2mat(images.Files(i)));
+        [~,name,ext] = fileparts(cell2mat(images.Files(i)));
         filename = strcat(name,ext);
         
         % ACTUAL REGIONS
-        encoded_correct_pixels = cell2mat(dataset{find(strcmp(filename,dataset{:,1})),class+1});
+        encoded_correct_pixels = cell2mat(dataset{strcmp(filename,dataset{:,1}),class+1});
         
         % bounding box correct pixels
         % [~, map] = rle_decoding(encoded_correct_pixels, im_size);

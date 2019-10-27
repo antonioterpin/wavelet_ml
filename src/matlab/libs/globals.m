@@ -131,4 +131,11 @@ variables_shape_sbs_imds_path = "../../data/exports/mc-cnn/data/shape-sbs-imds.m
 variables_local_sbs_imds_path = "../../data/exports/mc-cnn/data/local-sbs-imds.mat";
 variables_global_sbs_imds_path = "../../data/exports/mc-cnn/data/global-sbs-imds.mat";
 
+% SEGMENTATION RESULTS
+
+global results_segmentation_optimization_dir results_segmentation_test_dir
+
+results_segmentation_optimization_dir = "../../data/exports/segmentation/optimization/";
+results_segmentation_test_dir = "../../data/exports/segmentation/test/";
+
 end
