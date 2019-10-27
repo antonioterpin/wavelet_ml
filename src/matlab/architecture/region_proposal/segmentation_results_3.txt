@@ -78,7 +78,8 @@ Estimated objective function value = 0.66767
 Estimated function evaluation time = 398.5401
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-BATCH 100 - 60 EPOCHE
+BATCH 100 (26/10) - 60 EPOCHE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 |============================================================================================================================================================|
 | Iter | Active  | Eval   | Objective   | Objective   | BestSoFar   | BestSoFar   |      hyst_tl |      hyst_th |        alpha |      hole_th |    region_th |
@@ -273,6 +274,8 @@ Best estimated feasible point (according to models):
 Estimated objective function value = 0.6579
 Estimated function evaluation time = 1265.2307
 
+(5, 14, 4.8238, 1.668, 54, 133, 7, 8270, 672)
+
 |   51 |       2 | Accept |     0.71935 |      1239.2 |     0.65776 |     0.65946 |            4 |           13 |       4.6547 |       1.4154 |           71 |          141 |           14 |        13868 |          732 |
 |   52 |       2 | Accept |     0.75333 |      1513.5 |     0.65776 |      0.6578 |            5 |           15 |       3.3006 |       1.8059 |           41 |          127 |            8 |        14798 |          586 |
 |   53 |       2 | Accept |     0.73985 |      915.89 |     0.65776 |     0.65782 |            4 |           12 |       4.6945 |       1.9693 |           54 |          149 |            7 |        10138 |         1428 |
@@ -360,3 +363,4 @@ Best estimated feasible point (according to models):
 
 Estimated objective function value = 0.66683
 Estimated function evaluation time = 1151.9564
+
