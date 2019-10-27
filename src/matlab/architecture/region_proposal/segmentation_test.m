@@ -1,61 +1,71 @@
-function [loss, acc] = segmentation_test(im, im_high, ... % image to test (with/withot highlight)
-                                         encoded_correct_pixels, ... % actual regions
-                                         kov_nscale, kov_norient, kov_min_wl, kov_mult, ... %kovesi
-                                         hist_tl, hist_th, ... % hysteretic edge follower
-                                         alpha, hole_th, region_th) % alpha shape
-
-    map = defect_edge_detection(im, kov_nscale, kov_norient, kov_min_wl, kov_mult, hist_tl, hist_th);
+function [loss, acc, test_data] = segmentation_test(images, dataset, class, batch_size, params)
     
-    map(1:end,1) = 1;
-    map(1,1:end) = 1;
-    map(end, 1:end) = 1;
-    map(1:end, end) = 1;
-
-    [number_of_regions, encoded_shape_maps, bounding_boxes, shp] = segmentate_image(map, alpha, hole_th, region_th);
-
-    im_size = size(im);
-    output1 = zeros(im_size);
-    output2 = zeros(im_size);
-    output1_binary = zeros(im_size);
-    output2_binary = zeros(im_size);
-    x = 1:im_size(2); y = 1:im_size(1); [X,Y] = meshgrid(x,y);
-
-    for region_id = 1:number_of_regions
-        color = floor(255 / number_of_regions) * region_id;
-    
-        % predicted regions
-        filled_shape_feature = zeros(im_size(1)*im_size(2),1);
-        filled_shape_feature(inShape(shp,X(:),Y(:),region_id)) = color;
-        filled_shape_feature = reshape(filled_shape_feature, im_size(1), im_size(2));
-        output1 = output1 + filled_shape_feature;
-        
-        % debug
-        % sprintf("%d-%d, %d-%d",bounding_boxes(1,1,region_id),bounding_boxes(1,2,region_id), ...
-        %    bounding_boxes(2,1,region_id),bounding_boxes(2,2,region_id))
-    
-        % predicted bounding box
-        output2(bounding_boxes(1,2,region_id):bounding_boxes(2,2,region_id), ...
-            bounding_boxes(1,1,region_id):bounding_boxes(2,1,region_id)) = color;
+    if class == 1
+        class_str = '1000';
+    elseif class == 2
+        class_str = '0100';
+    elseif class == 3
+        class_str = '0010';
+    elseif class == 4
+        class_str = '0001';
     end
     
-    output1_binary(output1>0) = 1;
-    output2_binary(output2>0) = 1;
-    
-    encoded_proposed_pixels = rle_encoding(output2_binary);
-    
-    % scores
-    loss = 1 - loss_function(encoded_proposed_pixels, encoded_correct_pixels, im_size);
-    acc = accuracy_segmentation(encoded_proposed_pixels, encoded_correct_pixels, im_size);
+    global results_segmentation_test_dir
+    file_log = convertStringsToChars(strcat(results_segmentation_test_dir,"log_class",num2str(class),"_batch",num2str(batch_size),sprintf("_%f",now),".out"));
+    file_data = convertStringsToChars(strcat(results_segmentation_test_dir,"data_class",num2str(class),"_batch",num2str(batch_size),sprintf("_%f",now),".mat"));
 
-    figure('Position', [0 500 1600 256]); imshow(map,'InitialMagnification','fit');
-    figure('Position', [0 500 1600 256]); imshow(im_high,'InitialMagnification','fit');
-    figure('Position', [0 100 1600 256]); imagesc(output1); % segmented
-    figure('Position', [0 100 1600 256]); imagesc(output2); % bounding box
+    test_data = cell(batch_size,3);
     
-    % debug plots
-    % [~, map_corrected] = rle_decoding(encoded_correct_pixels, im_size);
-    % figure('Position', [0 500 1600 256]); imshow(map_corrected,'InitialMagnification','fit');
-    % figure('Position', [0 500 1600 256]); imshow(output2_binary,'InitialMagnification','fit');
+    idx = find(images.Labels == class_str);
+    s = RandStream('mlfg6331_64','Seed',0); 
+    idx = sort(randsample(s,idx,batch_size,false));
+
+    loss = 0;
+    acc = 0;
+     
+    diary(file_log);
+    
+    fprintf("SEGMENTATION TEST STARTED\n");
+    fprintf("class: %d\nbatch_size: %d\n\n", class, batch_size);
+   
+    test_waitbar = waitbar(0,'Calculating test results..');
+    batch_size = length(idx);
+    for n = 1 : batch_size
+        
+        waitbar(n / batch_size, test_waitbar, sprintf('Calculating test results... %d of %d',n, batch_size));
+        
+        i = idx(n);
+        im = readimage(images,i);
+        im_size = size(im);
+        
+        [~,name,ext] = fileparts(cell2mat(images.Files(i)));
+        im_name = strcat(name,ext);
+        
+        fprintf("%2d) im: %s ", n, im_name);
+        
+        encoded_correct_pixels = cell2mat(dataset{strcmp(im_name,dataset{:,1}),class+1});
+        
+        [loss_i, acc_i] = segmentation_test_im(im, ...
+                                               encoded_correct_pixels, ...
+                                               params);
+        
+        fprintf("loss: %.3f acc: %.3f\n", loss_i, acc_i);
+                                           
+        loss = loss + 1 - loss_i;
+        acc = acc + acc_i;
+        
+        test_data(n,:) = {im_name, loss, acc};
+        
+    end
+    close(test_waitbar);
+    
+    loss = loss ./ batch_size;
+    acc = acc ./ batch_size;
+    
+    fprintf("\navg_loss: %.3f\navg_acc:  %.3f\n", loss, acc);
+    
+    diary off;
+    
+    save(file_data, 'test_data');
     
 end
-    
