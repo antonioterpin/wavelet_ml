@@ -272,3 +272,5 @@ Best estimated feasible point (according to models):
 
 Estimated objective function value = 0.6579
 Estimated function evaluation time = 1265.2307
+
+(5, 14, 4.8238, 1.668, 54, 133, 7, 8270, 672)
