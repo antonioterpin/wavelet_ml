@@ -5,15 +5,13 @@ function score = loss_function(encoded_proposed_pixels, encoded_correct_pixels, 
 %   proposed_pixels (X) and the correct_pixels (Y), gives the score: 
 %   score = 2 * |X ? Y| / (|X| + |Y|)
 
-    proposed_pixels = rle_decoding(encoded_proposed_pixels, domain_size);
-    correct_pixels = rle_decoding(encoded_correct_pixels, domain_size);
+    X = rle_decoding(encoded_proposed_pixels, domain_size);
+    Y = rle_decoding(encoded_correct_pixels, domain_size);
+    
+    score = 2 * size(intersect(X,Y,'rows'),1) / (size(X,1) + size(Y,1));
     
 %     X = cellstr(num2str(proposed_pixels));
-    X = proposed_pixels;
 %     Y = cellstr(num2str(correct_pixels));
-    Y = correct_pixels;
-    
 %     score = 2 * size(intersect(X,Y),1) / (size(X,1) + size(Y,1));
-    score = 2 * size(intersect(X,Y,'rows'),1) / (size(X,1) + size(Y,1));
 
 end
