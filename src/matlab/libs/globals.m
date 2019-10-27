@@ -56,6 +56,8 @@ function globals
 % EXPORTS
 %   * variables_analytics_defects_statistics_path: Path to defects
 %   statistics saved variables.
+%   * variables_analytics_defects_statistics_distribution_path: Path to
+%   folder of distribution hypoteses test output.
 %   * variables_shape_imds_path: Path to shape imds variables for mc-cnn training.
 %   * variables_local_imds_path: Path to local imds variables for mc-cnn training.
 %   * variables_global_imds_path: Path to global imds variables for mc-cnn training.
@@ -116,11 +118,12 @@ global defects_colors;
 defects_colors = ["red" "green" "blue" "yellow"];
 
 % EXPORTS
-global variables_analytics_defects_statistics_path;
+global variables_analytics_defects_statistics_path variables_analytics_defects_statistics_distribution_path;
 global variables_shape_imds_path variables_local_imds_path variables_global_imds_path;
 global variables_shape_sbs_imds_path variables_local_sbs_imds_path variables_global_sbs_imds_path;
 
 variables_analytics_defects_statistics_path = "../../data/exports/defect-analysis/defects-statistics.mat";
+variables_analytics_defects_statistics_distribution_path = "../../data/exports/defect-analysis/";
 variables_shape_imds_path = "../../data/exports/mc-cnn/data/shape-imds.mat";
 variables_local_imds_path = "../../data/exports/mc-cnn/data/local-imds.mat";
 variables_global_imds_path = "../../data/exports/mc-cnn/data/global-sbs-imds.mat";

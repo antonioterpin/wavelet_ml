@@ -1,6 +1,6 @@
 \section{Challenger}\label{section:challenger}
     \par{
-        To measure the effectiveness of the R-CNN approach relying on the edge-based image segmentation involving wavelet analysis, the results are compared with another well-known architecture, i.e. a \emph{sliding window} classificator. Results are reported in \ref{section:results}.
+        To measure the effectiveness of the R-CNN approach relying on the edge-based image segmentation involving wavelet analysis, the results are compared with another well-known architecture, i.e. a \emph{sliding window} classificator. This comparison is reported in \ref{section:results}.
     }
     \subsection{Sliding window architecture}
         \par{
@@ -38,7 +38,7 @@
             The \emph{confidence map} is then used along with some image segmentation tecnique to spot defective regions. In particular, a $n+1$ levels whatershed algorithm is proposed in \ref{section:challenger:image-segmentation}.
         }
         \par{
-            Since defects may have different dimensions, more refined tecniques could be used to improve the accuracy of the challenger. However, these are outside the scope of this work, and they are proposed in \ref{section:further-work}. Moreover, the segmentation tecnique proposed in \ref{section:challenger:image-segmentation} soothes this problem, since it combines local information from different areas to build the defective regions.
+            Since defects may have different dimensions, more refined tecniques could be used to improve the accuracy of the challenger. However, these are outside the scope of this work, and they are proposed as a further development in \ref{section:further-work}. Moreover, the segmentation tecnique proposed in \ref{section:challenger:image-segmentation} soothes this problem, since it combines local information from different areas to build the defective regions.
         }
     \subsection{Image segmentation}\label{section:challenger:image-segmentation}
         \par{
