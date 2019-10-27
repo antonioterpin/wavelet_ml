@@ -98,3 +98,5 @@ data/manipulated-images/defects-highlighted/._README.txt
 /presentation/main.toc
 presentation/graphics/*.*
 presentation/graphics/*
+src/matlab/architecture/region_proposal/segmentation_results_3.asv
+src/matlab/architecture/region_proposal/segmentation_opt.asv
