@@ -30,9 +30,14 @@ function [results, params] = segmentation_optimization(images, dataset, class, b
     hole_th = optimizableVariable('hole_th',[500 15000],'Type','integer');
     region_th = optimizableVariable('region_th',[500 15000],'Type','integer');
 
-    hyp_segmentation = [kov_nscale, kov_norient, kov_min_wl, kov_mult, hyst_tl, hyst_th, alpha, hole_th, region_th];
+    hyp_segmentation = [kov_nscale, kov_norient, kov_min_wl, kov_mult, ...
+                        hyst_tl, hyst_th, ...
+                        alpha, hole_th, region_th];
 
     diary(file_log);
+    
+    fprintf("SEGMENTATION OPTIMIZATION STARTED\n");
+    fprintf("class: %d\nbatch_size: %d\nn_iter: %d\n\n", class, batch_size, n_iter);
     
     % bayesian optimization
     results = bayesopt(@(params)err_segmentation(params, images, dataset, class, batch_size),...
