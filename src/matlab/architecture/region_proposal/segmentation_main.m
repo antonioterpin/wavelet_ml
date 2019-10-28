@@ -6,14 +6,14 @@ segmentation_configuration
 batch_size = 150;
 n_iter = 50;
 
-% class = 3;
-% [results_3, params_3] = segmentation_optimization(images, dataset, class, batch_size, n_iter);
+class = 3;
+[results_3, params_3] = segmentation_optimization(images, dataset, class, batch_size, n_iter);
 
-class = 4;
-[results_4, params_4] = segmentation_optimization(images, dataset, class, batch_size, n_iter);
+% class = 4;
+% [results_4, params_4] = segmentation_optimization(images, dataset, class, batch_size, n_iter);
 
-class = 1;
-[results_1, params_1] = segmentation_optimization(images, dataset, class, batch_size, n_iter);
+% class = 1;
+% [results_1, params_1] = segmentation_optimization(images, dataset, class, batch_size, n_iter);
 
 
 %% custom params
