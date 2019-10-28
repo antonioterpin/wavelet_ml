@@ -64,6 +64,8 @@ function globals
 %   * variables_shape_sbs_imds_path: Path to shape subsets imds variables for mc-cnn training.
 %   * variables_local_sbs_imds_path: Path to local subsets imds variables for mc-cnn training.
 %   * variables_global_sbs_imds_path: Path to global subsets imds variables for mc-cnn training.
+%   * results_segmentation_optimization_dir: Path for segmentation optimization results
+%   * results_segmentation_test_dir: Path for segmentation test results
 
 
 % IMAGES
@@ -131,8 +133,7 @@ variables_shape_sbs_imds_path = "../../data/exports/mc-cnn/data/shape-sbs-imds.m
 variables_local_sbs_imds_path = "../../data/exports/mc-cnn/data/local-sbs-imds.mat";
 variables_global_sbs_imds_path = "../../data/exports/mc-cnn/data/global-sbs-imds.mat";
 
-% SEGMENTATION RESULTS
-
+% segmentation results
 global results_segmentation_optimization_dir results_segmentation_test_dir
 
 results_segmentation_optimization_dir = "../../data/exports/segmentation/optimization/";

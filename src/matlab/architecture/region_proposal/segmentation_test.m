@@ -1,5 +1,12 @@
 function [loss, acc, test_data] = segmentation_test(images, dataset, class, batch_size, params)
-    
+% SEGMENTATION_TEST Test routine of the region proposal architecture
+%
+%   [loss, acc, test_data] = segmentation_test(images, dataset, class, batch_size, params) launch
+%   the test routine over kovesi-hysteretic edge detector and alpha shape pipeline.
+%   TODO describe input/output.
+%
+%   See also SEGMENTATION_TEST_IM SEGMENTATION_OPTIMIZATION
+
     if class == 1
         class_str = '1000';
     elseif class == 2
