@@ -109,3 +109,8 @@ src/matlab/architecture/region_proposal/test_old.txt
 src/matlab/architecture/region_proposal/segmentation_configuration.asv
 data/exports/segmentation/optimization/log_class4_batch150_niter50_737725.941680.out
 data/exports/segmentation/optimization/log_class4_batch150_niter50_737725.937006.out
+data/exports/segmentation/optimization/data_class4_batch150_niter50_737725.941680.mat.PREV
+data/exports/segmentation/optimization/log_class3_batch150_niter50_737726.475835.out
+data/exports/segmentation/optimization/data_class3_batch150_niter50_737726.475835.mat.PREV
+data/exports/segmentation/optimization/log_class1_batch150_niter50_737726.244768.out
+data/exports/segmentation/optimization/data_class1_batch150_niter50_737726.244768.mat.PREV
