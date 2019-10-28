@@ -1,14 +1,11 @@
 function [results, params] = segmentation_optimization(images, dataset, class, batch_size, n_iter)
 % SEGMENTATION_OPT Optimization of the region proposal architecture
 %
-%   segmentation_opt_results = segmentation_opt(class, batch_size) launch
-%   the bayesian optimization routine over kovesi edge detection, hysteretic
-%   edge follower and alpha shape.
+%   [results, params] = segmentation_opt(images, dataset, class, batch_size, n_iter) launch the
+%   bayesian optimization routine over kovesi-hysteretic edge detector and alpha shape pipeline.
+%   TODO describe input/output.
 %
-%   Example:
-%
-%   segmentation_opt_results = segmentation_opt(3, 40)
-%   segmentation_opt_results = segmentation_opt(4, 128)
+%   See also SEGMENTATION_TEST SEGMENTATION_TEST_IM
 
     global results_segmentation_optimization_dir
     
