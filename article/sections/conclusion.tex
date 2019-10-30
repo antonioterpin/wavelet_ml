@@ -1,38 +1,39 @@
 \section{Results}\label{section:results}
     Review the article, make some considerations on results
+    Observe that this architecture is dealing with different sixze image, interesting.....!!!
 
-    \begin{figure}
-        \centering
-        % \includegraphics[width=.8\linewidth]{graphics/results/mc-cnn-shape-confusion}
-        \caption{Shape column confusion matrix on ideal input.}\label{fig:shape-confusion}
-    \end{figure}
+    \subsection{Detector}
+    \subsection{Classificator}
+    \par{
 
+    }
     \begin{figure}
         \centering
         % \includegraphics[width=.8\linewidth]{graphics/results/mc-cnn-local-confusion}
         \caption{Local column confusion matrix on ideal input.}\label{fig:local-confusion}
     \end{figure}
-
-    \begin{figure}
-        \centering
-        % \includegraphics[width=.8\linewidth]{graphics/results/mc-cnn-global-confusion}
-        \caption{Global column confusion matrix on ideal input.}\label{fig:global-confusion}
-    \end{figure}
-
-    \begin{figure}
-        \centering
-        % \includegraphics[width=.8\linewidth]{graphics/results/mc-cnn-final-classifier-confusion}
-        \caption{Final classifier confusion matrix on ideal input.}\label{fig:final-classifier-confusion}
-    \end{figure}
-
     \begin{table}
-        \caption{Results}\label{table:results}
+        \caption{Local column comparisons}\label{table:results:local-comparisons}
     \end{table}
-
     \par{
-        *** Confronto con esplicitamente indicati il contributo di ogni step al miglioramento del risultato *** Results are shown in table \ref{table:results}.
+        ** COMPARISONS with / without equalization local column **
     }
-
+    \par{
+        ** COMPARISONS crop / spreader local column **
+    }
+    \subsection{United architecture}
+    \begin{figure}
+        \centering
+        
+        \caption{Final classifier confusion matrix on real input.}\label{fig:results:final-classifier}
+    \end{figure}
+    \begin{table}
+        \caption{Overall results}\label{table:results}
+    \end{table}
+    \par{
+        ** OVERALL RESULTS **
+    }
+    \subsection{Architecture implementation}
     \par{
         The whole system implementation can be found in the \href{https://github.com/antonioterpin/wavelet_ml}{\texttt{GitHub}} repository \cite{antonioterpin:github}.
     }
@@ -41,11 +42,86 @@
     \par{
         This work can be further developed in many ways.
     }
+    \subsection{Proposed architecture improvement}
     \par{
-        Firstly, the challenger could be refined in order to evaluate better the effectiveness of the proposed architecture. As an example, a multi-scale approach could be considered, since the challenger does not take into account the variability of defects dimensions. To solve this flaw, \emph{image pyramids} could be used.
+        Firstly, it would be interest to implement and train the shape column, preeptively discarding misleading data, and the global column and measure their contribution. The structure of the shape column may be identical to the local column, described in \ref{section:local-column}.
     }
     \par{
-        Secondly, other refined architectures could be compared to the proposed one.
+        Secondly, regarding the local column, some padding could be considered around defective regions, to fed the CNN also with some more pixels outside the border.
+    }
+    \par{
+        Thirdly, as announced in \ref{section:local-column}, both the local and the shape column could be fed with a cropped image. One could attempt to preeptively discard these outliers and try to optimize the other samples with a smaller input and, hence, more traditional classificators.
+    }
+    \begin{table*}
+        \centering
+        \begin{tabular}{|c|c|c|c|c|c|}
+            \hline
+            \textbf{Cropping size} & \textbf{Class \#1 outliers} & \textbf{Class \#2 outliers}& \textbf{Class \#3 outliers} & \textbf{Class \#4 outliers} & \textbf{Overall outliers}\\\hline
+            $800\times 800$ & $0\%$ & $0\%$ & $1.47\%$ & $1.06\%$ & $0.88\%$\\
+            $512\times 512$ & $0\%$ & $0\%$ & $2.94\%$ & $3.99\%$ & $2.11\%$\\
+            $256\times 256$ & $0\%$ & $0\%$ & $6.61\%$ & $17.57\%$& $6.42\%$\\
+            \hline
+        \end{tabular}
+        \vspace{0.5cm}
+        \caption{Cropping examples.}\label{table:cropping}
+    \end{table*}
+    \par{
+        Some examples of interesting cropping size are shown in table \ref{table:cropping}.
+    }
+    \subsection{Challenger}
+    \par{
+        Some comparisons with a challenger architecture are needed to evaluate the effectiveness of the proposed system.
+    }
+    \par{
+        As an example, a well-known \emph{sliding window} classificator could be used.
+    }
+    \subsubsection{Sliding window architecture}
+        \par{
+            The idea behind this architecture is to crop the input image at different locations (eventually all the ones possible, as in this paper) and use a classifier to assign to the pixels of the considered region an array of confidences.
+        }
+        \begin{figure}
+            \centering
+            \begin{tikzpicture}
+                % Image
+                \node[rectangle, draw, minimum width=3cm, minimum height=3cm] (image) at (0,0) {Image};
+                % Window
+                \node[rectangle, draw=red, minimum width=.8cm, minimum height=.8cm] (window) at ($(image) + (.3,.9)$) {};
+                % Sliding window
+                \draw[->, draw=red] ($(window) + (.2,0)$) -- ($(window) + (1,0)$);
+                \draw[->, draw=red] ($(window) + (0,-.2)$) -- ($(window) + (0,-.7)$);
+                % Classifier
+                \node[rounded rectangle, draw, minimum width=2cm, minimum height=1cm] (classifier) at ($(image) + (2.5,0)$) {Classifier};
+                \draw[->,draw=blue] ($(window) + (0,0)$) -- (classifier);
+                % Confidence map
+                \node[rectangle,draw,minimum width=3cm, minimum height=3cm] (confidence map) at ($(classifier) + (2.5,0)$) {Confidence map};
+                \node[rectangle, draw=red, minimum width=.8cm, minimum height=.8cm] (confidence map window) at ($(confidence map) + (.3,.9)$) {};
+                \draw[->, draw=red] ($(confidence map window) + (.2,0)$) -- ($(confidence map window) + (1,0)$);
+                \draw[->, draw=red] ($(confidence map window) + (0,-.2)$) -- ($(confidence map window) + (0,-.7)$);
+                \draw[->,draw=blue] (classifier) -- ($(confidence map window)$);
+            \end{tikzpicture}
+            \caption{Sliding window architecture}\label{fig:sliding-window}
+        \end{figure}
+        \par{
+            This cropped regions may overlap. In those circumstances, an euristic to combine different values of confidences is needed.
+        }
+        \par{
+            In figure \ref{fig:sliding-window} the sketch of this architecture is shown. In the illustration the resulting map, called \emph{confidence map}, is associated to an array of confidences relative to the possible labels. 
+        }
+        \par{
+            The \emph{confidence map} is then used along with some image segmentation tecnique to spot defective regions. In particular, a $n+1$ levels whatershed algorithm is proposed in \ref{section:challenger:image-segmentation}.
+        }
+        \par{
+            Since defects may have different dimensions, more refined tecniques could be used to improve the accuracy of the challenger. However, these are outside the scope of this work, and they are proposed as a further development in \ref{section:further-work}. Moreover, the segmentation tecnique proposed in \ref{section:challenger:image-segmentation} soothes this problem, since it combines local information from different areas to build the defective regions.
+        }
+    \subsubsection{Image segmentation}\label{section:challenger:image-segmentation}
+        \par{
+            The \emph{confidence map} is used to segmentate the image through a $n+1$ levels whatershed algorithm. However, since the defective regions are always disjunct, the problem can be reduced to a binary whatershed algorithm \cite{ieee:87344} considering all the defective classes as one, and distinguishing them only later. The $n+1$ levels whatershed algorithm is left as a further development in \ref{section:further-work}.
+        }
+        \par{
+            As a final remark about the challenger, it is patent that even this naive implementation is far more involved then the proposed architecture, and the reason lies on the image segmentation approach.
+        }
+    \par{
+        Moreover, the challenger could be further refined. As an example, a multi-scale approach could be considered, since the challenger does not take into account the variability of defects dimensions. To solve this flaw, \emph{image pyramids} could be used.
     }
     \par{
         Finally, an interesting development would be to investigate further a segmentation with overlapping (adjacent) regions, when there are more classes then foreground/background only. Towards this multi-level segmentation, it would be interesting to consider a non-binary whatershed-based algorithm.
