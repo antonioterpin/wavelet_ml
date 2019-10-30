@@ -1,7 +1,22 @@
 function combinate(f, N, bitmask, i)
 %COMBINATE Perform f on all combinations of N elements, given through
 %bitmask
-%   combinate(f, N); bitmask, i are used on recursion
+%
+%   combinate(f, N); bitmask and i are used during recursion
+%
+%   Example:
+%
+%   combinate(@(x) disp(dec2bin(x,3)), 3);
+%   ---- OUTPUT ----
+%   000
+%   100
+%   010
+%   110
+%   001
+%   101
+%   011
+%   111
+%   
 
     if nargin == 2
         % First call
