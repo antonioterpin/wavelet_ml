@@ -1,49 +1,78 @@
+function [loss, acc, test_data] = segmentation_test(images, dataset, class, batch_size, params)
+% SEGMENTATION_TEST Test routine of the region proposal architecture
+%
+%   [loss, acc, test_data] = segmentation_test(images, dataset, class, batch_size, params) launch
+%   the test routine over kovesi-hysteretic edge detector and alpha shape pipeline.
+%   TODO describe input/output.
+%
+%   See also SEGMENTATION_TEST_IM SEGMENTATION_OPTIMIZATION
 
-% test images
-% im_name = '0adc17f1d.jpg'; %4
-% im_name = '0b7a4c9b9.jpg'; %3
-% im_name = '0be9bad7b.jpg'; %3-4
-% im_name = '0d0c21687.jpg';
-% im_name = '00e0398ad.jpg'; %3
-% im_name = '2a8096ad1.jpg';
-% im_name = '2b8dfbe0b.jpg'; %1
-im_name = '2b15517b1.jpg'; %3
-% im_name = '2bdb48c91.jpg'; %1
-% im_name = '3a7d9b5c1.jpg'; %2
-
-im = imread(strcat('test_images/',im_name));
-im = rgb2gray(im);
-
-im_high = imread(strcat('test_images/highligted/',im_name));
-
-map = defect_edge_detection(im,49,196);
-map(1:end,1) = 1;
-map(1,1:end) = 1;
-map(end, 1:end) = 1;
-map(1:end, end) = 1;
-
-[number_of_regions, encoded_shape_maps, bounding_boxes, shp] = segmentate_image(map, 19, 3992, 1674);
-
-output1 = zeros(size(im)); output2 = zeros(size(im));
-image_size = size(im);
-x = 1:image_size(2); y = 1:image_size(1); [X,Y] = meshgrid(x,y);
-
-for region_id = 1:number_of_regions
-    color = floor(255 / number_of_regions) * region_id;
+    if class == 1
+        class_str = '1000';
+    elseif class == 2
+        class_str = '0100';
+    elseif class == 3
+        class_str = '0010';
+    elseif class == 4
+        class_str = '0001';
+    end
     
-    filled_shape_feature = zeros(image_size(1)*image_size(2),1);
-    filled_shape_feature(inShape(shp,X(:),Y(:),region_id)) = color;
-    filled_shape_feature = reshape(filled_shape_feature, image_size(1), image_size(2));
-    output1 = output1 + filled_shape_feature;
-    % sprintf("%d-%d, %d-%d",bounding_boxes(1,1,region_id),bounding_boxes(1,2,region_id), ...
-    %    bounding_boxes(2,1,region_id),bounding_boxes(2,2,region_id))
+    global results_segmentation_test_dir
+    file_log = convertStringsToChars(strcat(results_segmentation_test_dir,"log_class",num2str(class),"_batch",num2str(batch_size),sprintf("_%f",now),".out"));
+    file_data = convertStringsToChars(strcat(results_segmentation_test_dir,"data_class",num2str(class),"_batch",num2str(batch_size),sprintf("_%f",now),".mat"));
+
+    test_data = cell(batch_size,3);
     
-    output2(bounding_boxes(1,2,region_id):bounding_boxes(2,2,region_id), ...
-        bounding_boxes(1,1,region_id):bounding_boxes(2,1,region_id)) = color;
+    idx = find(images.Labels == class_str);
+    s = RandStream('mlfg6331_64','Seed',0); 
+    idx = sort(randsample(s,idx,batch_size,false));
+
+    loss = 0;
+    acc = 0;
+     
+    diary(file_log);
+    
+    fprintf("SEGMENTATION TEST STARTED\n");
+    fprintf("class: %d\nbatch_size: %d\n\n", class, batch_size);
+   
+    test_waitbar = waitbar(0,'Calculating test results..');
+    batch_size = length(idx);
+    for n = 1 : batch_size
+        
+        waitbar(n / batch_size, test_waitbar, sprintf('Calculating test results... %d of %d',n, batch_size));
+        
+        i = idx(n);
+        im = readimage(images,i);
+        im_size = size(im);
+        
+        [~,name,ext] = fileparts(cell2mat(images.Files(i)));
+        im_name = strcat(name,ext);
+        
+        fprintf("%2d) im: %s ", n, im_name);
+        
+        encoded_correct_pixels = cell2mat(dataset{strcmp(im_name,dataset{:,1}),class+1});
+        
+        [loss_i, acc_i] = segmentation_test_im(im, ...
+                                               encoded_correct_pixels, ...
+                                               params);
+        
+        fprintf("loss: %.3f acc: %.3f\n", loss_i, acc_i);
+                                           
+        loss = loss + 1 - loss_i;
+        acc = acc + acc_i;
+        
+        test_data(n,:) = {im_name, loss, acc};
+        
+    end
+    close(test_waitbar);
+    
+    loss = loss ./ batch_size;
+    acc = acc ./ batch_size;
+    
+    fprintf("\navg_loss: %.3f\navg_acc:  %.3f\n", loss, acc);
+    
+    diary off;
+    
+    save(file_data, 'test_data');
+    
 end
-
-figure; imshow(im_high);
-figure; imshow(map);
-figure('Position', [0 50 1600 256]); imagesc(output1);
-figure('Position', [0 50 1600 256]); imagesc(output2);
-    
