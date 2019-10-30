@@ -1,10 +1,13 @@
 function score = accuracy_segmentation(encoded_proposed_pixels, encoded_correct_pixels, domain_size)
-% ACCURACY_SEGMENTATION accuracy of the region proposal architecture
+% ACCURACY_SEGMENTATION accuracy of the region proposal stage of the
+% architecture.
 %
 %   score = ACCURACY_SEGMENTATION(proposed_pixels, correct_pixels)
 %   Let X be the proposed_pixels set and Y be the correct_pixels set. Then:
 %                   
 %   score = |intersect(X, Y)| / |Y|
+%
+%   See also LOSS_FUNCTION
 
     proposed_pixels = rle_decoding(encoded_proposed_pixels, domain_size);
     correct_pixels = rle_decoding(encoded_correct_pixels, domain_size);
