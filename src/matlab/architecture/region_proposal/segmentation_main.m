@@ -1,7 +1,6 @@
 %% CONFIGURATION
 segmentation_configuration
 
-
 %% OPTIMIZATION
 batch_size_opt = 150;
 n_iter = 50;
