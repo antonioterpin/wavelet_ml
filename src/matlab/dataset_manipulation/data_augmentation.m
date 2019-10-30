@@ -14,6 +14,7 @@ dataset = readtable(formatted_dataset_path, opts);
 augmented_dataset = dataset;
 number_of_original_images = size(dataset,1);
 
+%%
 % copy all old data
 % copyfile(compressed_images, augmentated_images);
 % copyfile(preprocessed_images, augmentated_preprocessed_images);
@@ -26,6 +27,7 @@ for i = 1 : number_of_original_images
 end
 close(data_augmentation_waitbar);
 
+%%
 % do not increase the number of surfaces with only class_id 3 or flawless.
 dataset = dataset(...
     find(strcmp(dataset.EncodedPixels1, "") == 0 ... 

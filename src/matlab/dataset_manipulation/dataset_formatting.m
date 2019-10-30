@@ -9,6 +9,7 @@ global number_defect_classes column_encoded_pixels column_image_id; % dataset de
 opts = detectImportOptions(dataset_path);
 dataset = readtable(dataset_path, opts);
 
+%%
 % format dataset
 number_of_images = size(dataset,1) / number_defect_classes;
 dataset_formatted = cell2table(cell(number_of_images,1 + number_defect_classes)); % create empty table
@@ -29,7 +30,7 @@ end
 % save formatted dataset to csv
 writetable(dataset_formatted, formatted_dataset_path);
 
-%%%%%%%%%%%%%%%%%%
+%%
 % Script functions
 
 function formatted_row = format_image_row(image_rows, image_type)
