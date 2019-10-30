@@ -6,6 +6,8 @@ global formatted_dataset_path images_path compressed_images column_image_id prep
 opts = detectImportOptions(formatted_dataset_path);
 dataset = readtable(formatted_dataset_path, opts);
 
+%%
+% Save compressed images and preprocessed images
 mkdir(compressed_images);
 mkdir(preprocessed_images);
 
