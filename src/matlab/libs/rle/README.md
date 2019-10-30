@@ -1,8 +1,8 @@
 # RLE encoding/decoding of a binary matrix
 This folder contains routines to encode and to decode binary matrices.
-- rle_decoding.m is the routine to decode a binary matrix.
-- rle_encoding.m is the routine to encode a binary matrix.
-- rle.mlx is a matlab live script to briefly explain the above functions.
+- [rle_decoding.m](./rle_decoding.m): routine to decode a binary matrix.
+- [rle_encoding.m](./rle_encoding.m): routine to encode a binary matrix.
+- [rle.mlx](./rle.mlx): matlab live script to briefly explain the above functions.
 
 ### RLE encoding
 ```
