@@ -85,22 +85,19 @@ Example:
         \par{
             The fundamental observation, however, is that some defects have a global origin, i.e. they are due to a flawed machinery, therefore is reasonable that a local classifier would miss some important details.
         }
-        \par{
-            One of the main stage of the production process is rolling \cite{wiki:rolling, defects:rolling}, which is the procedure of plastically deforming steel by passing it between rolls. Therefore, the stell is subjected to high compressive stresses as a result of the friction between the rolls and the metal surface.
-        }
-        \par{
-            The semi-finished products of rolling are named \emph{boom}, \emph{billet} and \emph{slab}. The former is the product of the first breakdown of the ingot, the second is obtained from a further reduction by hot rolling, and the latter is the hot rolled ingot.
-        }
-        \par{
-            The billet is characterized by a cross sectional area larger then $\SI[product-units=power]{40 x 40 }{\mm}$, whereas the slab has one larger then $\SI{100}{\mm\squared}$ and a width two times greater then its thickness.
-        }
-        \par{
-            Rolling mill products are called \emph{plate}, \emph{sheet}, \emph{strip} based on their size.
-        }
-        \par{
-            The plate has a thickness greater then $\SI{6}{\mm}$, whereas both sheet and strip are smaller. However, the latters are distinguished by their width. Sheets width is larger then $\SI{600}{\mm}$, whereas strips width is not.
-        }
-        \subsubsection{Defect class \#1}\label{section:defect-class-3}
+        % \par{
+        %     One of the main stage of the production process is rolling \cite{wiki:rolling, defects:rolling}, which is the procedure of plastically deforming steel by passing it between rolls. Therefore, the steel is subjected to high compressive stresses as a result of the friction between the rolls and the metal surface.
+        % }
+        % \par{
+        %     The semi-finished products of casting are named \emph{bloom}, \emph{billet} and \emph{slab}. The former is the product of the first breakdown of the ingot, the second is obtained from a further reduction by hot rolling, and the latter is obtained by rolling the ingot or the bloom.
+        % }
+        % \par{
+        %     Rolling mill products are called \emph{plate}, \emph{sheet}, \emph{strip} based on their size.
+        % }
+        % \par{
+        %     The plate has a thickness greater then $\SI{6}{\mm}$, whereas both sheet and strip are smaller. However, the latters are distinguished by their width. Sheets width is larger then $\SI{600}{\mm}$, whereas strips width is not.
+        % }
+        \subsubsection{Defect class \#1}\label{section:defect-class-1}
             \par{
                 The first type of defect has not been classified yet into one of the classes found in literature.
             }
@@ -110,8 +107,13 @@ Example:
                 \includegraphics[width=\linewidth]{graphics/defects/class1surface-highlighted}
                 \caption{Steel surface with defect class \#1.}\label{fig:defects:surface-1}
             \end{figure}
+            \begin{figure}
+                \centering
+                \includegraphics[width=\linewidth]{graphics/defects/nregions-class1}
+                \caption{Number of defects of class 1 per defective surface.}\label{fig:nregions-1}
+            \end{figure}
             \par{
-                However, it is a glaring example of burst defect, indeed it is reasonable to expect such defect to repeat multiple times on the same surface.
+                However, it is a glaring example of burst defect, indeed it is reasonable to expect such defect to repeat multiple times on the same surface, as deducible from the histogram in figure \ref{fig:nregions-1}.
             }
             \begin{figure}
                 \includegraphics[width=\linewidth]{graphics/defects/class1shape}
@@ -139,22 +141,25 @@ Example:
                 \centering
                 \begin{tabular}{|c|c|c|}
                     \hline
-                    \textbf{Length distribution} & $p$-value & Null hypotesis rejected
+                    \textbf{Length distribution} & $p$-value & Null hypothesis rejected
                     \csvreader[head to column names]{data/lengthDistribution1.csv}{}% use head of csv as column names
                     {\\\hline\Distribution&\pValue&\h}% specify your coloumns here
                     \\\hline
-                    \textbf{Height distribution} & $p$-value & Null hypotesis rejected
+                    \textbf{Height distribution} & $p$-value & Null hypothesis rejected
                     \csvreader[head to column names]{data/heightDistribution1.csv}{}% use head of csv as column names
                     {\\\hline\Distribution&\pValue&\h}% specify your coloumns here
                     \\\hline
                 \end{tabular}
                 \vspace{0.25cm}
-                \caption{Hypoteses test results on class \#1. *** FIX ***}\label{table:hypoteses-test-1}
+                \caption{hypotheses test results on class \#1.}\label{table:hypotheses-test-1}
             \end{table}
             \par{
-                In tables \ref{table:hypoteses-test-1} are shown the results of some distribution hypoteses test. The null hypoteses are data following a particular distribution. It is visible that it is not possible to infer the distribution, and it is eventually better to use a kernel distribution. *** FIX ***
+                In table \ref{table:hypotheses-test-1} are shown the results of some distribution hypothesis tests. The null hypotheses are data following a particular distribution (e.g. Lognormal, Normal, Weibull), with their parameters tuned using the best sample estimators. It is visible that it is not possible to infer the distribution, and it is eventually better to use a kernel distribution.
             }
-        \subsubsection{Defect class \#2}
+            \par{
+                Therefore, no information on the tuning of the architecture hyperparameters has been extrapolated from data distribution.
+            }
+        \subsubsection{Defect class \#2}\label{section:defect-class-2}
             \par{
                 Defects of class \#2 usually appears near the transversal edge, hence, they are probably edge laminations, since they are also visually similar.
             }
@@ -164,9 +169,17 @@ Example:
                 \includegraphics[width=\linewidth]{graphics/defects/class2surface-highlighted}
                 \caption{Steel surface with defect class \#2.}\label{fig:defects:surface-2}
             \end{figure}
+            \begin{figure}
+                \centering
+                \includegraphics[width=\linewidth]{graphics/defects/nregions-class2}
+                \caption{Number of defects of class 2 per defective surface.}\label{fig:nregions-2}
+            \end{figure}
             \par{
-                This defects are due to the overcooling of the slab off of the caster. The coil mill edges looks like a continuous or semi-continuous line of slivers.
+                These defects are local, since they are usually near the edge. Indeed, from the histogram in figure \ref{fig:nregions-2} is visible that they occur only a small limited number of times on the same surface.
             }
+            % \par{
+            %     This defects are due to the overcooling of the slab off of the caster. The coil mill edges looks like a continuous or semi-continuous line of slivers.
+            % }
             \begin{figure}
                 \includegraphics[width=\linewidth]{graphics/defects/class2shape}
                 \caption{Shape distribution for defect class \#2.}\label{fig:defects:shape-2}
@@ -190,22 +203,22 @@ Example:
                 \centering
                 \begin{tabular}{|c|c|c|}
                     \hline
-                    \textbf{Length distribution} & $p$-value & Null hypotesis rejected
+                    \textbf{Length distribution} & $p$-value & Null hypothesis rejected
                     \csvreader[head to column names]{data/lengthDistribution2.csv}{}% use head of csv as column names
                     {\\\hline\Distribution&\pValue&\h}% specify your coloumns here
                     \\\hline
-                    \textbf{Height distribution} & $p$-value & Null hypotesis rejected
+                    \textbf{Height distribution} & $p$-value & Null hypothesis rejected
                     \csvreader[head to column names]{data/heightDistribution2.csv}{}% use head of csv as column names
                     {\\\hline\Distribution&\pValue&\h}% specify your coloumns here
                     \\\hline
                 \end{tabular}
                 \vspace{0.25cm}
-                \caption{Hypoteses test results on class \#2. *** FIX ***}\label{table:hypoteses-test-2}
+                \caption{hypotheses test results on class \#2.}\label{table:hypotheses-test-2}
             \end{table}
             \par{
-                In tables \ref{table:hypoteses-test-2} are shown the results of some distribution hypoteses test. The null hypoteses are data following a particular distribution. It is visible that it is not possible to infer the distribution, and it is eventually better to use a kernel distribution. *** FIX ***
+                In table \ref{table:hypotheses-test-2} are shown the results of some distribution hypothesis tests. It is clear that it is not possible to model the height with any distribution, whereas the length may be modeled with the kernel distribution. 
             }
-        \subsubsection{Defect class \#3}
+        \subsubsection{Defect class \#3}\label{section-defect-class-3}
             \par{
                 The mill rolls should be perfectly parallel to correctly flatten the steel. When this is not the case, a stress pattern arises, with tension along the centreline.
             }
@@ -217,6 +230,14 @@ Example:
             \end{figure}
             \par{
                 Defects of class \#3 are probably rolling defects, in particular their repetitive pattern along the centreline is a symptom of \emph{zipper cracks}, i.e. centre line cracking. This is another patent example of burst defect.
+            }
+            \begin{figure}
+                \centering
+                \includegraphics[width=\linewidth]{graphics/defects/nregions-class3}
+                \caption{Number of defects of class 3 per defective surface.}\label{fig:nregions-3}
+            \end{figure}
+            \par{
+                The hypothesis of transversality of the presence of a defect of class \#3 over the surface is supported by the histogram in figure \ref{fig:nregions-3}. However, as extrapolated from a visual analysis (as an example, consider figure \ref{fig:defects:surface-3}), many defects of class \#3 are encoded together, since they are very near one another. Hence, many of these are considered as an atomic region.
             }
             \begin{figure}
                 \includegraphics[width=\linewidth]{graphics/defects/class3shape}
@@ -241,23 +262,23 @@ Example:
                 \centering
                 \begin{tabular}{|c|c|c|}
                     \hline
-                    \textbf{Length distribution} & $p$-value & Null hypotesis rejected
+                    \textbf{Length distribution} & $p$-value & Null hypothesis rejected
                     \csvreader[head to column names]{data/lengthDistribution3.csv}{}% use head of csv as column names
                     {\\\hline\Distribution&\pValue&\h}% specify your coloumns here
                     \\\hline
-                    \textbf{Height distribution} & $p$-value & Null hypotesis rejected
+                    \textbf{Height distribution} & $p$-value & Null hypothesis rejected
                     \csvreader[head to column names]{data/heightDistribution3.csv}{}% use head of csv as column names
                     {\\\hline\Distribution&\pValue&\h}% specify your coloumns here
                     \\\hline
                 \end{tabular}
                 \vspace{0.25cm}
-                \caption{Hypoteses test results on class \#3. *** FIX ***}\label{table:hypoteses-test-3}
+                \caption{hypotheses test results on class \#3.}\label{table:hypotheses-test-3}
             \end{table}
             \par{
-                In tables \ref{table:hypoteses-test-3} are shown the results of some distribution hypoteses test. The null hypoteses are data following a particular distribution. It is visible that it is not possible to infer the distribution, and it is eventually better to use a kernel distribution. *** FIX ***
+                In table \ref{table:hypotheses-test-3} are shown the results of some distribution hypothesis tests. Conclusions are the same discussed in \ref{section:defect-class-2}.
             }
 
-        \subsubsection{Defect class \#4}
+        \subsubsection{Defect class \#4}\label{section-defect-class-4}
             \par{
                 This defect class seems to be concerned with protrusions on the steel surface. The main typologies of protuberances in the given dataset are \emph{scabs} and \emph{blisters}.
             }
@@ -296,23 +317,28 @@ Example:
                 \centering
                 \begin{tabular}{|c|c|c|}
                     \hline
-                    \textbf{Length distribution} & $p$-value & Null hypotesis rejected
+                    \textbf{Length distribution} & $p$-value & Null hypothesis rejected
                     \csvreader[head to column names]{data/lengthDistribution4.csv}{}% use head of csv as column names
                     {\\\hline\Distribution&\pValue&\h}% specify your coloumns here
                     \\\hline
-                    \textbf{Height distribution} & $p$-value & Null hypotesis rejected
+                    \textbf{Height distribution} & $p$-value & Null hypothesis rejected
                     \csvreader[head to column names]{data/heightDistribution4.csv}{}% use head of csv as column names
                     {\\\hline\Distribution&\pValue&\h}% specify your coloumns here
                     \\\hline
                 \end{tabular}
                 \vspace{0.25cm}
-                \caption{Hypoteses test results on class \#4. *** FIX ***}\label{table:hypoteses-test-4}
+                \caption{hypotheses test results on class \#4.}\label{table:hypotheses-test-4}
             \end{table}
             \par{
-                In tables \ref{table:hypoteses-test-4} are shown the results of some distribution hypoteses test. The null hypoteses are data following a particular distribution. It is visible that it is not possible to infer the distribution, and it is eventually better to use a kernel distribution. *** FIX ***
+                In table \ref{table:hypotheses-test-4} are shown the results of some distribution hypothesis tests. Conclusions are the same discussed in \ref{section:defect-class-1}.
             }
+            \begin{figure}
+                \centering
+                \includegraphics[width=\linewidth]{graphics/defects/nregions-class4}
+                \caption{Number of defects of class 4 per defective surface.}\label{fig:nregions-4}
+            \end{figure}
             \par{
-                Differently from the defects of class \#3 or \#4, these flaws are local, i.e. it is not unusual to find only a single region with this issues in the whole picture.
+                Even this defect class has global characteristics, as confirmed by the histogram in picture \ref{fig:nregions-4}.
             }
     \subsection{Dataset considerations}
         \begin{figure}
