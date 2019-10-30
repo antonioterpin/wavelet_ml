@@ -12,12 +12,16 @@ function globals
 %   images
 %   * local_feature_images: contains the relative path to the local feature
 %   images
-%   * global_feature_images: contains the relative path to the local feature
+%   * global_feature_images: contains the relative path to the global feature
 %   images
 %   * local_feature_preprocessed_images: contains the relative path to the local feature
 %   images (preprocessed)
-%   * global_feature_preprocessed_images: contains the relative path to the local feature
+%   * global_feature_preprocessed_images: contains the relative path to the global feature
 %   images (preprocessed)
+%   * local_crop_preprocessed_images: contains the relative path to the
+%   local feature images cropped (preprocessed)
+%   * local_crop_images: contains the relative path to the
+%   local feature images cropped
 % 
 % CSV
 %   * dataset_path: contains the relative path to the original csv.
@@ -38,7 +42,6 @@ function globals
 % NUMERIC
 %   * number_defect_classes: contains the number of defect classes.
 %   * image_size: array of image_size
-%   * minimum_defective_area: minimum defective area value
 %
 % DATASET COLUMNS NAME
 %   * column_encoded_pixels: Name of encoded pixels column. Concat
@@ -69,6 +72,7 @@ function globals
 % IMAGES
 global images_path compressed_images defects_highlighted preprocessed_images augmentated_images augmentated_preprocessed_images;
 global shape_feature_images local_feature_images global_feature_images local_feature_preprocessed_images global_feature_preprocessed_images;
+global local_crop_preprocessed_images local_crop_images;
 
 images_path = "../../data/images/";
 compressed_images = "../../data/manipulated-images/compressed-images/";
@@ -81,6 +85,8 @@ local_feature_images = "../../data/ideal-mc-cnn/local-features/";
 global_feature_images = "../../data/ideal-mc-cnn/global-features/";
 local_feature_preprocessed_images = "../../data/ideal-mc-cnn/local-features-preprocessed/";
 global_feature_preprocessed_images = "../../data/ideal-mc-cnn/global-features-preprocessed/";
+local_crop_preprocessed_images = "../../data/crop/local-features-preprocessed/";
+local_crop_images = "../../data/crop/local-features/";
 
 % CSV
 global dataset_path formatted_dataset_path augmented_dataset_path... 
@@ -98,11 +104,10 @@ classification_test_set_path = "../../data/ideal-mc-cnn/test.csv";
 classification_cv_set_path = "../../data/ideal-mc-cnn/cv.csv";
 
 % NUMERIC
-global number_defect_classes image_size minimum_defective_area;
+global number_defect_classes image_size;
 
 number_defect_classes = 4;
 image_size = [256 1600];
-minimum_defective_area = 0; % Eventually set this
 
 % DATASET COLUMNS NAME
 global column_encoded_pixels column_image_id_class_id column_image_id column_defect_class;
