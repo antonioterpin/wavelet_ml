@@ -11,9 +11,11 @@
 
 \input{style/colors.tex}
 
-\usepackage{siunitx}
+\usepackage[binary-units=true]{siunitx}
 
 \usepackage{cite}
+
+\usepackage{subcaption}
 
 \usepackage{amsmath}
 \usepackage[colorlinks]{hyperref}
@@ -33,7 +35,7 @@
 \begin{document}
     % TITLE & PUBLICATION ID
 
-    \title{An effective approach to defect detection} %  on steel surfaces
+    \title{An effective approach to steel defect detection} %  on steel surfaces
     \IEEEpubid{0000--0000/00\$00.00 ̃\copyright ̃2019 IEEE }
 
     % AUTHORS
@@ -64,7 +66,7 @@
     \input{sections/region_proposals}
     \input{sections/mc_cnn.tex}
     % Challenger
-    \input{sections/challengers.tex}
+    % \input{sections/challengers.tex}
     % Results
     \input{sections/conclusion.tex}
     % \input{sections/acknowledgment.tex}
