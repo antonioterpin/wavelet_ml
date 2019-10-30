@@ -10,17 +10,97 @@
     }
     \subsection{Edge detection}\label{subsection:contour_detection}
         \par{
-            The first step towards segmentation is .... ****
+            The first step towards segmentation consist of the detection of edges inside the image, performed by the Kovesi algorithm and a hysteretic edge detector.
         }
         \par{
-            ** Explain kovesi ecc.. **
+            The Kovesi algorithm \cite{mit:kovesiphase, googlescholar:kovesiphase} is a  \emph{phase congruency}-based edge detector. The main idea behind these types of detectors is that a edge appears where the local frequency components of the image are in phase (as shown in figure \ref{fig:phase-congruency}). There exist several metrics to evaluate the entity of phase congruency in a image. Some approaches are based on the Fourier analysis and a measure of local energy \cite{researchgate:phase}. Conversely, the Kovesi algorithm proposes an alternative method based on wavelets, which has the advantage of being dimensionless.
+        }
+    	\par{
+    		The wavelets employed are the log-Gabor ones (see figure \ref{fig:gabor}), which at the $n=0$ scale have general expression:
+    		\begin{equation*}
+	    		G_0(\lambda, u; \rho, \theta) = e^{-\frac{(\log\rho/\rho_0)^2}{2(\log\kappa/\rho_0)^2}} e^{-\frac{(\theta-\theta_0)^2}{2\sigma^2}} e^{i\frac{2\pi}{\lambda} (u_x x + u_y y)}
+    		\end{equation*}
+    		where $(\rho,\lambda)$ and $(x,y)$ are respectively the spherical and cartesian coordinates of the points in the domain, $\lambda$ the wavelength and $u$ the direction of the envelope. The other parameters $(\rho_0, \theta_0)$ control the position of the centre of the envelope, whereas $\kappa, \sigma$ its shape.
+	    }
+		\par{
+			Let consider first the setting with a single direction $u$. Given a image, for each pixel $q$ a square local window $W(q)$ of the image centered on $q$ is considered. Then, $W(q)$ is convolved with each one of the log-Gabor wavelets at the different scales $n = 0 \dots N-1$ obtaining a complex number
+	    	\begin{equation*}
+	    		z_{n} (q) = G_{n} * W(q)
+	    	\end{equation*}
+	    	then, by writing $z_{n} (q) = r_{n} (q) e^{i \alpha_{n} (q)}$ we can measure the phase congruency in correspondence of $q$ with:
+            \begin{equation*}
+	            \mathcal{P} (q) = \frac{\max(0,\lvert \sum_{n} z_{n} (q) \rvert - T)}{\sum_{n} r_{n} (q) + \varepsilon}
+            \end{equation*}
+            where $T$ is a constant which takes into account the effect of noise and $\varepsilon$ is a small value to address numerical problems that arise when the $r_n$ values are very small. A visualization of this metric can be found in figure \ref{fig:phase-congruency-metric}.
+        }
+	    \par{
+	    	The size $(2k+1)\times(2k+1)$ of the local window $I(q)$ is taken such that $2k+1$ is at least $3$ times the wavelength $\lambda$.
+		}
+        \par{
+        	In the general case the algorithm uses different orientations, identified by the solutions of $\sqrt[U]{i}$. The overall phase congruency metrics is then obtained by considering all the $r_{n,u}(q)$ and $\alpha_{n,u}(q)$. Moreover, considerations concerning frequency and phase spread allow to obtain a slightly different but more effective metrics for phase congruency. A discussion of these details can be found in \cite{mit:kovesiphase}.
         }
         \par{
-            ** Hysteretic thresholding **
+        	The given $\mathcal{P}$ lies in the $[0,1]$ interval. In our study we have observed that performing a \emph{min-max normalization} of each single image
+        	PARAGRAFETTO DA COMMENTARE DOPO AVER VISTO I RISULTATI
+        	\begin{equation*}
+        	\hat{\mathcal{P}}(q) = 255 \cdot \frac{\mathcal{P}(q)-\min_q\mathcal{P}(q)}{\max_q\mathcal{P}(q)-\min_q\mathcal{P}(q)}
+        	\end{equation*}
         }
         \par{
-            The parameters *** inserire parametri e loro dominio *** are tuned through Bayesian optimization  \cite{arXiv:2012arXiv1206.2944S,arXiv:2018arXiv180702811F, matlab:bayesian-opt}, together with the parameteres in \ref{subsection:segmentation}.
+        	The Kovesi algorithm is based on several parameters that need to be tuned to obtain an efficient edge detector. In our study we have take into account only the \emph{number of scales} $N$, the \emph{number of orientations} $U$, the wavelength $\lambda$ and the \emph{scaling factor} $s$ of wavelets. Their tuning has been performed using Bayesian optimization, as described in section \ref{subsection:bounding_box}.
         }
+	    \begin{figure}
+		    \centering
+		    \includegraphics[width=\linewidth]{graphics/architecture/phasecong}
+		    \caption{Visualization of the phase congruency concept for a 1D signal. The sum (blue line) of the frequency components (red and orange lines) gradually approaches a discontinuity where the components are in phase.}
+		    \label{fig:phase-congruency}
+		\end{figure}
+		\begin{figure}
+			\centering
+			\includegraphics[width=\linewidth]{graphics/architecture/gabor}
+			\caption{Examples of Gabor wavelets with different directions and scales.}
+			\label{fig:gabor}
+		\end{figure}
+	    \begin{figure}
+	    	\centering
+	    	\includegraphics[width=\linewidth]{graphics/architecture/phasecong_metric}
+	    	\caption{Phase congruency metric.}
+	    	\label{fig:phase-congruency-metric}
+	    \end{figure}
+        \par{
+            The output of the Kovesi algorithm cannot be used directly for segmentation because is tipically susceptible to isolated edge-like patterns that arise COMPLETARE. Hence, a hysteretic edge follower has been used to remove such patterns.
+        }
+        \par{
+        	In this step, the pixels with $\mathcal{P}(p) > T_{low}$
+        	are trace and marked as being edge pixels. Such traces are initialized by locations $q$ with $\mathcal{P}(p) > T_{high}$.
+        }
+    	\par{
+            In details, the algorithm in the following:
+        }
+		\begin{enumerate}
+			\item Scan the image and find a not yet marked pixel $q$ with $\hat{\mathcal{P}}(q) \ge T_{high}$ and mark it as edge.
+			\item Scan the $8$-neighbourhood $\Omega(q)$ of $q$, for each not-yet marked $p \in \Omega(q)$, mark it as edge if $\hat{\mathcal{P}}(p) \ge T_{low}$.
+			\item Repeat from step 1) until there are still not marked pixels.
+		\end{enumerate}
+		\par{
+			The output is a binary matrix with marked positions of edge pixels, ready for the segmentation procedure.
+		}
+        \par{
+            The hysteretic parameters \emph{low-threshold} $T_{low}$ and \emph{high-threshold} $T_{high}$ have been tuned through Bayesian optimization \cite{arXiv:2012arXiv1206.2944S,arXiv:2018arXiv180702811F, matlab:bayesian-opt}, together with the parameteres in \ref{subsection:segmentation} and with the parameters of the Kovesi algorithm.
+        }
+    	\par{
+    		The latter techniques has been implemented with the P. Kovesi \texttt{MATLAB} library, available at \cite{kovesilibrary}.
+    	}
+    	\begin{figure}
+    		% \includegraphics[width=\linewidth]{graphics/architecture/detector_ex_original}
+    		\vskip .05cm
+    		% \includegraphics[width=\linewidth]{graphics/architecture/detector_ex_kovesi}
+    		\vskip .05cm
+    		% \includegraphics[width=\linewidth]{graphics/architecture/detector_ex_hysteresis}
+    		\vskip .05cm
+    		\caption{Edge-detector results on a sample image. DA FARE FACENDO NOTARE I PUNTI SPARSI TROVATI CHE VENGONO RIPULITI DALL'ISTERESI}
+    		\label{fig:edge-detector-example}
+    	\end{figure}
     \subsection{Image Segmentation}\label{subsection:segmentation}
         \par{
             Given the plausible edges found by the previous step, the image segmentation is done banking on alpha shapes \cite{springer:10.1007/11907350_46}.
@@ -121,25 +201,3 @@ bounding_box =  | maxX maxY |
    
             \end{BVerbatim}
         }
-
-
-
-% \subsection{Edge detection filter}
-%         Cite main edge detection filters, explain approach (phase congruency) and previous use of wavelet in this field.. our approach and our evaluation of different wavelet families.
-%         \subsubsection{Phase congruency edge detection}
-%             Phase congruency.....  through wavelet .....
-%         \subsubsection{...}
-%             ..... Other steps .....
-%         \subsubsection{Maxima suppression}
-%             Describe maxima suppression....
-%         \subsubsection{Thresholding}
-%             Describe hysteresys thresholding....
-%             Table comparing different thresholding values....
-%         \subsubsection{Wavelet family}
-%             Present different wavelet families, euristic considerations, ....
-%             Table comparing different wavelet families....
-%         \subsubsection{Evaluation schema}
-%             Describe how we evaluated any choice.. optimization for example on confronting how much the defects area are highlighted.
-%             An effective approach to this black-box derivative-free global-optimization method is Bayesian Optimization \cite{rasmussen:williams:2006, arXiv:2018arXiv180702811F, arXiv:2012arXiv1206.2944S}
-%             Loss when we loose defects...
-%             Loss when we keep too much non defects area...
