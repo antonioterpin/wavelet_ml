@@ -1,13 +1,15 @@
 function [results] = distribution_hypoteses_test(x, h_th)
-%DISTRIBUTION_HYPOTESES_TEST Perform some hypoteses tests on x and return
-%results
+%DISTRIBUTION_HYPOTESES_TEST Perform some distribution hypothesis tests
+%
 %   results = DISTRIBUTION_HYPOTESES_TEST(x)
+%   The p value threshold is by default 0.001
 %   results = [ 
-%       normal_mu   normal_sigma    p_value     h;
-%       logn_mu     logn_sigma      p_vale      h;
-%       weibull_a   weibull_b       p_vale      h;
-%       gamma_a     gamma_b         p_vale      h;
+%       distribution name      p value      h0 rejected
 %   ];    
+%
+%   results = DISTRIBUTION_HYPOTESES_TEST(x, h_th)
+%   Perform hypothesis tests with threshold h_th
+%
 
     if nargin < 2
         h_th = 0.001;
@@ -45,7 +47,7 @@ function [results] = distribution_hypoteses_test(x, h_th)
     for i = 1:size(distributions)
         pd = fitdist(x, distributions(i));
         [h, p] = chi2gof(x, "cdf", pd);
-        ph_results(i,:) = [sprintf('%0.5e',p) bool_str(1 + (p > h_th))];
+        ph_results(i,:) = [sprintf('%0.5e',p) bool_str(1 + (p < h_th))];
     end
     
     results = table(distributions, ph_results(:,1), ph_results(:,2), 'VariableNames', {'Distribution', 'pValue', 'h'});
