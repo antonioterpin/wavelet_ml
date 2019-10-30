@@ -55,7 +55,7 @@ function ds2segmented_class_folders(dataset)
     
 end
 
-%%% 
+%%
 
 function extract_local_shape_features(number_defect_classes, image_row, column_encoded_pixels, column_image_id, ...
         image, type, shape_feature_images_path, local_feature_images_path)
@@ -63,8 +63,6 @@ function extract_local_shape_features(number_defect_classes, image_row, column_e
     for class_id = 1 : number_defect_classes
         encoded_pixels = image_row{1,sprintf("%s%d",column_encoded_pixels,class_id)}{1};
         [~,map] = rle_decoding(encoded_pixels,size(image));
-        % TODO REMARK NO NEGATIVE EXAMPLES!!!!!!!!!
-        % TODO subfolder 0
         if find(map ~= 0)
             [number_of_regions,encoded_shape_features,bounding_boxes] = segmentate_image(map);
             % Iterate over regions
@@ -75,6 +73,7 @@ function extract_local_shape_features(number_defect_classes, image_row, column_e
                 % save shape_feature & local_feature
                 new_image_id = insertBefore(image_id, sprintf("%s%s", ".", type), sprintf("%03d",region_id));
                 imwrite(shape_feature,sprintf("%s%d/%s",shape_feature_images_path,class_id,new_image_id));
+                % TODO save also filled shape
                 imwrite(uint8(local_feature),sprintf("%s%d/%s",local_feature_images_path,class_id,new_image_id));
             end
         end
