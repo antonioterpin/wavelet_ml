@@ -1,34 +1,11 @@
 \section{Results}\label{section:results}
-    Review the article, make some considerations on results
-    Observe that this architecture is dealing with different sixze image, interesting.....!!!
-
     \subsection{Detector}
-        \par{
-		    ***DESCRIVERE ACCURATEZZA***
-		    \begin{equation*}
-		    \mathcal{A}\left(X, Y\right) = \frac{\lvert X \cap Y \rvert}{\lvert Y \rvert}
-		    \end{equation*}
-		}
-        \begin{figure}
-    	\centering
-    	\includegraphics[width=\linewidth]{graphics/results/segmentation_opt_class1}
-    	\caption{Bayesian optimization of class 1 detector}\label{fig:bayesopt-class1}
-    \end{figure}
-    \begin{figure}
-    	\centering
-    	\includegraphics[width=\linewidth]{graphics/results/segmentation_opt_class1}
-    	\caption{Bayesian optimization of class 2 detector}\label{fig:bayesopt-class2}
-    \end{figure}
-    \begin{figure}
-    	\centering
-    	\includegraphics[width=\linewidth]{graphics/results/segmentation_opt_class3}
-    	\caption{Bayesian optimization of class 3 detector}\label{fig:bayesopt-class3}
-    \end{figure}
-    \begin{figure}
-    	\centering
-    	\includegraphics[width=\linewidth]{graphics/results/segmentation_opt_class4}
-    	\caption{Bayesian optimization of class 4 detector}\label{fig:bayesopt-class4}
-    \end{figure}
+    \par{
+    	The Bayesian optimization was performed using batches of $128$ images and $50$ iterations. During each iteration, the average loss function was computed over the batch and used to predict the next point in the hyperparameters domain.
+    }	
+   	\par{
+    	Losses of $0.78$, $0.92$, $0.68$ and $0.59$ were obtained for detectors of classes $1$, $2$, $3$ and $4$ respectively.
+    }
     \begin{table}
 		\centering
 		\begin{tabular}{|c|c|c|c|c|}
@@ -45,100 +22,143 @@
 			$T_{region}$ & 510 & 942 & 727 & 1134 \\ \hline
 		\end{tabular}
 		\vspace{0.25cm}
-		\caption{Optimal parameters obtained for each class detector with Bayesian optimization.}\label{table:bayesopt-params}
+		\caption{Optimal parameters obtained for each class detector with Bayesian optimization.}
+		\label{table:params-bayesopt}
 	\end{table}
-	\begin{figure}
-		\centering
-		\includegraphics[width=\linewidth]{graphics/results/acc-segmentation-class1}
-		\vskip .05cm
-		\includegraphics[width=\linewidth]{graphics/results/acc-segmentation-class2}
-		\vskip .05cm
-		\includegraphics[width=\linewidth]{graphics/results/acc-segmentation-class3}
-		\vskip .05cm
-		\includegraphics[width=\linewidth]{graphics/results/acc-segmentation-class4}
-		\vskip .05cm
-		\caption{INSERIRE}\label{fig:segmentation-test}
-	\end{figure}
-	\begin{table}
-		\centering
-		\begin{tabular}{|c|c|c|c|c|c|}
-			\hline
-			\textbf{Detector} & \textbf{Eq.} & \textbf{MinMax} & \textbf{Batch size} & \textbf{Loss} & \textbf{Accuracy}\\ \hline
-			1 & yes & no & 5 & 4 & 4 \\ \hline
-			2 & no & yes & 5 & 15 & 4\\ \hline
-			3 & yes & yes & 4.9810 & 3.5076 & 4\\ \hline
-		\end{tabular}
-		\vspace{0.25cm}
-		\caption{Optimal parameters obtained for each class detector with Bayesian optimization.}\label{table:bayesopt-params}
-	\end{table}
-	\begin{figure}
-		\centering
-		\includegraphics[width=\linewidth]{graphics/results/detector-result-class1}
-		\vskip .05cm
-		\includegraphics[width=\linewidth]{graphics/results/detector-result-class1-edges}
-		\vskip .05cm
-		\includegraphics[width=\linewidth]{graphics/results/detector-result-class1-segmentation}
-		\vskip .05cm
-		\includegraphics[width=\linewidth]{graphics/results/detector-result-class1-bounding-box}
-		\vskip .05cm
-		\caption{INSERIRE}\label{fig:detector-results-1}
-	\end{figure}
-	\begin{figure}
-		\centering
-		\includegraphics[width=\linewidth]{graphics/results/detector-result-class2}
-		\vskip .05cm
-		\includegraphics[width=\linewidth]{graphics/results/detector-result-class2-edges}
-		\vskip .05cm
-		\includegraphics[width=\linewidth]{graphics/results/detector-result-class2-segmentation}
-		\vskip .05cm
-		\includegraphics[width=\linewidth]{graphics/results/detector-result-class2-bounding-box}
-		\vskip .05cm
-		\caption{INSERIRE}\label{fig:detector-results-2}
-	\end{figure}
-	\begin{figure}
-		\centering
-		\includegraphics[width=\linewidth]{graphics/results/detector-result-class3}
-		\vskip .05cm
-		\includegraphics[width=\linewidth]{graphics/results/detector-result-class3-edges}
-		\vskip .05cm
-		\includegraphics[width=\linewidth]{graphics/results/detector-result-class3-segmentation}
-		\vskip .05cm
-		\includegraphics[width=\linewidth]{graphics/results/detector-result-class3-bounding-box}
-		\vskip .05cm
-		\caption{INSERIRE}\label{fig:detector-results-3}
-	\end{figure}
-	\begin{figure}
-		\centering
-		\includegraphics[width=\linewidth]{graphics/results/detector-result-class4}
-		\vskip .05cm
-		\includegraphics[width=\linewidth]{graphics/results/detector-result-class4-edges}
-		\vskip .05cm
-		\includegraphics[width=\linewidth]{graphics/results/detector-result-class4-segmentation}
-		\vskip .05cm
-		\includegraphics[width=\linewidth]{graphics/results/detector-result-class4-bounding-box}
-		\vskip .05cm
-		\caption{INSERIRE}\label{fig:detector-results-4}
-	\end{figure}
+	\par{
+		In \emph{Table \ref{table:params-bayesopt}} the optimal parameters values are reported. It is visible that tuned parameters reflect the shape of defects studied in \emph{Section \ref{subsection:defects}}.
+	}	
+%	\begin{figure}
+%		\centering
+%		\includegraphics[width=\linewidth]{graphics/results/segmentation_opt_class1}
+%		\caption{Bayesian optimization of class 1 detector}\label{fig:bayesopt-class1}
+%	\end{figure}
+%	\begin{figure}
+%		\centering
+%		\includegraphics[width=\linewidth]{graphics/results/segmentation_opt_class1}
+%		\caption{Bayesian optimization of class 2 detector}\label{fig:bayesopt-class2}
+%	\end{figure}
+%	\begin{figure}
+%		\centering
+%		\includegraphics[width=\linewidth]{graphics/results/segmentation_opt_class3}
+%		\caption{Bayesian optimization of class 3 detector}\label{fig:bayesopt-class3}
+%	\end{figure}
+%	\begin{figure}
+%		\centering
+%		\includegraphics[width=\linewidth]{graphics/results/segmentation_opt_class4}
+%		\caption{Bayesian optimization of class 4 detector}\label{fig:bayesopt-class4}
+%	\end{figure}
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{graphics/results/acc-segmentation-class1}
+    \vskip .05cm
+    \includegraphics[width=\linewidth]{graphics/results/acc-segmentation-class2}
+    \vskip .05cm
+    \includegraphics[width=\linewidth]{graphics/results/acc-segmentation-class3}
+    \vskip .05cm
+    \includegraphics[width=\linewidth]{graphics/results/acc-segmentation-class4}
+    \vskip .05cm
+    \caption{Accuracies distributions of the trained detectors, computed on their test sets.}\label{fig:segmentation-test}
+\end{figure}
+\begin{table}
+    \centering
+    \begin{tabular}{|c|c|c|c|c|c|}
+        \hline
+        \textbf{Class (No.)} & \textbf{MinMax} & \textbf{Eq.} & \textbf{Batch size} & \textbf{Loss} & \textbf{Accuracy}\\ \hline
+        \multirow{3}{*}{1} & no & no & 1024 & & \\
+        & yes & no & 1024 & & \\
+        & yes & yes & 1024 & 0.7977 & 0.4925 \\ \hline
+        \multirow{3}{*}{2} & no & no & 760 & & \\
+        & yes & no & 760 & & \\
+        & yes & yes & 760 & 0.9172 & 0.3333 \\ \hline
+        \multirow{3}{*}{3} & no & no & 1024 & & \\
+        & yes & no & 1024 & & \\
+        & yes & yes & 1024 & 0.6995 & 0.4600 \\ \hline
+        \multirow{3}{*}{4} & no & no & 1024 & & \\
+        & yes & no & 1024 & & \\
+        & yes & yes & 1024 & 0.6050 & 0.5550 \\ \hline
+    \end{tabular}
+    \vspace{0.25cm}
+    \caption{Comparison between performances obtained by different class detectors, using or not both the MinMax normalization and the equalization.}\label{table:bayesopt-params}
+\end{table}
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{graphics/results/detector-result-class1}
+    \vskip .05cm
+    \includegraphics[width=\linewidth]{graphics/results/detector-result-class1-edges}
+    \vskip .05cm
+    \includegraphics[width=\linewidth]{graphics/results/detector-result-class1-segmentation}
+    \vskip .05cm
+    \includegraphics[width=\linewidth]{graphics/results/detector-result-class1-bounding-box}
+    \vskip .05cm
+    \caption{An example of the region proposal procedure performed on an image with a defect of class No.1.}\label{fig:detector-results-1}
+\end{figure}
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{graphics/results/detector-result-class2}
+    \vskip .05cm
+    \includegraphics[width=\linewidth]{graphics/results/detector-result-class2-edges}
+    \vskip .05cm
+    \includegraphics[width=\linewidth]{graphics/results/detector-result-class2-segmentation}
+    \vskip .05cm
+    \includegraphics[width=\linewidth]{graphics/results/detector-result-class2-bounding-box}
+    \vskip .05cm
+    \caption{An example of the region proposal procedure performed on an image with a defect of class No.2.}\label{fig:detector-results-2}
+\end{figure}
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{graphics/results/detector-result-class3}
+    \vskip .05cm
+    \includegraphics[width=\linewidth]{graphics/results/detector-result-class3-edges}
+    \vskip .05cm
+    \includegraphics[width=\linewidth]{graphics/results/detector-result-class3-segmentation}
+    \vskip .05cm
+    \includegraphics[width=\linewidth]{graphics/results/detector-result-class3-bounding-box}
+    \vskip .05cm
+    \caption{An example of the region proposal procedure performed on an image with a defect of class No.3.}\label{fig:detector-results-3}
+\end{figure}
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{graphics/results/detector-result-class4}
+    \vskip .05cm
+    \includegraphics[width=\linewidth]{graphics/results/detector-result-class4-edges}
+    \vskip .05cm
+    \includegraphics[width=\linewidth]{graphics/results/detector-result-class4-segmentation}
+    \vskip .05cm
+    \includegraphics[width=\linewidth]{graphics/results/detector-result-class4-bounding-box}
+    \vskip .05cm
+    \caption{An example of the region proposal procedure performed on an image with a defect of class No.4.}\label{fig:detector-results-4}
+\end{figure}
+	\par{
+		The trained detectors were tested using the accuracy measure:
+		\begin{equation*}
+		\mathcal{A} = \frac{\lvert X \cap Y \rvert}{\lvert Y \rvert}.
+		\end{equation*}
+		The average accuracies are reported in \emph{Table \ref{fig:segmentation-test}}. In \emph{Figure \ref{fig:segmentation-test}} accuracies distribution for each detector class are reported. 
+	}
 
     \subsection{Classificator}
+    \begin{figure}
+        \centering
+        \includegraphics[width=.8\linewidth]{graphics/results/spreader-net-confusion}
+        \caption{Local column confusion matrix on ideal input (with spreader layer).}\label{fig:local-confusion-spreader}
+    \end{figure}
     \par{
-
+        The confusion matrix of the proposed architecture for the local column on a test set of $1000\times 4$ defects is reported in \emph{Figure \ref{fig:local-confusion-spreader}}. It is visible that the defect class No. 3 is the most misclassified. This situation is probably due to the aggregation of multiple defects into the same defective region. Hence, the variability of the local features hamper the network learning.
     }
     \begin{figure}
         \centering
-        % \includegraphics[width=.8\linewidth]{graphics/results/mc-cnn-local-confusion}
-        \caption{Local column confusion matrix on ideal input.}\label{fig:local-confusion}
+        \includegraphics[width=.8\linewidth]{graphics/results/crop-net-confusion}
+        \caption{Local column confusion matrix on ideal input (with crop).}\label{fig:local-confusion-crop}
     \end{figure}
-    \begin{table}
-        \centering
-        \normalsize
-        \caption{Local column comparisons}\label{table:results:local-comparisons}
-    \end{table}
     \par{
-        ** COMPARISONS with / without equalization local column **
+        To evaluate the effectivenes of the spreader layer, a CNN with the same layers but without the novel layer was trained and tested with the same constraints. In \emph{Figure \ref{fig:local-confusion-crop}} its confusion matrix is illustrated.
     }
     \par{
-        ** COMPARISONS crop / spreader local column **
+        It is interesting to notice that the network with the spreading layer achieves higher accuracy then the one which uses cropping instead. Moreover, the former overcome the latter in classifying defects of class No. 3 and No. 4. Indeed, these are the wider defects in the dataset. Hence, one can infer that the spreader layer deals better then cropping with larger images.
+    }
+    \par{
+        However, neither one of the two CNNs overfits, and both can be trained longer. Moreover, deeper architectures can be used along with either image cropping or the spreading layer. With more powerful hardware, these could easily reach higher accuracies. 
     }
     \subsection{Architecture implementation}
     \par{

@@ -61,7 +61,7 @@
         	 on KA output improves the performance of the detector stage.
         }
         \par{
-        	KA is based on several parameters that need to be tuned to obtain an effective edge detector. In this paper, the \emph{number of scales} $N$, the \emph{number of orientations} $U$, the \emph{minimum wavelength} $\lambda$ and the \emph{scaling factor} $s$ of the wavelets are considered. Their tuning was performed through Bayesian optimization \cite{arXiv:2012arXiv1206.2944S,arXiv:2018arXiv180702811F, matlab:bayesian-opt}, as described in section \ref{subsection:bounding_box}.
+        	KA is based on several parameters that need to be tuned to obtain an effective edge detector. In this paper, the \emph{number of scales} $N$, the \emph{number of orientations} $U$, the \emph{minimum wavelength} $\lambda$ and the \emph{scaling factor} $s$ of the wavelets are considered. Their tuning was performed through Bayesian optimization \cite{arXiv:2012arXiv1206.2944S,arXiv:2018arXiv180702811F, matlab:bayesian-opt}, as described in section \ref{subsection:segmentation}.
         }
         \par{
             It is not recommend to use directly the output of KA for image segmentation, since it is tipically susceptible to isolated edge-like patterns that arise in sparse locations within the image. Hence, a hysteretic edge follower was used to discard such patterns.
@@ -186,4 +186,7 @@ bounding_box =  | maxX maxY |
         maxY = max(pixels(:,2))
    
             \end{BVerbatim}
+        }
+        \par{
+            As a first approximation, the implementation of the detector was done to output the bounding boxes instead of the alpha shape. Therefore, the $X$ set in \emph{Section \ref{subsection:segmentation}} is characterized by all the pixels inside the bounding box of the alpha shape regions.
         }
