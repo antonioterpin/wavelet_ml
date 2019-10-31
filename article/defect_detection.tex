@@ -15,6 +15,9 @@
 
 \usepackage{cite}
 
+\usepackage[font={it}]{caption}
+\captionsetup[figure]{name={Figure},labelsep=period}
+\captionsetup[table]{name={Table},labelsep=period}
 \usepackage{subcaption}
 
 \usepackage{amsmath}
@@ -55,6 +58,8 @@
     }
 
     \maketitle
+    \thispagestyle{plain}
+    \pagestyle{plain}
 
     \input{sections/abstract&keywords.tex}
     % Introduction
