@@ -1,13 +1,17 @@
 \section{Results}\label{section:results}
-    \subsection{Detector}
     \par{
-    	The Bayesian optimization was performed using batches of $128$ images and $50$ iterations. During each iteration, the average loss function was computed over the batch and used to predict the next point in the hyperparameters domain.
-    }	
-   	\par{
-    	Losses of $0.78$, $0.92$, $0.68$ and $0.59$ were obtained for detectors of classes $1$, $2$, $3$ and $4$ respectively.
+        Although the proposed architecture was not fully implemented, both the \emph{detector} and the \emph{classificator} were proven effective. Indeed, the concept proof of the described defect detection system on steel surfaces was proven by the results reported in \emph{Section \ref{section:results:detector}} and \emph{Section \ref{section:results:classificator}}.
     }
+    \par{
+        From results in \emph{Section \ref{section:results:classificator}} one can infer that the proposed novel usage of the dilatation factor in the first convolutional layer may represents an effective alternative to cropping when dealing with images of different sizes.
+    }
+    \subsection{Detector}\label{section:results:detector}
+    \par{
+    	The Bayesian optimization was performed using batches of $128$ images and $50$ iterations. During each iteration, the average loss function was computed over the batch and used to predict the next point in the hyperparameters domain. Losses of $0.78$, $0.92$, $0.68$ and $0.59$ were obtained with detectors of classes $1$, $2$, $3$ and $4$ respectively.
+    }	
     \begin{table}
-		\centering
+        \centering
+        \normalsize
 		\begin{tabular}{|c|c|c|c|c|}
 			\hline
 			\textbf{Parameters} & \textbf{Class 1} & \textbf{Class 2} & \textbf{Class 3} & \textbf{Class 4}\\ \hline
@@ -22,7 +26,7 @@
 			$T_{region}$ & 510 & 942 & 727 & 1134 \\ \hline
 		\end{tabular}
 		\vspace{0.25cm}
-		\caption{Optimal parameters obtained for each class detector with Bayesian optimization.}
+		\caption{Optimal parameters obtained for each class with Bayesian optimization.}
 		\label{table:params-bayesopt}
 	\end{table}
 	\par{
@@ -62,9 +66,10 @@
 \end{figure}
 \begin{table}
     \centering
+    \normalsize
     \begin{tabular}{|c|c|c|c|c|c|}
         \hline
-        \textbf{Class (No.)} & \textbf{MinMax} & \textbf{Eq.} & \textbf{Batch size} & \textbf{Loss} & \textbf{Accuracy}\\ \hline
+        \textbf{No.} & \textbf{MinMax} & \textbf{Eq.} & \textbf{Batch size} & \textbf{Loss} & \textbf{Accuracy}\\ \hline
         \multirow{3}{*}{1} & no & no & 1024 & & \\
         & yes & no & 1024 & & \\
         & yes & yes & 1024 & 0.7977 & 0.4925 \\ \hline
@@ -79,7 +84,7 @@
         & yes & yes & 1024 & 0.6050 & 0.5550 \\ \hline
     \end{tabular}
     \vspace{0.25cm}
-    \caption{Comparison between performances obtained by different class detectors, using or not both the MinMax normalization and the equalization.}\label{table:bayesopt-params}
+    \caption{Comparison between performances obtained by different class (No.) detectors, either using or not the MinMax normalization and the equalization.}\label{table:bayesopt-params}
 \end{table}
 \begin{figure}
     \centering
@@ -134,15 +139,18 @@
 		\begin{equation*}
 		\mathcal{A} = \frac{\lvert X \cap Y \rvert}{\lvert Y \rvert}.
 		\end{equation*}
-		The average accuracies are reported in \emph{Table \ref{fig:segmentation-test}}. In \emph{Figure \ref{fig:segmentation-test}} accuracies distribution for each detector class are reported. 
+		The average accuracies are reported in \emph{Table \ref{fig:segmentation-test}}. In \emph{Figure \ref{fig:segmentation-test}} the accuracies distribution for each detector class are reported. 
 	}
 
-    \subsection{Classificator}
+    \subsection{Classificator}\label{section:results:classificator}
     \begin{figure}
         \centering
         \includegraphics[width=.8\linewidth]{graphics/results/spreader-net-confusion}
         \caption{Local column confusion matrix on ideal input (with spreader layer).}\label{fig:local-confusion-spreader}
     \end{figure}
+    \par{
+        The local column was trained with a batch of $1024$ images, and mini-batch size of $256$.
+    }
     \par{
         The confusion matrix of the proposed architecture for the local column on a test set of $1000\times 4$ defects is reported in \emph{Figure \ref{fig:local-confusion-spreader}}. It is visible that the defect class No. 3 is the most misclassified. This situation is probably due to the aggregation of multiple defects into the same defective region. Hence, the variability of the local features hamper the network learning.
     }
@@ -152,13 +160,32 @@
         \caption{Local column confusion matrix on ideal input (with crop).}\label{fig:local-confusion-crop}
     \end{figure}
     \par{
-        To evaluate the effectivenes of the spreader layer, a CNN with the same layers but without the novel layer was trained and tested with the same constraints. In \emph{Figure \ref{fig:local-confusion-crop}} its confusion matrix is illustrated.
+        To evaluate the effectivenes of the spreader layer, a CNN with the same layers but without the novel layer was trained and tested with the same training options, i.e. batch size of $1024$, mini-batch size of $256$ and $30$ epochs. An optimal learning rate was used for both. In \emph{Figure \ref{fig:local-confusion-crop}} its confusion matrix is illustrated.
     }
     \par{
-        It is interesting to notice that the network with the spreading layer achieves higher accuracy then the one which uses cropping instead. Moreover, the former overcome the latter in classifying defects of class No. 3 and No. 4. Indeed, these are the wider defects in the dataset. Hence, one can infer that the spreader layer deals better then cropping with larger images.
+        It is interesting to notice that the network with the spreading layer achieves higher accuracy ($+0.7\%$) then the one which uses cropping instead. Moreover, the former overcome the latter in classifying defects of class No. 3 and No. 4. Indeed, these are the wider defects in the dataset. Hence, one can infer that the spreader layer deals better then cropping with larger images. This is visible also comparing the gained percentage with the outliers percentage, reported in the first row of \emph{Table \ref{table:cropping}}.
     }
     \par{
         However, neither one of the two CNNs overfits, and both can be trained longer. Moreover, deeper architectures can be used along with either image cropping or the spreading layer. With more powerful hardware, these could easily reach higher accuracies. 
+    }
+    \begin{figure}
+        \centering
+        \includegraphics[width=\linewidth]{graphics/results/spreader-net-confusion-noneq}
+        \caption{Local column confusion matrix on ideal input (images non-equalized).}\label{fig:local-confusion-noneq}
+    \end{figure}
+    \par{
+        Then, the proposed local column structure was trained also with non-equalized images, but with the same training options. The resulting confusion matrix is reported in \emph{Figure \ref{fig:local-confusion-noneq}}.
+    }
+    \par{
+        It is visible that there is an actual improvement of $2.2\%$ in the average accuracy when using equalized images.
+    }
+    \begin{figure}
+        \centering
+        \includegraphics[width=\linewidth]{graphics/results/spreader-net-confusion-update}
+        \caption{Local column confusion matrix on ideal input (with spreader, more epochs).}\label{fig:local-confusion-spreader-update}
+    \end{figure}
+    \par{
+        Hence, the architectural choice is clear. The local column proposed was further trained, for other $40$ epochs, and reached ans accuracy of $75\%$. However, it kept the same structure, and thus the same number of parameters. It is predictable that a deeper model with a larger training set will achieve state-of-the-art results. The updated confusion matrix is illustrated in \emph{Figure \ref{fig:local-confusion-spreader-update}}.
     }
     \subsection{Architecture implementation}
     \par{
@@ -171,7 +198,7 @@
     }
     \subsection{Proposed architecture improvement}
     \par{
-        Firstly, it would be interest to implement and train the shape column, preeptively discarding misleading data, and the global column and measure their contribution. The structure of the shape column may be identical to the local column, described in \emph{Section \ref{section:local-column}}.
+        Firstly, it would be interesting to implement and train the shape column, preeptively discarding misleading data, and the global column and measure their contribution. The structure of the shape column may be identical to the local column, described in \emph{Section \ref{section:local-column}}.
     }
     \par{
         Regarding the local column, some padding could be considered around defective regions, to fed the CNN also with some more pixels outside the border.
