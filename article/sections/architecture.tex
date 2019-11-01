@@ -63,30 +63,30 @@
     \end{figure}
 
     \par{
-        The defect detection system architecture proposed in this paper is shown in figure \ref{fig:architecture}.
+        The defect detection system architecture proposed in this paper is described in \emph{Figure \ref{fig:architecture}}.
     }
 
     \par{
-        Steel surfaces pictures of $1600\times 256$ pixels are taken at the input of the process. Since they may be taken under different light exposure conditions, some preprocessing is made to enhance the quality of the image, e.g. histogram equalization or linear scaling. Moreover, the images considered have three equal colours levels, therefore they are converted into gray levels, to save space. This first step is further described in \ref{section:image_preprocessing}.
+        Steel surfaces pictures of $1600\times 256$ pixels are taken at the input of the process. Since they may be taken under different light exposure conditions, some preprocessing is made to enhance the quality of the image, e.g. histogram equalization or linear scaling. Moreover, the images considered have three equal colours levels, therefore they are converted into gray levels, to save space. This first step is further described in \emph{Section \ref{section:image_preprocessing}}.
     }
     \par{
-        The aim of the architecture proposed in this paper is both to detect pixels representing steel imperfections and to classify those regions. Therefore, image segmentation is either obtained as an output of the system or it is needed in some step during the process. The latter situation can be achieved through a brute-force multi-scale sliding window, but to improve performances without reducing accuracy a particular implementation of a Region based CNN (R-CNN) \cite{ieee:7410526,ieee:7532516} is proposed in \ref{section:mc-cnn}. This R-CNN uses a MC-CNN to combine and to consider separately interesting regions, which are called proposals and which are described in \ref{section:region_proposals}.
+        The aim of the architecture proposed in this paper is both to detect pixels representing steel imperfections and to classify those regions. Therefore, image segmentation is either obtained as an output of the system or it is needed in some step during the process. The latter situation can be achieved through a brute-force multi-scale sliding window, but to improve performances without reducing accuracy a particular implementation of a Region based CNN (R-CNN) \cite{ieee:7410526,ieee:7532516} is proposed in \emph{Section \ref{section:mc-cnn}}. This R-CNN uses a MC-CNN to combine and to consider separately interesting regions, which are called proposals and which are described in \emph{Section \ref{section:region_proposals}}.
     }
     \par{
         This reduces the computational cost of the system, compared with a naive sliding window.
     }
     \par{
-        Moreover, both local and global information are combined to improve classification accuracy. This approach avoids the complexity of combining different scale information and handling windows with different classes of defects. A further description of this approach is provided in \ref{section:mc-cnn}, whereas in \ref{section:further-work} a challenger architecture is described, to compare the results of the proposed system with.
+        Moreover, both local and global information are combined to improve classification accuracy. This approach avoids the complexity of combining different scale information and handling windows with different classes of defects. A further description of this approach is provided in \emph{Section \ref{section:mc-cnn}}, whereas in \emph{Section \ref{section:further-work}} a challenger architecture is described, to compare the results of the proposed system with.
     }
     \par{
-        One column of the MC-CNN is concerned with global information, and it is fed with the full enchanced image. Conceptually, this CNN learns to evaluate the probability of presence of the different types of defects in the whole surface picture. The other two columns consider local information instead. This local information is obtained from a further processing step, described in \ref{section:region_proposals}. Firstly, a contour detection algorithm (\ref{subsection:contour_detection}) is used to spot proposals. Secondly, image segmentation (\ref{subsection:segmentation}) is done, to feed the MC-CNN only with some interesting regions. This segmentation results in a black and white (b/w) map describing the shape of the plausible defects. One column of the MC-CNN is fed with this map, therefore it learns to classify regions only observing their border. The other column is fed with the portion of original image enveloped in the bounding box (\ref{subsection:bounding_box}) of the map, hence it is trained to consider luminance levels inside, outside and on the border of the considered proposals.
+        One column of the MC-CNN is concerned with global information, and it is fed with the full enchanced image. Conceptually, this CNN learns to evaluate the probability of presence of the different types of defects in the whole surface picture. The other two columns consider local information instead. This local information is obtained from a further processing step, described in \emph{Section \ref{section:region_proposals}}. First, a contour detection algorithm (\emph{Section \ref{subsection:contour_detection}}) is used to spot proposals. Second, image segmentation (\emph{Section \ref{subsection:segmentation}}) is done, to feed the MC-CNN only with some interesting regions. This segmentation results in a black and white (b/w) map describing the shape of the plausible defects. One column of the MC-CNN is fed with this map, therefore it learns to classify regions only observing their border. The other column is fed with the portion of original image enveloped in the bounding box (\emph{Section \ref{subsection:bounding_box}}) of the map, hence, it is trained to consider luminance levels inside, outside and on the border of the considered proposals.
     }
     \par{
         Since defects may have different dimensions, the local information are centered in a $1600\times 256$ pixels black image.
     }
     \par{
-        All the MC-CNN columns end with a softmax layer. However, they have different output size, as described in \ref{section:mc-cnn}. Their results are then combined in order to properly classify the local regions.
+        All the MC-CNN columns end with a softmax layer. However, they have different output size, as described in \emph{Section \ref{section:mc-cnn}}. Their results are then combined in order to properly classify the local regions.
     }
     \par{
-        Finally, if the classification outcome labels the region as defective, segmentation coordinates are kept. When all the proposals of the considered image have been processed, defective pixels of the same class are encoded together with RLE algorithm. If the surface is flawless, all this encodings are empty.
+        Finally, if the classification outcome labels the region as defective, segmentation coordinates are kept. When all the proposals of the considered image are processed, defective pixels of the same class are encoded together with RLE algorithm. If the surface is flawless, all this encodings are empty.
     }

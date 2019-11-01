@@ -48,7 +48,7 @@
         \caption{General structure of a MC-CNN}\label{fig:mc-cnn}
     \end{figure}
     \par{
-        The \emph{classificator} is structured as a MC-CNN, which in general has the structure illustrated in figure \ref{fig:mc-cnn}. 
+        The \emph{classificator} is structured as a MC-CNN, which in general has the structure illustrated in \emph{Figure \ref{fig:mc-cnn}}. 
     }
     \par{
         Firstly, the input image I is preprocessed to extract $n$ column input P.
@@ -72,37 +72,37 @@
         This is the main point in favour of MC-CNN, since the class of a defect may be inferred using global patterns, such as the number of similar area. Imagine, for example, an error burst on the surface. Although traditional single-column CNNs may consider directly the input to the global column, this would face problems regarding the presence of multiple defects classes on the same surface. Therefore, a MC-CNN approach with some columns concerning local information and other focusing on global patterns is heuristically better.
     }
     \par{
-        In \ref{section:further-work} another approach to combine such information through a CNN is described. Although possible, is patently more convoluted then the MC-CNN approach. It would still be interesting to compare them in order to better evaluate the effectiveness of the proposed architecture. 
+        In \emph{Section \ref{section:further-work}} another approach to combine such information through a CNN is described. Although possible, is patently more convoluted then the MC-CNN approach. It would still be interesting to compare them in order to better evaluate the effectiveness of the proposed architecture. 
     }
     \par{
         Observe that the output of the global column must be calculated only once per each image, since it is constant throughtout the single surface, hence both the training and the predicting process can be lighten.
     }
     \par{
-        Finally, as an incidental outcome, it is possible to further study the amount of contribution of the different columns in accurately determining the defective class, if any, of the considered area. This considerations are reported in \ref{section:results}.
+        Finally, as an incidental outcome, it is possible to further study the amount of contribution of the different columns in accurately determining the defective class, if any, of the considered area. These considerations are reported in \emph{Section \ref{section:results}}.
     }
     \par{
         The proposed MC-CNN has three columns, namely a \emph{shape}, a \emph{local} and a \emph{global} column.
     }
     \par{
-        A final consideration about the architecture training has to be done in order to comprehend the upper bound reported in \ref{section:results}. Indeed, the \emph{classificator} has been implemented before the \emph{detector}. In fact, although the former relies on the latter for the ROIs and their relative features (described in \ref{section:shape-column}, \ref{section:local-column} and \ref{section:global-column}), it has been preempting supposed to have an ideal \emph{detector}, i.e. one which proposes the optimal ROIs.
+        A final consideration about the architecture training has to be done in order to comprehend the upper bound reported in \emph{Section \ref{section:results}}. Indeed, the \emph{classificator} was implemented before the \emph{detector}. In fact, although the former relies on the latter for the ROIs and their relative features (described in \emph{Section \ref{section:shape-column}}, \emph{\ref{section:local-column}} and \emph{\ref{section:global-column}}), it was preempting supposed to have an ideal \emph{detector}, i.e. one which proposes the optimal ROIs.
     }
     \par{
-        This effort-outcome oriented approach has been done for two main reasons.
+        This effort-outcome oriented approach was done for two main reasons.
     }
     \par{
         Firstly, it highlights the upper bound reachable with the whole architecture.
     }
     \par{
-        Secondly, dividing the \emph{detector} outcome from the \emph{classificator} input during the training allows to export the trained MC-CNN and to use it within the challenger architecture, proposed in \ref{section:further-work}.
+        Secondly, dividing the \emph{detector} outcome from the \emph{classificator} input during the training allows to export the trained MC-CNN and to use it within the challenger architecture, proposed in \emph{Section \ref{section:further-work}}.
     }
     \par{
-        All the three columns share the common ideas used in edge-cutting work \cite{stanford:cs231n} in their structure, beside some their idiosyncrasies. These are explained in \ref{section:shape-column}, \ref{section:local-column}, \ref{section:global-column}.
+        All the three columns share the common ideas used in edge-cutting work \cite{stanford:cs231n} in their structure, beside some their idiosyncrasies. These are explained in \emph{Section \ref{section:shape-column}}, \emph{\ref{section:local-column}} and \emph{\ref{section:global-column}}.
     }
     \par{
         The basic principles used in structuring the CNNs are mainly three:
         \begin{enumerate}
-            \item The input layer should be a multiple of a high power of $2$. Common dimensions are $32$ (e.g. CIFAR-10), $64$, $96$ (e.g. STL-10), or $224$ (e.g. common ImageNet ConvNets), $384$, and $512$. However, the approach described in this paper deals with input images of various size. Hence, a padding is add in order to fix the input to $1600\times 1600$.
-            \item The convolutional layers should involve small filters (e.g. $3\times 3$ or $5\times5$), using a unitary stride, should not alter the spatial dimensions of the input. Hence, proper padding (e.g. $\left[1,1,1,1\right]$ for $3\times 3$ filters) should be added.
+            \item The input layer should be a multiple of a high power of $2$. Common dimensions are $32$ (e.g. CIFAR-10), $64$, $96$ (e.g. STL-10), or $224$ (e.g. common ImageNet ConvNets), $384$, and $512$. However, the approach described in this paper deals with input images of various size.
+            \item The convolutional layers should involve small filters (e.g. $3\times 3$ or $5\times5$), using a unitary stride, should not alter the spatial dimensions of the input. Hence, proper padding (e.g., $\left[1,1,1,1\right]$ for $3\times 3$ filters) should be added.
             \item The reduction of the size of the input should be due to the pooling layers, tipically a $2\times 2$ downsampling with a $2\times 2$ stride. This is also connected with the usual constraint on input size.
         \end{enumerate}
     }
@@ -118,7 +118,7 @@
             \caption{Shape column input (top) and input filled (bottom).}\label{fig:mc-cnn:shape-input}
         \end{figure}
         \par{
-            An example of this binary images is given in figure \ref{fig:mc-cnn:shape-input} (top). The shape is centered in a $1600\times 256$ black image. Indeed, the size of the input is set to the largest area that could be found, i.e. a defect spanning over the entire surface. The shape is centered to ensure that the classificator is translation independent. 
+            An example of this binary images is given in \emph{Figure \ref{fig:mc-cnn:shape-input}} (top). The shape is centered in a $1600\times 256$ black image. Indeed, the size of the input is set to the largest area that could be found, i.e. a defect spanning over the entire surface. The shape is centered to ensure that the classificator is translation independent. 
         }
         \par{
             The \emph{detector}, since will not be ideal, will provide to the \emph{classificator} also false positive ROIs, i.e. regions that are not defective. Therefore, this stage of the architecture need to be able to discard flawless proposed regions.
@@ -127,23 +127,23 @@
             However, training the shape column to classify some shapes as not defective is not feasible. Indeed, there is not a flawless surface shape, and manually generating it would not be safe.
         }
         \par{
-            Hence, the shape column should only be trained to classify a region into one of the four defect classes, and to mark flawless proposals will be duty of the final classifier (\ref{section:final-classifier}).
+            Hence, the shape column should only be trained to classify a region into one of the four defect classes, and to mark flawless proposals will be duty of the final classifier (\emph{Section \ref{section:final-classifier}}).
         }
         \par{
-            Therefore, the output layer is a $n$-dimensional vector, where $n$ is the number of defect classes. Each entry of this vector describe the confidence of the network in considering the input shape as related to one of the $n$ defect classes.
+            Therefore, the output layer is a $n$-dimensional vector, where $n$ is the number of defect classes. Each entry of this vector describes the confidence of the network in considering the input shape as related to one of the $n$ defect classes.
         }
         \par{
-            However, from data analysis has been observed that sometimes defective input defects of the same class are clustered together, since very near one another. This is usually true for defects of class \#3, which are burst defects and might be nearly adjacent. Therefore, the shape that would be extracted is the shape of the region and not the one of the defects. Hence, the network would not be properly trained.
+            However, from data analysis was observed that sometimes defective input defects of the same class are clustered together, since very near one another. This is usually true for defects of class No.3, which are burst defects and might be nearly adjacent. Therefore, the shape that would be extracted is the shape of the region and not the one of the defects. Hence, the network would not be properly trained.
         }
         \par{
-            For this reason, the shape column is left as a further development in \ref{section:further-work}.
+            For this reason, the shape column is left as a further development in \emph{Section \ref{section:further-work}}.
         }
         \par{
-            The shape column input could also be filled before to be fed into the CNN, as shown in figure \ref{fig:mc-cnn:shape-input} (bottom).
+            The shape column input could also be filled before to be fed into the CNN, as shown in \emph{Figure \ref{fig:mc-cnn:shape-input}} (bottom).
         }
     \subsection{Local column}\label{section:local-column}
         \par{
-            The \emph{local column} is thought to consider luminance levels around the border of the defect, to learn from the local context. Similarly to the shape column (\ref{section:shape-column}), this column is concerned only in classifying proposals into one of the four defective classes.
+            The \emph{local column} is thought to consider luminance levels around the border of the defect, to learn from the local context. Similarly to the shape column (\emph{Section \ref{section:shape-column}}), this column is concerned only in classifying proposals into one of the four defective classes.
         }
         \begin{figure}
             \centering
@@ -151,16 +151,17 @@
             \caption{Local column input.}\label{fig:mc-cnn:local-input}
         \end{figure}
         \par{
-            Therefore, the column is fed with the grey scale portion of the image inside the bounding box of the considered region. As an example, in figure \ref{fig:mc-cnn:local-input} is illustrated a plausible input to the \emph{local column}.
+            Therefore, the column is fed with the grey scale portion of the image inside the bounding box of the considered region. As an example, in \emph{Figure \ref{fig:mc-cnn:local-input}} is illustrated a plausible input to the \emph{local column}.
         }
         \par{
             This grey scale portion is generated from the shape of the region and the original image.
         }
         \par{
-            Firstly, the bounding box of the shape is calculated. Secondly, the original image outside the bounding box is discarded. Finally, the cropped image is centered in a black $1600\times 256$ picture. The reasons behind the centering and the dimensioning of the input are the same described in \ref{section:shape-column}.
+            Firstly, the bounding box of the shape is calculated. Secondly, the original image outside the bounding box is discarded. Finally, the cropped image is centered in a black $1600\times 256$ picture. The reasons behind the centering and the dimensioning of the input are the same described in \emph{Section \ref{section:shape-column}}.
         }
         \begin{table*}
             \centering
+            \normalsize
             \begin{tabular}{|l|l|l|l|}
                 \hline
                     \textbf{Layer} & \textbf{Type} & \textbf{Activations} & \textbf{Learnables}\\\hline
@@ -179,8 +180,7 @@
                     Stride $\left[1\;1\right]$ & & & Total: $296$\\
                     Padding ``same'' & & & \\\hline
                     %%%%
-                    MaxPool1 & Max pooling & $200\times 200\times 8 = 320.000$ & \\
-                    $\left[4\times 4\times 1\right]$ & & & \\
+                    MaxPool1, $\left[4\times 4\times 1\right]$ & Max pooling & $200\times 200\times 8 = 320.000$ & \\
                     Stride $\left[4\;4\right]$ & & & \\
                     Padding ``same'' & & & \\\hline
                     %%%%
@@ -189,8 +189,7 @@
                     Stride $\left[1\;1\right]$ & & & Total: $1168$\\
                     Padding ``same'' & & & \\\hline
                     %%%%
-                    MaxPool2 & Max pooling & $50\times 50\times 16 = 40.000$ & \\
-                    $\left[4\times 4\times 1\right]$ & & & \\
+                    MaxPool2, $\left[4\times 4\times 1\right]$ & Max pooling & $50\times 50\times 16 = 40.000$ & \\
                     Stride $\left[4\;4\right]$ & & & \\
                     Padding ``same'' & & & \\\hline
                     %%%%
@@ -199,8 +198,7 @@
                     Stride $\left[1\;1\right]$ & & & Total: $4640$\\
                     Padding ``same'' & & & \\\hline
                     %%%%
-                    MaxPool3 & Max pooling & $25\times 25\times 32 = 20.000$ & \\
-                    $\left[2\times 2\times 1\right]$ & & & \\
+                    MaxPool3, $\left[2\times 2\times 1\right]$& Max pooling & $25\times 25\times 32 = 20.000$ & \\
                     Stride $\left[2\;2\right]$ & & & \\
                     Padding ``same'' & & & \\\hline
                     %%%%
@@ -209,8 +207,7 @@
                     Stride $\left[1\;1\right]$ & & & Total: $18496$\\
                     Padding ``same'' & & & \\\hline
                     %%%%
-                    MaxPool4 & Max pooling & $13\times 13\times 64 = 10.816$ & \\
-                    $\left[2\times 2\times 1\right]$ & & & \\
+                    MaxPool4, $\left[2\times 2\times 1\right]$ & Max pooling & $13\times 13\times 64 = 10.816$ & \\
                     Stride $\left[2\;2\right]$ & & & \\
                     Padding ``same'' & & & \\\hline
                     %%%%
@@ -219,8 +216,7 @@
                     Stride $\left[1\;1\right]$ & & & Total: $73856$\\
                     Padding ``same'' & & & \\\hline
                     %%%%
-                    MaxPool5 & Max pooling & $7\times 7\times 128 = 6.272$ & \\
-                    $\left[2\times 2\times 1\right]$ & & & \\
+                    MaxPool5, $\left[2\times 2\times 1\right]$ & Max pooling & $7\times 7\times 128 = 6.272$ & \\
                     Stride $\left[2\;2\right]$ & & & \\
                     Padding ``same'' & & & \\\hline
                     %%%%
@@ -243,10 +239,10 @@
             \caption{Local column CNN layers.}\label{table:mc-cnn:local-structure}
         \end{table*}
         \par{
-            The layers of this CNN are shown in table \ref{table:mc-cnn:local-structure}.
+            The layers of this CNN are shown in \emph{Table \ref{table:mc-cnn:local-structure}}.
         }
         \par{
-            The output layer is analogous to the one in \ref{section:shape-column}.
+            The output layer is analogous to the one in \emph{Section \ref{section:shape-column}}.
         }
         \par{
             The peculiarity of this CNN is in its first convolutional layer, named \emph{spreader}. It is a novel application of the dilation factor. 
@@ -282,7 +278,7 @@
                     
         \end{BVerbatim}
         \par{
-            The dilation factor has been used in CNNs to implement a wider receptive field, using the same number of weights. Indeed, a $K_1 \times K_2$ filter convolves pixels in an area of $K_1 \times K_2$. Using a dilation factor of $\left[a\;b\right]$ it would convolve the same number of pixels, but on an area of $\left[\left(K_1-1\right)*a + 1\right] \times \left[\left(K_2-1\right)*b + 1\right]$.
+            The dilation factor is used in CNNs to implement a wider receptive field, using the same number of weights. Indeed, a $K_1 \times K_2$ filter convolves pixels in an area of $K_1 \times K_2$. Using a dilation factor of $\left[a\;b\right]$ it would convolve the same number of pixels, but on an area of $\left[\left(K_1-1\right)*a + 1\right] \times \left[\left(K_2-1\right)*b + 1\right]$.
         }
         \par{
             However, in the proposed architecture it is used in a novel way, to address the problem of different-sized bounding boxes.
@@ -298,7 +294,7 @@
             \caption{Learned features with a traditional convolutional layer (top) and with the \emph{spreader} (bottom). There are $4$ tiled features in both cases.}\label{fig:learned-features-hope-net}
         \end{figure}
         \par{
-            In figure \ref{fig:learned-features-hope-net} the learned features of four $3\times3$ filters of a traditional convolutional layer with padding $\left[673\;1\right]$ are juxtaposed to the ones learned by four $3\times 3$ filters with a dilation factor of $\left[400\;400\right]$ and proper padding $\left[672\;0\right]$. 
+            In \emph{Figure \ref{fig:learned-features-hope-net}} the learned features of four $3\times3$ filters of a traditional convolutional layer with padding $\left[673\;1\right]$ are juxtaposed to the ones learned by four $3\times 3$ filters with a dilation factor of $\left[400\;400\right]$ and proper padding $\left[672\;0\right]$. 
         }
         \par{
             The two pictures are scaled to be paired. However, the former is $1600 \times 1600$, the latter is $800\times 800$. Still it is patent that the proposed approach greatly exceed the traditional one in terms of information kept. 
@@ -313,19 +309,19 @@
             Indeed, this approach ensures that at least $9$ areas will convolve with the defective region. The learned weights of the filter will then decide whether to copy, along with some multiplicative factor (which can be thought as varying the exposure of the image portion), the defect in these new regions.
         }
         \par{
-            It would eventually learn to handle large original pictures. As an example, if the dataset is composed by a cornucopia of large defects, the \emph{spreader} could copy only vertically the defect, using only $3$ of the $9$ available weights.
+            It would eventually learn to handle large original pictures. As an example, if the dataset is composed by a cornucopia of large defects, the \emph{spreader} could copy only vertically the defect, using only three of the nine available weights.
         }
         \par{
-            In the proposed architecture, $4$ of this spreading filters are used in the first layer, conceptually in order to tune them one per defect class.
+            In the proposed architecture, four of this spreading filters are used in the first layer, conceptually in order to tune them one per defect class.
         }
         \par{
             The \emph{spreader} layer represents an effective alternative to either lossy crop or padding when dealing with either images of different dimensions or non-squared pictures.
         }
         \par{
-            The crop could allow massive memory saving. As an example, the $512\times 512$ cropping proposed in table \ref{table:cropping} would save $800\times 800 - 512\times 512 \approx \SI{1}{\mega\byte}$ per image, about $59.04\%$.
+            By cropping the image, massive memory saving could be allowed. As an example, the $512\times 512$ cropping proposed in \emph{Table \ref{table:cropping}} would save $800\times 800 - 512\times 512 \approx \SI{1}{\mega\byte}$ per image, about $59.04\%$.
         }
         \par{
-            However, the proposed spreader introduces $\times 9$ information compared to cropping, which is followed by activations similar, although with less memory consumption, to the ones shown in \ref{fig:learned-features-hope-net} (top).
+            However, the proposed spreader introduces $\times 9$ information compared to cropping, which is followed by activations similar, although with less memory consumption, to the ones shown in \emph{Figure \ref{fig:learned-features-hope-net}} (top).
         }
         \par{
             There is patently a tradeoff between training time, memory (hence both batch and mini-bath size), number of weights and information loss.
@@ -349,7 +345,7 @@
             \label{fig:features-last-layer}
         \end{figure}
         \par{
-            Instead, the proposed initial layer spreads over the squared activation matrix the defect, allowing in the final layer to have more informative features, as visible in the comparison in figure \ref{fig:features-last-layer}. Indeed, the visual effect of equivalence between the two suggests that the initial \emph{spreader} reduces the number of successive filters required, hence the number of parameters. 
+            Instead, the proposed initial layer spreads over the squared activation matrix the defect, allowing in the final layer to have more informative features, as visible in the comparison in \emph{Figure \ref{fig:features-last-layer}}. Indeed, the visual effect of equivalence between the two suggests that the initial \emph{spreader} reduces the number of successive filters required, hence the number of parameters. 
         }
         \par{
             A smaller number of parameters requires less data to prevent overfitting. If the outcomes are the same, it means that the model is better.
@@ -375,7 +371,7 @@
             would simply replicate three times the image vertically. The takeaway is that this filter removes the manual tuning of the crop operation, while it improves the efficiency of the feature extraction stage of the CNN.
         }
         \par{
-            However, evaluating the results of the crop operation is proposed as further development in \ref{section:further-work}.
+            However, evaluating the results of the crop operation is proposed as further development in \emph{Section \ref{section:further-work}}.
         }
     \subsection{Global column}\label{section:global-column}
         \begin{figure}
@@ -384,17 +380,17 @@
             \caption{Global column input.}\label{fig:mc-cnn:global-input}
         \end{figure}
         \par{
-            The \emph{global column} is concerned in detecting global patterns, like zipper cracks. Hence, it is fed with the whole image. An example of input is shown in figure \ref{fig:mc-cnn:global-input}. The importance of this column is clear from the observations made in \ref{subsection:defects}. Indeed, when two different classes are locally equal, the global column is determinant to correctly classify the defects.
+            The \emph{global column} is concerned in detecting global patterns, like zipper cracks. Hence, it is fed with the whole image. An example of input is shown in \emph{Figure \ref{fig:mc-cnn:global-input}}. The importance of this column is clear from the observations made in \emph{Section \ref{subsection:defects}}. Indeed, when two different classes are locally equal, the global column is determinant to correctly classify the defects.
         }
         \par{
             Ideally, the global column should output a $16$-dimensional vector, with one entry per combination of classes. The presence of at least a defect of a particular class is hot-encoded in a $4$-bit bitmask.
         }
         \par{
-            However, the dataset is very skewed when accounting for different classes combinations, as illustrated in fig. \ref{fig:defects:combinations}. Hence, the output layer has to be structured in a different way. Moreover, the inner structure of the CNN has to be deeper and requires a larger amount of data and 
+            However, the dataset is very skewed when accounting for different classes combinations, as illustrated in \emph{Figure \ref{fig:defects:combinations}}. Hence, the output layer has to be structured in a different way. Moreover, the inner structure of the CNN has to be deeper and requires a larger amount of data and 
             , therefore, longer training times and more hardware resources then the local column.
         }
         \par{
-            Therefore, the global column is left as a further development in \ref{section:further-work}.
+            Therefore, the global column is left as a further development in \emph{Section \ref{section:further-work}}.
         }
     \subsection{Final classifier}\label{section:final-classifier}
         \par{
@@ -456,7 +452,7 @@
             \caption{Final classifier structure.}\label{fig:mc-cnn:final-classifier-structure}
         \end{figure}
         \par{
-            In figure \ref{fig:mc-cnn:final-classifier-structure} the structure of the last layer of the architecture is described.
+            In \emph{Figure \ref{fig:mc-cnn:final-classifier-structure}} the structure of the last layer of the architecture is described.
         }
         \par{
             The first layer is constrained to the output size of the three columns, i.e. $4+4+16 = 24$. Then there are two hidden layers with $16$ activation units, and finally the output layer with $5$ neurons. The output is passed through a softmax layer, hence the final output describe the confidence per each class.
@@ -465,8 +461,5 @@
             Observe that bias units have not been included in the picture.
         }
         \par{
-            However, since both shape and global column are left as further work, the classificator actually implemented has a $4$-units input layer, two hidden layer with $16$ neurons and a $4$-units output layer.
-        }
-        \par{
-            The results of this architecture are reported in \ref{section:results}.
+            The classificator is left as further work, together with both shape and global columns, in \emph{Section \ref{section:further-work}}.
         }

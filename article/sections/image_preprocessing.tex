@@ -1,9 +1,6 @@
 \section{Image preprocessing}\label{section:image_preprocessing}
     \par{
-        The first stage of the architecture is concerned with the enhancement of the raw image, in order to improve the learning effectiveness.
-    }
-    \par{
-        In this section image preprocessing is introduced, and the raw image is enhanced to improve learning quality. In \ref{section:results} the contribution of preprocessing is evaluated.
+        The first stage of the architecture is concerned with the enhancement of the raw image, in order to improve the learning effectiveness. In \emph{Section \ref{section:results}} the contribution of preprocessing is evaluated.
     }
     \par{
         Firstly, since given images have three equal colours levels, they can be considered gray-levels. Therefore, it is possible to shrink the space occupied on disk by discarding hue and saturation information and using only luminance.
@@ -11,10 +8,10 @@
     \par{
         Rec.ITU-R BT.601-7 calculates luminance $\left(E\left[y\right]\right)$ as:
         $$ E\left[y\right] = 0.299 * R + 0.587 * G + 0.114 * B $$
-        where $R,G,B$ are the three image channels. Observe that since $R = G = B$, also $E\left[y\right] = R = G = B$, which justifies the assumption that discarding hue and saturation does not affect effectiveness of the system, whereas improving space and computational efficiency. Luminance is denoted by $E\left[y\right]$ since brightness is named $y$ in literature, therefore the luminance, i.e. the physical intensity expected, is labeled in this way.
+        where $R,G,B$ are the three image channels. Since $R = G = B$, also $E\left[y\right] = R = G = B$, which justifies the assumption that discarding hue and saturation does not affect effectiveness of the system, whereas improving space and computational efficiency. Luminance is denoted by $E\left[y\right]$ since brightness is named $y$ in literature, therefore the luminance, i.e. the physical intensity expected, is labeled in this way.
     }
     \par{
-        Secondly, since pictures may have been taken under different light exposure conditions, and since learning has heuristically be proven to be more effective if input assumptions are constant, the luminance histogram of the image is normalized.
+        Secondly, since pictures may be took under different light exposure conditions, and since learning has heuristically be proven to be more effective if input assumptions are constant, the luminance histogram of the image is normalized.
     }
     \begin{figure}
         \includegraphics[width=\linewidth]{graphics/preprocessing/histeq-before-image}
@@ -41,7 +38,7 @@
         However, histogram equalization is preferred over linear scaling.
     }
     \par{
-        Indeed, although both linear scaling and histogram equalization are effective in spreading over all the spectrum the luminance levels of an image, the former only ensure that all the intensities are used whereas the latter is also concerned about the shape of the resulting histogram, which ideally should be flat.
+        Indeed, although both linear scaling and histogram equalization are effective in spreading over all the spectrum the luminance levels of an image, the former only ensures that all the intensities are used whereas the latter is also concerned about the shape of the resulting histogram, which ideally should be flat.
     }
     \begin{figure}
         \includegraphics[width=\linewidth]{graphics/preprocessing/histeq-before}
@@ -52,9 +49,9 @@
     \par{
         In fact, histogram equalization aims to transform a scalar image $\mathcal{I}$ such that all grey levels appear equally often in the transformed image $\mathcal{I}_{new}$, i.e.:
         \begin{equation*}
-            H_{\mathcal{I}_{new}}(u) = \text{const} = \frac{N_{cols}N_{rows}}{G_{max} + 1} \quad 0 \leq u \leq G_{max}
+            H_{\mathcal{I}_{new}}(u) = \text{const} = \frac{N_{cols}N_{rows}}{G_{max} + 1} \quad 0 \leq u \leq G_{max},
         \end{equation*}
-        Where $N_{cols}$ and $N_{rows}$ are, respectively, the number of columns and rows of the image. $H_{\mathcal{I}}(u)$ is the absolute frequency of luminance level $u$.
+        where $N_{cols}$ and $N_{rows}$ are, respectively, the number of columns and rows of the image. $H_{\mathcal{I}}(u)$ is the absolute frequency of luminance level $u$.
     }
     \par{
         However, this is not practically feasible, since identical value in $\mathcal{I}$ must be mapped on the same value of $\mathcal{I}_{new}$. Therefore, the transform is just an approximate solution.
@@ -62,13 +59,13 @@
     \par{
         Intensities $u$ in $\mathcal{I}$ are mapped onto new intensities $v = g(u)$ by the gradation function $g$: 
         \begin{equation*}
-            g(u) = c_{\mathcal{I}}(u) \cdot G_{max}
+            g(u) = c_{\mathcal{I}}(u) \cdot G_{max},
         \end{equation*}
-        Where $c_{\mathcal{I}}$ is the relative cumulative frequency function.
+        where $c_{\mathcal{I}}$ is the relative cumulative frequency function.
     }
     \par{
-        In figure \ref{fig:equalization} the effects of equalization on the histogram of luminance of a sample image are shown.
+        In \emph{Figure \ref{fig:equalization}} the effects of equalization on the histogram of luminance of a sample image are shown.
     }
     \par{
-        Pictures \ref{fig:preprocessing_image_before} and \ref{fig:preprocessing_image_after} show the preprocessing output on some samples images. It is clear that the different light exposures of the three images are compensated through the histogram equalization.
+        \emph{Figures \ref{fig:preprocessing_image_before}} and \emph{\ref{fig:preprocessing_image_after}} show the preprocessing output on some samples images. It is clear that the different light exposures of the three images are compensated through the histogram equalization.
     }
