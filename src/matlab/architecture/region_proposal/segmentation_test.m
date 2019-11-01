@@ -1,9 +1,16 @@
 function [loss, acc, test_data] = segmentation_test(images, dataset, class, batch_size, params)
-% SEGMENTATION_TEST Test routine of the region proposal architecture
+% SEGMENTATION_TEST Test routine of the region proposal stage of the
+% architecture.
 %
 %   [loss, acc, test_data] = segmentation_test(images, dataset, class, batch_size, params) launch
 %   the test routine over kovesi-hysteretic edge detector and alpha shape pipeline.
-%   TODO describe input/output.
+%
+%   * images:       is the image datastore
+%   * dataset:      contains information about ideal segmentation
+%   * class:        defect class
+%   * batch_size:   optimization batch size
+%   * n_iter:       number of iterations for epochs
+%   * params:       segmentation parameters
 %
 %   See also SEGMENTATION_TEST_IM SEGMENTATION_OPTIMIZATION
 
