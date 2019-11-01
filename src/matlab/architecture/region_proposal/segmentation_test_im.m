@@ -1,18 +1,32 @@
 function [loss, acc] = segmentation_test_im(im, ... % image to test
                                             encoded_correct_pixels, ... % defect regions (RLE)
-                                            params, ... % struct with parameters
-                                            plot_flag, im_high, save_flag) % optional (for plots)
-
-    % parameters
-    % params.kov_nscale   % kovesi
-    % params.kov_norient
-    % params.kov_min_wl
-    % params.kov_mult
-    % params.hist_tl      % hysteretic edge detector
-    % params.hist_th
-    % params.alpha        % alpha shape
-    % params.hole_th
-    % params.region_th
+                                            params, ... % struct with segmentation parameters
+                                            plot_flag, im_high) % optional (for plots)
+% SEGMENTATION_TEST_IM Calculates loss and accuracy on given image (im).                                      
+%
+%   [loss, acc] = segmentation_test_im(im, encoded_correct_pixels, params) 
+%   calculates segmentation loss and accuracy on given image im with 
+%   segmentation parameters params.
+%  
+%   [_] = segmentation_test_im(_, plot_flag) also plots the segmentation
+%   results.
+%
+%   [_] = segmentation_test_im(_, im_high) also plots the image with
+%   highlighted defects for comparison (im_high).
+% 
+%   PARAMETERS:
+%       --- KOVESI
+%   * params.kov_nscale   
+%   * params.kov_norient
+%   * params.kov_min_wl
+%   * params.kov_mult
+%       --- HYSTERETIC EDGE DETECTOR
+%   * params.hist_tl      
+%   * params.hist_th
+%       --- ALPHA SHAPE
+%   * params.alpha        
+%   * params.hole_th
+%   * params.region_th
                                         
     if nargin == 3
         plot_flag = 0;

@@ -1,7 +1,9 @@
 function [loss_im, acc_im] = segmentation_test_im_plots(im_name, class, params, ...
                                                         images, images_name, ...
                                                         images_high, images_high_name, ...
-                                                        dataset, save_flag)
+                                                        dataset, save_flag)                                   
+% SEGMENTATION_TEST_IM_PLOTS Interface between segmentation_main and
+% segmentation_test_im, used to fix parameters.
 
     if nargin==8
         save_flag = 0;
