@@ -3,6 +3,147 @@
     Observe that this architecture is dealing with different sixze image, interesting.....!!!
 
     \subsection{Detector}
+    \label{sec:results-detector}
+    \par{
+    	The Bayesian optimization has been performed using batches of $128$ images and $50$ iterations. During each iteration, the average loss function is computed on the batch and used to predict the next point in the domain of hyperparameters. 
+    }	
+   	\par{
+    	Losses of $0.78$, $0.92$, $0.68$, $0.59$ have been obtained for detectors of classes $1$, $2$, $3$, $4$ respectively.
+    }
+	\par{
+		In \emph{Table \ref{table:params-bayesopt}} are reported the optimal values of parameters obtained. It is visible that tuned parameters reflect the shape of defects studied in Section \ref{subsection:defects}.
+	}	
+%	\begin{figure}
+%		\centering
+%		\includegraphics[width=\linewidth]{graphics/results/segmentation_opt_class1}
+%		\caption{Bayesian optimization of class 1 detector}\label{fig:bayesopt-class1}
+%	\end{figure}
+%	\begin{figure}
+%		\centering
+%		\includegraphics[width=\linewidth]{graphics/results/segmentation_opt_class1}
+%		\caption{Bayesian optimization of class 2 detector}\label{fig:bayesopt-class2}
+%	\end{figure}
+%	\begin{figure}
+%		\centering
+%		\includegraphics[width=\linewidth]{graphics/results/segmentation_opt_class3}
+%		\caption{Bayesian optimization of class 3 detector}\label{fig:bayesopt-class3}
+%	\end{figure}
+%	\begin{figure}
+%		\centering
+%		\includegraphics[width=\linewidth]{graphics/results/segmentation_opt_class4}
+%		\caption{Bayesian optimization of class 4 detector}\label{fig:bayesopt-class4}
+%	\end{figure}
+	\begin{table}
+		\centering
+		\begin{tabular}{|c|c|c|c|c|}
+			\hline
+			\textbf{Parameters} & \textbf{Class 1} & \textbf{Class 2} & \textbf{Class 3} & \textbf{Class 4}\\ \hline
+			$N$ & 3 & 4 & 5 & 4 \\ \hline
+			$U$ & 15 & 7 & 5 & 15 \\ \hline
+			$\lambda$ & 3.9199 & 2.3621 & 4.9810 & 3.5076 \\ \hline
+			$s$ & 2.1161 & 1.5552 & 1.5559 & 1.4307 \\ \hline
+			$T_{low}$ & 59 & 77 & 60 & 59 \\ \hline
+			$T_{high}$ & 113 & 212 & 104 & 179 \\ \hline
+			$\alpha$ & 7 & 8 & 6 & 6 \\ \hline
+			$T_{hole}$ & 9593 & 6460 & 7179 & 9986 \\ \hline
+			$T_{region}$ & 510 & 942 & 727 & 1134 \\ \hline
+		\end{tabular}
+		\vspace{0.25cm}
+		\caption{Optimal parameters obtained for each class detector with Bayesian optimization.}
+		\label{table:params-bayesopt}
+	\end{table}
+	\par{
+		The trained detectors have been tested on batches of $1024$ images (a part of class $3$, which has only $760$ examples) using the accuracy measure:
+		\begin{equation*}
+		\mathcal{A} = \frac{\lvert X \cap Y \rvert}{\lvert Y \rvert}
+		\end{equation*}
+		which average value has been reported in \emph{Table \ref{fig:segmentation-test}}.
+	}
+	\par{
+		In Fig. \ref{fig:segmentation-test} are reported the distributions of accuracies over the test sets of each detectors. 
+	}
+	\begin{figure}
+		\centering
+		\includegraphics[width=\linewidth]{graphics/results/acc-segmentation-class1}
+		\vskip .05cm
+		\includegraphics[width=\linewidth]{graphics/results/acc-segmentation-class2}
+		\vskip .05cm
+		\includegraphics[width=\linewidth]{graphics/results/acc-segmentation-class3}
+		\vskip .05cm
+		\includegraphics[width=\linewidth]{graphics/results/acc-segmentation-class4}
+		\vskip .05cm
+		\caption{Distribution of the accuracies of the trained detectors, computed on their test sets.}\label{fig:segmentation-test}
+	\end{figure}
+	\begin{table}
+		\centering
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline
+			\textbf{Class (no.)} & \textbf{MinMax} & \textbf{Eq.} & \textbf{Batch size} & \textbf{Loss} & \textbf{Accuracy}\\ \hline
+			\multirow{3}{*}{1} & no & no & 1024 & & \\
+			& yes & no & 1024 & & \\
+			& yes & yes & 1024 & 0.7977 & 0.4925 \\ \hline
+			\multirow{3}{*}{2} & no & no & 760 & & \\
+			& yes & no & 760 & & \\
+			& yes & yes & 760 & 0.9172 & 0.3333 \\ \hline
+			\multirow{3}{*}{3} & no & no & 1024 & & \\
+			& yes & no & 1024 & & \\
+			& yes & yes & 1024 & 0.6995 & 0.4600 \\ \hline
+			\multirow{3}{*}{4} & no & no & 1024 & & \\
+			& yes & no & 1024 & & \\
+			& yes & yes & 1024 & 0.6050 & 0.5550 \\ \hline
+		\end{tabular}
+		\vspace{0.25cm}
+		\caption{Comparison between performance obtained by the detectors by using or not the MinMax normalization and the equalization.}\label{table:bayesopt-params}
+	\end{table}
+	\begin{figure}
+		\centering
+		\includegraphics[width=\linewidth]{graphics/results/detector-result-class1}
+		\vskip .05cm
+		\includegraphics[width=\linewidth]{graphics/results/detector-result-class1-edges}
+		\vskip .05cm
+		\includegraphics[width=\linewidth]{graphics/results/detector-result-class1-segmentation}
+		\vskip .05cm
+		\includegraphics[width=\linewidth]{graphics/results/detector-result-class1-bounding-box}
+		\vskip .05cm
+		\caption{An example of the region proposal procedure for image with a defect of the class 1.}\label{fig:detector-results-1}
+	\end{figure}
+	\begin{figure}
+		\centering
+		\includegraphics[width=\linewidth]{graphics/results/detector-result-class2}
+		\vskip .05cm
+		\includegraphics[width=\linewidth]{graphics/results/detector-result-class2-edges}
+		\vskip .05cm
+		\includegraphics[width=\linewidth]{graphics/results/detector-result-class2-segmentation}
+		\vskip .05cm
+		\includegraphics[width=\linewidth]{graphics/results/detector-result-class2-bounding-box}
+		\vskip .05cm
+		\caption{An example of the region proposal procedure for image with a defect of the class 2.}\label{fig:detector-results-2}
+	\end{figure}
+	\begin{figure}
+		\centering
+		\includegraphics[width=\linewidth]{graphics/results/detector-result-class3}
+		\vskip .05cm
+		\includegraphics[width=\linewidth]{graphics/results/detector-result-class3-edges}
+		\vskip .05cm
+		\includegraphics[width=\linewidth]{graphics/results/detector-result-class3-segmentation}
+		\vskip .05cm
+		\includegraphics[width=\linewidth]{graphics/results/detector-result-class3-bounding-box}
+		\vskip .05cm
+		\caption{An example of the region proposal procedure for image with a defect of the class 3.}\label{fig:detector-results-3}
+	\end{figure}
+	\begin{figure}
+		\centering
+		\includegraphics[width=\linewidth]{graphics/results/detector-result-class4}
+		\vskip .05cm
+		\includegraphics[width=\linewidth]{graphics/results/detector-result-class4-edges}
+		\vskip .05cm
+		\includegraphics[width=\linewidth]{graphics/results/detector-result-class4-segmentation}
+		\vskip .05cm
+		\includegraphics[width=\linewidth]{graphics/results/detector-result-class4-bounding-box}
+		\vskip .05cm
+		\caption{An example of the region proposal procedure for image with a defect of the class 4.}\label{fig:detector-results-4}
+	\end{figure}
+    
     \subsection{Classificator}
     \par{
 
