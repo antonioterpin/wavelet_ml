@@ -42,3 +42,4 @@ presentation/graphics
 data/exports/segmentation/segmentation_results_4.txt
 data/exports/segmentation/segmentation_results_3.txt
 src/matlab/architecture/region_proposal/test_old.txt
+data/exports/segmentation/optimization/real/desktop.ini
