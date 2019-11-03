@@ -1,6 +1,6 @@
 \section{Detector}\label{section:region_proposals}
     \par{
-        The second stage of the proposed architecture is the \emph{detector} of region proposals, which are then fed into the \emph{classificator} for classification, which is described in \emph{Section} \ref{section:mc-cnn}.
+        The second stage of the proposed architecture is the \emph{detector} of region proposals, which are then fed into the \emph{classifier} for classification, which is described in \emph{Section} \ref{section:mc-cnn}.
     }
     \par{
         The whole system relies on the \emph{detector} to spot one or more region of interest (ROI), which are the plausible candidates to be defective regions.
@@ -10,10 +10,10 @@
     }
     \subsection{Edge detection}\label{subsection:contour_detection}
         \par{
-            The first step towards segmentation consists of the detection of edges within the image. The usage of Kovesi algorithm (KA) \cite{mit:kovesiphase, googlescholar:kovesiphase} together with hysteretic edge follower \cite{Klette:2014:CCV:2584519}.
+            The first step towards segmentation consists of the detection of edges within the image. The usage of Kovesi algorithm (KA) \cite{mit:kovesiphase, googlescholar:kovesiphase} together with hysteretic edge follower \cite{Klette:2014:CCV:2584519} is proposed.
         }
         \par{
-            KA is a \emph{phase congruency}-based edge detector. The main idea is that where the local frequency components of an image are in phase, there is an edge \cite{researchgate:morrone}. This concept is illustrated in \emph{Figure \ref{fig:phase-congruency}}.
+            KA is a \emph{phase congruency}-based edge detector. The main idea is that wherever the local frequency components of an image are in phase, there is an edge \cite{researchgate:morrone}. This concept is illustrated in \emph{Figure \ref{fig:phase-congruency}}.
         }
         \par{
             Some phase congruency metrics are based on Fourier analysis and on measuring the local energy \cite{researchgate:phase}, whereas KA exploits the log-Gabor wavelets. These are shown in \emph{Figure \ref{fig:gabor}}.
@@ -21,7 +21,7 @@
     	\begin{figure}
     		\centering
     		\includegraphics[width=.9\linewidth]{graphics/architecture/phasecong}
-    		\caption{Visualization of the phase congruency concept for a 1D signal. The sum (blue curve) of the frequency components (red and orange curves) gradually approaches a discontinuity where the components are in phase.}
+    		\caption{Visualization of the phase congruency concept for a 1D signal. The sum (blue curve) of the frequency components (red and orange curves) gradually approaches a discontinuity wherever the components are in phase.}
     		\label{fig:phase-congruency}
     	\end{figure}
     	\begin{figure}
@@ -90,7 +90,7 @@
     		\vskip .05cm \includegraphics[width=\linewidth]{graphics/architecture/detector-ex-hysteresis-60-100}
     		\vskip .05cm \includegraphics[width=\linewidth]{graphics/architecture/detector-ex-hysteresis-90-150}
     		\vskip .05cm
-    		\caption{Output of the edge detector on a sample image using different thresholds $(T_{low},T_{high})$. Respectively, from top to bottom: $(30,50)$, $(60,100)$ and $(100,150)$. Standard parameters of the Kovesi algorithm has been used.}
+    		\caption{Output of the edge detector on a sample image using different thresholds $(T_{low},T_{high})$. From top to bottom: $(30,50)$, $(60,100)$ and $(100,150)$. Standard parameters of the Kovesi algorithm were used.}
     		\label{fig:edge-detector-example}
     	\end{figure}
     
@@ -113,7 +113,7 @@
             \includegraphics[width=\linewidth]{graphics/architecture/detector-points}
             \includegraphics[width=\linewidth]{graphics/architecture/detector-a-shape}
             \includegraphics[width=\linewidth]{graphics/architecture/detector-a-shape-better-radius}
-            \caption{Alpha shape with different alphas of a set of points.}\label{fig:example-alpha-shape}
+            \caption{Alpha shape with different alpha values of a set of points.}\label{fig:example-alpha-shape}
         \end{figure}
         \begin{figure}
             \centering
@@ -133,7 +133,7 @@
             Observe that the latter is useful to soothe the effects of noisy edge detections.
         }
         \par{
-            However, tuning them manually is quixotic, hence they are choosen through Bayesian optimization.
+            However, tuning them manually is quixotic, hence they were choosen through Bayesian optimization.
         }
         \par{
             The segmentation step outputs a set of pixels, which can be compared with the ideal segmentation, i.e. only the pixels within some defective region.
@@ -151,13 +151,13 @@
             \end{equation*}
         }
         \par{
-            The acquisition function used is \emph{expected-improvement-plus} \cite{matlab:acquisition}.
+            The acquisition function proposed is \emph{expected-improvement-plus} \cite{matlab:acquisition}.
         }
         \par{
             As a final consideration, using alpha shape lessen the detrimental effect of the noise in edge detection. Indeed, outliers are suppressed by the hole threshold and region threshold parameteres.
         }
         \par{
-            The regions of this alpha shape are the ROIs, which are fed into the \emph{classificator}.
+            The regions of this alpha shape are the ROIs, which are fed into the \emph{classifier}.
         }
     \subsection{Bounding box}\label{subsection:bounding_box}
         \par{
@@ -191,14 +191,14 @@ bounding_box =  | maxX maxY |
         \par{
             As a first approximation, the implementation of the detector was done to output the bounding boxes instead of the alpha shape. Therefore, the $X$ set in \emph{Section \ref{subsection:segmentation}} is characterized by all the pixels inside the bounding box of the alpha shape regions.
         }
-    	\par{
-    		In \emph{Figure \ref{fig:segmentation-bb-example}} examples of ROIs and bounding boxes obtained from a surface image can be found.
-    	}
-    	\begin{figure} 		  
+        \begin{figure} 		  
     		\includegraphics[width=\linewidth]{graphics/architecture/detector-ex}
     		\vskip .05cm \includegraphics[width=\linewidth]{graphics/architecture/detector-ex-segmentated}
     		\vskip .05cm \includegraphics[width=\linewidth]{graphics/architecture/detector-ex-bounding-box}
     		\vskip .05cm
-    		\caption{ROIs and bounding boxes obtained on a example image using manually-tuned parameters.}
+    		\caption{ROIs and relative bounding boxes obtained on an example image.}
     		\label{fig:segmentation-bb-example}
     	\end{figure}
+    	\par{
+    		In \emph{Figure \ref{fig:segmentation-bb-example}} examples of ROIs extracted from a steel surface picture are illustrated. In the picture, also the ROIs bounding boxes are shown.
+    	}

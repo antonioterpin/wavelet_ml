@@ -1,9 +1,9 @@
 \section{Results}\label{section:results}
 \par{
-	Although the proposed architecture was not fully implemented, both the \emph{detector} and the \emph{classificator} were proven effective. Indeed, the concept proof of the described defect detection system on steel surfaces was proven by the results reported in \emph{Section \ref{section:results:detector}} and \emph{Section \ref{section:results:classificator}}.
+	Although the proposed architecture was not fully implemented, both the \emph{detector} and the \emph{classifier} were proven effective. Indeed, the concept proof of the described defect detection system on steel surfaces was proven by the results reported in \emph{Section \ref{section:results:detector}} and \emph{Section \ref{section:results:classifier}}.
 }
 \par{
-	From results in \emph{Section \ref{section:results:classificator}} one can infer that the proposed novel usage of the dilatation factor in the first convolutional layer may represents an effective alternative to cropping when dealing with images of different sizes.
+	From results in \emph{Section \ref{section:results:classifier}} one can infer that the proposed novel usage of the dilatation factor in the first convolutional layer may represents an effective alternative to cropping when dealing with images of different sizes.
 }
 
 \subsection{Detector}\label{section:results:detector}
@@ -41,13 +41,13 @@
 		& yes & yes & 1024 & 0.6050 & 0.5550 \\ \hline
 	\end{tabular}
 	\vspace{0.25cm}
-	\caption{Comparison between performances obtained by different class (No.) detectors, either using or not the equalization and the MinMax normalization. In bold are reported the best detectors obtained, according to the study.}\label{table:test-bayesopt}
+	\caption{Comparison between the performances obtained by detectors trained on different classes (No.), either using or not the equalization and the MinMax normalization. The best detectors obtained, according to the study, are bolded.}\label{table:test-bayesopt}
 \end{table}
 \par{
-	In \emph{Table \ref{table:test-bayesopt}} are reported the average loss and accuracy obtained by the trained detectors, either using or not the equalization and the MinMax normalization on the images. These results need to be studied recalling that the defects have been identified with bounding boxes. Hence, overhead pixels are intrinsically part of our approach and the values of the loss functions have a lower bound greater than $0$.
+	In \emph{Table \ref{table:test-bayesopt}} are reported the average loss and accuracy obtained by the trained detectors, either using or not the equalization and the MinMax normalization on the images. Recall that the defects were localized with bounding boxes. Hence, overhead pixels were intrinsic to the implementation and, thus, the loss function had a non-null lower bound.
 }
 \par{
-	At first glance, it is clear that either in the equalized and in the non-equalized setting, the MinMax normalization improves the performance of each detector. Indeed, despite the accuracy increase by using normalization, also the loss increase. This means that the localization of more defects is not due to an increase of the detector precision, but only to the introduction of more overhead pixels.
+	It is clear that in both the equalized and non-equalized setting, the MinMax normalization improves the performance of each detector. Indeed, although the accuracy increases using normalization, the loss increases too. This means that the localization of more defects is not due to an increase in the detector precision, but only to larger bounding boxes and, thus, more overhead pixels.
 }
 \begin{table}
 	\centering
@@ -66,7 +66,7 @@
 		$T_{region}$ & 541 & 1158 & 682 & 1204 \\ \hline
 	\end{tabular}
 	\vspace{0.25cm}
-	\caption{Optimal parameters obtained for each class with Bayesian optimization (non-equalized setting).}
+	\caption{Optimal parameters obtained for each class with Bayesian optimization (non-equalized images).}
 	\label{table:params-bayesopt}
 \end{table}
 \begin{figure}
@@ -127,10 +127,10 @@
 	\vskip .05cm
 	\includegraphics[width=\linewidth]{graphics/results/acc-segmentation-class4}
 	\vskip .05cm
-	\caption{Accuracies distributions of the trained detectors, computed on their test sets (non-equalized setting).}\label{fig:segmentation-test}
+	\caption{Accuracies distributions of the trained detectors, evaluated on their test sets (non-equalized images).}\label{fig:segmentation-test}
 \end{figure}
 \par{
-	Let consider first the detectors obtained without equalization. Accuracies $0.55$, $0.77$, $0.62$ and $0.75$ have been reached for classes $1$, $2$, $3$ and $4$ respectively. Classes $3$ and $4$ have the lowest values of loss function, which means that the detection of these defects is generally more precise and with lower amount of overhead pixels.
+	Without equalization, accuracies $0.55$, $0.77$, $0.62$ and $0.75$ were reached for classes $1$, $2$, $3$ and $4$, respectively. Classes $3$ and $4$ had the lowest values of loss function, hence the detection of these defects is generally more precise and with a lower amount of overhead pixels.
 }
 \par{
 	In \emph{Table \ref{table:params-bayesopt}} the optimal parameters values are reported. It is visible that tuned parameters reflect the shape of defects studied in \emph{Section \ref{subsection:defects}}. In \emph{Figure \ref{fig:detector-results-1}, \ref{fig:detector-results-2}, \ref{fig:detector-results-3}} and \emph{\ref{fig:detector-results-4}} are shown some examples of localization of defects from class $1$, $2$, $3$ and $4$ respectively. In \emph{Figure \ref{fig:segmentation-test}} the test accuracies distribution for each detector class are reported. 
@@ -145,7 +145,7 @@
 	\vskip .05cm
 	\includegraphics[width=\linewidth]{graphics/results/acc-segmentation-class4-eq}
 	\vskip .05cm
-	\caption{Accuracies distributions of the trained detectors, computed on their test sets (equalized images).}\label{fig:segmentation-test-eq}
+	\caption{Accuracies distributions of the trained detectors, evaluated on their test sets (equalized images).}\label{fig:segmentation-test-eq}
 \end{figure}
 \begin{table}
 	\centering
@@ -164,7 +164,7 @@
 		$T_{region}$ & 510 & 942 & 727 & 1134 \\ \hline
 	\end{tabular}
 	\vspace{0.25cm}
-	\caption{Optimal parameters obtained for each class with Bayesian optimization (equalized setting).}
+	\caption{Optimal parameters obtained for each class with Bayesian optimization (equalized images).}
 	\label{table:params-bayesopt-eq}
 \end{table}
 \begin{figure}
@@ -185,25 +185,25 @@
 	\vskip .05cm
 	\includegraphics[width=\linewidth]{graphics/results/detector-result-eq-4-2}
 	\vskip .05cm
-	\caption{Effect of the equalization on the detector performance when images have very large and black regions.}\label{fig:equalization-problems}
+	\caption{Effect of the equalization on the detector performance with images with large black regions.}\label{fig:equalization-problems}
 \end{figure}
 \par{
-	The distribution of accuracies in the equalized setting (\emph{Figure \ref{fig:segmentation-test-eq}}) have a very different behaviour. Indeed, there is a larger amount of images with values of accuracies near zero. Hence, average accuracies of $0.49$, $0.33$, $0.46$ and $0.55$ only have been reached for classes $1$, $2$, $3$ and $4$ respectively.
+	The distribution of accuracies in the equalized setting (\emph{Figure \ref{fig:segmentation-test-eq}}) differs greatly from the non-equalized one. Indeed, there is a larger amount of images with values of accuracies near zero. Average accuracies of only $0.49$, $0.33$, $0.46$ and $0.55$ were reached for classes $1$, $2$, $3$ and $4$, respectively.
 }
 \par{
-	One of the main problems behind this results is that a \emph{global} equalization procedure has been used. Indeed, if there are very wide and monochromatic regions (e.g., black backgrounds), not significant patterns may arise  (e.g., noise). Examples of these situations are shown in \emph{Figure \ref{fig:segmentation-test-eq}}. This have a negative impact on the optimization procedure and the optimum values of parameters obtained (\emph{Table \ref{table:params-bayesopt-eq}}).
+	The worsening of the results after equalization is probably due to the usage of global (i.e. over all the image domain) equalization procedure. Indeed, noise is greatly increased by this equalization approach, wherever there are wide and nearly monochromatic regions (e.g., black backgrounds). Examples of these cases are shown in \emph{Figure \ref{fig:segmentation-test-eq}}. This was obviously detrimental to the optimization procedure. However, the optimal values found are reported in \emph{Table \ref{table:params-bayesopt-eq}}.
 }
 \par{
-	On the other hand, despite the accuracies of equalized detectors are lower, the obtained losses are slightly different from the non-equalized ones. This means that, even if a equalized detector find only few defects, the proportion of overhead pixels is lower. Hence, equalized detectors seems to be more precise. This is also confirmed by the performance of the classificator, which perform better on equalized images.
+	Although the accuracies of detectors on equalized images were lower, one can infer from the obtained losses that the proportion of overhead pixels is lower. Hence, equalized detectors seems to be more precise. This is also confirmed by the performance of the \emph{classifier}, which performs better on equalized images. Conceptually, the equalized images have higher contrast, and thus an edge detector is expected to identify better abrupt changes.
 }
 \par{
-	These results suggest that higher performance could be obtained by detectors by using a proper equalization procedure, which is able to identify the \emph{local} presence of the situation described above.
+	These results suggest that higher performances could be obtained by detectors using a proper equalization procedure, dealing better with the situations with non-negligible noise.
 }
 
-\subsection{Classificator}\label{section:results:classificator}
+\subsection{Classifier}\label{section:results:classifier}
 \begin{figure}
 	\centering
-	\includegraphics[width=.8\linewidth]{graphics/results/spreader-net-confusion}
+	\includegraphics[width=\linewidth]{graphics/results/spreader-net-confusion}
 	\caption{Local column confusion matrix on ideal input (with spreader layer).}\label{fig:local-confusion-spreader}
 \end{figure}
 \par{
@@ -214,7 +214,7 @@
 }
 \begin{figure}
 	\centering
-	\includegraphics[width=.8\linewidth]{graphics/results/crop-net-confusion}
+	\includegraphics[width=\linewidth]{graphics/results/crop-net-confusion}
 	\caption{Local column confusion matrix on ideal input (with crop).}\label{fig:local-confusion-crop}
 \end{figure}
 \par{
@@ -265,7 +265,7 @@
 	Secondly, the final classifier should be implemented to realize the end-to-end system and evaluate its performance.
 }
 \par{
-	Thirdly, as announced in \emph{Section \ref{section:local-column}}, both the local and the shape column could be fed with a cropped image. One could attempt to preemptively discard these outliers and try to optimize the other samples with a smaller input and, hence, more traditional classificators.
+	Finally, as announced in \emph{Section \ref{section:local-column}}, both the local and the shape column could be fed with a cropped image. One could attempt to preemptively discard these outliers and try to optimize the other samples with a smaller input and, hence, more traditional classifiers.
 }
 \begin{table*}
 	\centering
@@ -289,24 +289,12 @@
 	Some comparisons with a challenger architecture are needed to evaluate the effectiveness of the proposed system.
 }
 \par{
-	As an example, a well-known \emph{sliding window} classificator could be used.
+	As an example, a well-known \emph{sliding window} classifier could be used.
 }
 \subsubsection{Sliding window architecture}
 \par{
 	The idea behind this architecture is to crop the input image at different locations (eventually all the ones possible, as in this paper) and use a classifier to assign to the pixels of the considered region an array of confidences.
 }
-\begin{figure}
-	\centering
-	\includegraphics[width=\linewidth]{graphics/results/detector-problem-1}
-	\vskip .05cm
-	\includegraphics[width=\linewidth]{graphics/results/detector-problem-2}
-	\vskip .05cm
-	\includegraphics[width=\linewidth]{graphics/results/detector-problem-3}
-	\vskip .05cm
-	\includegraphics[width=\linewidth]{graphics/results/detector-problem-4}
-	\vskip .05cm
-	\caption{COMMENTARE PROBLEMI}\label{fig:detector-problems}
-\end{figure}
 \begin{figure}
 	\centering
 	\begin{tikzpicture}
@@ -327,7 +315,7 @@
 	\draw[->, draw=red] ($(confidence map window) + (0,-.2)$) -- ($(confidence map window) + (0,-.7)$);
 	\draw[->,draw=blue] (classifier) -- ($(confidence map window)$);
 	\end{tikzpicture}
-	\caption{Sliding window architecture}\label{fig:sliding-window}
+	\caption{Sliding window architecture.}\label{fig:sliding-window}
 \end{figure}
 \par{
 	This cropped regions may overlap. In those circumstances, an heuristic to combine different values of confidences is needed.
@@ -341,6 +329,18 @@
 \par{
 	Since defects may have different dimensions, more refined tecniques could be used to improve the accuracy of the challenger. However, these are outside the scope of this work, and they are proposed as a further development in \emph{Section \ref{section:further-work}}. Moreover, the segmentation tecnique proposed in \emph{Section \ref{section:challenger:image-segmentation}} soothes this problem, since it combines local information from different areas to build the defective regions.
 }
+% \begin{figure}
+% 	\centering
+% 	\includegraphics[width=\linewidth]{graphics/results/detector-problem-1}
+% 	\vskip .05cm
+% 	\includegraphics[width=\linewidth]{graphics/results/detector-problem-2}
+% 	\vskip .05cm
+% 	\includegraphics[width=\linewidth]{graphics/results/detector-problem-3}
+% 	\vskip .05cm
+% 	\includegraphics[width=\linewidth]{graphics/results/detector-problem-4}
+% 	\vskip .05cm
+% 	\caption{COMMENTARE PROBLEMI}\label{fig:detector-problems}
+% \end{figure}
 \subsubsection{Image segmentation}\label{section:challenger:image-segmentation}
 \par{
 	The \emph{confidence map} is used to segmentate the image through a $n+1$ levels whatershed algorithm. However, since the defective regions are always disjunct, the problem can be reduced to a binary whatershed algorithm \cite{ieee:87344} considering all the defective classes as one, and distinguishing them only later. The $n+1$ levels whatershed algorithm is left as a further development in \emph{Section \ref{section:further-work}}.

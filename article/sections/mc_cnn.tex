@@ -1,6 +1,6 @@
-\section{Classificator}\label{section:mc-cnn}
+\section{Classifier}\label{section:mc-cnn}
     \par{
-        The ROIs are then fed into the third part of the proposed architecture, the \emph{classificator}, and properly classified as flawless or flawed; in the latter case, they are assigned a defect class.
+        The ROIs are then fed into the third part of the proposed architecture, the \emph{classifier}, and properly classified as flawless or flawed; in the latter case, they are assigned a defect class.
     }
     \begin{figure}
         \centering
@@ -45,10 +45,10 @@
             \draw[->] ($(classifier) + (.5, 0)$) -- ($(output) + (-.45, 0)$);
     
         \end{tikzpicture}
-        \caption{General structure of a MC-CNN}\label{fig:mc-cnn}
+        \caption{General structure of a MC-CNN.}\label{fig:mc-cnn}
     \end{figure}
     \par{
-        The \emph{classificator} is structured as a MC-CNN, which in general has the structure illustrated in \emph{Figure \ref{fig:mc-cnn}}. 
+        The \emph{classifier} is structured as a MC-CNN, which in general has the structure illustrated in \emph{Figure \ref{fig:mc-cnn}}. 
     }
     \par{
         Firstly, the input image I is preprocessed to extract $n$ column input P.
@@ -57,7 +57,7 @@
         Secondly, these P are fed into different CNNs in parallel, therefore all the columns are independent one another. 
     }
     \par{
-        Finally, the output of the MC-CNN columns is combined through a classificator, e.g. a neural network (NN), to produce the final output.
+        Finally, the output of the MC-CNN columns is combined through a classifier, e.g. a neural network (NN), to produce the final output.
     }
     \par{
         The choice of using a MC-CNN is due to several reasons, beyond the proved effectiveness described in \cite{ieee:6248110}.
@@ -84,7 +84,7 @@
         The proposed MC-CNN has three columns, namely a \emph{shape}, a \emph{local} and a \emph{global} column.
     }
     \par{
-        A final consideration about the architecture training has to be done in order to comprehend the upper bound reported in \emph{Section \ref{section:results}}. Indeed, the \emph{classificator} was implemented before the \emph{detector}. In fact, although the former relies on the latter for the ROIs and their relative features (described in \emph{Section \ref{section:shape-column}}, \emph{\ref{section:local-column}} and \emph{\ref{section:global-column}}), it was preempting supposed to have an ideal \emph{detector}, i.e. one which proposes the optimal ROIs.
+        A final consideration about the architecture training has to be done in order to comprehend the upper bound reported in \emph{Section \ref{section:results}}. Indeed, the \emph{classifier} was implemented before the \emph{detector}. In fact, although the former relies on the latter for the ROIs and their relative features (described in \emph{Section \ref{section:shape-column}}, \emph{\ref{section:local-column}} and \emph{\ref{section:global-column}}), it was preempting supposed to have an ideal \emph{detector}, i.e. one which proposes the optimal ROIs.
     }
     \par{
         This effort-outcome oriented approach was done for two main reasons.
@@ -93,7 +93,7 @@
         Firstly, it highlights the upper bound reachable with the whole architecture.
     }
     \par{
-        Secondly, dividing the \emph{detector} outcome from the \emph{classificator} input during the training allows to export the trained MC-CNN and to use it within the challenger architecture, proposed in \emph{Section \ref{section:further-work}}.
+        Secondly, dividing the \emph{detector} outcome from the \emph{classifier} input during the training allows to export the trained MC-CNN and to use it within the challenger architecture, proposed in \emph{Section \ref{section:further-work}}.
     }
     \par{
         All the three columns share the common ideas used in edge-cutting work \cite{stanford:cs231n} in their structure, beside some their idiosyncrasies. These are explained in \emph{Section \ref{section:shape-column}}, \emph{\ref{section:local-column}} and \emph{\ref{section:global-column}}.
@@ -118,10 +118,10 @@
             \caption{Shape column input (top) and input filled (bottom).}\label{fig:mc-cnn:shape-input}
         \end{figure}
         \par{
-            An example of this binary images is given in \emph{Figure \ref{fig:mc-cnn:shape-input}} (top). The shape is centered in a $1600\times 256$ black image. Indeed, the size of the input is set to the largest area that could be found, i.e. a defect spanning over the entire surface. The shape is centered to ensure that the classificator is translation independent. 
+            An example of this binary images is given in \emph{Figure \ref{fig:mc-cnn:shape-input}} (top). The shape is centered in a $1600\times 256$ black image. Indeed, the size of the input is set to the largest area that could be found, i.e. a defect spanning over the entire surface. The shape is centered to ensure that the classifier is translation independent. 
         }
         \par{
-            The \emph{detector}, since will not be ideal, will provide to the \emph{classificator} also false positive ROIs, i.e. regions that are not defective. Therefore, this stage of the architecture need to be able to discard flawless proposed regions.
+            The \emph{detector}, since is not ideal, provides to the \emph{classifier} also false positive ROIs, i.e. regions that are not defective. Therefore, this stage of the architecture need to be able to discard flawless proposed regions.
         }
         \par{
             However, training the shape column to classify some shapes as not defective is not feasible. Indeed, there is not a flawless surface shape, and manually generating it would not be safe.
@@ -245,7 +245,7 @@
             The output layer is analogous to the one in \emph{Section \ref{section:shape-column}}.
         }
         \par{
-            The peculiarity of this CNN is in its first convolutional layer, named \emph{spreader}. It is a novel application of the dilation factor. 
+            The peculiarity of this CNN lies in its first convolutional layer, named \emph{spreader}. It is a novel application of the dilation factor. 
         }
         \par{
             Recall that given a $n\times n$ filter, a dilation of $[a\;b]$ applied to the given filter produces a $\left[\left(n-1\right)*a + 1\right] \times \left[\left(n-1\right)*b + 1\right]$ filter. The original entries are equally spread in the new filter, whereas the additional values are null.
@@ -278,20 +278,20 @@
                     
         \end{BVerbatim}
         \par{
-            The dilation factor is used in CNNs to implement a wider receptive field, using the same number of weights. Indeed, a $K_1 \times K_2$ filter convolves pixels in an area of $K_1 \times K_2$. Using a dilation factor of $\left[a\;b\right]$ it would convolve the same number of pixels, but on an area of $\left[\left(K_1-1\right)*a + 1\right] \times \left[\left(K_2-1\right)*b + 1\right]$.
+            The dilation factor is used in CNNs to implement a wider receptive field, using the same number of weights. Indeed, a $K_1 \times K_2$ filter convolves pixels in an area of $K_1 \times K_2$. Using a dilation factor of $\left[a\;b\right]$ it would convolve the same number of pixels, but on an area of $\left[\left(K_1-1\right)*a + 1\right] \times \left[\left(K_2-1\right)*b + 1\right]$. Using a proper stride, this would be the same of a downsampling followed by a convolution.
         }
         \par{
             However, in the proposed architecture it is used in a novel way, to address the problem of different-sized bounding boxes.
         }
         \par{
-        
+            In fact, the usage of the \emph{spreader} layer aims to reproduce in different location of the activation the original informative regions, through some learned linear functions. Indeed, with a proper sizing, the convolution in the first layer results in the sum of the bias factor and a single informative pixel multiplied by a weight of the filter.
         }
         \begin{figure}
             \centering
             \includegraphics[width=\linewidth]{graphics/architecture/act_net}
             \vskip .05cm
             \includegraphics[width=\linewidth]{graphics/architecture/act_net_hope}
-            \caption{Learned features with a traditional convolutional layer (top) and with the \emph{spreader} (bottom). There are $4$ tiled features in both cases.}\label{fig:learned-features-hope-net}
+            \caption{Learned features with a traditional convolutional layer (top) and with the \emph{spreader} (bottom). $4$ tiled features are illustrated in both cases.}\label{fig:learned-features-hope-net}
         \end{figure}
         \par{
             In \emph{Figure \ref{fig:learned-features-hope-net}} the learned features of four $3\times3$ filters of a traditional convolutional layer with padding $\left[673\;1\right]$ are juxtaposed to the ones learned by four $3\times 3$ filters with a dilation factor of $\left[400\;400\right]$ and proper padding $\left[672\;0\right]$. 
@@ -300,7 +300,7 @@
             The two pictures are scaled to be paired. However, the former is $1600 \times 1600$, the latter is $800\times 800$. Still it is patent that the proposed approach greatly exceed the traditional one in terms of information kept. 
         }
         \par{
-            Indeed, the problem with convolutional layer with massive padding (in alternative to cropping) is that large empty regions have null activations. Pooling layers then keep the proportions between \emph{death} area and the informative, central, region. This leads to a lot of memory waste.
+            Indeed, the problem with convolutional layer with massive padding (in alternative to cropping) is that large empty regions have null activations. Then, pooling layers keep the proportions between \emph{death} area and the informative, central, region. This leads to a lot of memory waste.
         }
         \par{
             A $3\times 3$ filter with a dilation factor of half the output activation size and proper padding enhance the effectiveness of following layers, recycling empty areas. In fact, they are convolved with the central informative region.
@@ -334,12 +334,12 @@
             \begin{subfigure}{.5\linewidth}
                 \centering
                 \includegraphics[width=.9\linewidth]{graphics/architecture/act_net_out}
-                \caption{}
+                % \caption{}
             \end{subfigure}\hfill
             \begin{subfigure}{.5\linewidth}
                 \centering
                 \includegraphics[width=.9\linewidth]{graphics/architecture/act_net_hope_out}
-                \caption{}
+                % \caption{}
             \end{subfigure}
             \caption{Final layer features with classical architecture ($512$ $13\times 13$ features) (a) and with the \emph{spreader} ($128$ $13\times 13$ features) (b).}
             \label{fig:features-last-layer}
@@ -400,11 +400,11 @@
             \centering
             \begin{tikzpicture}
                 % input layer
-                \foreach \i in {0,...,23} % TODO fix
+                \foreach \i in {0,...,23}
                     \node[circle, draw, minimum height=1, minimum width=1,fill=blue] (input \i) at (0,-\i*0.5) {};
 
                 % hidden layer
-                \foreach \i in {0,...,15} % TODO fix
+                \foreach \i in {0,...,15}
                     \node[circle, draw, minimum height=1, minimum width=1,fill=orange] (hidden \i) at ($(input 4) + (2,-\i*0.5)$) {};
 
                 % from input to hidden layer
@@ -413,7 +413,7 @@
                         \draw ($(input \i) + (.2,0)$) -- ($(hidden \j) + (-.2,0)$);
 
                 % hidden layer 2
-                \foreach \i in {0,...,15} % TODO fix
+                \foreach \i in {0,...,15}
                     \node[circle, draw, minimum height=1, minimum width=1,fill=orange] (hidden 2 \i) at ($(hidden 0) + (2,-\i*0.5)$) {};
 
                 % from hidden to hidden layer
@@ -461,5 +461,5 @@
             Observe that bias units have not been included in the picture.
         }
         \par{
-            The classificator is left as further work, together with both shape and global columns, in \emph{Section \ref{section:further-work}}.
+            The classifier is left as further work, together with both shape and global columns, in \emph{Section \ref{section:further-work}}.
         }
