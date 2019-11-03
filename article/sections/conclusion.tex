@@ -5,10 +5,148 @@
 \par{
 	From results in \emph{Section \ref{section:results:classificator}} one can infer that the proposed novel usage of the dilatation factor in the first convolutional layer may represents an effective alternative to cropping when dealing with images of different sizes.
 }
+
 \subsection{Detector}\label{section:results:detector}
 \par{
-	The Bayesian optimization was performed using batches of $128$ images and $50$ iterations. During each iteration, the average loss function was computed over the batch and used to predict the next point in the hyperparameters domain. Losses of $0.78$, $0.92$, $0.68$ and $0.59$ were obtained with detectors of classes $1$, $2$, $3$ and $4$ respectively.
-}	
+	The Bayesian optimization was performed using batches of $128$ images and $50$ iterations. During each iteration, the average loss function was computed over the batch and used to predict the next point in the hyperparameters domain. 
+%	Losses of $0.78$, $0.92$, $0.68$ and $0.59$ were obtained with detectors of classes $1$, $2$, $3$ and $4$ respectively.
+}
+\par{
+	After the optimization procedure, the trained detectors were tested using batches of $1024$ images ($720$ for the class $3$) and computing on them the accuracy measure:
+	\begin{equation*}
+	\mathcal{A} = \frac{\lvert X \cap Y \rvert}{\lvert Y \rvert}.
+	\end{equation*}
+}
+\begin{table}
+	\centering
+	\normalsize	
+	\begin{tabular}{|c|c|c|c|c|c|}
+		\hline		
+		\textbf{No.} & \textbf{Equal.} & \textbf{MinMax} & \textbf{Batch} & \textbf{Loss} & \textbf{Accuracy}\\ \hline
+		\multirow{3}{*}{1} & no & no & 1024 & 0.8773 & 0.6234 \\
+		& no & yes & 1024 & \textbf{0.8378} & \textbf{0.5477} \\
+		& yes & no & 1024 & 0.9205 & 0.6752 \\
+		& yes & yes & 1024 & 0.7977 & 0.4925 \\ \hline
+		\multirow{3}{*}{2} & no & no & 760 & 0.9103 & 0.7318\\
+		& no & yes & 760 & \textbf{0.9061} & \textbf{0.7738} \\
+		& yes & no & 760 & 0.9676 & 0.9587 \\
+		& yes & yes & 760 & 0.9172 & 0.3333 \\ \hline
+		\multirow{3}{*}{3} & no & no & 1024 & 0.7382 & 0.6710 \\
+		& no & yes & 1024 & \textbf{0.6852} & \textbf{0.6168} \\
+		& yes & no & 1024 & 0.8161 & 0.9145 \\
+		& yes & yes & 1024 & 0.6995 & 0.4600 \\ \hline
+		\multirow{3}{*}{4} & no & no & 1024 & 0.6261 & 0.6190 \\
+		& no & yes & 1024 & \textbf{0.6455} & \textbf{0.7528} \\
+		& yes & no & 1024 & 0.6694 & 0.7334 \\
+		& yes & yes & 1024 & 0.6050 & 0.5550 \\ \hline
+	\end{tabular}
+	\vspace{0.25cm}
+	\caption{Comparison between performances obtained by different class (No.) detectors, either using or not the equalization and the MinMax normalization. In bold are reported the best detectors obtained, according to the study.}\label{table:test-bayesopt}
+\end{table}
+\par{
+	In \emph{Table \ref{table:test-bayesopt}} are reported the average loss and accuracy obtained by the trained detectors, either using or not the equalization and the MinMax normalization on the images. These results need to be studied recalling that the defects have been identified with bounding boxes. Hence, overhead pixels are intrinsically part of our approach and the values of the loss functions have a lower bound greater than $0$.
+}
+\par{
+	At first glance, it is clear that either in the equalized and in the non-equalized setting, the MinMax normalization improves the performance of each detector. Indeed, despite the accuracy increase by using normalization, also the loss increase. This means that the localization of more defects is not due to an increase of the detector precision, but only to the introduction of more overhead pixels.
+}
+\begin{table}
+	\centering
+	\normalsize
+	\begin{tabular}{|c|c|c|c|c|}
+		\hline
+		\textbf{Parameters} & \textbf{Class 1} & \textbf{Class 2} & \textbf{Class 3} & \textbf{Class 4}\\ \hline
+		$N$ & 4 & 3 & 3 & 3 \\ \hline
+		$U$ & 11 & 7 & 16 & 15 \\ \hline
+		$\lambda$ & 4.2905 & 4.0612 & 4.5523 & 3.9422 \\ \hline
+		$s$ & 1.7205 & 2.3772 & 2.9674 & 2.8169 \\ \hline
+		$T_{low}$ & 43 & 54 & 49 & 53 \\ \hline
+		$T_{high}$ & 242 & 164 & 126 & 106 \\ \hline
+		$\alpha$ & 12 & 13 & 12 & 19 \\ \hline
+		$T_{hole}$ & 14168 & 14536 & 10651 & 10594 \\ \hline
+		$T_{region}$ & 541 & 1158 & 682 & 1204 \\ \hline
+	\end{tabular}
+	\vspace{0.25cm}
+	\caption{Optimal parameters obtained for each class with Bayesian optimization (non-equalized setting).}
+	\label{table:params-bayesopt}
+\end{table}
+\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth]{graphics/results/detector-result-class1-1}
+	\vskip .05cm
+	\includegraphics[width=\linewidth]{graphics/results/detector-result-class1-2}
+	\vskip .05cm
+	\includegraphics[width=\linewidth]{graphics/results/detector-result-class1-3}
+	\vskip .05cm
+	\includegraphics[width=\linewidth]{graphics/results/detector-result-class1-4}
+	\vskip .05cm
+	\caption{An example of the region proposal procedure performed on an image with a defect of class No.1.}\label{fig:detector-results-1}
+\end{figure}
+\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth]{graphics/results/detector-result-class2-1}
+	\vskip .05cm
+	\includegraphics[width=\linewidth]{graphics/results/detector-result-class2-2}
+	\vskip .05cm
+	\includegraphics[width=\linewidth]{graphics/results/detector-result-class2-3}
+	\vskip .05cm
+	\includegraphics[width=\linewidth]{graphics/results/detector-result-class2-4}
+	\vskip .05cm
+	\caption{An example of the region proposal procedure performed on an image with a defect of class No.2.}\label{fig:detector-results-2}
+\end{figure}
+\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth]{graphics/results/detector-result-class3-1}
+	\vskip .05cm
+	\includegraphics[width=\linewidth]{graphics/results/detector-result-class3-2}
+	\vskip .05cm
+	\includegraphics[width=\linewidth]{graphics/results/detector-result-class3-3}
+	\vskip .05cm
+	\includegraphics[width=\linewidth]{graphics/results/detector-result-class3-4}
+	\vskip .05cm
+	\caption{An example of the region proposal procedure performed on an image with a defect of class No.3.}\label{fig:detector-results-3}
+\end{figure}
+\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth]{graphics/results/detector-result-class4-1}
+	\vskip .05cm
+	\includegraphics[width=\linewidth]{graphics/results/detector-result-class4-2}
+	\vskip .05cm
+	\includegraphics[width=\linewidth]{graphics/results/detector-result-class4-3}
+	\vskip .05cm
+	\includegraphics[width=\linewidth]{graphics/results/detector-result-class4-4}
+	\vskip .05cm
+	\caption{An example of the region proposal procedure performed on an image with a defect of class No.4.}\label{fig:detector-results-4}
+\end{figure}
+\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth]{graphics/results/acc-segmentation-class1}
+	\vskip .05cm
+	\includegraphics[width=\linewidth]{graphics/results/acc-segmentation-class2}
+	\vskip .05cm
+	\includegraphics[width=\linewidth]{graphics/results/acc-segmentation-class3}
+	\vskip .05cm
+	\includegraphics[width=\linewidth]{graphics/results/acc-segmentation-class4}
+	\vskip .05cm
+	\caption{Accuracies distributions of the trained detectors, computed on their test sets (non-equalized setting).}\label{fig:segmentation-test}
+\end{figure}
+\par{
+	Let consider first the detectors obtained without equalization. Accuracies $0.55$, $0.77$, $0.62$ and $0.75$ have been reached for classes $1$, $2$, $3$ and $4$ respectively. Classes $3$ and $4$ have the lowest values of loss function, which means that the detection of these defects is generally more precise and with lower amount of overhead pixels.
+}
+\par{
+	In \emph{Table \ref{table:params-bayesopt}} the optimal parameters values are reported. It is visible that tuned parameters reflect the shape of defects studied in \emph{Section \ref{subsection:defects}}. In \emph{Figure \ref{fig:detector-results-1}, \ref{fig:detector-results-2}, \ref{fig:detector-results-3}} and \emph{\ref{fig:detector-results-4}} are shown some examples of localization of defects from class $1$, $2$, $3$ and $4$ respectively. In \emph{Figure \ref{fig:segmentation-test}} the test accuracies distribution for each detector class are reported. 
+}
+\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth]{graphics/results/acc-segmentation-class1-eq}
+	\vskip .05cm
+	\includegraphics[width=\linewidth]{graphics/results/acc-segmentation-class2-eq}
+	\vskip .05cm
+	\includegraphics[width=\linewidth]{graphics/results/acc-segmentation-class3-eq}
+	\vskip .05cm
+	\includegraphics[width=\linewidth]{graphics/results/acc-segmentation-class4-eq}
+	\vskip .05cm
+	\caption{Accuracies distributions of the trained detectors, computed on their test sets (equalized images).}\label{fig:segmentation-test-eq}
+\end{figure}
 \begin{table}
 	\centering
 	\normalsize
@@ -26,120 +164,40 @@
 		$T_{region}$ & 510 & 942 & 727 & 1134 \\ \hline
 	\end{tabular}
 	\vspace{0.25cm}
-	\caption{Optimal parameters obtained for each class with Bayesian optimization.}
-	\label{table:params-bayesopt}
-\end{table}
-\par{
-	In \emph{Table \ref{table:params-bayesopt}} the optimal parameters values are reported. It is visible that tuned parameters reflect the shape of defects studied in \emph{Section \ref{subsection:defects}}.
-}	
-%	\begin{figure}
-%		\centering
-%		\includegraphics[width=\linewidth]{graphics/results/segmentation_opt_class1}
-%		\caption{Bayesian optimization of class 1 detector}\label{fig:bayesopt-class1}
-%	\end{figure}
-%	\begin{figure}
-%		\centering
-%		\includegraphics[width=\linewidth]{graphics/results/segmentation_opt_class1}
-%		\caption{Bayesian optimization of class 2 detector}\label{fig:bayesopt-class2}
-%	\end{figure}
-%	\begin{figure}
-%		\centering
-%		\includegraphics[width=\linewidth]{graphics/results/segmentation_opt_class3}
-%		\caption{Bayesian optimization of class 3 detector}\label{fig:bayesopt-class3}
-%	\end{figure}
-%	\begin{figure}
-%		\centering
-%		\includegraphics[width=\linewidth]{graphics/results/segmentation_opt_class4}
-%		\caption{Bayesian optimization of class 4 detector}\label{fig:bayesopt-class4}
-%	\end{figure}
-\begin{figure}
-	\centering
-	\includegraphics[width=\linewidth]{graphics/results/acc-segmentation-class1}
-	\vskip .05cm
-	\includegraphics[width=\linewidth]{graphics/results/acc-segmentation-class2}
-	\vskip .05cm
-	\includegraphics[width=\linewidth]{graphics/results/acc-segmentation-class3}
-	\vskip .05cm
-	\includegraphics[width=\linewidth]{graphics/results/acc-segmentation-class4}
-	\vskip .05cm
-	\caption{Accuracies distributions of the trained detectors, computed on their test sets.}\label{fig:segmentation-test}
-\end{figure}
-\begin{table}
-	\centering
-	\normalsize
-	\begin{tabular}{|c|c|c|c|c|c|}
-		\hline
-		\textbf{No.} & \textbf{MinMax} & \textbf{Eq.} & \textbf{Batch size} & \textbf{Loss} & \textbf{Accuracy}\\ \hline
-		\multirow{3}{*}{1} & no & no & 1024 & & \\
-		& yes & no & 1024 & & \\
-		& yes & yes & 1024 & 0.7977 & 0.4925 \\ \hline
-		\multirow{3}{*}{2} & no & no & 760 & & \\
-		& yes & no & 760 & & \\
-		& yes & yes & 760 & 0.9172 & 0.3333 \\ \hline
-		\multirow{3}{*}{3} & no & no & 1024 & & \\
-		& yes & no & 1024 & & \\
-		& yes & yes & 1024 & 0.6995 & 0.4600 \\ \hline
-		\multirow{3}{*}{4} & no & no & 1024 & & \\
-		& yes & no & 1024 & & \\
-		& yes & yes & 1024 & 0.6050 & 0.5550 \\ \hline
-	\end{tabular}
-	\vspace{0.25cm}
-	\caption{Comparison between performances obtained by different class (No.) detectors, either using or not the MinMax normalization and the equalization.}\label{table:bayesopt-params}
+	\caption{Optimal parameters obtained for each class with Bayesian optimization (equalized setting).}
+	\label{table:params-bayesopt-eq}
 \end{table}
 \begin{figure}
 	\centering
-	\includegraphics[width=\linewidth]{graphics/results/detector-result-class1}
+	\includegraphics[width=\linewidth]{graphics/results/detector-result-eq-1}
 	\vskip .05cm
-	\includegraphics[width=\linewidth]{graphics/results/detector-result-class1-edges}
+	\includegraphics[width=\linewidth]{graphics/results/detector-result-eq-2}
 	\vskip .05cm
-	\includegraphics[width=\linewidth]{graphics/results/detector-result-class1-segmentation}
+	\includegraphics[width=\linewidth]{graphics/results/detector-result-eq-3}
 	\vskip .05cm
-	\includegraphics[width=\linewidth]{graphics/results/detector-result-class1-bounding-box}
+	\includegraphics[width=\linewidth]{graphics/results/detector-result-eq-4}
 	\vskip .05cm
-	\caption{An example of the region proposal procedure performed on an image with a defect of class No.1.}\label{fig:detector-results-1}
-\end{figure}
-\begin{figure}
-	\centering
-	\includegraphics[width=\linewidth]{graphics/results/detector-result-class2}
+	\includegraphics[width=\linewidth]{graphics/results/detector-result-eq-1-2}
 	\vskip .05cm
-	\includegraphics[width=\linewidth]{graphics/results/detector-result-class2-edges}
+	\includegraphics[width=\linewidth]{graphics/results/detector-result-eq-2-2}
 	\vskip .05cm
-	\includegraphics[width=\linewidth]{graphics/results/detector-result-class2-segmentation}
+	\includegraphics[width=\linewidth]{graphics/results/detector-result-eq-3-2}
 	\vskip .05cm
-	\includegraphics[width=\linewidth]{graphics/results/detector-result-class2-bounding-box}
+	\includegraphics[width=\linewidth]{graphics/results/detector-result-eq-4-2}
 	\vskip .05cm
-	\caption{An example of the region proposal procedure performed on an image with a defect of class No.2.}\label{fig:detector-results-2}
-\end{figure}
-\begin{figure}
-	\centering
-	\includegraphics[width=\linewidth]{graphics/results/detector-result-class3}
-	\vskip .05cm
-	\includegraphics[width=\linewidth]{graphics/results/detector-result-class3-edges}
-	\vskip .05cm
-	\includegraphics[width=\linewidth]{graphics/results/detector-result-class3-segmentation}
-	\vskip .05cm
-	\includegraphics[width=\linewidth]{graphics/results/detector-result-class3-bounding-box}
-	\vskip .05cm
-	\caption{An example of the region proposal procedure performed on an image with a defect of class No.3.}\label{fig:detector-results-3}
-\end{figure}
-\begin{figure}
-	\centering
-	\includegraphics[width=\linewidth]{graphics/results/detector-result-class4}
-	\vskip .05cm
-	\includegraphics[width=\linewidth]{graphics/results/detector-result-class4-edges}
-	\vskip .05cm
-	\includegraphics[width=\linewidth]{graphics/results/detector-result-class4-segmentation}
-	\vskip .05cm
-	\includegraphics[width=\linewidth]{graphics/results/detector-result-class4-bounding-box}
-	\vskip .05cm
-	\caption{An example of the region proposal procedure performed on an image with a defect of class No.4.}\label{fig:detector-results-4}
+	\caption{Effect of the equalization on the detector performance when images have very large and black regions.}\label{fig:equalization-problems}
 \end{figure}
 \par{
-	The trained detectors were tested using the accuracy measure:
-	\begin{equation*}
-		\mathcal{A} = \frac{\lvert X \cap Y \rvert}{\lvert Y \rvert}.
-	\end{equation*}
-	The average accuracies are reported in \emph{Table \ref{fig:segmentation-test}}. In \emph{Figure \ref{fig:segmentation-test}} the accuracies distribution for each detector class are reported. 
+	The distribution of accuracies in the equalized setting (\emph{Figure \ref{fig:segmentation-test-eq}}) have a very different behaviour. Indeed, there is a larger amount of images with values of accuracies near zero. Hence, average accuracies of $0.49$, $0.33$, $0.46$ and $0.55$ only have been reached for classes $1$, $2$, $3$ and $4$ respectively.
+}
+\par{
+	One of the main problems behind this results is that a \emph{global} equalization procedure has been used. Indeed, if there are very wide and monochromatic regions (e.g., black backgrounds), not significant patterns may arise  (e.g., noise). Examples of these situations are shown in \emph{Figure \ref{fig:segmentation-test-eq}}. This have a negative impact on the optimization procedure and the optimum values of parameters obtained (\emph{Table \ref{table:params-bayesopt-eq}}).
+}
+\par{
+	On the other hand, despite the accuracies of equalized detectors are lower, the obtained losses are slightly different from the non-equalized ones. This means that, even if a equalized detector find only few defects, the proportion of overhead pixels is lower. Hence, equalized detectors seems to be more precise. This is also confirmed by the performance of the classificator, which perform better on equalized images.
+}
+\par{
+	These results suggest that higher performance could be obtained by detectors by using a proper equalization procedure, which is able to identify the \emph{local} presence of the situation described above.
 }
 
 \subsection{Classificator}\label{section:results:classificator}
@@ -237,6 +295,18 @@
 \par{
 	The idea behind this architecture is to crop the input image at different locations (eventually all the ones possible, as in this paper) and use a classifier to assign to the pixels of the considered region an array of confidences.
 }
+\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth]{graphics/results/detector-problem-1}
+	\vskip .05cm
+	\includegraphics[width=\linewidth]{graphics/results/detector-problem-2}
+	\vskip .05cm
+	\includegraphics[width=\linewidth]{graphics/results/detector-problem-3}
+	\vskip .05cm
+	\includegraphics[width=\linewidth]{graphics/results/detector-problem-4}
+	\vskip .05cm
+	\caption{COMMENTARE PROBLEMI}\label{fig:detector-problems}
+\end{figure}
 \begin{figure}
 	\centering
 	\begin{tikzpicture}

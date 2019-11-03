@@ -191,3 +191,14 @@ bounding_box =  | maxX maxY |
         \par{
             As a first approximation, the implementation of the detector was done to output the bounding boxes instead of the alpha shape. Therefore, the $X$ set in \emph{Section \ref{subsection:segmentation}} is characterized by all the pixels inside the bounding box of the alpha shape regions.
         }
+    	\par{
+    		In \emph{Figure \ref{fig:segmentation-bb-example}} examples of ROIs and bounding boxes obtained from a surface image can be found.
+    	}
+    	\begin{figure} 		  
+    		\includegraphics[width=\linewidth]{graphics/architecture/detector-ex}
+    		\vskip .05cm \includegraphics[width=\linewidth]{graphics/architecture/detector-ex-segmentated}
+    		\vskip .05cm \includegraphics[width=\linewidth]{graphics/architecture/detector-ex-bounding-box}
+    		\vskip .05cm
+    		\caption{ROIs and bounding boxes obtained on a example image using manually-tuned parameters.}
+    		\label{fig:segmentation-bb-example}
+    	\end{figure}
