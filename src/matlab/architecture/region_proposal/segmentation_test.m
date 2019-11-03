@@ -65,7 +65,7 @@ function [loss, acc, test_data] = segmentation_test(images, dataset, class, batc
         
         fprintf("loss: %.3f acc: %.3f\n", loss_i, acc_i);
                                            
-        loss = loss + 1 - loss_i;
+        loss = loss + loss_i;
         acc = acc + acc_i;
         
         test_data(n,:) = {im_name, loss, acc};

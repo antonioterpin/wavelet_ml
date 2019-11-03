@@ -7,17 +7,21 @@ dataset = readtable(augmented_dataset_path,'Delimiter', ',');
 % images
 global global_feature_preprocessed_images global_feature_images
 % w/o equalization
-% images = imageDatastore(convertStringsToChars(global_feature_images),...
-%                        'IncludeSubfolders', true,...
-%                        'LabelSource', 'foldernames'); % use foldernames as labels
-% w/ equalization
-images = imageDatastore(convertStringsToChars(global_feature_preprocessed_images),...
+images = imageDatastore(convertStringsToChars(global_feature_images),...
                        'IncludeSubfolders', true,...
                        'LabelSource', 'foldernames'); % use foldernames as labels
+                   
+% w/ equalization
+images_eq = imageDatastore(convertStringsToChars(global_feature_preprocessed_images),...
+                           'IncludeSubfolders', true,...
+                           'LabelSource', 'foldernames'); % use foldernames as labels
 
 % names of images
 [~,name,ext] = cellfun(@fileparts,images.Files,'UniformOutput',false);
 images_name = join([name ext],'');
+clear('name','ext');
+[~,name,ext] = cellfun(@fileparts,images_eq.Files,'UniformOutput',false);
+images_eq_name = join([name ext],'');
 clear('name','ext');
 
 % highlighted images
