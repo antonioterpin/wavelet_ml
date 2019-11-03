@@ -93,6 +93,7 @@
     		\caption{Output of the edge detector on a sample image using different thresholds $(T_{low},T_{high})$. Respectively, from top to bottom: $(30,50)$, $(60,100)$ and $(100,150)$. Standard parameters of the Kovesi algorithm has been used.}
     		\label{fig:edge-detector-example}
     	\end{figure}
+    
     \subsection{Image Segmentation}\label{subsection:segmentation}
         \par{
             Given the plausible edges found by the previous step, image segmentation is performed banking on alpha shapes \cite{springer:10.1007/11907350_46}.
@@ -123,7 +124,7 @@
             As an example, in \emph{Figure \ref{fig:example-alpha-shape}} are compared the alpha-shapes with different $\alpha$ values of a set of points. In \emph{Figure \ref{fig:example-convex-hull}} is shown the convex-hull of the same set of points. The choice of alpha shapes for the given task is clear.
         }
         \par{
-            However, in order to obtain topologically correct image segmentation, three parameters need to be properly choosen \cite{springer:10.1007/11907350_46}. These are the \emph{alpha-radius}, the \emph{hole-thresholding} and the \emph{region-thresholding} \cite{matlab:alpha-shape}.
+            However, in order to obtain topologically correct image segmentation, three parameters need to be properly chosen \cite{springer:10.1007/11907350_46}. These are the \emph{alpha-radius} $\alpha$, the \emph{hole-thresholding} $T_{hole}$ and the \emph{region-thresholding} $T_{region}$ \cite{matlab:alpha-shape}.
         }
         \par{
             The first is the value of $\alpha$, the second is the maximum area of interior holes that is filled and the third is the largest area that is suppressed (ignored).
@@ -190,3 +191,14 @@ bounding_box =  | maxX maxY |
         \par{
             As a first approximation, the implementation of the detector was done to output the bounding boxes instead of the alpha shape. Therefore, the $X$ set in \emph{Section \ref{subsection:segmentation}} is characterized by all the pixels inside the bounding box of the alpha shape regions.
         }
+    	\par{
+    		In \emph{Figure \ref{fig:segmentation-bb-example}} examples of ROIs and bounding boxes obtained from a surface image can be found.
+    	}
+    	\begin{figure} 		  
+    		\includegraphics[width=\linewidth]{graphics/architecture/detector-ex}
+    		\vskip .05cm \includegraphics[width=\linewidth]{graphics/architecture/detector-ex-segmentated}
+    		\vskip .05cm \includegraphics[width=\linewidth]{graphics/architecture/detector-ex-bounding-box}
+    		\vskip .05cm
+    		\caption{ROIs and bounding boxes obtained on a example image using manually-tuned parameters.}
+    		\label{fig:segmentation-bb-example}
+    	\end{figure}
