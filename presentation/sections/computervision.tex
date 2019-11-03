@@ -101,40 +101,40 @@
         }
     \end{frame}
 
-    \begin{frame}
-        \frametitle{Pixel-based image segmentation}
-        \framesubtitle{Whatershed}
-        \begin{columns}[onlytextwidth]
-            \column{0.5\textwidth}
-            \includegraphics[width=\textwidth]{graphics/computervision/whatershed-plane}
-            \column{0.5\textwidth}
-            \includegraphics[width=\textwidth]{graphics/computervision/whatershed-surf}
-        \end{columns}
-        \only <1> {
-            \begin{block}{Whatershed and immersion}
-                The above pictures both show the same function defined over a 2D domain. Suppose to immerse the above right surface in some liquid, which gradually fill the two holes.
-            \end{block}
-        }
-        \only <2> {
-            \begin{block}{Whatershed and immersion}
-                At some point the two volumes of liquid will meet, in particular they will flood at the same time over the green colored surface region.
-            \end{block}
-        }
-        \only <3> {
-            \begin{block}{Whatershed and immersion}
-                This region is called whatershed and differentiates two areas of the image. Hence, an image can be segmentated considering its whatersheds.
-            \end{block}
-        }
-    \end{frame}
+    % \begin{frame}
+    %     \frametitle{Pixel-based image segmentation}
+    %     \framesubtitle{Whatershed}
+    %     \begin{columns}[onlytextwidth]
+    %         \column{0.5\textwidth}
+    %         \includegraphics[width=\textwidth]{graphics/computervision/whatershed-plane}
+    %         \column{0.5\textwidth}
+    %         \includegraphics[width=\textwidth]{graphics/computervision/whatershed-surf}
+    %     \end{columns}
+    %     \only <1> {
+    %         \begin{block}{Whatershed and immersion}
+    %             The above pictures both show the same function defined over a 2D domain. Suppose to immerse the above right surface in some liquid, which gradually fill the two holes.
+    %         \end{block}
+    %     }
+    %     \only <2> {
+    %         \begin{block}{Whatershed and immersion}
+    %             At some point the two volumes of liquid will meet, in particular they will flood at the same time over the green colored surface region.
+    %         \end{block}
+    %     }
+    %     \only <3> {
+    %         \begin{block}{Whatershed and immersion}
+    %             This region is called whatershed and differentiates two areas of the image. Hence, an image can be segmentated considering its whatersheds.
+    %         \end{block}
+    %     }
+    % \end{frame}
 
-    \begin{frame}
-        \frametitle{Pixel-based image segmentation}
-        \framesubtitle{Whatershed}
-        % \includegraphics[width=\textwidth]{graphics/whatershed-plane}
-        TODO insert example image\\
-        % \includegraphics[width=\textwidth]{graphics/whatershed-surf}
-        TODO insert example image
-    \end{frame}
+    % \begin{frame}
+    %     \frametitle{Pixel-based image segmentation}
+    %     \framesubtitle{Whatershed}
+    %     % \includegraphics[width=\textwidth]{graphics/whatershed-plane}
+    %     TODO insert example image\\
+    %     % \includegraphics[width=\textwidth]{graphics/whatershed-surf}
+    %     TODO insert example image
+    % \end{frame}
 
     % \begin{frame}
     %     \frametitle{Pixel-based image segmentation}
@@ -151,70 +151,79 @@
     %         \end{itemize}
     % \end{frame}
 
-    \begin{frame}
-        \frametitle{Edge-based image segmentation}
-        \framesubtitle{Wavelet \& Phase Congruency \& Alpha-Shape}
-        \includegraphics[width=\textwidth]{graphics/computervision/edge-odd}
-        \includegraphics[width=\textwidth]{graphics/computervision/edge-odd-plot}
-        \begin{exampleblock}{Odd transition}
-            Given a function defined on a $2D$ domain, a local odd transition is likely to describe border edge.
-        \end{exampleblock}
+    \subsection{Alpha-shape}
+    \begin{frame}{$\alpha$-Shape}
+        \begin{columns}[onlytextwidth]
+            \column{0.5\textwidth}
+                \onslide <1-> {
+                    \includegraphics[width=\textwidth]{graphics/computervision/detector-points}
+                }
+                \vskip -.7cm
+                \onslide <4-> {
+                    \includegraphics[width=\textwidth]{graphics/computervision/detector-convhull}
+                }
+            \column{0.5\textwidth}
+                \onslide <2-> {
+                    \includegraphics[width=\textwidth]{graphics/computervision/detector-a-shape}   
+                }
+                \vskip -.7cm
+                \onslide <3-> {
+                    \includegraphics[width=\textwidth]{graphics/computervision/detector-a-shape-better-radius}
+                }
+            
+        \end{columns}
     \end{frame}
 
+    \subsection{Optimization}
     \begin{frame}
-        \frametitle{Edge-based image segmentation}
-        \framesubtitle{Wavelet \& Phase Congruency \& Alpha-Shape}
-        \includegraphics[width=\textwidth]{graphics/computervision/edge-even}
-        \includegraphics[width=\textwidth]{graphics/computervision/edge-even-plot}
-        \begin{exampleblock}{Even transition}
-            Given a function defined on a $2D$ domain, a local even transition is likely to describe a line.
-        \end{exampleblock}
+        \frametitle{Optimization}
+        \onslide <1-> {
+            \begin{block}{Bayesian optimization}
+                Bayesian optimization aims to solve an optimization problem $\max\limits_{x\in A}f\left(x\right)$ when:
+                \begin{itemize}
+                    \item $A \subset \mathbb{R}^d$ with $d$ not too large.
+                    \item Easy to asses $A$ membership.
+                    \item $f$ can be modeled using \emph{Gaussian process regression}.
+                    \item $f$ is a \emph{black box}.
+                \end{itemize}
+            \end{block}
+        }
+        \onslide <2-> {
+            \begin{exampleblock}{Loss function}
+                \begin{equation}
+                    J\left(\alpha\right) = \frac{2\lvert X \cap Y \rvert}{\lvert X \rvert + \lvert Y \rvert} = -f(x)
+                \end{equation}
+            \end{exampleblock}
+        }
     \end{frame}
     
     \begin{frame}
-        \frametitle{Edge-based image segmentation}
-        \framesubtitle{Wavelet \& Phase Congruency \& Alpha-Shape}
-            \begin{block}{Phase-congruency model}
-                Given $v_1, v_2, \ldots, v_n \in \mathcal{V}$, their phase congruency is defined as:
-                \begin{equation}
-                    \mathcal{P} = \frac{\lvert \sum_{i} v_i \rvert}{\sum_{i} \lvert v_i \rvert}
-                \end{equation}
-            \end{block}
-            \centering
-            \includegraphics[width=0.6\textwidth]{graphics/computervision/phasecongruency}
+        \frametitle{Optimization}
+        \vskip -0.5cm
+        \begin{block}{Bayesian optimization}
+            Firstly a collection of points $x_1, \ldots, x_k \in \mathbb{R}^d$ is considered. Suppose $f$ can be modeled as:
+            \begin{equation*}
+                f\left(x_{1:n}\right) \sim \mathcal{N}\left(\mu\left(x_{1:n}\right), \Sigma\left(x_{1:n}, x_{1:n}\right)\right)
+            \end{equation*}
+            Then we can infere the probability distribution of $f\left(x_{n+1}\right)$:
+            \begin{equation}
+                f\left(x_{n+1}\right) \mid f\left(x_{1:n}\right) \sim \mathcal{N}\left(\mu_{n+1}, \Sigma_{n+1}\right)
+            \end{equation}
+            \begin{equation*}
+                \mu_{n+1} = \Sigma\left(x_{n+1}, x_{1:n}\right)\Sigma\left(x_{1:n}, x_{1:n}\right)^{-1}\left(f\left(x_{1:n}\right) - \mu\left(x_{1:n}\right)\right) + \mu\left(x_{n}\right)
+            \end{equation*}
+            \begin{equation*}
+                \Sigma_n = \Sigma\left(x_{n+1}, x_{n+1}\right) - \Sigma\left(x_{n+1}, x_{1:n}\right)\Sigma\left(x_{1:n}, x_{1:n}\right)^{-1}\Sigma\left(x_{1:n}, x_{n+1}\right)
+            \end{equation*}
+        \end{block}
     \end{frame}
-
+    
     \begin{frame}
-        \frametitle{Edge-based image segmentation}
-        \framesubtitle{Wavelet \& Phase Congruency \& Alpha-Shape}
-            Algorithm
-    \end{frame}
-
-    \begin{frame}
-        \frametitle{Edge-based image segmentation}
-        \framesubtitle{Wavelet \& Phase Congruency \& Alpha-Shape}
-        \begin{columns}[onlytextwidth]
-            \onslide <1-> {
-                \column{0.5\textwidth}
-                \includegraphics[width=\textwidth]{graphics/computervision/alpha-shape-points}
-            }
-            \onslide <2-> {
-                \column{0.5\textwidth}
-                \includegraphics[width=\textwidth]{graphics/computervision/alpha-shapes}
-            }
-        \end{columns}
-        \onslide <3-> {
-            \begin{theorem}[Topologically correct image segmentation]
-                Under certain conditions on the parameters of the alpha-shape, the boundary reconstruction is topologically equivalent to the boundary of the original region.
-            \end{theorem}
-        }
-    \end{frame}
-
-    \begin{frame}
-        \frametitle{Edge-based image segmentation}
-        \framesubtitle{Wavelet \& Phase Congruency \& Alpha-Shape}
-        % \includegraphics[width=\textwidth]{graphics/whatershed-plane}
-        TODO insert example image\\
-        % \includegraphics[width=\textwidth]{graphics/whatershed-surf}
-        TODO insert example image
+        \frametitle{Optimization}
+        \begin{exampleblock}{Acquisition function}
+            Therefore, it is possible to consider an \emph{acquisition function}, i.e. a function that given the previous $x_1, \ldots, x_n$ values determines the best choice of $x_{n+1}$:
+            \begin{equation}
+                a \colon \left[x_1 \ldots x_n\right] \rightarrow x_{n+1} \colon \mathcal{P}\left[f(x_{n+1}) = \max\limits_{x \in A} f\left(x\right)\right] \text{is max}
+            \end{equation}
+        \end{exampleblock}
     \end{frame}

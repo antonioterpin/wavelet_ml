@@ -132,25 +132,22 @@
     \begin{frame}
         \frametitle{Wavelet: Example application}
         \framesubtitle{Detect temporal trends}
-
+        $$f_{s_2} = e^t;\quad s_2 = \sin\left(2*pi*f_{s_2}t\right)$$
         \begin{columns}[onlytextwidth]
             \column{0.5\textwidth}
-            \includegraphics[width=\textwidth]{graphics/wavelets/frequency-signal-2}
+            \only<1-2> {
+                \includegraphics[width=\textwidth]{graphics/wavelets/frequency-signal-2}
+            }
+            \only<3-4> {
+                \includegraphics[width=\textwidth]{graphics/wavelets/detect-pattern-fft}
+            }
             \column{0.5\textwidth}
-            \includegraphics[width=\textwidth]{graphics/wavelets/signal2}
-        \end{columns}
-        
-    \end{frame}
-    
-    \begin{frame}
-        \frametitle{Wavelet: Example application}
-        \framesubtitle{Detect temporal trends}
-
-        \begin{columns}[onlytextwidth]
-            \column{0.5\textwidth}
-            \includegraphics[width=\textwidth]{graphics/wavelets/detect-pattern-fft}
-            \column{0.5\textwidth}
-            \includegraphics[width=\textwidth]{graphics/wavelets/detect-pattern-cwt}
+            \only<2> {
+                \includegraphics[width=\textwidth]{graphics/wavelets/signal2}
+            }
+            \only<4> {
+                \includegraphics[width=\textwidth]{graphics/wavelets/detect-pattern-cwt}
+            }
         \end{columns}
         
     \end{frame}

@@ -63,74 +63,87 @@
 \end{frame}
 
 \begin{frame}
+        \frametitle{Edge-based image segmentation}
+        \framesubtitle{Wavelet \& Phase Congruency \& Alpha-Shape}
+        \includegraphics[width=\textwidth]{graphics/computervision/edge-odd}
+        \includegraphics[width=\textwidth]{graphics/computervision/edge-odd-plot}
+        \begin{exampleblock}{Odd transition}
+            Given a function defined on a $2D$ domain, a local odd transition is likely to describe border edge.
+        \end{exampleblock}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Edge-based image segmentation}
+        \framesubtitle{Wavelet \& Phase Congruency \& Alpha-Shape}
+        \includegraphics[width=\textwidth]{graphics/computervision/edge-even}
+        \includegraphics[width=\textwidth]{graphics/computervision/edge-even-plot}
+        \begin{exampleblock}{Even transition}
+            Given a function defined on a $2D$ domain, a local even transition is likely to describe a line.
+        \end{exampleblock}
+    \end{frame}
+    
+    \begin{frame}
+        \frametitle{Edge-based image segmentation}
+        \framesubtitle{Wavelet \& Phase Congruency \& Alpha-Shape}
+            \begin{block}{Phase-congruency model}
+                Given $v_1, v_2, \ldots, v_n \in \mathcal{V}$, their phase congruency is defined as:
+                \begin{equation}
+                    \mathcal{P} = \frac{\lvert \sum_{i} v_i \rvert}{\sum_{i} \lvert v_i \rvert}
+                \end{equation}
+            \end{block}
+            \centering
+            \includegraphics[width=0.6\textwidth]{graphics/computervision/phasecongruency}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Edge-based image segmentation}
+        \framesubtitle{Wavelet \& Phase Congruency \& $\alpha$-Shape}
+            Algorithm
+    \end{frame}
+
+\begin{frame}
+    \frametitle{Edge-based image segmentation}
+    \framesubtitle{Wavelet \& Phase Congruency \& $\alpha$-Shape}
+    \begin{columns}[onlytextwidth]
+        \column{0.5\textwidth}
+            \onslide <1-> {
+                \includegraphics[width=\textwidth]{graphics/computervision/detector-points}
+            }
+        \column{0.5\textwidth}
+            \onslide <2-> {
+                \includegraphics[width=\textwidth]{graphics/computervision/detector-a-shape-better-radius}
+            }
+    \end{columns}
+    \onslide <3-> {
+        \begin{theorem}[Topologically correct image segmentation]
+            Under certain conditions on the parameters of the alpha-shape, the boundary reconstruction is topologically equivalent to the boundary of the original region.
+        \end{theorem}
+    }
+\end{frame}
+
+\begin{frame}
     \frametitle{Region proposals}
     \framesubtitle{Optimization}
     \onslide <1-> {
+        \begin{alertblock}{Kovesi algorithm tuning}
+            ..
+        \end{alertblock}
+    }
+    \onslide <2-> {
+        \begin{alertblock}{Hysteretic edge-follower tuning}
+            ..
+        \end{alertblock}
+    }
+    \onslide <3-> {
         \begin{alertblock}{Alpha shape tuning}
             Manually tuning the parameters to satisfy the validity of the topologically correct image segmentation using alpha-shapes requires a full knowledge of the object considered.
         \end{alertblock}
     }
-    \onslide <2-> {
-        \begin{exampleblock}{Alpha shape tuning - solution}
-            An empirical approach is proposed instead. To tune the hyper parameters of the algorithm, bayesian optimization is used.
+    \onslide <3-> {
+        \begin{exampleblock}{Parameters tuning - solution}
+            An empirical approach is proposed instead. \textbf{Bayesian optimization} is used to tune the hyper parameters of the algorithm.
         \end{exampleblock}
     }
-\end{frame}
-
-\begin{frame}
-    \frametitle{Region proposals}
-    \framesubtitle{Optimization}
-    \onslide <1-> {
-        \begin{block}{Bayesian optimization}
-            Bayesian optimization aims to solve an optimization problem $\max\limits_{x\in A}f\left(x\right)$ when:
-            \begin{itemize}
-                \item $A \subset \mathbb{R}^d$ with $d$ not too large.
-                \item Easy to asses $A$ membership.
-                \item $f$ can be modeled using \emph{Gaussian process regression}.
-                \item $f$ is a \emph{black box}.
-            \end{itemize}
-        \end{block}
-    }
-    \onslide <2-> {
-        \begin{exampleblock}{Loss function}
-            \begin{equation}
-                J\left(\alpha\right) = \frac{2\lvert X \cap Y \rvert}{\lvert X \rvert + \lvert Y \rvert} = -f(x)
-            \end{equation}
-        \end{exampleblock}
-    }
-\end{frame}
-
-\begin{frame}
-    \frametitle{Region proposals}
-    \framesubtitle{Optimization}
-    \vskip -0.5cm
-    \begin{block}{Bayesian optimization}
-        Firstly a collection of points $x_1, \ldots, x_k \in \mathbb{R}^d$ is considered. Suppose $f$ can be modeled as:
-        \begin{equation*}
-            f\left(x_{1:n}\right) \sim \mathcal{N}\left(\mu\left(x_{1:n}\right), \Sigma\left(x_{1:n}, x_{1:n}\right)\right)
-        \end{equation*}
-        Then we can infere the probability distribution of $f\left(x_{n+1}\right)$:
-        \begin{equation}
-            f\left(x_{n+1}\right) \mid f\left(x_{1:n}\right) \sim \mathcal{N}\left(\mu_{n+1}, \Sigma_{n+1}\right)
-        \end{equation}
-        \begin{equation*}
-            \mu_{n+1} = \Sigma\left(x_{n+1}, x_{1:n}\right)\Sigma\left(x_{1:n}, x_{1:n}\right)^{-1}\left(f\left(x_{1:n}\right) - \mu\left(x_{1:n}\right)\right) + \mu\left(x_{n}\right)
-        \end{equation*}
-        \begin{equation*}
-            \Sigma_n = \Sigma\left(x_{n+1}, x_{n+1}\right) - \Sigma\left(x_{n+1}, x_{1:n}\right)\Sigma\left(x_{1:n}, x_{1:n}\right)^{-1}\Sigma\left(x_{1:n}, x_{n+1}\right)
-        \end{equation*}
-    \end{block}
-\end{frame}
-
-\begin{frame}
-    \frametitle{Region proposals}
-    \framesubtitle{Optimization}
-    \begin{exampleblock}{Acquisition function}
-        Therefore, it is possible to consider an \emph{acquisition function}, i.e. a function that given the previous $x_1, \ldots, x_n$ values determines the best choice of $x_{n+1}$:
-        \begin{equation}
-            a \colon \left[x_1 \ldots x_n\right] \rightarrow x_{n+1} \colon \mathcal{P}\left[f(x_{n+1}) = \max\limits_{x \in A} f\left(x\right)\right] \text{is max}
-        \end{equation}
-    \end{exampleblock}
 \end{frame}
 
 \begin{frame}
@@ -199,29 +212,29 @@
     \end{tabular}
 \end{frame}
 
-\begin{frame}
-    \frametitle{Multi Column CNN (MC-CNN)}
-    \framesubtitle{Shape column}
-    \includegraphics[width=\textwidth]{graphics/architecture/mc-cnn-shape}
-    % \includegraphics[width=\textwidth]{graphics/architecture/mc-cnn-shape-architecture}
-    TODO confusion matrix + learning curve
-\end{frame}
+% \begin{frame}
+%     \frametitle{Multi Column CNN (MC-CNN)}
+%     \framesubtitle{Shape column}
+%     \includegraphics[width=\textwidth]{graphics/architecture/mc-cnn-shape}
+%     % \includegraphics[width=\textwidth]{graphics/architecture/mc-cnn-shape-architecture}
+%     TODO confusion matrix + learning curve
+% \end{frame}
 
-\begin{frame}
-    \frametitle{Multi Column CNN (MC-CNN)}
-    \framesubtitle{Local column}
-    \includegraphics[width=\textwidth]{graphics/architecture/mc-cnn-local}
-    % \includegraphics[width=\textwidth]{graphics/architecture/mc-cnn-shape-architecture}
-    TODO confusion matrix + learning curve
-\end{frame}
+% \begin{frame}
+%     \frametitle{Multi Column CNN (MC-CNN)}
+%     \framesubtitle{Local column}
+%     \includegraphics[width=\textwidth]{graphics/architecture/mc-cnn-local}
+%     % \includegraphics[width=\textwidth]{graphics/architecture/mc-cnn-shape-architecture}
+%     TODO confusion matrix + learning curve
+% \end{frame}
 
-\begin{frame}
-    \frametitle{Multi Column CNN (MC-CNN)}
-    \framesubtitle{Global column}
-    \includegraphics[width=\textwidth]{graphics/architecture/mc-cnn-global}
-    % \includegraphics[width=\textwidth]{graphics/architecture/mc-cnn-shape-architecture}
-    TODO confusion matrix + learning curve
-\end{frame}
+% \begin{frame}
+%     \frametitle{Multi Column CNN (MC-CNN)}
+%     \framesubtitle{Global column}
+%     \includegraphics[width=\textwidth]{graphics/architecture/mc-cnn-global}
+%     % \includegraphics[width=\textwidth]{graphics/architecture/mc-cnn-shape-architecture}
+%     TODO confusion matrix + learning curve
+% \end{frame}
 
 \subsubsection{Output layer}
 \begin{frame}{Output layer}
@@ -277,4 +290,19 @@
         
     \end{tikzpicture}
     % FC NN + bayesopt params....
+\end{frame}
+
+\begin{frame}
+    \frametitle{Multi Column CNN (MC-CNN)}
+    \framesubtitle{Local column}
+    \begin{columns}
+        \column{.5\textwidth}
+            Hello
+        \only<2> {
+            \column{.25}
+                % \includegraphics[height=\linewidth, angle=90, origin=c]{graphics/architecture/act_net}
+            \column{.25}
+                % \includegraphics[height=\linewidth, angle=90, origin=c]{graphics/architecture/act_net_hope}
+        }
+    \end{columns}
 \end{frame}

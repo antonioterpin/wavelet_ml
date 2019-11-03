@@ -26,17 +26,17 @@
 \usetheme{uniud}
 
 %%% Bibliography
-\usepackage[style=authoryear,backend=biber]{biblatex}
-\addbibresource{bibliography.bib}
+% \usepackage[style=authoryear,backend=biber]{biblatex}
+% \addbibresource{bibliography.bib}
 
 % Author names in publication list are consistent 
 % i.e. name1 surname1, name2 surname2
 % See https://tex.stackexchange.com/questions/106914/biblatex-does-not-reverse-the-first-and-last-names-of-the-second-author
-\DeclareNameAlias{author}{given-family}
+% \DeclareNameAlias{author}{given-family}
 
 %%% Suppress biblatex annoying warning
-\usepackage{silence}
-\WarningFilter{biblatex}{Patching footnotes failed}
+% \usepackage{silence}
+% \WarningFilter{biblatex}{Patching footnotes failed}
 
 %%% Some useful commands
 % pdf-friendly newline in links
@@ -65,6 +65,12 @@
 \input{sections/introduction.tex}
 \input{sections/defectdetection.tex}
 \input{sections/results.tex}
+
+% Extra slides
+\section{Theoretical foundation (Extra)}
+\input{sections/wavelet.tex}
+\input{sections/computervision.tex}
+\input{sections/deeplearning.tex}
 
 % \begin{frame}[t,allowframebreaks]
 % \frametitle{Bibliography}
