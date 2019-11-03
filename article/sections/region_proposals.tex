@@ -1,6 +1,6 @@
 \section{Detector}\label{section:region_proposals}
     \par{
-        The second stage of the proposed architecture is the \emph{detector} of region proposals, which are then fed into the \emph{classifier} for classification, which is described in \emph{Section} \ref{section:mc-cnn}.
+        The second stage of the proposed architecture is the \emph{detector} of region proposals, which are then fed into the \emph{classifier} for classification. The latter is described in \emph{Section} \ref{section:mc-cnn}.
     }
     \par{
         The whole system relies on the \emph{detector} to spot one or more region of interest (ROI), which are the plausible candidates to be defective regions.
@@ -10,7 +10,7 @@
     }
     \subsection{Edge detection}\label{subsection:contour_detection}
         \par{
-            The first step towards segmentation consists of the detection of edges within the image. The usage of Kovesi algorithm (KA) \cite{mit:kovesiphase, googlescholar:kovesiphase} together with hysteretic edge follower \cite{Klette:2014:CCV:2584519} is proposed.
+            The first step towards segmentation consists of the detection of edges within the image. The usage of Kovesi algorithm (KA) \cite{mit:kovesiphase, googlescholar:kovesiphase} together with a hysteretic edge follower \cite{Klette:2014:CCV:2584519} is proposed.
         }
         \par{
             KA is a \emph{phase congruency}-based edge detector. The main idea is that wherever the local frequency components of an image are in phase, there is an edge \cite{researchgate:morrone}. This concept is illustrated in \emph{Figure \ref{fig:phase-congruency}}.
@@ -31,37 +31,34 @@
     		\label{fig:gabor}
     	\end{figure}
 		\par{
-			Given a image and fixed a direction $u$, for each pixel $q$ a squared local window $W(q)$ is considered. It is an image crop centered in $q$. Then, $W(q)$ is convolved with the log-Gabor wavelets at different scales $n = 0 \dots N-1$, obtaining the complex number:
+			Given a image and fixed a direction $u$, for each pixel $q$ a squared local window $W(q)$ is considered. $W(q)$ is an image crop centered in $q$. Then, it is convolved with the log-Gabor wavelets at different scales $n = 0 \dots N-1$, obtaining the complex number:
 	    	\begin{equation*}
 	    		z_{n} (q) = G_{n} * W(q) = r_{n} (q) e^{i \alpha_{n} (q)}.
 	    	\end{equation*}
 	    	Then, the phase congruency measure at $q$ is:
             \begin{equation*}
-	            \mathcal{P} (q) = \frac{\max(0,\lvert \sum_{n} z_{n} (q) \rvert - T)}{\sum_{n} r_{n} (q) + \varepsilon},
+	            \mathcal{P} (q) = \frac{\max(0,\lvert \sum_{n} z_{n} (q) \rvert - T)}{\sum_{n} r_{n} (q) + \varepsilon} \in \left[0,1\right],
             \end{equation*}
             where $T$ is a constant that soothes the effects of noise and $\varepsilon$ is a small value, used to avoid numerical problems concerning negligible values of $r_n$. 
         }
-        \par{
-            One of the advantages of this measure is that it is dimensionless. The concept behind this metric is illustrated in \emph{Figure \ref{fig:phase-congruency-metric}}.
-        }
-	    \begin{figure}
+        \begin{figure}
 	    	\centering
 	    	\includegraphics[width=\linewidth]{graphics/architecture/phasecong_metric}
-	    	\caption{Phase congruency metric.}
+	    	\caption{Phase congruency metric concept.}
 	    	\label{fig:phase-congruency-metric}
 	    \end{figure}
-	    \par{
-	    	The local window $W(q)$ size is $(2k+1)\times(2k+1)$, with $2k+1 \geq 3\lambda$.
+        \par{
+            One of the advantages of this measure is that it is dimensionless. The concept behind this metric is illustrated in \emph{Figure \ref{fig:phase-congruency-metric}}. $W(q)$ sizes are $(2k+1)\times(2k+1)$, with $2k+1 \geq 3\lambda$.
 		}
         \par{
-        	$\mathcal{P}$ lies in the $[0,1]$ interval. However, as reported in \emph{Section \ref{section:results}}, the \emph{min-max normalization}
+        	As discussed in \emph{Section \ref{section:results}}, the \emph{min-max normalization}:
         	\begin{equation*}
         	\hat{\mathcal{P}}(q) = 255 \cdot \frac{\mathcal{P}(q)-\min_q\mathcal{P}(q)}{\max_q\mathcal{P}(q)-\min_q\mathcal{P}(q)}
         	\end{equation*}
         	 on KA output improves the performance of the detector stage.
         }
         \par{
-        	KA is based on several parameters that need to be tuned to obtain an effective edge detector. In this paper, the \emph{number of scales} $N$, the \emph{number of orientations} $U$, the \emph{minimum wavelength} $\lambda$ and the \emph{scaling factor} $s$ of the wavelets are considered. Their tuning was performed through Bayesian optimization \cite{arXiv:2012arXiv1206.2944S,arXiv:2018arXiv180702811F, matlab:bayesian-opt}, as described in section \ref{subsection:segmentation}.
+        	KA is based on several parameters that need to be tuned to obtain an effective edge detector. In this paper, the \emph{number of scales} $N$, the \emph{number of orientations} $U$, the \emph{minimum wavelength} $\lambda$ and the \emph{scaling factor} $s$ of the wavelets are considered. Their tuning was performed through Bopt \cite{arXiv:2012arXiv1206.2944S,arXiv:2018arXiv180702811F, matlab:bayesian-opt}, as described in section \ref{subsection:segmentation}.
         }
         \par{
             It is not recommend to use directly the output of KA for image segmentation, since it is tipically susceptible to isolated edge-like patterns that arise in sparse locations within the image. Hence, a hysteretic edge follower was used to discard such patterns.
@@ -74,11 +71,11 @@
             \begin{enumerate}
     			\item $q_i \in \mathcal{Q};\; \mathcal{Q} = \mathcal{Q} \setminus \{q_i\};\;\mathcal{E} = \mathcal{E} \cup \{q_i\}$
     			\item $\forall q_j \in \Omega(q_i)$ if $\hat{\mathcal{P}}(q_j) > T_{low}$ then $\mathcal{E} = \mathcal{E} \cup \{q_j\}$ and repeat $(2)$ with $q_i = q_j$
-    			\item if $\mathcal{Q} \neq \empty$ then repeat $(1)$
+    			\item if $\mathcal{Q} \neq \emptyset$ then repeat $(1)$
     		\end{enumerate}
         }
 		\par{
-			The final output is a binary matrix marking the positions of edge pixels. The hysteretic parameters \emph{low-threshold} $T_{low}$ and \emph{high-threshold} $T_{high}$ need to be properly tuned, in order to improve the effectiveness of edge detection, as illustrated in \emph{Figure \ref{fig:edge-detector-example}}. Therefore, they were free parameters during the Bayesian optimization, together with KA ones.
+			The final output is a binary matrix marking the positions of edge pixels. The hysteretic parameters \emph{low-threshold} $T_{low}$ and \emph{high-threshold} $T_{high}$ need to be properly tuned, in order to improve the effectiveness of edge detection, as illustrated in \emph{Figure \ref{fig:edge-detector-example}}. Therefore, they were free parameters during the Bopt, together with KA ones.
         }
     	\par{
     		The described techniques \texttt{MATLAB} implementation is freely available at \cite{kovesilibrary}.
@@ -90,7 +87,7 @@
     		\vskip .05cm \includegraphics[width=\linewidth]{graphics/architecture/detector-ex-hysteresis-60-100}
     		\vskip .05cm \includegraphics[width=\linewidth]{graphics/architecture/detector-ex-hysteresis-90-150}
     		\vskip .05cm
-    		\caption{Output of the edge detector on a sample image using different thresholds $(T_{low},T_{high})$. From top to bottom: $(30,50)$, $(60,100)$ and $(100,150)$. Standard parameters of the Kovesi algorithm were used.}
+    		\caption{Output of the edge detector on a sample image (first from the top) using different thresholds $(T_{low},T_{high})$. From top to bottom: $(30,50)$, $(60,100)$ and $(100,150)$. Default parameters of the Kovesi algorithm were used.}
     		\label{fig:edge-detector-example}
     	\end{figure}
     
@@ -121,40 +118,37 @@
             \caption{Convex hull of a set of points.}\label{fig:example-convex-hull}
         \end{figure}
         \par{
-            As an example, in \emph{Figure \ref{fig:example-alpha-shape}} are compared the alpha-shapes with different $\alpha$ values of a set of points. In \emph{Figure \ref{fig:example-convex-hull}} is shown the convex-hull of the same set of points. The choice of alpha shapes for the given task is clear.
+            As an example, in \emph{Figure \ref{fig:example-alpha-shape}} the alpha-shapes with different $\alpha$ values of a set of points are compared. In \emph{Figure \ref{fig:example-convex-hull}} the convex-hull of the same set of points is shown. The choice of alpha shapes for the given task is clear.
         }
         \par{
             However, in order to obtain topologically correct image segmentation, three parameters need to be properly chosen \cite{springer:10.1007/11907350_46}. These are the \emph{alpha-radius} $\alpha$, the \emph{hole-thresholding} $T_{hole}$ and the \emph{region-thresholding} $T_{region}$ \cite{matlab:alpha-shape}.
         }
         \par{
-            The first is the value of $\alpha$, the second is the maximum area of interior holes that is filled and the third is the largest area that is suppressed (ignored).
+            The first is the value of $\alpha$, the second is the maximum area of interior holes that is filled and the third is the largest area that is suppressed (ignored). Observe that the latter is useful to soothe the effects of noisy edge detections.
         }
         \par{
-            Observe that the latter is useful to soothe the effects of noisy edge detections.
+            However, tuning them manually is quixotic, hence they were choosen through Bopt.
         }
         \par{
-            However, tuning them manually is quixotic, hence they were choosen through Bayesian optimization.
-        }
-        \par{
-            The segmentation step outputs a set of pixels, which can be compared with the ideal segmentation, i.e. only the pixels within some defective region.
+            The segmentation step outputs a set of pixels, which can be compared with the ideal segmentation, i.e. only the pixels within some true defective regions.
         }
         \par{
             Therefore, the goodness of fit of the set of proposed pixels $\left(X\right)$ to the ideal pixels $\left(Y\right)$ can be measured as:
             \begin{equation*}
-                \chi\left(X, Y\right) = \frac{2 \lvert X \cap Y \rvert}{\lvert X \rvert + \lvert Y \rvert}.
+                \chi\left(X, Y\right) = \frac{2 \lvert X \cap Y \rvert}{\lvert X \rvert + \lvert Y \rvert} \in \left[0,1\right].
             \end{equation*}
         }
         \par{
             Hence, the loss function is:
             \begin{equation*}
-                \mathcal{L}\left(X, Y\right) = 1 - \chi\left(X, Y\right).
+                \mathcal{L}\left(X, Y\right) = 1 - \chi\left(X, Y\right) \in \left[0,1\right].
             \end{equation*}
         }
         \par{
             The acquisition function proposed is \emph{expected-improvement-plus} \cite{matlab:acquisition}.
         }
         \par{
-            As a final consideration, using alpha shape lessen the detrimental effect of the noise in edge detection. Indeed, outliers are suppressed by the hole threshold and region threshold parameteres.
+            As a final consideration, using alpha shape lessen the detrimental effect of the noise in edge detection. Indeed, outliers are suppressed by the hole threshold and region threshold parameters.
         }
         \par{
             The regions of this alpha shape are the ROIs, which are fed into the \emph{classifier}.
@@ -189,14 +183,14 @@ bounding_box =  | maxX maxY |
             \end{BVerbatim}
         }
         \par{
-            As a first approximation, the implementation of the detector was done to output the bounding boxes instead of the alpha shape. Therefore, the $X$ set in \emph{Section \ref{subsection:segmentation}} is characterized by all the pixels inside the bounding box of the alpha shape regions.
+            As a first approximation, the implementation of the \emph{detector} was done to output the bounding boxes instead of the alpha shape. Therefore, the $X$ set in \emph{Section \ref{subsection:segmentation}} was characterized by all the pixels inside the bounding box of the alpha shape regions.
         }
         \begin{figure} 		  
     		\includegraphics[width=\linewidth]{graphics/architecture/detector-ex}
     		\vskip .05cm \includegraphics[width=\linewidth]{graphics/architecture/detector-ex-segmentated}
     		\vskip .05cm \includegraphics[width=\linewidth]{graphics/architecture/detector-ex-bounding-box}
     		\vskip .05cm
-    		\caption{ROIs and relative bounding boxes obtained on an example image.}
+    		\caption{ROIs (middle) and relative bounding boxes (bottom) obtained on an example surface (top).}
     		\label{fig:segmentation-bb-example}
     	\end{figure}
     	\par{

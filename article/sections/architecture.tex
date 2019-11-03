@@ -67,13 +67,10 @@
     }
 
     \par{
-        Steel surfaces pictures of $1600\times 256$ pixels are taken at the input of the process. Since they may be taken under different light exposure conditions, some preprocessing is made to enhance the quality of the image, e.g. histogram equalization or linear scaling. Moreover, the images considered have three equal colours levels, therefore they are converted into gray levels, to save space. This first step is further described in \emph{Section \ref{section:image_preprocessing}}.
+        Steel surfaces pictures of $1600\times 256$ pixels are taken at the input of the process. Since they may be took under different light exposure conditions, some preprocessing is made to enhance the quality of the image (e.g., histogram equalization or linear scaling). Moreover, the images considered have three equal colours levels, therefore they are converted into gray levels, to save space. This first step is further described in \emph{Section \ref{section:image_preprocessing}}.
     }
     \par{
-        The aim of the architecture proposed in this paper is both to detect pixels representing steel imperfections and to classify those regions. Therefore, image segmentation is either obtained as an output of the system or it is needed in some step during the process. The latter situation can be achieved through a brute-force multi-scale sliding window, but to improve performances without reducing accuracy a particular implementation of a Region based CNN (R-CNN) \cite{ieee:7410526,ieee:7532516} is proposed in \emph{Section \ref{section:mc-cnn}}. This R-CNN uses a MC-CNN to combine and to consider separately interesting regions, which are called proposals and which are described in \emph{Section \ref{section:region_proposals}}.
-    }
-    \par{
-        This reduces the computational cost of the system, compared with a naive sliding window.
+        The aim of the architecture proposed in this paper is both to detect pixels representing steel imperfections and to classify those regions. Therefore, image segmentation is either obtained as an output of the system or it is needed in some step during the process. The latter situation can be achieved through a brute-force multi-scale sliding window, but to improve performances without reducing accuracy a particular implementation of a Region based CNN (R-CNN) \cite{ieee:7410526,ieee:7532516} is proposed in \emph{Section \ref{section:mc-cnn}}. This R-CNN uses a MC-CNN to combine and to consider separately information regarding interesting regions, which are further described in \emph{Section \ref{section:region_proposals}}. This reduces the computational cost of the system, compared with a naive sliding window.
     }
     \par{
         Moreover, both local and global information are combined to improve classification accuracy. This approach avoids the complexity of combining different scale information and handling windows with different classes of defects. A further description of this approach is provided in \emph{Section \ref{section:mc-cnn}}, whereas in \emph{Section \ref{section:further-work}} a challenger architecture is described, to compare the results of the proposed system with.
@@ -88,5 +85,5 @@
         All the MC-CNN columns end with a softmax layer. However, they have different output size, as described in \emph{Section \ref{section:mc-cnn}}. Their results are then combined in order to properly classify the local regions.
     }
     \par{
-        Finally, if the classification outcome labels the region as defective, segmentation coordinates are kept. When all the proposals of the considered image are processed, defective pixels of the same class are encoded together with RLE algorithm. If the surface is flawless, all this encodings are empty.
+        Finally, if the classification outcome labels the region as defective, segmentation coordinates are kept. When all the proposals of the considered image are processed, defective pixels of the same class are encoded together with RLE algorithm. The surface is considered flawless, whenever all this encodings are empty.
     }

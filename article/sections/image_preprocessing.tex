@@ -35,10 +35,7 @@
         $$\mathcal{I}_{max} = \max_{x,y} \mathcal{I}\left(x,y\right)\;;\quad\mathcal{I}_{min} = \min_{x,y} \mathcal{I}\left(x,y\right)$$
     }
     \par{
-        However, histogram equalization is preferred over linear scaling.
-    }
-    \par{
-        Indeed, although both linear scaling and histogram equalization are effective in spreading over all the spectrum the luminance levels of an image, the former only ensures that all the intensities are used whereas the latter is also concerned about the shape of the resulting histogram, which ideally should be flat.
+        However, histogram equalization is preferred over linear scaling. Indeed, although both linear scaling and histogram equalization are effective in spreading over all the spectrum the luminance levels of an image, the former only ensures that all the intensities are used whereas the latter is also concerned about the shape of the resulting histogram, which ideally should be flat.
     }
     \begin{figure}
         \includegraphics[width=\linewidth]{graphics/preprocessing/histeq-before}
@@ -54,18 +51,12 @@
         where $N_{cols}$ and $N_{rows}$ are, respectively, the number of columns and rows of the image. $H_{\mathcal{I}}(u)$ is the absolute frequency of luminance level $u$.
     }
     \par{
-        However, this is not practically feasible, since identical value in $\mathcal{I}$ must be mapped on the same value of $\mathcal{I}_{new}$. Therefore, the transform is just an approximate solution.
-    }
-    \par{
-        Intensities $u$ in $\mathcal{I}$ are mapped onto new intensities $v = g(u)$ by the gradation function $g$: 
+        However, this is not practically feasible, since identical value in $\mathcal{I}$ must be mapped on the same value of $\mathcal{I}_{new}$. Therefore, the transform is just an approximate solution. Intensities $u$ in $\mathcal{I}$ are mapped onto new intensities $v = g(u)$ by the gradation function $g$: 
         \begin{equation*}
             g(u) = c_{\mathcal{I}}(u) \cdot G_{max},
         \end{equation*}
         where $c_{\mathcal{I}}$ is the relative cumulative frequency function.
     }
     \par{
-        In \emph{Figure \ref{fig:equalization}} the effects of equalization on the histogram of luminance of a sample image are shown.
-    }
-    \par{
-        \emph{Figures \ref{fig:preprocessing_image_before}} and \emph{\ref{fig:preprocessing_image_after}} show the preprocessing output on some samples images. It is clear that the different light exposures of the three images are compensated through the histogram equalization.
+        In \emph{Figure \ref{fig:equalization}} the effects of equalization on the histogram of luminance of a sample image are shown. \emph{Figures \ref{fig:preprocessing_image_before}} and \emph{\ref{fig:preprocessing_image_after}} show the preprocessing output on some samples images. It is clear that the different light exposures of the three images are compensated through the histogram equalization.
     }

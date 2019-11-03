@@ -3,7 +3,7 @@
 	Although the proposed architecture was not fully implemented, both the \emph{detector} and the \emph{classifier} were proven effective. Indeed, the concept proof of the described defect detection system on steel surfaces was proven by the results reported in \emph{Section \ref{section:results:detector}} and \emph{Section \ref{section:results:classifier}}.
 }
 \par{
-	From results in \emph{Section \ref{section:results:classifier}} one can infer that the proposed novel usage of the dilatation factor in the first convolutional layer may represents an effective alternative to cropping when dealing with images of different sizes.
+	From results in \emph{Section \ref{section:results:classifier}} one can infer that the proposed novel usage of the dilatation factor in the first convolutional layer represents an effective alternative to cropping when dealing with images of different sizes.
 }
 
 \subsection{Detector}\label{section:results:detector}
@@ -12,9 +12,9 @@
 %	Losses of $0.78$, $0.92$, $0.68$ and $0.59$ were obtained with detectors of classes $1$, $2$, $3$ and $4$ respectively.
 }
 \par{
-	After the optimization procedure, the trained detectors were tested using batches of $1024$ images ($720$ for the class $3$) and computing on them the accuracy measure:
+	After the optimization procedure, the trained \emph{detectors} were tested using batches of $1024$ images ($720$ for the class $3$) and computing on them the accuracy measure:
 	\begin{equation*}
-	\mathcal{A} = \frac{\lvert X \cap Y \rvert}{\lvert Y \rvert}.
+	\mathcal{A} = \frac{\lvert X \cap Y \rvert}{\lvert Y \rvert} \in \left[0,1\right].
 	\end{equation*}
 }
 \begin{table}
@@ -41,13 +41,13 @@
 		& yes & yes & 1024 & 0.6050 & 0.5550 \\ \hline
 	\end{tabular}
 	\vspace{0.25cm}
-	\caption{Comparison between the performances obtained by detectors trained on different classes (No.), either using or not the equalization and the MinMax normalization. The best detectors obtained, according to the study, are bolded.}\label{table:test-bayesopt}
+	\caption{Comparison between the performances obtained by detectors trained on different classes (No.), either using or not the equalization and the MinMax normalization. The best results obtained, according to the study, are bolded.}\label{table:test-bayesopt}
 \end{table}
 \par{
-	In \emph{Table \ref{table:test-bayesopt}} are reported the average loss and accuracy obtained by the trained detectors, either using or not the equalization and the MinMax normalization on the images. Recall that the defects were localized with bounding boxes. Hence, overhead pixels were intrinsic to the implementation and, thus, the loss function had a non-null lower bound.
+	In \emph{Table \ref{table:test-bayesopt}} are reported the average loss and accuracy obtained by the trained \emph{detectors}, either using or not the equalization and the MinMax normalization on the images. Recall that the defects were localized with bounding boxes. Hence, overhead pixels were intrinsic to the implementation and, thus, the loss function had a non-null lower bound.
 }
 \par{
-	It is clear that in both the equalized and non-equalized setting, the MinMax normalization improves the performance of each detector. Indeed, although the accuracy increases using normalization, the loss increases too. This means that the localization of more defects is not due to an increase in the detector precision, but only to larger bounding boxes and, thus, more overhead pixels.
+	It is clear that in both the equalized and non-equalized settings, the MinMax normalization improves the performance of each \emph{detector}. Indeed, although the accuracy increases using normalization, the loss value increases too. This means that the localization of more defects is not due to an increase in the \emph{detector} precision, but only to larger bounding boxes and, thus, more overhead pixels.
 }
 \begin{table}
 	\centering
@@ -130,10 +130,10 @@
 	\caption{Accuracies distributions of the trained detectors, evaluated on their test sets (non-equalized images).}\label{fig:segmentation-test}
 \end{figure}
 \par{
-	Without equalization, accuracies $0.55$, $0.77$, $0.62$ and $0.75$ were reached for classes $1$, $2$, $3$ and $4$, respectively. Classes $3$ and $4$ had the lowest values of loss function, hence the detection of these defects is generally more precise and with a lower amount of overhead pixels.
+	Without equalization, accuracies $0.55$, $0.77$, $0.62$ and $0.75$ were reached for classes No.$1$, No.$2$, No.$3$ and No.$4$, respectively. Classes No.$3$ and No.$4$ achieved the lowest values of loss function. Hence, the detection of these defects is generally more precise and with a lower amount of overhead pixels.
 }
 \par{
-	In \emph{Table \ref{table:params-bayesopt}} the optimal parameters values are reported. It is visible that tuned parameters reflect the shape of defects studied in \emph{Section \ref{subsection:defects}}. In \emph{Figure \ref{fig:detector-results-1}, \ref{fig:detector-results-2}, \ref{fig:detector-results-3}} and \emph{\ref{fig:detector-results-4}} are shown some examples of localization of defects from class $1$, $2$, $3$ and $4$ respectively. In \emph{Figure \ref{fig:segmentation-test}} the test accuracies distribution for each detector class are reported. 
+	In \emph{Table \ref{table:params-bayesopt}} the optimal parameters values are reported. It is visible that tuned parameters reflect the shape of defects studied in \emph{Section \ref{subsection:defects}}. In \emph{Figures \ref{fig:detector-results-1}, \ref{fig:detector-results-2}, \ref{fig:detector-results-3}} and \emph{\ref{fig:detector-results-4}} are shown some examples of localization of defects from classes No.$1$, No.$2$, No.$3$ and No.$4$ respectively. In \emph{Figure \ref{fig:segmentation-test}} the test accuracies distribution for each \emph{detector} are reported. 
 }
 \begin{figure}
 	\centering
@@ -188,16 +188,16 @@
 	\caption{Effect of the equalization on the detector performance with images with large black regions.}\label{fig:equalization-problems}
 \end{figure}
 \par{
-	The distribution of accuracies in the equalized setting (\emph{Figure \ref{fig:segmentation-test-eq}}) differs greatly from the non-equalized one. Indeed, there is a larger amount of images with values of accuracies near zero. Average accuracies of only $0.49$, $0.33$, $0.46$ and $0.55$ were reached for classes $1$, $2$, $3$ and $4$, respectively.
+	The distribution of accuracies in the equalized setting (\emph{Figure \ref{fig:segmentation-test-eq}}) differs greatly from the non-equalized one. Indeed, there is a larger amount of images with values of accuracies near zero. Average accuracies of only $0.49$, $0.33$, $0.46$ and $0.55$ were reached for classes No.$1$, No.$2$, No.$3$ and No.$4$, respectively.
 }
 \par{
-	The worsening of the results after equalization is probably due to the usage of global (i.e. over all the image domain) equalization procedure. Indeed, noise is greatly increased by this equalization approach, wherever there are wide and nearly monochromatic regions (e.g., black backgrounds). Examples of these cases are shown in \emph{Figure \ref{fig:segmentation-test-eq}}. This was obviously detrimental to the optimization procedure. However, the optimal values found are reported in \emph{Table \ref{table:params-bayesopt-eq}}.
+	The worsening of the results after equalization is probably due to the usage of a global (i.e. over all the image domain) equalization procedure. Indeed, noise is greatly increased by this equalization approach, wherever there are wide and nearly monochromatic regions (e.g., black backgrounds). Examples of these cases are shown in \emph{Figure \ref{fig:segmentation-test-eq}}. This was obviously detrimental to the optimization procedure. However, the optimal values found are reported in \emph{Table \ref{table:params-bayesopt-eq}}.
 }
 \par{
-	Although the accuracies of detectors on equalized images were lower, one can infer from the obtained losses that the proportion of overhead pixels is lower. Hence, equalized detectors seems to be more precise. This is also confirmed by the performance of the \emph{classifier}, which performs better on equalized images. Conceptually, the equalized images have higher contrast, and thus an edge detector is expected to identify better abrupt changes.
+	Although the accuracies of the \emph{detectors} on equalized images were lower, one can infer from the obtained losses that the proportion of overhead pixels is lower too. Hence, equalized \emph{detectors} seems to be more precise. This is also confirmed by the performance of the \emph{classifier}, which are superior on equalized images. Conceptually, the equalized images have higher contrast, and thus an edge detector is expected to identify better abrupt changes.
 }
 \par{
-	These results suggest that higher performances could be obtained by detectors using a proper equalization procedure, dealing better with the situations with non-negligible noise.
+	These results suggest that higher performances could be obtained by the \emph{detectors} using a proper equalization procedure, dealing finer with the situations with non-negligible noise.
 }
 
 \subsection{Classifier}\label{section:results:classifier}
@@ -207,10 +207,7 @@
 	\caption{Local column confusion matrix on ideal input (with spreader layer).}\label{fig:local-confusion-spreader}
 \end{figure}
 \par{
-	The local column was trained with a batch of $1024$ images, and mini-batch size of $256$.
-}
-\par{
-	The confusion matrix of the proposed architecture for the local column on a test set of $1000\times 4$ defects is reported in \emph{Figure \ref{fig:local-confusion-spreader}}. It is visible that the defect class No. 3 is the most misclassified. This situation is probably due to the aggregation of multiple defects into the same defective region. Hence, the variability of the local features hamper the network learning.
+	The \emph{local column} was trained with a batch of $1024$ images, and mini-batch size of $256$.
 }
 \begin{figure}
 	\centering
@@ -218,10 +215,10 @@
 	\caption{Local column confusion matrix on ideal input (with crop).}\label{fig:local-confusion-crop}
 \end{figure}
 \par{
-	To evaluate the effectivenes of the spreader layer, a CNN with the same layers but without the novel layer was trained and tested with the same training options, i.e. batch size of $1024$, mini-batch size of $256$ and $30$ epochs. An optimal learning rate was used for both. In \emph{Figure \ref{fig:local-confusion-crop}} its confusion matrix is illustrated.
+	The confusion matrix of the proposed architecture for the \emph{local column} on a test set of $1000\times 4$ defects is reported in \emph{Figure \ref{fig:local-confusion-spreader}}. It is visible that the defect class No. 3 is the most misclassified. This situation is probably due to the aggregation of multiple defects into the same defective region. Hence, the variability of the local features hamper the network learning. To evaluate the effectivenes of the spreader layer, a CNN with the same layers but without the novel layer was trained and tested with the same training options, i.e. batch size of $1024$, mini-batch size of $256$ and $30$ epochs. In \emph{Figure \ref{fig:local-confusion-crop}} its confusion matrix is illustrated.
 }
 \par{
-	It is interesting to notice that the network with the spreading layer achieves higher accuracy ($+0.7\%$) then the one which uses cropping instead. Moreover, the former overcome the latter in classifying defects of class No. 3 and No. 4. Indeed, these are the wider defects in the dataset. Hence, one can infer that the spreader layer deals better then cropping with larger images. This is visible also comparing the gained percentage with the outliers percentage, reported in the first row of \emph{Table \ref{table:cropping}}.
+	It is interesting to notice that the network with the spreading layer achieves higher accuracy ($+0.7\%$) then the one which uses cropping instead. Moreover, the former overcome the latter in classifying defects of class No. 3 and No. 4. Indeed, these are the widest defects in the dataset. Hence, one can infer that the spreader layer deals better then cropping with larger images. This is visible also comparing the gained percentage with the outliers percentage, reported in the first row of \emph{Table \ref{table:cropping}}.
 }
 \par{
 	However, neither one of the two CNNs overfits, and both can be trained longer. Moreover, deeper architectures can be used along with either image cropping or the spreading layer. With more powerful hardware, these could easily reach higher accuracies. 
@@ -232,10 +229,7 @@
 	\caption{Local column confusion matrix on ideal input (images non-equalized).}\label{fig:local-confusion-noneq}
 \end{figure}
 \par{
-	Then, the proposed local column structure was trained also with non-equalized images, but with the same training options. The resulting confusion matrix is reported in \emph{Figure \ref{fig:local-confusion-noneq}}.
-}
-\par{
-	It is visible that there is an actual improvement of $2.2\%$ in the average accuracy when using equalized images.
+	Then, the proposed \emph{local column} structure was trained also with non-equalized images, but with the same training options. The resulting confusion matrix is reported in \emph{Figure \ref{fig:local-confusion-noneq}}.
 }
 \begin{figure}
 	\centering
@@ -243,7 +237,10 @@
 	\caption{Local column confusion matrix on ideal input (with spreader, more epochs).}\label{fig:local-confusion-spreader-update}
 \end{figure}
 \par{
-	Hence, the architectural choice is clear. The local column proposed was further trained, for other $40$ epochs, and reached ans accuracy of $75\%$. However, it kept the same structure, and thus the same number of parameters. It is predictable that a deeper model with a larger training set will achieve state-of-the-art results. The updated confusion matrix is illustrated in \emph{Figure \ref{fig:local-confusion-spreader-update}}.
+	It is visible that there is an actual improvement of $2.2\%$ in the average accuracy when using equalized images. Hence, the architectural choice is clear. 
+}
+\par{
+	The \emph{local column} proposed was further trained, for other $40$ epochs, and reached ans accuracy of $75\%$. However, it kept the same structure, and thus the same number of parameters. It is predictable that a deeper model with a larger training set will achieve state-of-the-art results. The updated confusion matrix is illustrated in \emph{Figure \ref{fig:local-confusion-spreader-update}}.
 }
 \subsection{Architecture implementation}
 \par{
@@ -256,16 +253,10 @@
 }
 \subsection{Proposed architecture improvement}
 \par{
-	Firstly, it would be interesting to implement and train the shape column, preeptively discarding misleading data, and the global column and measure their contribution. The structure of the shape column may be identical to the local column, described in \emph{Section \ref{section:local-column}}.
-}
-\par{
-	Regarding the local column, some padding could be considered around defective regions, to fed the CNN also with some more pixels outside the border.
+	Firstly, it would be interesting to implement and train the \emph{shape column}, preeptively discarding misleading data, and the \emph{global column} and measure their contribution. The structure of the \emph{shape column} may be identical to the \emph{local column}, described in \emph{Section \ref{section:local-column}}. Regarding the \emph{local column}, some padding could be considered around defective regions, to fed the CNN also with some more pixels outside the border.
 }
 \par{
 	Secondly, the final classifier should be implemented to realize the end-to-end system and evaluate its performance.
-}
-\par{
-	Finally, as announced in \emph{Section \ref{section:local-column}}, both the local and the shape column could be fed with a cropped image. One could attempt to preemptively discard these outliers and try to optimize the other samples with a smaller input and, hence, more traditional classifiers.
 }
 \begin{table*}
 	\centering
@@ -282,7 +273,7 @@
 	\caption{Cropping examples.}\label{table:cropping}
 \end{table*}
 \par{
-	Some examples of interesting cropping size are shown in \emph{Table \ref{table:cropping}}.
+	Finally, as announced in \emph{Section \ref{section:local-column}}, both the \emph{local} and the \emph{shape columns} could be fed with a cropped image. One could attempt to preemptively discard these outliers and try to optimize the other samples with a smaller input and, hence, more traditional classifiers. Some examples of interesting cropping size are shown in \emph{Table \ref{table:cropping}}. A further investigation on the spreader layer effectiveness could be done.
 }
 \subsection{Challenger}
 \par{
@@ -293,7 +284,7 @@
 }
 \subsubsection{Sliding window architecture}
 \par{
-	The idea behind this architecture is to crop the input image at different locations (eventually all the ones possible, as in this paper) and use a classifier to assign to the pixels of the considered region an array of confidences.
+	the idea behind this architecture is to crop the input image at different locations (eventually all the ones possible) and use a classifier to assign to the pixels of the considered region an array of confidences.
 }
 \begin{figure}
 	\centering
@@ -321,13 +312,10 @@
 	This cropped regions may overlap. In those circumstances, an heuristic to combine different values of confidences is needed.
 }
 \par{
-	In \emph{Figure \ref{fig:sliding-window}} the sketch of this architecture is shown. In the illustration the resulting map, called \emph{confidence map}, is associated to an array of confidences relative to the possible labels. 
+	In \emph{Figure \ref{fig:sliding-window}} the sketch of this architecture is shown. In the illustration the resulting map, called \emph{confidence map}, is associated to an array of confidences relative to the possible labels. The \emph{confidence map} is then used along with some image segmentation tecnique to spot defective regions. In particular, a $n+1$ levels whatershed algorithm is proposed in \emph{Section \ref{section:challenger:image-segmentation}}.
 }
 \par{
-	The \emph{confidence map} is then used along with some image segmentation tecnique to spot defective regions. In particular, a $n+1$ levels whatershed algorithm is proposed in \emph{Section \ref{section:challenger:image-segmentation}}.
-}
-\par{
-	Since defects may have different dimensions, more refined tecniques could be used to improve the accuracy of the challenger. However, these are outside the scope of this work, and they are proposed as a further development in \emph{Section \ref{section:further-work}}. Moreover, the segmentation tecnique proposed in \emph{Section \ref{section:challenger:image-segmentation}} soothes this problem, since it combines local information from different areas to build the defective regions.
+	Since defects may have different dimensions, more refined tecniques could be used to improve the accuracy of the challenger. However, the segmentation tecnique proposed in \emph{Section \ref{section:challenger:image-segmentation}} soothes this problem, since it combines local information from different areas to build the defective regions.
 }
 % \begin{figure}
 % 	\centering
@@ -343,13 +331,13 @@
 % \end{figure}
 \subsubsection{Image segmentation}\label{section:challenger:image-segmentation}
 \par{
-	The \emph{confidence map} is used to segmentate the image through a $n+1$ levels whatershed algorithm. However, since the defective regions are always disjunct, the problem can be reduced to a binary whatershed algorithm \cite{ieee:87344} considering all the defective classes as one, and distinguishing them only later. The $n+1$ levels whatershed algorithm is left as a further development in \emph{Section \ref{section:further-work}}.
+	the \emph{confidence map} is used to segmentate the image through a $n+1$ levels whatershed algorithm. However, since the defective regions are always disjunct, the problem can be reduced to a binary whatershed algorithm \cite{ieee:87344} considering all the defective classes as one, and distinguishing them later.
 }
 \par{
 	As a final remark about the challenger, it is patent that even this naive implementation is far more involved then the proposed architecture, and the reason lies on the image segmentation approach.
 }
 \par{
-	Moreover, the challenger could be further refined. As an example, a multi-scale approach could be considered, since the challenger does not take into account the variability of defects dimensions. To solve this flaw, \emph{image pyramids} could be used.
+	The challenger could be further refined. As an example, a multi-scale approach could be considered, since the challenger does not take into account the variability of defects dimensions. To solve this flaw, \emph{image pyramids} could be used.
 }
 \par{
 	Finally, an interesting development would be to investigate further a segmentation with overlapping (adjacent) regions, when there are more classes then foreground/background only. Towards this multi-level segmentation, it would be interesting to consider a non-binary whatershed-based algorithm.
