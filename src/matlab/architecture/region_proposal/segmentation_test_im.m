@@ -1,7 +1,7 @@
 function [loss, acc] = segmentation_test_im(im, ... % image to test
                                             encoded_correct_pixels, ... % defect regions (RLE)
                                             params, ... % struct with segmentation parameters
-                                            plot_flag, im_high) % optional (for plots)
+                                            plot_flag, im_high, save_flag) % optional (for plots)
 % SEGMENTATION_TEST_IM Calculates loss and accuracy on given image (im).                                      
 %
 %   [loss, acc] = segmentation_test_im(im, encoded_correct_pixels, params) 
