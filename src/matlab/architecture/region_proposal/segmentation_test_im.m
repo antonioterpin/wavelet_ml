@@ -1,7 +1,7 @@
 function [loss, acc] = segmentation_test_im(im, ... % image to test
                                             encoded_correct_pixels, ... % defect regions (RLE)
                                             params, ... % struct with segmentation parameters
-                                            plot_flag, im_high) % optional (for plots)
+                                            plot_flag, im_high, save_flag) % optional (for plots)
 % SEGMENTATION_TEST_IM Calculates loss and accuracy on given image (im).                                      
 %
 %   [loss, acc] = segmentation_test_im(im, encoded_correct_pixels, params) 
@@ -31,11 +31,17 @@ function [loss, acc] = segmentation_test_im(im, ... % image to test
     if nargin == 3
         plot_flag = 0;
         plot_high = 0;
+        save_flag = 0;
         
     elseif nargin == 4
         plot_high = 0;
+        save_flag = 0;
         
     elseif nargin == 5
+        plot_high = 1;
+        save_flag = 0;
+        
+    elseif nargin == 6
         plot_high = 1;
         
     end 
@@ -45,8 +51,8 @@ function [loss, acc] = segmentation_test_im(im, ... % image to test
                                 params.kov_norient, ...
                                 params.kov_min_wl, ...
                                 params.kov_mult, ...
-                                params.hist_tl, ...
-                                params.hist_th);
+                                params.hyst_tl, ...
+                                params.hyst_th);
     
     map(1:end,1) = 1;
     map(1,1:end) = 1;
@@ -92,15 +98,23 @@ function [loss, acc] = segmentation_test_im(im, ... % image to test
 
     if plot_flag
         
-        figure('Position', [0 400 1600 256]); imshow(im,'InitialMagnification','fit');
+        figure('Position', [0 400 1600 256]); colormap(gray(256)); imagesc(im); set(gca,'xtick',[],'ytick',[]);
         
         if plot_high
-            figure('Position', [0 400 1600 256]); imshow(im_high,'InitialMagnification','fit');
+            figure('Position', [0 400 1600 256]); colormap(gray(256)); imagesc(im_high); set(gca,'xtick',[],'ytick',[]);
         end
         
-        figure('Position', [0 400 1600 256]); imshow(map,'InitialMagnification','fit');
-        figure('Position', [0 50 1600 256]); imagesc(output1); % segmented
-        figure('Position', [0 50 1600 256]); imagesc(output2); % bounding box
+        figure('Position', [0 400 1600 256]); colormap(gray(256)); imagesc(map); set(gca,'xtick',[],'ytick',[]);
+        figure('Position', [0 50 1600 256]); colormap(parula(256)); imagesc(output1); set(gca,'xtick',[],'ytick',[]); % segmented
+        figure('Position', [0 50 1600 256]); colormap(parula(256)); imagesc(output2); set(gca,'xtick',[],'ytick',[]); % bounding box
+        
+        if save_flag
+        
+            imwrite(map,'image-ex-edges.jpg');
+            imwrite(output1,parula(256),'image-ex-segmentated.jpg');
+            imwrite(output2,parula(256),'image-ex-bounding-box.jpg');
+            
+        end
         
     end
     
