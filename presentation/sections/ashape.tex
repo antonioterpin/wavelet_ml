@@ -1,0 +1,181 @@
+
+    \subsection{Alpha-shape}
+    \begin{frame}{$\alpha$-Shape}
+        \onslide<1-> {
+            \begin{alertblock}{Problem}
+                The edge detector samples points along the boundary of the region. Moreover, this will always be an approximate sampling, because it is operating on a digital domain.
+            \end{alertblock}
+        }
+        \onslide<2-> {
+            \begin{exampleblock}{Solution}
+                The $\alpha$-shape approach is a solution to a topologically correct image segmentation from a boundary sampling.
+            \end{exampleblock}
+        }
+    \end{frame}
+    \begin{frame}{$\alpha$-Shape}
+        \onslide<1-> {
+            \begin{definition}
+                A \textit{partition} of the plane $\mathbb{R}^2$ is defined by a finite set of points $P = \left\{p_i\in\mathbb{R}^2\right\}$ and a set of pairwise disjoint arcs $A = \left\{a_i \subset \mathbb{R}^2\right\}$, such that $a_i\colon \left[0,1\right] \rightarrow \mathbb{R}^2;\; a_i(0), a_i(1) \in P$.
+            \end{definition}
+        }
+        \onslide<2-> {
+            \begin{definition}
+                The union of the points and arcs is the \textit{boundary} of the partition $B = P \cup A$ and the regions $R = \left\{r_i \subset \mathbb{R}^2\right\}$ are the connected components of $B^C$.
+            \end{definition}
+        }
+    \end{frame}
+    \begin{frame}{$\alpha$-Shape}
+        \onslide<1-> {
+            \begin{definition}
+                The partition is called \textit{binary} when:
+                \begin{equation*}
+                    \exists\;l\colon R \rightarrow \left\{0,1\right\} \text{ s.t. }\forall r_i \neq r_j \in R\; \overline{r_i} \cap \overline{r_j} = \emptyset \lor l\left(r_i\right) \neq l\left(r_j\right)
+                \end{equation*}
+            \end{definition}
+        }
+        \begin{columns}
+            \column{.5\linewidth}
+                \onslide<2-> {
+                    \begin{definition}
+                        A plane partition is \textit{$r$-stable} when its boundary can be dilated with a closed disc of radius $s$ without changing its homotopy type for any $s \leq r$.
+                    \end{definition}
+                }
+            \column{.4\linewidth}
+                \onslide<3-> {
+                    \includegraphics[width=\linewidth]{graphics/theory-extra/rstable}
+                }
+        \end{columns}
+    \end{frame}
+    \begin{frame}{$\alpha$-Shape}
+        \onslide<1-> {
+            \begin{definition}
+                A finite set of sampling points $\mathcal{S} = \left\{s_i \in \mathbb{R}^2\right\}$ is called a $\left(p, q\right)$-sampling of the boundary $B$ when: 
+                \begin{itemize}
+                    \item $\forall b \in B, \max\left\{\min\left\{d\left(b,s\right),\; s \in \mathcal{S}\right\}\right\} \leq p$
+                    \item $\forall s \in \mathcal{S}, \max\left\{\min\left\{d\left(b,s\right),\; b \in B\right\}\right\} \leq q$
+                \end{itemize} 
+                For some $d(\cdot,\cdot)$. The elements of $\mathcal{S}$ are called \textit{edgels}. The sampling is said to be \textit{strict} when all edgels are exactly on the boundary, i.e. $q = 0$.
+            \end{definition}
+        }
+        \onslide<2-> {
+            \vskip -1cm
+            \begin{columns}
+                \column{.5\textwidth}
+                \centering
+                \begin{tikzpicture}[rotate=-50]
+                    % \draw[step=.5cm,gray,very thin] (0,0) grid (4,4);
+                    \draw (0,0) .. controls (0,4) and (4,0) .. (4,4);
+                    \foreach \Point in {(.1,.4), (0,1), (.3,1.3), (1,2), (1.5,2), (2.1,1.9), (2.35,2.1), (3,2.1), (3.5,2.5), (3.75,2.4), (3.75,3), (4, 3.75)}{
+                        \node[color=ForestGreen] at \Point {\textbullet};
+                    }
+                    \foreach \Point in {(.25,2.25), (1,1.5), (1.5,2.5), (2.5,2.5), (3,1.5), (3.5,3)}{
+                        \node[color=Red] at \Point {$\star$};
+                    }
+                \end{tikzpicture}
+                \column{.5\textwidth}
+                \vskip -.5cm
+                \begin{itemize}
+                    \item $\forall b \in B \;\exists$ \textcolor{ForestGreen}{\textbullet} such that $d(b, \text{\textcolor{ForestGreen}{\textbullet}}) \leq p$.
+                    \item $\forall s = \text{\textcolor{ForestGreen}{\textbullet}}, \text{\textcolor{Red}{$\star$}} \;\exists b \in B$ such that $d(b,s) \leq q$.
+                \end{itemize}
+            \end{columns}
+        }
+    \end{frame}
+    \begin{frame}{$\alpha$-Shape}
+        \onslide<1-> {
+            \vskip -.5cm
+            \begin{definition}
+                The \textit{Delaunay triangulation} $\mathcal{D}$ of a set of point $\mathcal{S}$ is the subset of all triangles $T = \left\{\left(a, b, c\right) \subset \mathcal{S}^3, a \neq b, b \neq c, a \neq c \right\}$ such that $t \in T, x \in \mathcal{S} \Rightarrow x \not\in \mathcal{C}\left(t\right)$, where $\mathcal{C}\left(t\right)$ is the circumcircle of $t$.
+            \end{definition}
+        }
+        \onslide<2-> {
+            \vskip -.25cm
+            \begin{definition}
+                The union of cells $c \in \mathcal{D}$ is called \textit{polytope} of $\mathcal{D}$. 
+                \begin{equation*}
+                    \mathcal{D}_\alpha = \left\{t \in T \colon r\left(\mathcal{C}\left(t\right)\right) < \alpha\right\},
+                \end{equation*}
+                where $r\left(\mathcal{C}\left(t\right)\right)$ is the radius of the circumcircle of $t$. The polytope of $\mathcal{D}_\alpha$ is called \textit{alpha-shape}.
+            \end{definition}
+        }
+        \onslide<3-> {
+            \vskip -.75cm
+            \begin{remark}
+                $\alpha$ is the first Bayesian optimization parameter regarding the $\alpha$-shape.
+            \end{remark}
+        }
+    \end{frame}
+    \begin{frame}{$\alpha$-Shape}
+        \begin{columns}[onlytextwidth]
+            \column{0.5\textwidth}
+                \onslide <1-> {
+                    \includegraphics[width=\textwidth]{graphics/computervision/detector-points}
+                }
+                \vskip -.7cm
+                \onslide <4-> {
+                    \includegraphics[width=\textwidth]{graphics/computervision/detector-convhull}
+                }
+            \column{0.5\textwidth}
+                \onslide <2-> {
+                    \includegraphics[width=\textwidth]{graphics/computervision/detector-a-shape}   
+                }
+                \vskip -.7cm
+                \onslide <3-> {
+                    \includegraphics[width=\textwidth]{graphics/computervision/detector-a-shape-better-radius}
+                }
+            
+        \end{columns}
+    \end{frame}
+    \begin{frame}{$\alpha$-Shape}
+        \onslide<1-> {
+            \begin{lemma}
+                The union of closed $\alpha$-discs with centers at the points $s_i \in \mathcal{S}$ covers $\lvert \mathcal{D}_\alpha \rvert$, and the two sets are homotopy equivalent.\newline
+                \textbf{Proof.} (Blackboard)
+            \end{lemma}
+        }
+        \onslide<2-> {
+            What are then the conditions of homotopy equivalence between the boundary and the alpha shape?
+        }
+        \onslide<3-> {
+            \includegraphics[width=\linewidth]{graphics/theory-extra/topologicalequivalence-border-ashape}
+        }
+    \end{frame}
+
+    \begin{frame}{$\alpha$-Shape}
+        \onslide<1-> {
+            \begin{definition}
+                A connected component of $\lvert\mathcal{D}_\alpha\rvert^C = \mathbb{R}^2 \setminus \lvert \mathcal{D}_\alpha \rvert$ is called an $\alpha$-hole of $\lvert\mathcal{D}_\alpha\rvert$. When the radius of the circumcircle of the largest Delaunay triangle in an $\alpha$-hole’s closure is at least $\beta \geq \alpha$, we speak of an $\left(\alpha, \beta\right)$-hole.
+            \end{definition}
+        }
+        \onslide<2-> {
+            \begin{lemma}
+                An $\alpha$-hole $h$ is an $\left(\alpha,\beta\right)$-hole if and only if it contains a point $v$ whose distance from the nearest edgel is at least $\beta$.\newline
+                \textbf{Proof.} (Blackboard)
+            \end{lemma}
+        }
+    \end{frame}
+
+    \begin{frame}{$\alpha$-Shape}
+        \onslide<1-> {
+            \begin{definition}
+                An $\left(\alpha,\beta\right)$-boundary reconstruction from an edgel set $\mathcal{S}$ is defined as the union of the polytope $\lvert\mathcal{D}_alpha\rvert$ with all $\alpha$-holes of $\mathcal{D}_\alpha$ that are not $\left(\alpha,\beta\right)$-holes.
+            \end{definition}
+        }
+        \onslide<2-> {
+            \begin{remark}
+                Therefore, $\beta$ is the \textit{hole-threshold} Bayesian optimization parameter.
+            \end{remark}
+        }
+    \end{frame}
+
+    \begin{frame}{$\alpha$-Shape}
+        \begin{theorem}
+            Let $P$ be an $r$-stable plane partition, and $S$ a $\left(p,q\right)$-sampling of $P$’s boundary $B$. Then the $\left(\alpha,\beta\right)$-boundary reconstruction $R$ defined by $S$ is homotopy equivalent to $B$, and the $\left(\alpha,\beta\right)$-holes of $R$ are topologically equivalent to the regions $r_i$ of $P$, if:
+            \begin{itemize}
+                \item $p < \alpha \leq r - q$
+                \item $\beta = \alpha + p + q$
+                \item $\forall r_i \in R \;\exists \gamma \geq \beta + q > 2\left(p+q\right)$ such that $r_i$ contains an open $\gamma$-disc.
+            \end{itemize}
+            \textbf{Proof.} (Blackboard)
+        \end{theorem}
+    \end{frame}
