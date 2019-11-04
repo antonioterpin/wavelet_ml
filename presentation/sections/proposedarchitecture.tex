@@ -63,47 +63,78 @@
 \end{frame}
 
 \begin{frame}
-        \frametitle{Edge-based image segmentation}
-        \framesubtitle{Wavelet \& Phase Congruency \& Alpha-Shape}
-        \includegraphics[width=\textwidth]{graphics/computervision/edge-odd}
-        \includegraphics[width=\textwidth]{graphics/computervision/edge-odd-plot}
-        \begin{exampleblock}{Odd transition}
-            Given a function defined on a $2D$ domain, a local odd transition is likely to describe border edge.
-        \end{exampleblock}
-    \end{frame}
-
-    \begin{frame}
-        \frametitle{Edge-based image segmentation}
-        \framesubtitle{Wavelet \& Phase Congruency \& Alpha-Shape}
-        \includegraphics[width=\textwidth]{graphics/computervision/edge-even}
-        \includegraphics[width=\textwidth]{graphics/computervision/edge-even-plot}
-        \begin{exampleblock}{Even transition}
-            Given a function defined on a $2D$ domain, a local even transition is likely to describe a line.
-        \end{exampleblock}
-    \end{frame}
-    
-    \begin{frame}
-        \frametitle{Edge-based image segmentation}
-        \framesubtitle{Wavelet \& Phase Congruency \& Alpha-Shape}
-            \begin{block}{Phase-congruency model}
-                Given $v_1, v_2, \ldots, v_n \in \mathcal{V}$, their phase congruency is defined as:
-                \begin{equation}
-                    \mathcal{P} = \frac{\lvert \sum_{i} v_i \rvert}{\sum_{i} \lvert v_i \rvert}
-                \end{equation}
-            \end{block}
-            \centering
-            \includegraphics[width=0.6\textwidth]{graphics/computervision/phasecongruency}
-    \end{frame}
-
-    \begin{frame}
-        \frametitle{Edge-based image segmentation}
-        \framesubtitle{Wavelet \& Phase Congruency \& $\alpha$-Shape}
-            Algorithm
-    \end{frame}
+    \frametitle{Edge-based image segmentation}
+    \framesubtitle{Edge Detection}
+    \includegraphics[width=\textwidth]{graphics/computervision/edge-odd}
+    \includegraphics[width=\textwidth]{graphics/computervision/edge-odd-plot}
+    \begin{exampleblock}{Odd transition}
+        Given a function defined on a $2D$ domain, a local odd transition is likely to describe border edge.
+    \end{exampleblock}
+\end{frame}
 
 \begin{frame}
     \frametitle{Edge-based image segmentation}
-    \framesubtitle{Wavelet \& Phase Congruency \& $\alpha$-Shape}
+    \framesubtitle{Edge Detection}
+    \includegraphics[width=\textwidth]{graphics/computervision/edge-even}
+    \includegraphics[width=\textwidth]{graphics/computervision/edge-even-plot}
+    \begin{exampleblock}{Even transition}
+        Given a function defined on a $2D$ domain, a local even transition is likely to describe a line.
+    \end{exampleblock}
+\end{frame}
+    
+\begin{frame}
+    \frametitle{Edge-based image segmentation}
+    \framesubtitle{Phase Congruency}
+    \begin{block}{Phase-congruency model}
+        Given $v_1, v_2, \ldots, v_n \in \mathcal{V}$, their phase congruency is defined as:
+        \begin{equation}
+            \mathcal{P} = \frac{\lvert \sum_{i} v_i \rvert}{\sum_{i} \lvert v_i \rvert}
+        \end{equation}
+    \end{block}
+    \centering
+    \includegraphics[width=0.6\textwidth]{graphics/computervision/phasecongruency}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Edge-based image segmentation}
+	\framesubtitle{Kovesi Algorithm}
+	Algorithm
+\end{frame}
+
+\begin{frame}
+	\frametitle{Edge-based image segmentation}
+	\framesubtitle{Hysteretic Edge Follower}
+	\begin{block}{Algorithm}
+	  	Let $\mathcal{I}$ be the image, $\mathcal{Q} = \left\{q \in \mathcal{I} \colon \hat{\mathcal{P}}(q) > T_{high}\right\}$, $\Omega(q)$ the set of  pixels adjacent to $q$ and $\mathcal{E} = \empty$ the set of edge pixels.
+		Then, the hysteretic edge follower calculates edge pixels as:
+		\begin{enumerate}
+			\item $q_i \in \mathcal{Q};\; \mathcal{Q} = \mathcal{Q} \setminus \{q_i\};\;\mathcal{E} = \mathcal{E} \cup \{q_i\}$
+			\item $\forall q_j \in \Omega(q_i)$ if $\hat{\mathcal{P}}(q_j) > T_{low}$ then $\mathcal{E} = \mathcal{E} \cup \{q_j\}$ and repeat $(2)$ with $q_i = q_j$
+			\item if $\mathcal{Q} \neq \emptyset$ then repeat $(1)$
+		\end{enumerate}
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Edge-based image segmentation}
+	\framesubtitle{Hysteretic Edge Follower}
+	\only<1-4> {
+		\includegraphics[width=\textwidth]{graphics/architecture/detector-ex}
+	}
+	\only<2-4> {
+		\includegraphics[width=\textwidth]{graphics/architecture/detector-ex-hysteresis-30-50}
+	}
+	\only<3-4> {
+		\includegraphics[width=\textwidth]{graphics/architecture/detector-ex-hysteresis-60-100}
+	}
+	\only<4-4> {
+		\includegraphics[width=\textwidth]{graphics/architecture/detector-ex-hysteresis-90-150}
+	}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Edge-based image segmentation}
+    \framesubtitle{$\alpha$-Shape}
     \begin{columns}[onlytextwidth]
         \column{0.5\textwidth}
             \onslide <1-> {
@@ -114,11 +145,25 @@
                 \includegraphics[width=\textwidth]{graphics/computervision/detector-a-shape-better-radius}
             }
     \end{columns}
-    \onslide <3-> {
-        \begin{theorem}[Topologically correct image segmentation]
-            Under certain conditions on the parameters of the alpha-shape, the boundary reconstruction is topologically equivalent to the boundary of the original region.
-        \end{theorem}
-    }
+%    \onslide <3-> {
+%        \begin{theorem}[Topologically correct image segmentation]
+%            Under certain conditions on the parameters of the alpha-shape, the boundary reconstruction is topologically equivalent to the boundary of the original region.
+%        \end{theorem}
+%    }
+\end{frame}
+
+\begin{frame}
+	\frametitle{Edge-based image segmentation}
+	\framesubtitle{$\alpha$-Shape}
+	\only<1-3> {
+			\includegraphics[width=\textwidth]{graphics/architecture/detector-ex}
+	}
+	\only<2-3> {
+			\includegraphics[width=\textwidth]{graphics/architecture/detector-ex-segmentated}
+	}
+	\only<3-3> {
+			\includegraphics[width=\textwidth]{graphics/architecture/detector-ex-bounding-box}
+	}
 \end{frame}
 
 \begin{frame}
@@ -126,32 +171,137 @@
     \framesubtitle{Optimization}
     \onslide <1-> {
         \begin{alertblock}{Kovesi algorithm tuning}
-            ..
+            Parameters: $N$, $U$, $\lambda$ and $s$.
         \end{alertblock}
     }
     \onslide <2-> {
-        \begin{alertblock}{Hysteretic edge-follower tuning}
-            ..
+        \begin{alertblock}{Hysteretic edge follower tuning}
+        	Parameters: $T_{low}$ and $T_{high}$.
         \end{alertblock}
     }
     \onslide <3-> {
         \begin{alertblock}{Alpha shape tuning}
-            Manually tuning the parameters to satisfy the validity of the topologically correct image segmentation using alpha-shapes requires a full knowledge of the object considered.
+        	Parameters: $\alpha$, $T_{hole}$ and $T_{regions}$.
         \end{alertblock}
     }
     \onslide <3-> {
         \begin{exampleblock}{Parameters tuning - solution}
-            An empirical approach is proposed instead. \textbf{Bayesian optimization} is used to tune the hyper parameters of the algorithm.
+            An empirical approach is proposed: \textbf{Bayesian optimization} is used to tune the hyper parameters of the algorithm.
         \end{exampleblock}
     }
 \end{frame}
 
 \begin{frame}
+	\frametitle{Region proposals}
+	\framesubtitle{Optimization}
+	\begin{block}{Loss function}
+		\begin{equation*}
+		\mathcal{L} = 1 - 2 \frac{\lvert X \cap Y \rvert}{\lvert X \rvert + \lvert Y \rvert}
+		\end{equation*}
+	\end{block}
+	\begin{block}{Accuracy}
+		\begin{equation*}
+		\mathcal{A} = \frac{\lvert X \cap Y \rvert}{\lvert Y \rvert}
+		\end{equation*}
+	\end{block}
+\end{frame}
+
+\begin{frame}
     \frametitle{Region proposals}
-    \framesubtitle{Optimization}
-    TABLE with results\\
-    plot bayesian \\
-    example results
+    \framesubtitle{Results}
+    \vskip -0.5cm
+	\begin{table}
+		\centering
+		\small	
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline		
+			\textbf{No.} & \textbf{Equal.} & \textbf{MinMax} & \textbf{Batch} & \textbf{Loss} & \textbf{Accuracy}\\ \hline
+			\multirow{3}{*}{1} & no & no & 1024 & 0.8773 & 0.6234 \\
+			& no & yes & 1024 & \textbf{0.8378} & \textbf{0.5477} \\
+			& yes & no & 1024 & 0.9205 & 0.6752 \\
+			& yes & yes & 1024 & 0.7977 & 0.4925 \\ \hline
+			\multirow{3}{*}{2} & no & no & 760 & 0.9103 & 0.7318\\
+			& no & yes & 760 & \textbf{0.9061} & \textbf{0.7738} \\
+			& yes & no & 760 & 0.9676 & 0.9587 \\
+			& yes & yes & 760 & 0.9172 & 0.3333 \\ \hline
+			\multirow{3}{*}{3} & no & no & 1024 & 0.7382 & 0.6710 \\
+			& no & yes & 1024 & \textbf{0.6852} & \textbf{0.6168} \\
+			& yes & no & 1024 & 0.8161 & 0.9145 \\
+			& yes & yes & 1024 & 0.6995 & 0.4600 \\ \hline
+			\multirow{3}{*}{4} & no & no & 1024 & 0.6261 & 0.6190 \\
+			& no & yes & 1024 & \textbf{0.6455} & \textbf{0.7528} \\
+			& yes & no & 1024 & 0.6694 & 0.7334 \\
+			& yes & yes & 1024 & 0.6050 & 0.5550 \\ \hline
+		\end{tabular}
+	\end{table}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Region proposals}
+	\framesubtitle{Example: Class No.1}
+    \only<1-4> {
+		\includegraphics[width=\textwidth]{graphics/results/detector-result-class1-1}
+	}
+	\only<2-4> {
+		\includegraphics[width=\textwidth]{graphics/results/detector-result-class1-2}
+	}
+	\only<3-4> {
+		\includegraphics[width=\textwidth]{graphics/results/detector-result-class1-3}
+	}
+	\only<4> {
+		\includegraphics[width=\textwidth]{graphics/results/detector-result-class1-4}
+	}
+\end{frame}
+
+\begin{frame}
+\frametitle{Region proposals}
+\framesubtitle{Example: Class No.2}
+	\only<1-4> {
+		\includegraphics[width=\textwidth]{graphics/results/detector-result-class2-1}
+	}
+	\only<2-4> {
+		\includegraphics[width=\textwidth]{graphics/results/detector-result-class2-2}
+	}
+	\only<3-4> {
+		\includegraphics[width=\textwidth]{graphics/results/detector-result-class2-3}
+	}
+	\only<4> {
+		\includegraphics[width=\textwidth]{graphics/results/detector-result-class2-4}
+	}
+\end{frame}
+
+\begin{frame}
+\frametitle{Region proposals}
+\framesubtitle{Example: Class No.3}
+	\only<1-4> {
+		\includegraphics[width=\textwidth]{graphics/results/detector-result-class3-1}
+	}
+	\only<2-4> {
+		\includegraphics[width=\textwidth]{graphics/results/detector-result-class3-2}
+	}
+	\only<3-4> {
+		\includegraphics[width=\textwidth]{graphics/results/detector-result-class3-3}
+	}
+	\only<4> {
+		\includegraphics[width=\textwidth]{graphics/results/detector-result-class3-4}
+	}
+\end{frame}
+
+\begin{frame}
+\frametitle{Region proposals}
+\framesubtitle{Example: Class No.4}
+	\only<1-4> {
+		\includegraphics[width=\textwidth]{graphics/results/detector-result-class4-1}
+	}
+	\only<2-4> {
+		\includegraphics[width=\textwidth]{graphics/results/detector-result-class4-2}
+	}
+	\only<3-4> {
+		\includegraphics[width=\textwidth]{graphics/results/detector-result-class4-3}
+	}
+	\only<4> {
+		\includegraphics[width=\textwidth]{graphics/results/detector-result-class4-4}
+	}
 \end{frame}
 
 \subsubsection{MC-CNN}
@@ -298,11 +448,11 @@
     \begin{columns}
         \column{.5\textwidth}
             Hello
-        \only<2> {
-            \column{.25\textwidth}
-                % \includegraphics[height=\linewidth, angle=90, origin=c]{graphics/architecture/act_net}
-            \column{.25\textwidth}
-                % \includegraphics[height=\linewidth, angle=90, origin=c]{graphics/architecture/act_net_hope}
-        }
+%        \only<2> {
+%            \column{.25}
+%                % \includegraphics[height=\linewidth, angle=90, origin=c]{graphics/architecture/act_net}
+%            \column{.25}
+%                % \includegraphics[height=\linewidth, angle=90, origin=c]{graphics/architecture/act_net_hope}
+%        }
     \end{columns}
 \end{frame}
