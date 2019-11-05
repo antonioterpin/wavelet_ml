@@ -386,6 +386,134 @@
 %     TODO confusion matrix + learning curve
 % \end{frame}
 
+\begin{frame}
+    \frametitle{Multi Column CNN (MC-CNN)}
+    \framesubtitle{Local column}
+    \begin{columns}
+        \column{.4\textwidth}
+            \centering
+            \only<1> {\localcolumn{ForestGreen}{black}{black}{black}{black}{black}}
+            \only<2-5> {\localcolumn{black}{ForestGreen}{black}{black}{black}{black}}
+            \only<6-7> {\localcolumn{black}{black}{ForestGreen}{black}{black}{black}}
+            \only<8-9> {\localcolumn{black}{black}{black}{ForestGreen}{black}{black}}
+            \only<10> {\localcolumn{black}{black}{black}{black}{ForestGreen}{black}}
+            \only<11> {\localcolumn{black}{black}{black}{black}{black}{ForestGreen}}
+        \column{.6\textwidth}
+            \only<1> {
+                \begin{itemize}
+                    \item \textbf{Input Layer}
+                    \item $\left[256\times 1600\times 1\right]$ image
+                    \item ``zerocenter'' normalization
+                    \item Activations: $256\times 1600 \times 1 = 409.600$
+                \end{itemize}
+            }
+            \only<2> {
+                \begin{itemize}
+                    \item \textbf{Spreader Layer}
+                    \item $4$ $\left[3\times 3\times 1\right]$ filters
+                    \item Stride $\left[1\;1\right]$
+                    \item Dilation Factor $\left[400\;400\right]$
+                    \item Padding $\left[672\;0\right]$
+                    % \item Activations: $800\times 800\times 4 = 2.560.000$
+                    % \item Learnables: $3\times 3\times 1 \times 4 = 36$ (Weights) + $1\times 1\times 4 = 4$ (Bias) $ = 40$
+                \end{itemize}
+            }
+            \only<3> {
+                \includegraphics[width=\linewidth]{graphics/architecture/dilation2x2}
+                \includegraphics[width=\linewidth]{graphics/architecture/dilation3x3}
+                \begin{tikzpicture}
+                    \node[circle, draw] (downsampling) at (0,0) {$\downarrow$};
+                    \draw[->] ($(downsampling) + (-2,0)$) -- node[above] {$\mathcal{I}\left(x,y\right)$} ($(downsampling) + (-.5,0)$);
+                    \node[rectangle, draw,minimum height=.75cm,minimum width=1.5cm] (filter) at ($(downsampling) + (2,0)$) {g};
+                    \draw[->] ($(downsampling) + (.5,0)$) -- ($(filter) + (-1,0)$);
+                    \draw[->] ($(filter) + (1,0)$) -- node[above] {$\mathcal{A}\left(x,y\right)$} ($(filter) + (2.5,0)$);
+                \end{tikzpicture}
+            }
+            \only<4> {
+                \centering
+                \includegraphics[width=\textwidth,angle=90]{graphics/architecture/act_net}
+                \includegraphics[width=\textwidth,angle=90]{graphics/architecture/act_net_hope}
+            }
+            \only<5> {
+                \centering
+                \includegraphics[width=.45\linewidth]{graphics/architecture/act_net_out}
+                \includegraphics[width=.45\linewidth]{graphics/architecture/act_net_hope_out}
+            }
+            \only<6-7> {
+                \begin{itemize}
+                    \item \textbf{Convolutional Layer}
+                    \item $8/16$ $\left[3\times 3\times 4/16\right]$ filters
+                    \item Stride $\left[1\;1\right]$
+                    \item Padding ``same''
+                    \only<7> {
+                        \item \textbf{Max Pooling}
+                        \item $\left[4\times 4\times 1\right]$
+                        \item Stride $\left[4\;4\right]$
+                        \item Padding ``same''
+                    }
+                \end{itemize}
+            }
+            \only<8-9> {
+                \begin{itemize}
+                    \item \textbf{Convolutional Layer}
+                    \item $32/64/128$ $\left[3\times 3\times 16/32/64\right]$ filters
+                    \item Stride $\left[1\;1\right]$
+                    \item Padding ``same''
+                    \only<9> {
+                        \item \textbf{Max Pooling}
+                        \item $\left[2\times 2\times 1\right]$
+                        \item Stride $\left[2\;2\right]$
+                        \item Padding ``same''
+                    }
+                \end{itemize}
+            }
+            \only<10> {
+                \begin{itemize}
+                    \item \textbf{Fully Connected}
+                    \item $16/16/4$ neurons
+                \end{itemize}
+            }
+            \only<11> {
+                \begin{itemize}
+                    \item \textbf{Softmax}
+                    \item $c_i = \frac{e^{o_i}}{\sum_{k = 1}^4 e^{o_k}}$
+                \end{itemize}
+            }
+    \end{columns}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Results}
+    \framesubtitle{Local Column - Equalization}
+    \centering
+    \begin{columns}
+        \column{0.5\textwidth}
+            \onslide <1-> {
+                \includegraphics[width=\linewidth]{graphics/results/spreader-net-confusion-noneq}
+            }
+        \column{0.5\textwidth}
+            \onslide <2-> {
+                \includegraphics[width=\linewidth]{graphics/results/spreader-net-confusion}
+            }
+    \end{columns}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Results}
+    \framesubtitle{Local Column - Spreader vs Crop}
+    \centering
+    \begin{columns}
+        \column{0.5\textwidth}
+            \onslide <1-> {
+                \includegraphics[width=\linewidth]{graphics/results/spreader-net-confusion}
+            }
+        \column{0.5\textwidth}
+            \onslide <2-> {
+                \includegraphics[width=\linewidth]{graphics/results/crop-net-confusion}
+            }
+    \end{columns}
+\end{frame}
+
 \subsubsection{Output layer}
 \begin{frame}{Output layer}
     \begin{tikzpicture}
@@ -439,20 +567,4 @@
         
         
     \end{tikzpicture}
-    % FC NN + bayesopt params....
-\end{frame}
-
-\begin{frame}
-    \frametitle{Multi Column CNN (MC-CNN)}
-    \framesubtitle{Local column}
-    \begin{columns}
-        \column{.5\textwidth}
-            Hello
-%        \only<2> {
-%            \column{.25}
-%                % \includegraphics[height=\linewidth, angle=90, origin=c]{graphics/architecture/act_net}
-%            \column{.25}
-%                % \includegraphics[height=\linewidth, angle=90, origin=c]{graphics/architecture/act_net_hope}
-%        }
-    \end{columns}
 \end{frame}

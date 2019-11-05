@@ -1,34 +1,24 @@
 \section{Results}
-    \begin{frame}
-        \frametitle{Results}
-        \framesubtitle{Local Column}
-        \centering
-        \begin{columns}
-            \column{0.5\textwidth}
-                \onslide <1-> {
-                    \includegraphics[width=\linewidth]{graphics/results/spreader-net-confusion-noneq}
-                }
-            \column{0.5\textwidth}
-                \onslide <2-> {
-                    \includegraphics[width=\linewidth]{graphics/results/spreader-net-confusion}
-                }
-        \end{columns}
-    \end{frame}
-
-    \begin{frame}
-        \frametitle{Results}
-        \framesubtitle{Local Column}
-        \centering
-        \begin{columns}
-            \column{0.5\textwidth}
-                \onslide <1-> {
-                    \includegraphics[width=\linewidth]{graphics/results/spreader-net-confusion}
-                }
-            \column{0.5\textwidth}
-                \onslide <2-> {
-                    \includegraphics[width=\linewidth]{graphics/results/crop-net-confusion}
-                }
-        \end{columns}
+    \begin{frame}{Results}
+        \onslide<1-> {
+            \centering
+            \begin{tabular}{|l|c|c|c|c|c|}
+                \hline
+                Step \textbackslash{} Accuracy $\left[\%\right]$ & No.1 & No.2 & No.3 & No.4 & Overall \\\hline
+                Detector & $54.77$ & $77.38$ & $61.68$ & $75.28$ & $67.28$\\\hline
+                Classifier & $81.10$ & $89.60$ & $48.9$ & $80.50$ & $75.03$\\
+                \hline
+            \end{tabular}
+        }
+        \vskip .5cm
+        \begin{itemize}
+            \onslide<2-> {
+                \item Concept proof
+            }
+            \onslide<3-> {
+                \item Effectiveness of the \textit{spreader} layer
+            }
+        \end{itemize}
     \end{frame}
 
     \begin{frame}{Further work}
@@ -40,9 +30,15 @@
             \item <4->[4.] Challenger architecture
         \end{description}
         \vskip 1.5cm
-        \onslide<3-> {
+        \onslide<5-> {
             The project can be found in the \href{https://github.com/antonioterpin/wavelet_ml}{\texttt{GitHub repository}}
             \vskip 0.5cm
             \url{https://github.com/antonioterpin/wavelet_ml}
         }
     \end{frame}
+
+    \bgroup
+    \setbeamercolor{background canvas}{bg=black}
+    \begin{frame}[plain]{}
+    \end{frame}
+    \egroup
