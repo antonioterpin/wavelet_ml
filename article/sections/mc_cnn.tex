@@ -158,7 +158,7 @@
                     Padding $\left[672\;0\right]$ & & & \\\hline
                     %%%%
                     Conv1 & Convolution & $800\times 800\times 8 = 5.120.000$ & Weights $3\times 3\times 4 \times 8 = 288$\\
-                    Filter $8$ $\left[3\times 3\times 1\right]$ & & & Bias $1\times 1\times 8 = 8$\\
+                    Filter $8$ $\left[3\times 3\times 4\right]$ & & & Bias $1\times 1\times 8 = 8$\\
                     Stride $\left[1\;1\right]$ & & & Total: $296$\\
                     Padding ``same'' & & & \\\hline
                     %%%%
@@ -167,7 +167,7 @@
                     Padding ``same'' & & & \\\hline
                     %%%%
                     Conv2 & Convolution & $200\times 200\times 16 = 640.000$ & Weights $3\times 3\times 8 \times 16 = 1152$\\
-                    Filter $16$ $\left[3\times 3\times 1\right]$ & & & Bias $1\times 1\times 16 = 16$\\
+                    Filter $16$ $\left[3\times 3\times 8\right]$ & & & Bias $1\times 1\times 16 = 16$\\
                     Stride $\left[1\;1\right]$ & & & Total: $1168$\\
                     Padding ``same'' & & & \\\hline
                     %%%%
@@ -176,7 +176,7 @@
                     Padding ``same'' & & & \\\hline
                     %%%%
                     Conv3 & Convolution & $50\times 50\times 32 = 640.000$ & Weights $3\times 3\times 16 \times 32 = 4.608$\\
-                    Filter $32$ $\left[3\times 3\times 1\right]$ & & & Bias $1\times 1\times 32 = 32$\\
+                    Filter $32$ $\left[3\times 3\times 16\right]$ & & & Bias $1\times 1\times 32 = 32$\\
                     Stride $\left[1\;1\right]$ & & & Total: $4640$\\
                     Padding ``same'' & & & \\\hline
                     %%%%
@@ -185,7 +185,7 @@
                     Padding ``same'' & & & \\\hline
                     %%%%
                     Conv4 & Convolution & $25\times 25\times 64 = 40.000$ & Weights $3\times 3\times 32 \times 64 = 18.432$\\
-                    Filter $64$ $\left[3\times 3\times 1\right]$ & & & Bias $1\times 1\times 64 = 64$\\
+                    Filter $64$ $\left[3\times 3\times 32\right]$ & & & Bias $1\times 1\times 64 = 64$\\
                     Stride $\left[1\;1\right]$ & & & Total: $18496$\\
                     Padding ``same'' & & & \\\hline
                     %%%%
@@ -194,7 +194,7 @@
                     Padding ``same'' & & & \\\hline
                     %%%%
                     Conv5 & Convolution & $13\times 13\times 128 = 21.632$ & Weights $3\times 3\times 64 \times 128 = 73.728$\\
-                    Filter $128$ $\left[3\times 3\times 1\right]$ & & & Bias $1\times 1\times 128 = 128$\\
+                    Filter $128$ $\left[3\times 3\times 64\right]$ & & & Bias $1\times 1\times 128 = 128$\\
                     Stride $\left[1\;1\right]$ & & & Total: $73856$\\
                     Padding ``same'' & & & \\\hline
                     %%%%
