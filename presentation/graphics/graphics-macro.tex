@@ -1,0 +1,77 @@
+\usetikzlibrary{positioning}
+
+\newcommand{\localcolumn}[6]{
+    \begin{tikzpicture}[
+        architecturenode/.style={rectangle,minimum width=3.5cm,minimum height=1cm}
+    ]
+        \node[architecturenode,draw=#1,fill=#1!10] (input) at (0,0) {Image Input};
+        \node[architecturenode,draw=#2,fill=#2!10] (spreader) at ($(input) + (0,-1.25)$) {Spreader};
+        \node[architecturenode,draw=#3,fill=#3!10] (conv mp 1 2) at ($(spreader) + (0,-1.25)$) {Conv + MaxPool};
+        \node[architecturenode,draw=#4,fill=#4!10] (conv mp 3 4) at ($(conv mp 1 2) + (0,-1.25)$) {Conv + MaxPool};
+        \node[architecturenode,draw=#5,fill=#5!10] (fc) at ($(conv mp 3 4) + (0,-1.25)$) {Fully Connected};
+        \node[architecturenode,draw=#6,fill=#6!10] (softmax) at ($(fc) + (0,-1.25)$) {Softmax};
+        \node at ($(conv mp 1 2) + (-2.1,0)$) {2x};
+        \node at ($(conv mp 3 4) + (-2.1,0)$) {3x};
+        \node at ($(fc) + (-2.1,0)$) {3x};
+    \end{tikzpicture}
+}
+
+\newcommand{\localcolumnnospreader}[6]{
+    \begin{tikzpicture}[
+        architecturenode/.style={rectangle,minimum width=3.5cm,minimum height=1cm}
+    ]
+        \node[architecturenode,draw=#1,fill=#1!10] (input) at (0,0) {Image Input};
+        % \node[architecturenode,draw=#2,fill=#2!10] (spreader) at ($(input) + (0,-1.25)$) {Spreader};
+        \node[architecturenode,draw=#3,fill=#3!10] (conv mp 1 2) at ($(input) + (0,-1.25)$) {Conv + MaxPool};
+        \node[architecturenode,draw=#4,fill=#4!10] (conv mp 3 4) at ($(conv mp 1 2) + (0,-1.25)$) {Conv + MaxPool};
+        \node[architecturenode,draw=#5,fill=#5!10] (fc) at ($(conv mp 3 4) + (0,-1.25)$) {Fully Connected};
+        \node[architecturenode,draw=#6,fill=#6!10] (softmax) at ($(fc) + (0,-1.25)$) {Softmax};
+        \node at ($(conv mp 1 2) + (-2.1,0)$) {2x};
+        \node at ($(conv mp 3 4) + (-2.1,0)$) {3x};
+        \node at ($(fc) + (-2.1,0)$) {3x};
+    \end{tikzpicture}
+}
+
+\newcommand{\spreader}[3]{
+    % 1 horizontal displacement
+    % 2 vertical displacement
+    % 3 activation formula
+
+    \begin{tikzpicture}
+        % image
+        \node[rectangle,minimum height=.2\linewidth,minimum width=.8\linewidth,draw=black,fill=black!20] (black image) at (0,0) {};
+        \node[rectangle,minimum height=.09\linewidth,minimum width=.24\linewidth,draw=blue,fill=blue!20] (informative region) at (0,0) {};
+
+        % padding
+        \node[rectangle,minimum height=.3\linewidth, minimum width=.8\linewidth,draw=gray, fill=black!10,anchor=south,above=0cm of black image] (padding top) {};
+        \node[rectangle,minimum height=.3\linewidth, minimum width=.8\linewidth,draw=gray, fill=black!10,anchor=north,below=0cm of black image] (padding bottom) {};
+
+        % filter
+        \node[rectangle,minimum height=.22\linewidth, minimum width=.22\linewidth,draw=orange,fill=orange!10,anchor=north west,below left=.35cm and -1.4cm of padding bottom] (filter) {};
+        \node[circle,draw=orange,fill=orange!10,anchor=west,right=.175cm of filter] (bias) {$b$};
+        \node[anchor=west,right=.1cm of bias] (activation) {#3};
+        % filter weights
+        \node at ($(filter) + (-.075\linewidth,.075\linewidth)$) {$f_1$};
+        \node at ($(filter) + (0,.075\linewidth)$) {$f_2$};
+        \node at ($(filter) + (.075\linewidth,.075\linewidth)$) {$f_3$};
+        \node at ($(filter) + (-.075\linewidth,0)$) {$f_4$};
+        \node at ($(filter) + (0,0)$) {$f_5$};
+        \node at ($(filter) + (.075\linewidth,0)$) {$f_6$};
+        \node at ($(filter) + (-.075\linewidth,-.075\linewidth)$) {$f_7$};
+        \node at ($(filter) + (0,-.075\linewidth)$) {$f_8$};
+        \node at ($(filter) + (.075\linewidth,-.075\linewidth)$) {$f_9$};
+
+        % activations
+        \node at ($(black image) + (-.35\linewidth,.35\linewidth) + (#1\linewidth,#2\linewidth)$)       {$\mathcal{I}_1$};
+        \node at ($(black image) + (-.175\linewidth,.35\linewidth) + (#1\linewidth,#2\linewidth)$)      {$\mathcal{I}_2$};
+        \node at ($(black image) + (0,.35\linewidth) + (#1\linewidth,#2\linewidth)$)                    {$\mathcal{I}_3$};
+        \node at ($(black image) + (-.35\linewidth,.175\linewidth) + (#1\linewidth,#2\linewidth)$)      {$\mathcal{I}_4$};
+        \node at ($(black image) + (-.175\linewidth,.175\linewidth) + (#1\linewidth,#2\linewidth)$)     {$\mathcal{I}_5$};
+        \node at ($(black image) + (0,.175\linewidth) + (#1\linewidth,#2\linewidth)$)                   {$\mathcal{I}_6$};
+        \node at ($(black image) + (-.35\linewidth,0) + (#1\linewidth,#2\linewidth)$)                   {$\mathcal{I}_7$};
+        \node at ($(black image) + (-.175\linewidth,0) + (#1\linewidth,#2\linewidth)$)                  {$\mathcal{I}_8$};
+        \node at ($(black image) + (0,0) + (#1\linewidth,#2\linewidth)$)                                {$\mathcal{I}_9$};
+        % \node[rectangle, minim]
+
+    \end{tikzpicture}
+}
