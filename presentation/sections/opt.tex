@@ -1,6 +1,6 @@
-\subsection{Optimization}
+\subsection{Bayesian Optimization}
 \begin{frame}
-    \frametitle{Optimization}
+    \frametitle{Bayesian Optimization}
     \onslide <1-> {
         \begin{block}{Bayesian optimization}
             Bayesian optimization aims to solve an optimization problem $\max\limits_{x\in A}f\left(x\right)$ when:
@@ -22,7 +22,7 @@
 \end{frame}
 
 \begin{frame}
-    \frametitle{Optimization}
+    \frametitle{Bayesian Optimization}
     \vskip -0.5cm
     \begin{block}{Bayesian optimization}
         Firstly a collection of points $x_1, \ldots, x_k \in \mathbb{R}^d$ is considered. Call $\underline{b}$ this collection. Suppose $f$ can be modeled as:
@@ -44,7 +44,7 @@
 \end{frame}
 
 \begin{frame}
-    \frametitle{Optimization}
+    \frametitle{Bayesian Optimization}
     \begin{exampleblock}{Acquisition function}
         Therefore, it is possible to consider an \emph{acquisition function}, i.e. a function that given the previous $x_1, \ldots, x_n$ values determines the best choice of $x_{n+1}$:
         \begin{equation*}
