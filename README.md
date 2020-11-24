@@ -1,4 +1,4 @@
-# Wavelet preprocessing for deep learning applications.
+# Wavelet preprocessing for deep learning based computervision applications.
 ## An effective approach to steel defect detection
 Quality control is a main issue in any industry. 
 The need of assuring a human-like evaluation during products quality control has resulted in an active research aiming to develop an automatic defect detection scheme.
